@@ -87,7 +87,7 @@ function draw(){
 
   function windowResized() {
     resizeCanvas(window.innerWidth, window.innerHeight);
-    
+    easycam.setViewport([0,0,windowWidth, windowHeight]);
   }
 
 /// Add these lines below sketch to prevent scrolling on mobile
