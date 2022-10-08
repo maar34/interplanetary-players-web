@@ -162,7 +162,7 @@ function draw(){
         // Render the state numbers
         fill(255,0,0);
         text(nfs(state.distance, 1, 2),panelX+140,panelY+25);
-        text(nfs (speedI ,    1, 10),panelX+160,panelY+25+20);
+        text(nfs (speedI ,    1, 10),panelX+120,panelY+25+20);
 
 /*        text(nfs(state.center,   1, 2),panelX+120,panelY+25+20);
         text(nfs(state.rotation, 1, 3),panelX+140,panelY+25+40);
