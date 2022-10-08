@@ -127,7 +127,7 @@ function draw(){
 
  // rotateY(PI/4);
   rotateY(frameCount * camRotY*playStateI);
-  rotateX(frameCount * camRotX);
+  rotateX(frameCount * camRotX*playStateI);
 
   sphere(80, 7, 7);
   rotateX(PI*.4);
@@ -198,18 +198,17 @@ function touchMoved() {
 
 function playPause(){
 if(!playerI.isPlaying()){
-playerI.loop();
 playButton.html("pause");
 //easycam.setInterpolatedRotation([0., 0., 0., 0.], playStateI, 200);
 playStateI = 1;
+playerI.loop();
 
 }else{
-playerI.pause();
 playButton.html("play");
 playStateI= easycam.getRotation()
 //easycam.setRotation(Dw.Rotation.create({angles_xyz:[0.0001,0.,0.]}), 2000);
 playStateI = 0;
-
+playerI.pause();
 }
 
 }
