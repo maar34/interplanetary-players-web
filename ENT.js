@@ -6,9 +6,9 @@ let myFont, myFont2, myFont3;
 
 var easycam,
     state = {
-      distance: 1008,
-      center  : [5, 3, -13],
-      rotation: [0.3, -0.4, -0.1, 0.85]
+      distance: 500, //final distance
+      center  : [0, 0, 0],
+      rotation: [0.5, 0., 0., 0.]
     },
     panelX=0, panelY=20;
 
@@ -32,7 +32,6 @@ function setup() {
   easycam = createEasyCam();
 
   // set initial camera state
-  easycam.setState(state, 1000); // animate to state in 1 second
   easycam.state_reset = state;   // state to use on reset
 
 
@@ -50,10 +49,21 @@ function setup() {
 
 function draw(){
 
+  var world_angle = -0.03;
+
 	background(0);
+  noStroke();
+
   lights();
-  sphere(100);
+  //rotateX(world_angle);
+  //rotateY(world_angle);
+  fill(100, 110, 0);
+
+  sphere(100, 7, 7);
   
+  easycam.rotateY(world_angle);
+
+
   // 2D screen-aligned rendering section
   easycam.beginHUD();
 
