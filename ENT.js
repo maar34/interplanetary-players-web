@@ -2,7 +2,7 @@
 let playerI;
 let playI;
 let myFont, myFont2, myFont3;
-
+let mX, mY;
 
 var easycam,
     state = {
@@ -26,6 +26,8 @@ function preload() {
 }
 
 function setup() {
+
+  
   createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   setAttributes('antialias', true);
 
@@ -33,8 +35,16 @@ function setup() {
 
   // set initial camera state
   easycam.state_reset = state;   // state to use on reset
+  easycam.setRotationConstraint = [true, true, true];   
+  //easycam.setRotationConstraint(true, true, true);   
+  easycam.setDistanceMin(333);
+  easycam.setDistanceMax(3333);
 
 
+
+  mX= 0.;
+  mY= 0.;
+  
   // use the loaded font
   textFont(myFont2);
   textSize(21);
@@ -57,11 +67,20 @@ function draw(){
   fill(100, 110, 0);
 
   let camRot = easycam.getRotation();
-  let camRotX = camRot[1]*0.1+0.001;
-  let camRotY = camRot[2]*0.1+0.001;
+  let camRotX = 0.;
+  let camRotY = 150;
+
+  camRotX = mY*0.1+0.00;
+  camRotY = mX*0.1+.034;
+
   let world_dist= easycam.getDistance();
   let level = map( world_dist, 3300, 333, 0, 1, true);
+ 
 
+  let speedI = map( camRot[1], -1, 1, -2, 2, true);
+  let pitchI = map( camRot[2], -1, 1, -12, 12, true);
+
+  
 
   //easycam.rotateY(world_angle);
 
@@ -81,6 +100,10 @@ function draw(){
   rotateX(PI*.4);
   torus(120, 7, 6, 7);
   pop();
+
+ 
+
+
 
 
   // 2D screen-aligned rendering section
@@ -102,8 +125,10 @@ function draw(){
         text("Center:  ",panelX+35,panelY+25+20);
         text("Rotation:",panelX+35,panelY+25+40);
         text("Framerate:",panelX+35,panelY+25+60);
-        text("Custom:",panelX+35,panelY+25+80);
-        text("Custom2:",panelX+35,panelY+25+100);
+        text("camRotX:",panelX+35,panelY+25+80);
+        text("camRotY:",panelX+35,panelY+25+100);
+        text("speedI:",panelX+35,panelY+25+120);
+        text("pitchI:",panelX+35,panelY+25+140);
 
         // Render the state numbers
         fill(255,0,0);
@@ -111,8 +136,10 @@ function draw(){
         text(nfs(state.center,   1, 2),panelX+120,panelY+25+20);
         text(nfs(state.rotation, 1, 3),panelX+140,panelY+25+40);
         text(nfs (frameRate(),    1, 2),panelX+160,panelY+25+60);
-        text(nfs (camRotY ,    1, 2),panelX+160,panelY+25+80);
-        text(nfs (level,    1, 2),panelX+160,panelY+25+100);
+        text(nfs (mX ,    1, 10),panelX+160,panelY+25+80);
+        text(nfs (mY,    1, 10),panelX+160,panelY+25+100);
+        text(nfs (speedI ,    1, 10),panelX+160,panelY+25+120);
+        text(nfs (pitchI,    1, 10),panelX+160,panelY+25+140);
 
 
       easycam.endHUD();
@@ -133,3 +160,10 @@ function touchMoved() {
 
 
 
+function mouseDragged() {
+  
+  mX= map(mouseX, 0, window.innerWidth, -1, 1, true); 
+  mY= map(mouseY, 0, window.innerHeight, 1, -1, true);  
+
+
+  }
