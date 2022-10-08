@@ -8,7 +8,7 @@ var easycam,
     state = {
       distance: 500, //final distance
       center  : [0, 0, 0],
-      rotation: [0.5, 0., 0., 0.]
+      rotation: [-90., 0., 0., 0.]
     },
     panelX=0, panelY=20;
 
@@ -41,7 +41,6 @@ function setup() {
   //stroke(0,255,0);
   //strokeWeight(1);
 
-
  //playerI.loop();// song is ready to play during setup() because it was loaded during preload
 
   background(0, 0, 0);
@@ -49,19 +48,39 @@ function setup() {
 
 function draw(){
 
-  var world_angle = -0.03;
 
 	background(0);
   noStroke();
 
   lights();
-  //rotateX(world_angle);
-  //rotateY(world_angle);
+
   fill(100, 110, 0);
 
-  sphere(100, 7, 7);
-  
-  easycam.rotateY(world_angle);
+  let camRot = easycam.getRotation();
+  let camRotX = camRot[1]*0.1+0.001;
+  let camRotY = camRot[2]*0.1+0.001;
+  let world_dist= easycam.getDistance();
+  let level = map( world_dist, 3300, 333, 0, 1, true);
+
+
+  //easycam.rotateY(world_angle);
+
+  push();
+  var r = (sin(frameCount * 0.01) * 0.5 + 0.5) * 255;
+  var g = r - (sin(frameCount * 0.02) * 0.5 + 0.5) * 255;
+  var b = 255-r-g;
+  ambientMaterial(r,g,b);
+ // translate(0,0, 30 + sin(frameCount * 0.05) * 40);
+ // rotateZ(frameCount * 0.02);
+
+ // rotateY(PI/4);
+  rotateY(frameCount * camRotY);
+  rotateX(frameCount * camRotX);
+
+  sphere(80, 7, 7);
+  rotateX(PI*.4);
+  torus(120, 7, 6, 7);
+  pop();
 
 
   // 2D screen-aligned rendering section
@@ -74,8 +93,8 @@ function draw(){
     noStroke();
     //fill(0);
    // rect(panelX,panelY,20,300);
-    fill(0,0,255, 200); // a bit of transparency
-    rect(panelX+20,panelY,580,100);
+   // fill(0,0,255, 255); // a bit of transparency
+   // rect(panelX+20,panelY,580,100);
 
         // Render the labels
         fill(0,255,0);
@@ -83,6 +102,8 @@ function draw(){
         text("Center:  ",panelX+35,panelY+25+20);
         text("Rotation:",panelX+35,panelY+25+40);
         text("Framerate:",panelX+35,panelY+25+60);
+        text("Custom:",panelX+35,panelY+25+80);
+        text("Custom2:",panelX+35,panelY+25+100);
 
         // Render the state numbers
         fill(255,0,0);
@@ -90,6 +111,9 @@ function draw(){
         text(nfs(state.center,   1, 2),panelX+120,panelY+25+20);
         text(nfs(state.rotation, 1, 3),panelX+140,panelY+25+40);
         text(nfs (frameRate(),    1, 2),panelX+160,panelY+25+60);
+        text(nfs (camRotY ,    1, 2),panelX+160,panelY+25+80);
+        text(nfs (level,    1, 2),panelX+160,panelY+25+100);
+
 
       easycam.endHUD();
 
@@ -98,6 +122,7 @@ function draw(){
   function windowResized() {
     resizeCanvas(window.innerWidth, window.innerHeight);
     easycam.setViewport([0,0,windowWidth, windowHeight]);
+
   }
 
 /// Add these lines below sketch to prevent scrolling on mobile
