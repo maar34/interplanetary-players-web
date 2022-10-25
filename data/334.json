@@ -6,7 +6,9 @@
         "filename":"https://dl.dropboxusercontent.com/s/0ynj027z1lui2xj/04%20Spherical%20Drops.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2.",
+        "speed":"1.",
+        "minSpeed":"-12.",
+        "maxSpeed":"12.",
         "col1":"333.",
         "col2":"333."
      },
@@ -15,7 +17,9 @@
         "filename":"https://dl.dropboxusercontent.com/s/0ynj027z1lui2xj/04%20Spherical%20Drops.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2.",
+        "speed":"1.",
+        "minSpeed":"-4.",
+        "maxSpeed":"4.",
         "col1":"333.",
         "col2":"333."
      },
@@ -24,49 +28,77 @@
         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"0.",
+        "minSpeed":"-3.",
+        "maxSpeed":"6.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"3",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-24.",
+        "maxSpeed":"12.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"4",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-48.",
+        "maxSpeed":"48.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"5",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-4.",
+        "maxSpeed":"4.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"6",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-4.",
+        "maxSpeed":"4.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"7",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-4.",
+        "maxSpeed":"4.",
+        "col1":"333.",
+        "col2":"333."
      },
      {
         "id":"8",
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2."
+        "speed":"2.",
+        "minSpeed":"-4.",
+        "maxSpeed":"4.",
+        "col1":"333.",
+        "col2":"333."
      }
   ]
 }
