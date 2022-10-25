@@ -1,11 +1,8 @@
-let sw, sh; 
-let padU; 
-let playerI;
-let playI;
-let myFont, myFont2, myFont3;
-let mX, mY;
-let speedI, pitchI, playStateI; 
-let button;
+let sw, sh; // window size
+let padU; // gui separation
+let trackI; // track 1 -  
+let font1; // font variable
+let playStateI; 
 let params; 
 let id ;
 var card = {
@@ -27,9 +24,7 @@ var pCard = {
   col2:""
 }
 
-
 var deck;
-
 
 var easycam,
     state = {
@@ -38,7 +33,6 @@ var easycam,
       rotation: [-90., 0., 0., 0.]
     },
     panelX=0, panelY=20;
-
 
 document.oncontextmenu = () => false; // no right click
 
@@ -50,17 +44,15 @@ function preload() {
 
   deck = loadJSON("data/334.json")
 
-  myFont = loadFont('https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf');
-  myFont2 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
-  myFont3 = loadFont('fonts/Monoton-Regular.ttf'); 
+  font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
+  getAudioContext().suspend();   // mimics the autoplay policy
 
 
 }
 
 function setup() {
 
-  getAudioContext().suspend();   // mimics the autoplay policy
   
   card = deck.skys1[2]; // here we update the actual card
   pCard = deck.skys1[4]; // here we update the previous actual card
@@ -88,12 +80,10 @@ function setup() {
   easycam.setDistanceMin(333);
   easycam.setDistanceMax(3333);
 
-  mX= 0.;
-  mY= 0.;
-  speedI= 1.;
+ 
+  card.speed= 1.;
 
   playStateI= 0;
-  pitchI= 1.;
  
   let bcol = color(200, 0, 0, 10);
   let col = color(0, 200, 0, 200);
@@ -112,16 +102,14 @@ function setup() {
   playButton.mousePressed( playPause);
 
   // use the loaded font
-  textFont(myFont2);
+  textFont(font1);
   textSize(21);
-  //stroke(0,255,0);
-  //strokeWeight(1);
 
   id = params.id;
 
  reload();
 ///
- playerI.playMode('restart');
+ trackI.playMode('restart');
 
   background(0, 0, 0);
 } 
@@ -145,26 +133,21 @@ function draw(){
   let world_dist= easycam.getDistance();
   let level = map( world_dist, 3300, 333, 0, 1, true);
 
-  speedI = map( camRot[1], -1, 1, -1, 3, true);
-  pitchI = map( camRot[2], -1, 1, -12, 12, true);
+  card.speed = map( camRot[1], -1, 1, -1, 3, true);
 
-  playerI.setVolume(level);
+  trackI.setVolume(level);
 
-  if (speedI != 0.0){
-  playerI.rate(speedI);
+  if (card.speed != 0.0){
+  trackI.rate(card.speed);
 
 }
-  //easycam.rotateY(world_angle);
 
   push();
   var r = (sin(frameCount * 0.001) * 0.5 + 0.5) * 255;
   var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
   var b = 255-r-g;
   ambientMaterial(r,g,b);
- // translate(0,0, 30 + sin(frameCount * 0.05) * 40);
- // rotateZ(frameCount * 0.02);
 
- // rotateY(PI/4);
   rotateY(frameCount * camRotY*playStateI);
   rotateX(frameCount * camRotX*playStateI);
 
@@ -173,7 +156,6 @@ function draw(){
   torus(120, 7, 6, 7);
   pop();
 
-  // 2D screen-aligned rendering section
   easycam.beginHUD();
 
   let state = easycam.getState();
@@ -181,36 +163,19 @@ function draw(){
   
     // Render the background box for the HUD
     noStroke();
-    //fill(0);
-   // rect(panelX,panelY,20,300);
-   // fill(0,0,255, 255); // a bit of transparency
-   // rect(panelX+20,panelY,580,100);
+
 
         // Render the labels
         fill(0,255,0);
         text("Distance:",panelX+35,panelY+25);
-        text("SpeedI:",panelX+35,panelY+25+20);
+        text("Speed:",panelX+35,panelY+25+20);
        
         text(params.id, panelX+35,panelY+25+40);
-
-       /* text("Center:  ",panelX+35,panelY+25+20);
-        text("Rotation:",panelX+35,panelY+25+40);
-        text("Framerate:",panelX+35,panelY+25+60);
-        text("camRotX:",panelX+35,panelY+25+80);
-        text("camRotY:",panelX+35,panelY+25+100);
-        text("pitchI:",panelX+35,panelY+25+140);*/
 
         // Render the state numbers
         fill(255,0,0);
         text(nfs(state.distance, 1, 2),panelX+140,panelY+25);
-        text(nfs (speedI ,    1, 10),panelX+120,panelY+25+20);
-
-/*        text(nfs(state.center,   1, 2),panelX+120,panelY+25+20);
-        text(nfs(state.rotation, 1, 3),panelX+140,panelY+25+40);
-        text(nfs (frameRate(),    1, 2),panelX+160,panelY+25+60);
-        text(nfs (camRotX ,    1, 10),panelX+160,panelY+25+80);
-        text(nfs (camRotY,    1, 10),panelX+160,panelY+25+100);
-        text(nfs (playStateI,    1, 10),panelX+160,panelY+25+140);*/
+        text(nfs (card.speed ,    1, 10),panelX+120,panelY+25+20);
 
 
       easycam.endHUD();
@@ -243,7 +208,6 @@ function loaded (){
 
 }
 
-
 function playPause(){
 if(playButton.html()=="play"){
 userStartAudio();  // mimics the autoplay policy
@@ -251,16 +215,16 @@ playButton.html("pause");
 
 //easycam.setInterpolatedRotation([0., 0., 0., 0.], playStateI, 200);
 playStateI = 1;
-playerI.loop();
+trackI.loop();
 
 }else{
-playerI.pause();
-playerI.pause();
-playerI.pause();//need to repeat to be sure that this happens 
+ userStartAudio();  // mimics the autoplay policy
+
+trackI.pause();
+trackI.pause();
+trackI.pause();//need to repeat to be sure that this happens 
 
 playButton.html("play");
-//playStateI= easycam.getRotation()
-//easycam.setRotation(Dw.Rotation.create({angles_xyz:[0.0001,0.,0.]}), 2000);
 playStateI = 0;
 
 }
@@ -269,12 +233,9 @@ playStateI = 0;
 
 function reload (){
   
-  playerI = loadSound(card.filename, loaded);
+  trackI = loadSound(card.filename, loaded);
 
  print(deck);
  print(deck.skys1[2].filename);
 
 }
-
-
-
