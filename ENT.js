@@ -143,8 +143,10 @@ function draw(){
   trackI_speed = map( camRot[2], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
 
   trackI.setVolume(level);
-  trackI.rate(trackI_speed);
-
+  
+  if (trackI_speed < 1.0 || trackI_speed  >= 1.){
+   trackI.rate(trackI_speed);
+}
   rotateY((frameCount*playStateI*trackI_speed)*0.1);
 
 
@@ -227,7 +229,6 @@ function draw(){
 
   /// Add these lines below sketch to prevent scrolling on mobile
 function touchMoved() {
-
   // do some stuff
   //return false;
 
