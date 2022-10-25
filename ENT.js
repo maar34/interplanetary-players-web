@@ -51,15 +51,15 @@ function preload() {
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
-  getAudioContext().suspend();   // mimics the autoplay policy
 
 
 }
 
 function setup() {
 
-  
-  card = deck.skys1[0]; // here we update the actual card
+  getAudioContext().suspend();   // mimics the autoplay policy
+
+  card = deck.skys1[1]; // here we update the actual card
   pCard = deck.skys1[4]; // here we update the previous actual card
 
 
@@ -132,15 +132,18 @@ function draw(){
   //let camRotX = 0.;
   //let camRotY = 150;
 
-  camRotX = camRot[1]*0.1+0.00;
-  camRotY = camRot[2]*0.1+.034;
+
+ // camRotX = camRot[1]*0.1+0.00;
+ camRotY = camRot[2]*float(card.speed)+.034;
 
   let world_dist= easycam.getDistance();
-  
+ // let camSpeed = camRot[2]*float(card.speed); 
+
   let level = map( world_dist, 3300, 333, 0, 1, true);
   trackI_speed = map( camRot[2], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
 
   trackI.setVolume(level);
+  trackI.rate(trackI_speed);
 
   rotateY((frameCount*playStateI*trackI_speed)*0.1);
 
@@ -247,7 +250,6 @@ function playPause(){
   trackI.loop();
 
 }else{
- userStartAudio();  // mimics the autoplay policy
 
   trackI.pause();
   trackI.pause();
@@ -266,31 +268,7 @@ function reload (){
   
   trackI = loadSound(card.filename, loaded);
 
- print(deck);
- print(deck.skys1[2].filename);
 
 }
 
-function mouseDragged() {
 
-
-  var m = map (mouseX, 0, sw, -1., 1., true);
-  var n = map (mouseY, sh, 0, -1., 1., true);
-//  var vectO = sqrt(m*m+n*n);
-//print("o",o, "min", card.minSpeed, "max", card.maxSpeed);
-// tIspeed = map (n, 0., 1, card.minSpeed, card.maxSpeed, true);
-// trackI_speed = map( m, -1., 1., float(card.minSpeed), float(card.maxSpeed), true);
-
-   trackI.rate(trackI_speed);
-  //rotateY(frameCount * trackI_speed*playStateI*0.1);
- 
-}
-
-function doubleClicked() {
-
-//trackI_speed = map( card.speed, float(card.minSpeed), float(card.maxSpeed), -1, 1, true);
-  trackI_speed = card.speed; 
-
-  print (frameCount);
-
-}
