@@ -8,6 +8,27 @@ let speedI, pitchI, playStateI;
 let button;
 let params; 
 let id ;
+var card = {
+  id:"",
+  filename:"",
+  initTime:"",
+  endTime:"",
+  speed:"",
+  col1:"",
+  col2:""
+}
+var pCard = {
+  id:"",
+  filename:"",
+  initTime:"",
+  endTime:"",
+  speed:"",
+  col1:"",
+  col2:""
+}
+
+
+var deck;
 
 
 var easycam,
@@ -27,9 +48,13 @@ function preload() {
 
   params = getURLParams();
 
+  deck = loadJSON("data/334.json")
+
   myFont = loadFont('https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf');
   myFont2 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
-  myFont3 = loadFont('fonts/Monoton-Regular.ttf');
+  myFont3 = loadFont('fonts/Monoton-Regular.ttf'); 
+
+
 
 }
 
@@ -37,6 +62,14 @@ function setup() {
 
   getAudioContext().suspend();   // mimics the autoplay policy
   
+  card = deck.skys1[2]; // here we update the actual card
+  pCard = deck.skys1[4]; // here we update the previous actual card
+
+
+  print("this is the loaded card", card);
+  print("this is the loaded previous card", pCard);
+
+
   sw= window.innerWidth;
   sh= window.innerHeight;
   padU = 10; 
@@ -236,28 +269,10 @@ playStateI = 0;
 
 function reload (){
   
-  var cambio = params.id;
+  playerI = loadSound(card.filename, loaded);
 
-  switch (cambio) {
-
-    case 1.:
-      playerI = loadSound('https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1', loaded);
-      print('The value of 1 is ' + id);
-      break;
-    case 2.:
-      playerI = loadSound('https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1', loaded);
-      print('The value of 2 is ' + id);
-      break;
-    case 3.:
-      playerI = loadSound('https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1', loaded);
-      print('The value of 3 is ' + id);
-
-    default:
-      playerI = loadSound('https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1', loaded);
-      print('The value of default is ' + id + params.id);
-      break;
-      //  
-  }
+ print(deck);
+ print(deck.skys1[2].filename);
 
 }
 
