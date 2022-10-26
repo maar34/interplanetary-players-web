@@ -5,6 +5,8 @@ let font1; // font variable
 let playStateI; 
 let params; // url parameters
 let trackI_speed; 
+let tempID;
+let loadingBar, loadP; 
 
 var card = {
   id:"",
@@ -59,9 +61,15 @@ function setup() {
 
   getAudioContext().suspend();   // mimics the autoplay policy
 
-  card = deck.skys1[1]; // here we update the actual card
+
+  tempID = params.id;
+
+  card = deck.skys1[tempID]; // here we update the actual card
   pCard = deck.skys1[4]; // here we update the previous actual card
 
+
+  trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
+  trackI.playMode('restart');
 
 
   print("this is the loaded card", card);
@@ -86,14 +94,11 @@ function setup() {
   easycam.setDistanceMin(333);
   easycam.setDistanceMax(3333);
 
- 
-
   playStateI= 0;
  
   let bcol = color(200, 0, 0, 10);
   let col = color(0, 200, 0, 200);
-
-
+  
   playButton = createButton('play');
   playButton.position(sw/2-60, sh-padU*6);
   playButton.style('width', '120px');
@@ -110,12 +115,6 @@ function setup() {
   textFont(font1);
   textSize(21);
 
-  card.id = params.id;
-
- reload();
-///
- trackI.playMode('restart');
-
   background(0, 0, 0);
 } 
 
@@ -131,8 +130,6 @@ function draw(){
   let camRot = easycam.getRotation();
   //let camRotX = 0.;
   //let camRotY = 150;
-
-
  // camRotX = camRot[1]*0.1+0.00;
  camRotY = camRot[2]*float(card.speed)+.034;
 
@@ -143,10 +140,12 @@ function draw(){
   trackI_speed = map( camRot[2], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
 
   trackI.setVolume(level);
-  
+if (playStateI == 1){  
   if (trackI_speed < 1.0 || trackI_speed  >= 1.){
    trackI.rate(trackI_speed);
 }
+}
+
   rotateY((frameCount*playStateI*trackI_speed)*0.1);
 
 
@@ -169,7 +168,6 @@ function draw(){
   var g = r - (sin(frameCount * 0.002) * 1.5 + 1.5) * 255;
   var b = 255-r-g;
   ambientMaterial(r,g,b);
-
 
   translate (- 260, 0., 0.);
 
@@ -196,21 +194,42 @@ function draw(){
 
 
         // Render the labels
-        fill(0,255,0);
+        fill(0, 0, 255);
         text("Distance:",panelX+35,panelY+25);
         text("Speed:",panelX+35,panelY+25+20);
         text("Min-Speed:",panelX+35,panelY+25+40);
         text("Max-Speed:",panelX+35,panelY+25+60);
 
-       
-        text(params.id, panelX+35,panelY+25+40);
+
+       if (loadP){
+
+        let tempF = frameRate()%30.; 
+        if (tempF>15.){
+        fill(0, 0,255);
+          }else{
+        fill(255, 0,0);
+        }
+ //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
+       if (loadingBar < .99){
+        text("Receiving Sound Waves",padU*4, sh-padU*6);
+        text("please wait...",padU*4, sh-padU*3);
+
+       }else{
+ 
+      text("Decoding Sound Waves,",padU*4, sh-padU*6);
+      text("please wait... >>>",padU*4, sh-padU*3);
+
+       }
+      }
 
         // Render the state numbers
         fill(255,0,0);
         text(nfs(state.distance, 1, 2),panelX+140,panelY+25);
-        text(nfs (trackI_speed ,    1, 10),panelX+120,panelY+25+20);
-        text(nfs(card.minSpeed, 1, 2),panelX+160,panelY+25+40);
-        text(nfs (card.maxSpeed ,    1, 10),panelX+160,panelY+25+60);
+        text(nfs (trackI_speed ,    1, 6),panelX+120,panelY+25+20);
+        text(nfs(card.minSpeed, 1, 2),panelX+180,panelY+25+40);
+        text(nfs (card.maxSpeed ,    1, 2),panelX+180,panelY+25+60);
+
+
 
       easycam.endHUD();
 
@@ -225,8 +244,6 @@ function draw(){
     easycam.setViewport([0,0,sw, sh]);
 
   }
-
-
   /// Add these lines below sketch to prevent scrolling on mobile
 function touchMoved() {
   // do some stuff
@@ -237,39 +254,46 @@ function touchMoved() {
 function loaded (){
 
   playButton.show();
-
+  loadP = false; 
 
 }
 
 function playPause(){
   if(playButton.html()=="play"){
-  userStartAudio();  // mimics the autoplay policy
-  playButton.html("pause");
+    userStartAudio();  // mimics the autoplay policy
+    playButton.html("pause");
 
-  //easycam.setInterpolatedRotation([0., 0., 0., 0.], playStateI, 200);
-  playStateI = 1;
-  trackI.loop();
+    //easycam.setInterpolatedRotation([0., 0., 0., 0.], playStateI, 200);
+    playStateI = 1;
+    trackI.loop();
 
-}else{
+  }else{
 
-  trackI.pause();
-  trackI.pause();
-  trackI.pause();
-  trackI.pause();
-  trackI.pause();//need to repeat to be sure that this happens 
+    trackI.pause();
+    trackI.pause();
+    trackI.pause();
+    trackI.pause();
+    trackI.pause();//need to repeat to be sure that this happens 
 
-  playButton.html("play");
-  playStateI = 0;
+    playButton.html("play");
+    playStateI = 0;
+
+  }
 
 }
 
-}
-
-function reload (){
+function errorLoadingAudio (){
   
-  trackI = loadSound(card.filename, loaded);
-
-
+  let p = createP('errorLoadingAudio');
+  p.style('font-size', '16px');
+  p.position(10, 0);
+  
 }
 
+function loadingAudio (_loadingN){
+  
+loadingBar = _loadingN; 
+loadP = true; 
+
+}
 
