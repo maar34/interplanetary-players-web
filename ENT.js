@@ -37,7 +37,7 @@ var easycam,
     state = {
       distance: 1500, //final distance
       center  : [0, 0, 0],
-      rotation: [-90., 0., 0., 0.]
+      rotation: [1., 0., 0., 0.]
     },
     panelX=0, panelY=20;
 
@@ -67,7 +67,6 @@ function setup() {
   card = deck.skys1[tempID]; // here we update the actual card
   pCard = deck.skys1[4]; // here we update the previous actual card
 
-
   trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
   trackI.playMode('restart');
 
@@ -84,10 +83,10 @@ function setup() {
   setAttributes('antialias', true);
 
   easycam = createEasyCam();
-  easycam.setState(state, 3000); // animate to state in 1 second
+  easycam.setState(state, 3000); // animate to state in 3 second
 
   // set initial camera state
-  //easycam.state_reset =  state;
+  easycam.state_reset =  state;
 
   //easycam.setRotationConstraint = [.31, .4, .41];   
   //easycam.setRotationConstraint(true, true, true);   
@@ -98,7 +97,7 @@ function setup() {
  
   let bcol = color(200, 0, 0, 10);
   let col = color(0, 200, 0, 200);
-  
+
   playButton = createButton('play');
   playButton.position(sw/2-60, sh-padU*6);
   playButton.style('width', '120px');
@@ -120,7 +119,6 @@ function setup() {
 
 function draw(){
 
-
   background(0);
   noStroke();
   lights();
@@ -131,22 +129,33 @@ function draw(){
   //let camRotX = 0.;
   //let camRotY = 150;
  // camRotX = camRot[1]*0.1+0.00;
- camRotY = camRot[2]*float(card.speed)+.034;
+ //camRotY = camRot[2]*float(card.speed)+.034;
 
   let world_dist= easycam.getDistance();
  // let camSpeed = camRot[2]*float(card.speed); 
 
   let level = map( world_dist, 3300, 333, 0, 1, true);
   trackI_speed = map( camRot[2], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
+ 
+  if (isNaN(camRot[2])) {
+    trackI_speed =0.0001;
+  } 
+
+  if (trackI_speed >= -0.1 && trackI_speed <= 0.1 ) {
+    trackI_speed = 0.11;
+  } 
 
   trackI.setVolume(level);
 if (playStateI == 1){  
-  if (trackI_speed < 1.0 || trackI_speed  >= 1.){
+  
+ // if (trackI_speed < 1.0 || trackI_speed  >= 1.){
    trackI.rate(trackI_speed);
-}
-}
+   rotateY((frameCount*trackI_speed)*0.077);
 
-  rotateY((frameCount*playStateI*trackI_speed)*0.1);
+//}
+}
+ // print((frameCount*trackI_speed)*0.077);
+  //print(camRot[2]);
 
 
   push();
@@ -212,12 +221,12 @@ if (playStateI == 1){
  //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
        if (loadingBar < .99){
         text("Receiving Sound Waves",padU*4, sh-padU*6);
-        text("please wait...",padU*4, sh-padU*3);
+        text("please wait, unmute device...",padU*4, sh-padU*3);
 
        }else{
  
       text("Decoding Sound Waves,",padU*4, sh-padU*6);
-      text("please wait... >>>",padU*4, sh-padU*3);
+      text("please wait, unmute device >>>",padU*4, sh-padU*3);
 
        }
       }
@@ -251,13 +260,6 @@ function touchMoved() {
 
 }
 
-function loaded (){
-
-  playButton.show();
-  loadP = false; 
-
-}
-
 function playPause(){
   if(playButton.html()=="play"){
     userStartAudio();  // mimics the autoplay policy
@@ -282,6 +284,13 @@ function playPause(){
 
 }
 
+function loaded (){
+
+  playButton.show();
+  loadP = false; 
+
+}
+
 function errorLoadingAudio (){
   
   let p = createP('errorLoadingAudio');
@@ -291,9 +300,8 @@ function errorLoadingAudio (){
 }
 
 function loadingAudio (_loadingN){
-  
-loadingBar = _loadingN; 
-loadP = true; 
+    
+  loadingBar = _loadingN; 
+  loadP = true; 
 
 }
-
