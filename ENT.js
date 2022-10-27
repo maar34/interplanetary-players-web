@@ -1,5 +1,5 @@
 let sw, sh; // window size
-let padU; // gui separation
+let padX; // gui separation
 let trackI; // track 1 -  
 let font1; // font variable
 let playStateI; 
@@ -7,6 +7,8 @@ let params; // url parameters
 let trackI_speed; 
 let tempID;
 let loadingBar, loadP; 
+let xSlider, ySlider, zSlider;
+
 
 var card = {
   id:"",
@@ -37,9 +39,9 @@ var easycam,
     state = {
       distance: 1500, //final distance
       center  : [0, 0, 0],
-      rotation: [1., 0., 0., 0.]
+      rotation: [1., 0., 0., 0.],
     },
-    panelX=0, panelY=20;
+    panelX=30, panelY=45;
 
 document.oncontextmenu = () => false; // no right click
 
@@ -52,8 +54,6 @@ function preload() {
   deck = loadJSON("data/334.json")
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
-
-
 
 }
 
@@ -77,7 +77,9 @@ function setup() {
 
   sw= window.innerWidth;
   sh= window.innerHeight;
-  padU = 10; 
+  padX = sw/80.; 
+  padY = sh/80.; 
+
 
   createCanvas(sw, sh, WEBGL);
   setAttributes('antialias', true);
@@ -92,28 +94,61 @@ function setup() {
   //easycam.setRotationConstraint(true, true, true);   
   easycam.setDistanceMin(333);
   easycam.setDistanceMax(3333);
+  easycam.removeMouseListeners();
 
   playStateI= 0;
  
   let bcol = color(200, 0, 0, 10);
-  let col = color(0, 200, 0, 200);
+  let col = color(255, 0, 0);
+
+
+var btW = 80.;
+var btH = 80.;
+var sliderW = sw*.34;
+var sliderH = sh*.055;
 
   playButton = createButton('play');
-  playButton.position(sw/2-60, sh-padU*6);
-  playButton.style('width', '120px');
-  playButton.style('height', '30px');
+
+  playButton.position(sw-(btW+panelX), panelY-20);
+  playButton.style('width', btW+'px');
+  playButton.style('height', btW+'px');
   playButton.style('background-color', bcol);
   playButton.style('color', col);
+  
+  // create sliders
 
+
+  xSlider = createSlider(0, 255, 127);
+  xSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
+  xSlider.style('width', sliderW+'px');
+  xSlider.style('height', sliderH+'px');
+  xSlider.style('background-color', bcol);
+  xSlider.style('color', col);
+
+  ySlider = createSlider(0, 255, 127);
+  ySlider.position(sw*.5-sliderW*.5, sh-sliderH*3);
+  ySlider.style('width', sliderW+'px');
+  ySlider.style('height', sliderH+'px');
+  ySlider.style('background-color', bcol);
+  ySlider.style('color', col);
+
+  zSlider = createSlider(0, 255, 127);
+  zSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
+  zSlider.style('width', sliderW+'px');
+  zSlider.style('height', sliderH+'px');
+  //zSlider.style('background-color', bcol);
+  zSlider.style('color', col);
+  
+  xSlider.hide();
+  ySlider.hide();
+  zSlider.hide();
   playButton.hide();
-
 
   playButton.mousePressed( playPause);
 
   // use the loaded font
   textFont(font1);
   textSize(21);
-
   background(0, 0, 0);
 } 
 
@@ -135,23 +170,16 @@ function draw(){
  // let camSpeed = camRot[2]*float(card.speed); 
 
   let level = map( world_dist, 3300, 333, 0, 1, true);
-  trackI_speed = map( camRot[2], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
- 
-  if (isNaN(camRot[2])) {
-    trackI_speed =0.0001;
-  } 
+  //trackI_speed = map( camRot[0], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
+   trackI_speed = float(card.speed);
 
-  if (trackI_speed >= -0.1 && trackI_speed <= 0.1 ) {
-    trackI_speed = 0.11;
-  } 
+
 
   trackI.setVolume(level);
 if (playStateI == 1){  
-  
  // if (trackI_speed < 1.0 || trackI_speed  >= 1.){
    trackI.rate(trackI_speed);
    rotateY((frameCount*trackI_speed)*0.077);
-
 //}
 }
  // print((frameCount*trackI_speed)*0.077);
@@ -204,10 +232,10 @@ if (playStateI == 1){
 
         // Render the labels
         fill(0, 0, 255);
-        text("Distance:",panelX+35,panelY+25);
-        text("Speed:",panelX+35,panelY+25+20);
-        text("Min-Speed:",panelX+35,panelY+25+40);
-        text("Max-Speed:",panelX+35,panelY+25+60);
+        text("Distance:",panelX,panelY);
+        text("Speed:",panelX,panelY+20);
+        text("Min-Speed:",panelX,panelY+40);
+        text("Max-Speed:",panelX,panelY+60);
 
 
        if (loadP){
@@ -220,23 +248,23 @@ if (playStateI == 1){
         }
  //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
        if (loadingBar < .99){
-        text("Receiving Sound Waves",padU*4, sh-padU*6);
-        text("please wait, unmute device...",padU*4, sh-padU*3);
+        text("Receiving Sound Waves",padX*4, sh-padX*6);
+        text("please wait, unmute device...",padX*4, sh-padX*3);
 
        }else{
  
-      text("Decoding Sound Waves,",padU*4, sh-padU*6);
-      text("please wait, unmute device >>>",padU*4, sh-padU*3);
+      text("Decoding Sound Waves,",padX*4, sh-padX*6);
+      text("please wait, unmute device >>>",padX*4, sh-padX*3);
 
        }
       }
 
         // Render the state numbers
         fill(255,0,0);
-        text(nfs(state.distance, 1, 2),panelX+140,panelY+25);
-        text(nfs (trackI_speed ,    1, 6),panelX+120,panelY+25+20);
-        text(nfs(card.minSpeed, 1, 2),panelX+180,panelY+25+40);
-        text(nfs (card.maxSpeed ,    1, 2),panelX+180,panelY+25+60);
+        text(nfs(state.distance, 1, 2),panelX+110,panelY);
+        text(nfs (trackI_speed ,    1, 6),panelX+90,panelY+20);
+        text(nfs(card.minSpeed, 1, 2),panelX+150,panelY+40);
+        text(nfs (card.maxSpeed ,    1, 2),panelX+150,panelY+60);
 
 
 
@@ -286,7 +314,11 @@ function playPause(){
 
 function loaded (){
 
+  xSlider.show();
+  ySlider.show();
+  zSlider.show();
   playButton.show();
+
   loadP = false; 
 
 }
@@ -305,3 +337,6 @@ function loadingAudio (_loadingN){
   loadP = true; 
 
 }
+
+
+
