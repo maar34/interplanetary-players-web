@@ -7,7 +7,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"1.",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -18,7 +18,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"1.5",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -29,7 +29,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"2.0",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -40,7 +40,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"2.",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -51,7 +51,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"2.",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -62,7 +62,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"2.",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
@@ -73,7 +73,7 @@
         "initTime":"111.",
         "endTime":"333.",
         "speed":"2.",
-        "minSpeed":"-1.",
+        "minSpeed":"1.",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
