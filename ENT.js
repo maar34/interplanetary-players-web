@@ -1,10 +1,10 @@
 let sw, sh; // window size
 let padX; // gui separation
-let trackI; // track 1 -  
+let trackI, filterI; // track 1 -  
 let font1; // font variable
 let playStateI; 
 let params; // url parameters
-let trackI_speed; 
+let trackI_speed, levelI; 
 let tempID;
 let loadingBar, loadP; 
 let xSlider, ySlider, zSlider;
@@ -70,10 +70,7 @@ function setup() {
   trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
   trackI.playMode('restart');
 
-
-  print("this is the loaded card", card);
-  print("this is the loaded previous card", pCard);
-
+  filterI = new p5.HighPass();
 
   sw= window.innerWidth;
   sh= window.innerHeight;
@@ -92,13 +89,15 @@ function setup() {
 
   //easycam.setRotationConstraint = [.31, .4, .41];   
   //easycam.setRotationConstraint(true, true, true);   
-  easycam.setDistanceMin(333);
-  easycam.setDistanceMax(3333);
+ // easycam.setDistanceMin(333);
+ // easycam.setDistanceMax(3333);
   easycam.removeMouseListeners();
+  easycam.setPanScale(.02);
 
+print (  easycam.getPanScale(2.));
   playStateI= 0;
  
-  let bcol = color(200, 0, 0, 10);
+  let bcol = color(0, 0, 0, 10);
   let col = color(255, 0, 0);
 
 
@@ -117,27 +116,22 @@ var sliderH = sh*.055;
   
   // create sliders
 
+  var initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
 
-  xSlider = createSlider(0, 255, 127);
-  xSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
+  xSlider = createSlider(0., 255, initSpeed);
+  xSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
   xSlider.style('width', sliderW+'px');
   xSlider.style('height', sliderH+'px');
-  xSlider.style('background-color', bcol);
-  xSlider.style('color', col);
 
   ySlider = createSlider(0, 255, 127);
   ySlider.position(sw*.5-sliderW*.5, sh-sliderH*3);
   ySlider.style('width', sliderW+'px');
   ySlider.style('height', sliderH+'px');
-  ySlider.style('background-color', bcol);
-  ySlider.style('color', col);
 
   zSlider = createSlider(0, 255, 127);
-  zSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
+  zSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
   zSlider.style('width', sliderW+'px');
   zSlider.style('height', sliderH+'px');
-  //zSlider.style('background-color', bcol);
-  zSlider.style('color', col);
   
   xSlider.hide();
   ySlider.hide();
@@ -146,56 +140,57 @@ var sliderH = sh*.055;
 
   playButton.mousePressed( playPause);
 
-  // use the loaded font
+// use the loaded font
   textFont(font1);
   textSize(21);
-  background(0, 0, 0);
+
 } 
 
 function draw(){
 
-  background(0);
   noStroke();
   lights();
 
   fill(100, 110, 0);
 
   let camRot = easycam.getRotation();
-  //let camRotX = 0.;
-  //let camRotY = 150;
- // camRotX = camRot[1]*0.1+0.00;
- //camRotY = camRot[2]*float(card.speed)+.034;
-
   let world_dist= easycam.getDistance();
- // let camSpeed = camRot[2]*float(card.speed); 
+  
+  trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
+  levelI = map (zSlider.value(), 0., 255., 0., 1.);
+  world_dist = map (zSlider.value(), 0., 255., 3333., 333.);
 
-  let level = map( world_dist, 3300, 333, 0, 1, true);
-  //trackI_speed = map( camRot[0], -1, 1, float(card.minSpeed), float(card.maxSpeed), true);
-   trackI_speed = float(card.speed);
-
-
-
-  trackI.setVolume(level);
-if (playStateI == 1){  
- // if (trackI_speed < 1.0 || trackI_speed  >= 1.){
-   trackI.rate(trackI_speed);
-   rotateY((frameCount*trackI_speed)*0.077);
-//}
-}
- // print((frameCount*trackI_speed)*0.077);
-  //print(camRot[2]);
+  trackI.setVolume(levelI);
+  trackI.rate(trackI_speed);
 
 
+  rotateY((frameCount*trackI_speed*playStateI)*0.077);
+  
+  easycam.setDistance(world_dist, 33.)
+
+  let freq, back; 
+
+// ySlider mapping with 0 at the center 
+
+if ( ySlider.value() >= 127.){
+    freq = map(ySlider.value(), 127., 255., 20., 5000.);
+    back = map(ySlider.value(), 127., 255., 0., 77.);
+
+  }else{
+    freq = map(ySlider.value(), 127., 0., 20., 5000.);
+    back = map(ySlider.value(), 127., 0., 0., 77.);
+
+  }
+   filterI.freq(freq);
+
+//Planet and Background color (back from ySlider)
   push();
   var r = (sin(frameCount * 0.001) * 0.5 + 0.5) * 255;
   var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
   var b = 255-r-g;
   ambientMaterial(r,g,b);
 
-  //rotateY(frameCount * camRotY*playStateI);
-  //rotateX(frameCount * camRotX*playStateI);
-
-  //state.rotation[0] = frameCount * camRotY*playStateI;
+  background(back, back, r);
 
   sphere(80, 7, 7);
   rotateX(PI*.4);
@@ -221,22 +216,20 @@ if (playStateI == 1){
 
   pop();
 
+  // Draw Data 
+
   easycam.beginHUD();
 
   let state = easycam.getState();
-
-  
     // Render the background box for the HUD
     noStroke();
 
-
         // Render the labels
-        fill(0, 0, 255);
+        fill(255, 0, 0);
         text("Distance:",panelX,panelY);
         text("Speed:",panelX,panelY+20);
         text("Min-Speed:",panelX,panelY+40);
         text("Max-Speed:",panelX,panelY+60);
-
 
        if (loadP){
 
@@ -258,15 +251,12 @@ if (playStateI == 1){
 
        }
       }
-
         // Render the state numbers
         fill(255,0,0);
-        text(nfs(state.distance, 1, 2),panelX+110,panelY);
-        text(nfs (trackI_speed ,    1, 6),panelX+90,panelY+20);
-        text(nfs(card.minSpeed, 1, 2),panelX+150,panelY+40);
-        text(nfs (card.maxSpeed ,    1, 2),panelX+150,panelY+60);
-
-
+        text(nfs(state.distance, 1, 3),panelX+110,panelY);
+        text(nfs (trackI_speed ,    1, 3),panelX+90,panelY+20);
+        text(nfs(card.minSpeed, 1, 3),panelX+150,panelY+40);
+        text(nfs (card.maxSpeed ,    1, 3),panelX+150,panelY+60);
 
       easycam.endHUD();
 
@@ -314,12 +304,16 @@ function playPause(){
 
 function loaded (){
 
+  loadP = false; 
+
   xSlider.show();
   ySlider.show();
   zSlider.show();
   playButton.show();
 
-  loadP = false; 
+  trackI.disconnect();
+  trackI.connect(filterI);
+
 
 }
 

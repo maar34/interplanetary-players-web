@@ -17,9 +17,9 @@
         "filename":"https://dl.dropboxusercontent.com/s/0ynj027z1lui2xj/04%20Spherical%20Drops.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"1.5",
-        "minSpeed":"1.",
-        "maxSpeed":"3.",
+        "speed":"1",
+        "minSpeed":".01",
+        "maxSpeed":"4.",
         "col1":"333.",
         "col2":"333."
      },
