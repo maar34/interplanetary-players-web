@@ -139,9 +139,9 @@ function draw(){
 
   // update sliders if easycam changes 
 
-  let world_dist2= easycam.getDistance();
-  let distanceUpdate = map (world_dist2,  3333., 333.,0., 255.);
-  zSlider.value(distanceUpdate);
+  //let world_dist2= easycam.getDistance();
+  //let distanceUpdate = map (world_dist2,  3333., 333.,0., 255.);
+  //zSlider.value(distanceUpdate);
   
   //let camRot = easycam.getRotation();
   //let rot_2 = map (camRot[2], -1., 1., 0., 255.);
@@ -250,7 +250,7 @@ if ( ySlider.value() >= 127.){
     sh= window.innerHeight;
 
     resizeCanvas(sw, sh);
-    easycam.setViewport([0,0,sw, sh]);
+   easycam.setViewport([0,0,sw, sh]);
 
   }
   /// Add these lines below sketch to prevent scrolling on mobile
