@@ -71,13 +71,13 @@ function setup() {
   sliderH = sh*.055;
 
 if(params.d==0){
-      card = game.skys0[params.c]; // here we update the actual card
+      card = game.skys0[params.c]; 
 };
 if(params.d==1){
-      card = game.skys00[params.c]; // here we update the actual card
+      card = game.skys00[params.c]; 
 };     
 if(params.d==2){
-      card = game.skys000[params.c]; // here we update the actual card
+      card = game.skys000[params.c];
 };
 
   print (card);
@@ -101,7 +101,7 @@ if(params.d==2){
  // easycam.setDistanceMin(333);
  // easycam.setDistanceMax(3333);
   easycam.state_reset =  state;
-  easycam.removeMouseListeners();
+ // easycam.removeMouseListeners();
   easycam.setPanScale(.02);
 
  
@@ -121,12 +121,12 @@ function draw(){
 
   fill(100, 110, 0);
 
-  let camRot = easycam.getRotation();
   let world_dist= easycam.getDistance();
   
   trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
   levelI = map (zSlider.value(), 0., 255., 0., 1.);
   world_dist = map (zSlider.value(), 0., 255., 3333., 333.);
+
 
   trackI.setVolume(levelI);
   trackI.rate(trackI_speed);
@@ -134,7 +134,21 @@ function draw(){
 
   rotateY((frameCount*trackI_speed*playStateI)*0.077);
   
-  easycam.setDistance(world_dist, 33.)
+  easycam.setDistance(world_dist, 33.);
+  
+
+  // update sliders if easycam changes 
+
+  let world_dist2= easycam.getDistance();
+  let distanceUpdate = map (world_dist2,  3333., 333.,0., 255.);
+  zSlider.value(distanceUpdate);
+  
+  //let camRot = easycam.getRotation();
+  //let rot_2 = map (camRot[2], -1., 1., 0., 255.);
+
+  // let trackI_speed2 = map (levelI_2, 0., 1., 0., 255.);
+  //xSlider.value(trackI_speed2);
+
 
   let freq, back; 
 
