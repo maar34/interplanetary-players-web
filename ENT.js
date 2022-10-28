@@ -25,7 +25,7 @@ var card = {
 }
 
 
-var deck;
+var game, deck, loadDeck;
 
 var easycam,
     state = {
@@ -41,8 +41,9 @@ document.oncontextmenu = () => false; // no right click
 
 function preload() {
 
+  params = getURLParams();
 
-  deck = loadJSON("data/334.json")
+  game = loadJSON("data/"+params.g+".json");
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
@@ -52,7 +53,6 @@ function setup() {
 
   getAudioContext().suspend();   // mimics the autoplay policy
 
-  params = getURLParams();
   
   // Initialize global variables 
 
@@ -70,10 +70,18 @@ function setup() {
   sliderW = sw*.34;
   sliderH = sh*.055;
 
-  //tempID = params.id;
+if(params.d==0){
+      card = game.skys0[params.c]; // here we update the actual card
+};
+if(params.d==1){
+      card = game.skys00[params.c]; // here we update the actual card
+};     
+if(params.d==2){
+      card = game.skys000[params.c]; // here we update the actual card
+};
 
-  card = deck.skys1[params.id]; // here we update the actual card
-  
+  print (card);
+
 
   trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
   trackI.playMode('restart');
