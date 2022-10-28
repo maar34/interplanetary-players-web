@@ -3,7 +3,7 @@
   "skys1":[
      {
         "id":"0",
-        "filename":"https://dl.dropboxusercontent.com/s/0ynj027z1lui2xj/04%20Spherical%20Drops.mp3?raw=1",
+        "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
         "speed":"1.",
@@ -14,7 +14,7 @@
      },
      {
         "id":"1",
-        "filename":"https://dl.dropboxusercontent.com/s/0ynj027z1lui2xj/04%20Spherical%20Drops.mp3?raw=1",
+        "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
         "speed":"1",
@@ -39,8 +39,8 @@
         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
         "initTime":"111.",
         "endTime":"333.",
-        "speed":"2.",
-        "minSpeed":"1.",
+        "speed":"1.",
+        "minSpeed":".1",
         "maxSpeed":"3.",
         "col1":"333.",
         "col2":"333."
