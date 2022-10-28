@@ -1,5 +1,6 @@
 let sw, sh; // window size
 let padX; // gui separation
+var btW, btH, sliderW, sliderH; 
 let trackI, filterI; // track 1 -  
 let font1; // font variable
 let playStateI; 
@@ -8,6 +9,7 @@ let trackI_speed, levelI;
 let tempID;
 let loadingBar, loadP; 
 let xSlider, ySlider, zSlider;
+let bcol, col; 
 
 
 var card = {
@@ -21,17 +23,7 @@ var card = {
   col1:"",
   col2:""
 }
-var pCard = {
-  id:"",
-  filename:"",
-  initTime:"",
-  endTime:"",
-  speed:"",
-  minSpeed:"",
-  maxSpeed:"",
-  col1:"",
-  col2:""
-}
+
 
 var deck;
 
@@ -49,7 +41,6 @@ document.oncontextmenu = () => false; // no right click
 
 function preload() {
 
-  params = getURLParams();
 
   deck = loadJSON("data/334.json")
 
@@ -61,22 +52,32 @@ function setup() {
 
   getAudioContext().suspend();   // mimics the autoplay policy
 
-
-  tempID = params.id;
-
-  card = deck.skys1[tempID]; // here we update the actual card
-  pCard = deck.skys1[4]; // here we update the previous actual card
-
-  trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
-  trackI.playMode('restart');
-
-  filterI = new p5.HighPass();
+  params = getURLParams();
+  
+  // Initialize global variables 
 
   sw= window.innerWidth;
   sh= window.innerHeight;
   padX = sw/80.; 
   padY = sh/80.; 
 
+  bcol = color(0, 0, 0, 10);
+  col = color(255, 0, 0);
+
+
+  btW = 80.;
+  btH = 80.;
+  sliderW = sw*.34;
+  sliderH = sh*.055;
+
+  //tempID = params.id;
+
+  card = deck.skys1[params.id]; // here we update the actual card
+  
+
+  trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
+  trackI.playMode('restart');
+  filterI = new p5.HighPass();
 
   createCanvas(sw, sh, WEBGL);
   setAttributes('antialias', true);
@@ -84,61 +85,20 @@ function setup() {
   easycam = createEasyCam();
   easycam.setState(state, 3000); // animate to state in 3 second
 
-  // set initial camera state
-  easycam.state_reset =  state;
+  playStateI= 0;
+  
 
-  //easycam.setRotationConstraint = [.31, .4, .41];   
-  //easycam.setRotationConstraint(true, true, true);   
+  // set initial camera state
+
  // easycam.setDistanceMin(333);
  // easycam.setDistanceMax(3333);
+  easycam.state_reset =  state;
   easycam.removeMouseListeners();
   easycam.setPanScale(.02);
 
-print (  easycam.getPanScale(2.));
-  playStateI= 0;
  
-  let bcol = color(0, 0, 0, 10);
-  let col = color(255, 0, 0);
+  createDom(); 
 
-
-var btW = 80.;
-var btH = 80.;
-var sliderW = sw*.34;
-var sliderH = sh*.055;
-
-  playButton = createButton('play');
-
-  playButton.position(sw-(btW+panelX), panelY-20);
-  playButton.style('width', btW+'px');
-  playButton.style('height', btW+'px');
-  playButton.style('background-color', bcol);
-  playButton.style('color', col);
-  
-  // create sliders
-
-  var initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
-
-  xSlider = createSlider(0., 255, initSpeed);
-  xSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
-  xSlider.style('width', sliderW+'px');
-  xSlider.style('height', sliderH+'px');
-
-  ySlider = createSlider(0, 255, 127);
-  ySlider.position(sw*.5-sliderW*.5, sh-sliderH*3);
-  ySlider.style('width', sliderW+'px');
-  ySlider.style('height', sliderH+'px');
-
-  zSlider = createSlider(0, 255, 127);
-  zSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
-  zSlider.style('width', sliderW+'px');
-  zSlider.style('height', sliderH+'px');
-  
-  xSlider.hide();
-  ySlider.hide();
-  zSlider.hide();
-  playButton.hide();
-
-  playButton.mousePressed( playPause);
 
 // use the loaded font
   textFont(font1);
@@ -314,7 +274,6 @@ function loaded (){
   trackI.disconnect();
   trackI.connect(filterI);
 
-
 }
 
 function errorLoadingAudio (){
@@ -333,4 +292,43 @@ function loadingAudio (_loadingN){
 }
 
 
+function createDom(){
 
+  // create buttons
+
+  playButton = createButton('play');
+
+  playButton.position(sw-(btW+panelX), panelY-20);
+  playButton.style('width', btW+'px');
+  playButton.style('height', btW+'px');
+  playButton.style('background-color', bcol);
+  playButton.style('color', col);
+  
+  // create sliders
+
+  var initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
+
+  xSlider = createSlider(0., 255, initSpeed);
+  xSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
+  xSlider.style('width', sliderW+'px');
+  xSlider.style('height', sliderH+'px');
+
+  ySlider = createSlider(0, 255, 127);
+  ySlider.position(sw*.5-sliderW*.5, sh-sliderH*3);
+  ySlider.style('width', sliderW+'px');
+  ySlider.style('height', sliderH+'px');
+
+  zSlider = createSlider(0, 255, 127);
+  zSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
+  zSlider.style('width', sliderW+'px');
+  zSlider.style('height', sliderH+'px');
+  
+  xSlider.hide();
+  ySlider.hide();
+  zSlider.hide();
+  playButton.hide();
+
+  playButton.mousePressed( playPause);
+
+
+}
