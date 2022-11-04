@@ -395,8 +395,8 @@ endShape();
   //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
   if (loadingBar < .99){
     
-    text("Receiving Sound Waves",sw*.5, sh*.5-padX*6);
-    text("please wait, unmute device...",sw*.5, sh*.5-padX*3);
+    text("Receiving Sound Waves",tempF, sh*.5-padX*6);
+    text("please wait, unmute device...",tempF, sh*.5-padX*3);
 
   }else{
       text("Decoding Sound Waves,", tempF, sh*.5-padX*6);
