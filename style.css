@@ -1,6 +1,14 @@
+@font-face { 
+  font-family: 'OpenSymbol';
+  src: url('fonts/Orbitron-VariableFont_wght.ttf') format('ttf');
+  }
+
 html, body {
   margin: 0;
   padding: 0;
+  font-size: 21px;
+  font-family: "Orbitron-VariableFont_wght"; 
+  color: rgb(0, 255, 0); 
 }
 
 canvas {
