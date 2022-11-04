@@ -14,3 +14,32 @@ html, body {
 canvas {
   display: block;
 }
+
+
+
+
+center.button{
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+center.button:hover{
+    top: 5px;
+    color: blue;
+
+}
+a.button{
+  font-size: 500px;
+  color: inherit;
+
+  text-decoration: none;
+}
+
+a.text{
+
+  position: absolute;
+  top: 55%;
+  left: 45%;
+  font: 40px "times";
+  color: green;
+  cursor: pointer;
+}

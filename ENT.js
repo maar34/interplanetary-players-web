@@ -43,8 +43,14 @@ function preload() {
 
   // Initialize global variables 
 
+  if (window.innerWidth>=window.innerHeight){ 
   sw= window.innerWidth;
   sh= window.innerHeight;
+  }else{
+  sh= window.innerWidth;
+  sw= window.innerHeight;
+  }
+  
   padX = sw/80.; 
   padY = sh/80.; 
   playStateI= 0;
@@ -57,7 +63,7 @@ function preload() {
 
   btW = 80.;
   btH = 80.;
-  sliderW = sw*.34;
+  sliderW = sw*.15;
   sliderH = sh*.055;
 
     if(params.d==0){
@@ -70,19 +76,17 @@ function preload() {
         card = game.skys000[params.c];
     };
    
+    createDom(); 
+
     trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
     trackI.playMode('restart');
     filterI = new p5.HighPass();
     trackI_speed = card.speed;
 
     // Create Canvas - Always the landscape.  
-    if (sw>=sh){ 
         createCanvas(sw, sh, WEBGL);
-    }else{
-        createCanvas(sh, sw, WEBGL);
-    }
-    setAttributes('antialias', true);
-    createDom(); 
+
+        setAttributes('antialias', true);
 
     cam1 = createCamera();
     cam1.setPosition(0, 0, worldI_dist);
@@ -145,17 +149,33 @@ function preload() {
 
     noFill(); 
     stroke(0, 255, 0);
-    translate (-width*.5, -height*.5, cam1.eyeZ-width*.5);  
-    rect(padX, padY, width-padX*4, height-padY*4, 20, 15, 10, 5); 
-    
+    translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.5);  
+//    rect (0, 0, sw , sh);
+
+    noFill();
+beginShape();
+vertex(sw, sh);
+vertex(sw, sh);
+vertex(sw, 0+padX*4);
+vertex(sw-padX*4, 0);
+vertex(0, 0);
+vertex(0, sh-sliderW);
+vertex(0+sliderW, sh);
+vertex(sw-padX*3, sh);
+curveVertex(sw, sh);
+vertex(sw, sh);
+
+endShape();
+
   }
 
 
   function playPause(){
-    if(playButton.html()=="play"){
+    if(!trackI.isPlaying()){
       userStartAudio();  // mimics the autoplay policy
-      playButton.html("pause");
-  
+      playButton.html('II');
+      playButton.style('transform', 'rotate(305deg)');
+
       playStateI = 1;
       trackI.loop();
   
@@ -166,10 +186,11 @@ function preload() {
       trackI.pause();
       trackI.pause();
       trackI.pause();//need to repeat to be sure that this happens 
-  
-      playButton.html("play");
+      playButton.style('transform', 'rotate(0deg)');
+
+      playButton.html('&#x25E5');
       playStateI = 0;
-  
+
     }
   
   }
@@ -209,34 +230,44 @@ function preload() {
   
     // create buttons
   
-    playButton = createButton('play');
-  
+    playButton = createButton('&#x25E5');
     playButton.position(sw-(btW+padX), padY);
     playButton.style('width', btW+'px');
     playButton.style('height', btW+'px');
     playButton.style('background-color', bcol);
-    playButton.style('color', col);
+    playButton.style('color', 'red');
+    playButton.style('font-size', '3rem');
+    playButton.style('border', 'none');
+    playButton.style('background', 'none');
+
+
+
     
     // create sliders
   
     var initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
   
     xSlider = createSlider(0., 255, initSpeed);
-    xSlider.position(sw*.5-sliderW*.5, sh-sliderH*4);
-    xSlider.style('width', sliderW+'px');
+    xSlider.position(0+sliderW*.1, sh-sliderH*1.3);
+    xSlider.style('width', sliderW*.77+'px');
     xSlider.style('height', sliderH+'px');
+
     xSlider.input(xInput);
+    
 
     ySlider = createSlider(0, 255, 127);
-    ySlider.position(sw*.5-sliderW*.5, sh-sliderH*3);
-    ySlider.style('width', sliderW+'px');
+    ySlider.position(-sliderW*.23, sh-sliderW*.7);
+    ySlider.style('width', sliderW*.7+'px');
     ySlider.style('height', sliderH+'px');
+    ySlider.style('transform', 'rotate(-90deg)');
+
     ySlider.input(yInput);
 
     zSlider = createSlider(0, 255, 127);
-    zSlider.position(sw*.5-sliderW*.5, sh-sliderH*2);
+    zSlider.position(0, sh-sliderW*.7);
     zSlider.style('width', sliderW+'px');
     zSlider.style('height', sliderH+'px');
+    zSlider.style('transform', 'rotate(-135deg)');
     zSlider.input(zInput);
 
     
@@ -285,7 +316,7 @@ function preload() {
 
   function guiData(){
     
-    let offset = .47;
+    let offset = 3.;
 
     translate (-width*offset, -height*offset, 0.);
 
@@ -354,7 +385,7 @@ function preload() {
 
   function loadGUI (){
     ///// LOADING TEXTS 
-
+    textAlign(CENTER);
     let tempF = frameRate()%30.; 
     if (tempF>15.){
     fill(0, 0,255);
@@ -363,12 +394,13 @@ function preload() {
     }
   //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
   if (loadingBar < .99){
-    text("Receiving Sound Waves",-width*.5+padX*4, sh*.5-padX*6);
-    text("please wait, unmute device...",-width*.5+padX*4, sh*.5-padX*3);
+    
+    text("Receiving Sound Waves",sw*.5, sh*.5-padX*6);
+    text("please wait, unmute device...",sw*.5, sh*.5-padX*3);
 
   }else{
-      text("Decoding Sound Waves,",-width*.5+padX*4, sh*.5-padX*6);
-  text("please wait, unmute device >>>",-width*.5+padX*4, sh*.5-padX*3);
+      text("Decoding Sound Waves,", tempF, sh*.5-padX*6);
+  text("please wait, unmute device >>>", tempF, sh*.5-padX*3);
 
   }
 }
