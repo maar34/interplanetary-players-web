@@ -78,11 +78,6 @@ function preload() {
    
     createDom(); 
 
-    trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
-    trackI.playMode('restart');
-    filterI = new p5.HighPass();
-    trackI_speed = card.speed;
-
     // Create Canvas - Always the landscape.  
         createCanvas(sw, sh, WEBGL);
 
@@ -94,6 +89,11 @@ function preload() {
     //cam1.ortho();
     setCamera(cam1);
 
+    trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
+    trackI.playMode('restart');
+    filterI = new p5.HighPass();
+    trackI_speed = card.speed;
+    
     // Use the selected Font 
 
     textFont(font1);
@@ -120,7 +120,6 @@ function preload() {
     fill(r, g, b);
 
     rotateY((frameCount*trackI_speed*playStateI)*0.077);
-
   
     sphere(80, 7, 7);
     rotateX(PI*.4);
@@ -149,8 +148,10 @@ function preload() {
 
     noFill(); 
     stroke(0, 255, 0);
-    translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.5);  
+    translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
+    
 //    rect (0, 0, sw , sh);
+//scale (.88);
 
     noFill();
 beginShape();
@@ -166,11 +167,15 @@ curveVertex(sw, sh);
 vertex(sw, sh);
 
 endShape();
+//scale (1.);
 
-  }
+//orbitControl();
+}
 
 
   function playPause(){
+
+
     if(!trackI.isPlaying()){
       userStartAudio();  // mimics the autoplay policy
       playButton.html('II');
@@ -281,8 +286,24 @@ endShape();
 
   }
 
-  function xInput(){
+  function updateDom(){
+  
+    // move buttons
+  
+    playButton.position(sw-(btW+padX), padY);
     
+    // move sliders
+  
+    xSlider.position(0+sliderW*.1, sh-sliderH*1.3);
+
+    ySlider.position(-sliderW*.23, sh-sliderW*.7);
+
+    zSlider.position(0, sh-sliderW*.7);  
+
+  }
+
+
+  function xInput(){
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
     trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
@@ -290,7 +311,6 @@ endShape();
   }
 
   function yInput(){
-    
   // ySlider mapping with 0 at the center 
   if ( ySlider.value() >= 127.){
     freq = map(ySlider.value(), 127., 255., 20., 5000.);
@@ -395,12 +415,47 @@ endShape();
   //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
   if (loadingBar < .99){
     
-    text("Receiving Sound Waves",tempF, sh*.5-padX*6);
-    text("please wait, unmute device...",tempF, sh*.5-padX*3);
+    text("Receiving Sound Waves",0, sh*.5-padX*6);
+    text("please wait, unmute device...",0, sh*.5-padX*3);
 
   }else{
-      text("Decoding Sound Waves,", tempF, sh*.5-padX*6);
-  text("please wait, unmute device >>>", tempF, sh*.5-padX*3);
+      text("Decoding Sound Waves,", 0, sh*.5-padX*6);
+  text("please wait, unmute device >>>", 0, sh*.5-padX*3);
 
   }
+}
+
+function windowResized() {
+  if (window.innerWidth>=window.innerHeight){ 
+    sw= window.innerWidth;
+    sh= window.innerHeight;
+    }else{
+    sh= window.innerWidth;
+    sw= window.innerHeight;
+    }
+
+  resizeCanvas(sw, sh);
+  updateDom();
+}
+
+
+function touchMoved() {
+  // do some stuff
+  var lef, rig, dow, up; 
+  var lef = sw*.2; 
+  var rig = sw*.8; 
+  var dow = sh*.2; 
+  var up = sh*.8; 
+
+  if (mouseX>lef&&mouseX<rig){
+    if (mouseY>dow&&mouseY<up){
+      return false;
+
+  }
+
+}
+
+
+
+
 }
