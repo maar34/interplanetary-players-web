@@ -9,6 +9,8 @@ html, body {
   font-size: 21px;
   font-family: "Orbitron-VariableFont_wght"; 
   color: rgb(0, 255, 0); 
+  background-color: black;
+
 }
 
 canvas {
@@ -16,30 +18,40 @@ canvas {
 }
 
 
+/* From here on it's styling the sliders */
+
+.slider {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 1px;
+  background: rgb(0, 255, 38, 0);
+  outline: none;
+  border: 0px solid lawngreen;
+  border-radius: 2px;
+}
 
 
-center.button{
+/* for chrome/safari */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0);
   cursor: pointer;
-  transition-duration: 0.2s;
-}
-center.button:hover{
-    top: 5px;
-    color: blue;
-
-}
-a.button{
-  font-size: 500px;
-  color: inherit;
-
-  text-decoration: none;
+  background: lawngreen;
+  border: 1px solid lawngreen;
+  border-radius: 100px;
 }
 
-a.text{
-
-  position: absolute;
-  top: 55%;
-  left: 45%;
-  font: 40px "times";
-  color: green;
+/* for firefox */
+.slider::-moz-range-thumb {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0);
   cursor: pointer;
+  background:lawngreen;
+  border: 1px solid lawngreen;
+  border-radius: 100px;
 }
+
