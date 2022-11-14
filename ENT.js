@@ -1,6 +1,6 @@
 let sw, sh; // window size
 let padX; // gui separation
-var btW, btH, sliderW, sliderH; 
+var btW, btH, sliderW, sliderH, initSpeed; 
 let trackI, filterI; // track 1 -  
 let font1; // font variable
 let playStateI; 
@@ -11,9 +11,11 @@ let loadingBar, loadP;
 let xSlider, ySlider, zSlider;
 let bcol, col; 
 let freq, back; 
-let t1, t2, t3, t4, t5, t6, t7, t8; 
+let t1, t2, t3, t4, t5, t6, t7, t8, t11; 
 var game, deck, loadDeck;
 let cam1; 
+let portrait;
+
 
 var card = {
   id:"",
@@ -43,16 +45,9 @@ function preload() {
 
   // Initialize global variables 
 
-  if (window.innerWidth>=window.innerHeight){ 
-  sw= window.innerWidth;
-  sh= window.innerHeight;
-  }else{
-  sh= window.innerWidth;
-  sw= window.innerHeight;
-  }
-  
-  padX = sw/80.; 
-  padY = sh/80.; 
+    initVariables();
+ 
+
   playStateI= 0;
   worldI_dist =800;
 
@@ -61,10 +56,7 @@ function preload() {
   col = color(255, 0, 0);
 
 
-  btW = 80.;
-  btH = 80.;
-  sliderW = sw*.15;
-  sliderH = sh*.055;
+
 
     if(params.d==0){
         card = game.skys0[params.c]; 
@@ -79,7 +71,7 @@ function preload() {
     createDom(); 
 
     // Create Canvas - Always the landscape.  
-        createCanvas(sw, sh, WEBGL);
+        createCanvas(window.innerWidth, window.innerHeight, WEBGL);
 
         setAttributes('antialias', true);
 
@@ -124,7 +116,7 @@ function preload() {
     sphere(80, 7, 7);
     rotateX(PI*.4);
     torus(120, 7, 6, 7);
-  
+
     var r = (sin(frameCount * 0.001) * 1.5 + 1.5) * 255;
     var g = r - (sin(frameCount * 0.002) * 1.5 + 1.5) * 255;
     var b = 255-r-g;
@@ -147,13 +139,17 @@ function preload() {
     pop();
 
     noFill(); 
+
+    
     stroke(0, 255, 0);
     translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
     
 //    rect (0, 0, sw , sh);
-//scale (.88);
+/*scale (.88);
 
-    noFill();
+
+noFill();
+
 beginShape();
 vertex(sw, sh);
 vertex(sw, sh);
@@ -167,7 +163,7 @@ curveVertex(sw, sh);
 vertex(sw, sh);
 
 endShape();
-//scale (1.);
+*/
 
 //orbitControl();
 }
@@ -179,7 +175,7 @@ endShape();
     if(!trackI.isPlaying()){
       userStartAudio();  // mimics the autoplay policy
       playButton.html('II');
-      playButton.style('transform', 'rotate(305deg)');
+     // playButton.style('transform', 'rotate(305deg)');
 
       playStateI = 1;
       trackI.loop();
@@ -193,7 +189,7 @@ endShape();
       trackI.pause();//need to repeat to be sure that this happens 
       playButton.style('transform', 'rotate(0deg)');
 
-      playButton.html('&#x25E5');
+      playButton.html('&#9655');
       playStateI = 0;
 
     }
@@ -235,8 +231,8 @@ endShape();
   
     // create buttons
   
-    playButton = createButton('&#x25E5');
-    playButton.position(sw-(btW+padX), padY);
+    playButton = createButton('&#9655');
+    playButton.position(width, height*3);
     playButton.style('width', btW+'px');
     playButton.style('height', btW+'px');
     playButton.style('background-color', bcol);
@@ -250,29 +246,35 @@ endShape();
     
     // create sliders
   
-    var initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
+    initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
   
     xSlider = createSlider(0., 255, initSpeed);
-    xSlider.position(0+sliderW*.1, sh-sliderH*1.3);
-    xSlider.style('width', sliderW*.77+'px');
-    xSlider.style('height', sliderH+'px');
+    xSlider.position(sw*.5-(sliderW*.5), sh-padY*25);
+    xSlider.style('width', sliderW+'px');
+    xSlider.addClass("slider");
+
+   // xSlider.style('height', sliderH+'px');
 
     xSlider.input(xInput);
     
 
     ySlider = createSlider(0, 255, 127);
-    ySlider.position(-sliderW*.23, sh-sliderW*.7);
-    ySlider.style('width', sliderW*.7+'px');
-    ySlider.style('height', sliderH+'px');
+    ySlider.position(padX*.3, sh*.5);
+    ySlider.style('width', sliderW+'px');
     ySlider.style('transform', 'rotate(-90deg)');
+
+    ySlider.addClass("slider");
+
+  //  ySlider.style('height', sliderH+'px');
 
     ySlider.input(yInput);
 
     zSlider = createSlider(0, 255, 127);
-    zSlider.position(0, sh-sliderW*.7);
+    zSlider.position(sliderW*1.7, sh*.5);
     zSlider.style('width', sliderW+'px');
-    zSlider.style('height', sliderH+'px');
-    zSlider.style('transform', 'rotate(-135deg)');
+    //zSlider.style('height', padY+'px');
+    zSlider.addClass("slider");
+    zSlider.style('transform', 'rotate(-90deg)');
     zSlider.input(zInput);
 
     
@@ -290,15 +292,15 @@ endShape();
   
     // move buttons
   
-    playButton.position(sw-(btW+padX), padY);
+    playButton.position(sw*.5, sh-padY);
     
     // move sliders
   
-    xSlider.position(0+sliderW*.1, sh-sliderH*1.3);
+    xSlider.position(sw*.5-(sliderW*.5), sh-padY*25);
 
-    ySlider.position(-sliderW*.23, sh-sliderW*.7);
+    ySlider.position(padX*.3, sh*.5);
 
-    zSlider.position(0, sh-sliderW*.7);  
+    zSlider.position(sliderW*1.7, sh*.5);
 
   }
 
@@ -319,7 +321,10 @@ endShape();
     freq = map(ySlider.value(), 127., 0., 20., 5000.);
     back = map(ySlider.value(), 127., 0., 0., 255.);
   }
+
    filterI.freq(freq);
+   print (freq); 
+
 
   }
 
@@ -426,16 +431,11 @@ endShape();
 }
 
 function windowResized() {
-  if (window.innerWidth>=window.innerHeight){ 
-    sw= window.innerWidth;
-    sh= window.innerHeight;
-    }else{
-    sh= window.innerWidth;
-    sw= window.innerHeight;
-    }
 
-  resizeCanvas(sw, sh);
-  updateDom();
+    initVariables(); 
+    resizeCanvas(sw, sh);
+    updateDom();
+
 }
 
 
@@ -449,13 +449,56 @@ function touchMoved() {
 
   if (mouseX>lef&&mouseX<rig){
     if (mouseY>dow&&mouseY<up){
-      return false;
+     // return false;
 
   }
 
 }
 
+function logslider(position) {
+  // position will be between 0 and 100
+  var minp = 0;
+  var maxp = 100;
 
+  // The result should be between 100 an 10000000
+  var minv = Math.log(100);
+  var maxv = Math.log(10000000);
+
+  // calculate adjustment factor
+  var scale = (maxv-minv) / (maxp-minp);
+
+  return Math.exp(minv + scale*(position-minp));
+}
 
 
 }
+
+
+function mousePressed(){
+  print( 'sw', sw, 'sh', sh, 'padX', padX, 'padY', padY); 
+  print( 'btW', btW, 'btH', btH, 'sliderW', sliderW, 'sliderH', sliderH); 
+ }
+
+ function doubleClicked() {
+  xSlider.value(initSpeed);
+  ySlider.value(127);
+  zSlider.value(127);
+  xInput();
+  yInput();
+  zInput();
+}
+
+ function initVariables(){
+
+  sw= window.innerWidth;
+  sh= window.innerHeight;
+
+  padX = sw/80.; 
+  padY = sh/80.; 
+  btW = sw*.1;
+  btH = sw*.1;
+  sliderW = sw*.4;
+  sliderH = sliderW*.25;
+
+
+ }

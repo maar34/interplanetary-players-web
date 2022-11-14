@@ -1,0 +1,16 @@
+{
+   "description":"Configuration of first release of ENT Cards",
+   "skys0":[
+      {
+         "id":"0",
+         "filename":"data/Rabbit_Hole_Maar.mp3",
+         "initTime":"111.",
+         "endTime":"333.",
+         "speed":"1.",
+         "minSpeed":".1",
+         "maxSpeed":"3.",
+         "col1":"333.",
+         "col2":"333."
+      }
+   ]
+}
