@@ -232,7 +232,7 @@ endShape();
     // create buttons
   
     playButton = createButton('&#9655');
-    playButton.position(sw*.5-(btW*.5), sh*.95-(btW*.5));
+    playButton.position(sw*.5-(btW*.5), sh*.9-(btW*.5));
     playButton.style('width', btW+'px');
     playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
@@ -292,7 +292,7 @@ endShape();
   
     // move buttons
   
-    playButton.position(sw*.5-(btW*.5), sh*.95-(btW*.5));
+    playButton.position(sw*.5-(btW*.5), sh*.9-(btW*.5));
     
     // move sliders
     
