@@ -11,6 +11,7 @@ html, body {
   color: rgb(0, 255, 0); 
   background-color: black;
 
+
 }
 
 canvas {
@@ -23,11 +24,11 @@ canvas {
 .slider {
   -webkit-appearance: none;
   width: 50%;
-  height: 1px;
+  height: 0rem;
   background: rgb(0, 255, 38, 0);
   outline: none;
   border: 0px solid lawngreen;
-  border-radius: 2px;
+  border-radius: 0px;
 }
 
 
@@ -35,23 +36,28 @@ canvas {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 60px;
-  height: 60px;
+  width: 1.5rem;
+  height: 1.5rem;
   background: rgba(0, 0, 0, 0);
   cursor: pointer;
   background: lawngreen;
   border: 1px solid lawngreen;
-  border-radius: 100px;
+  border-radius: 100px; /* round corners */
+
+
 }
 
 /* for firefox */
 .slider::-moz-range-thumb {
-  width: 60px;
-  height: 60px;
-  background: rgba(0, 0, 0, 0);
+  width: 1.5rem;
+  height: 1.5rem;
+  background: rgb(45, 255, 8);
   cursor: pointer;
   background:lawngreen;
   border: 1px solid lawngreen;
   border-radius: 100px;
-}
 
+  position: relative;
+
+
+}

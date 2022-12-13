@@ -232,16 +232,14 @@ endShape();
     // create buttons
   
     playButton = createButton('&#9655');
-    playButton.position(width, height*3);
+    playButton.position(sw*.5-(btW*.5), sh*.95-(btW*.5));
     playButton.style('width', btW+'px');
-    playButton.style('height', btW+'px');
+    playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
-    playButton.style('color', 'red');
-    playButton.style('font-size', '3rem');
+    playButton.style('color', 'lawngreen');
+    playButton.style('font-size', '1.5rem');
     playButton.style('border', 'none');
     playButton.style('background', 'none');
-
-
 
     
     // create sliders
@@ -249,8 +247,9 @@ endShape();
     initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
   
     xSlider = createSlider(0., 255, initSpeed);
-    xSlider.position(sw*.5-(sliderW*.5), sh-padY*25);
+    xSlider.position(sw*.5-(sliderW*.5), sh*.8);
     xSlider.style('width', sliderW+'px');
+
     xSlider.addClass("slider");
 
    // xSlider.style('height', sliderH+'px');
@@ -259,18 +258,19 @@ endShape();
     
 
     ySlider = createSlider(0, 255, 127);
-    ySlider.position(padX*.3, sh*.5);
+    ySlider.position(0., sh*.5);
     ySlider.style('width', sliderW+'px');
     ySlider.style('transform', 'rotate(-90deg)');
 
     ySlider.addClass("slider");
+
 
   //  ySlider.style('height', sliderH+'px');
 
     ySlider.input(yInput);
 
     zSlider = createSlider(0, 255, 127);
-    zSlider.position(sliderW*1.7, sh*.5);
+    zSlider.position(sw*.6, sh*.5);
     zSlider.style('width', sliderW+'px');
     //zSlider.style('height', padY+'px');
     zSlider.addClass("slider");
@@ -292,15 +292,15 @@ endShape();
   
     // move buttons
   
-    playButton.position(sw*.5, sh-padY);
+    playButton.position(sw*.5-(btW*.5), sh*.95-(btW*.5));
     
     // move sliders
-  
-    xSlider.position(sw*.5-(sliderW*.5), sh-padY*25);
+    
+    xSlider.position(sw*.5-(sliderW*.5), sh*.8);
 
-    ySlider.position(padX*.3, sh*.5);
+    ySlider.position(0 , sh*.5);
 
-    zSlider.position(sliderW*1.7, sh*.5);
+    zSlider.position(sw*.8, sh*.5);
 
   }
 
@@ -496,7 +496,7 @@ function mousePressed(){
   padX = sw/80.; 
   padY = sh/80.; 
   btW = sw*.1;
-  btH = sw*.1;
+  btH = sw*.01;
   sliderW = sw*.4;
   sliderH = sliderW*.25;
 
