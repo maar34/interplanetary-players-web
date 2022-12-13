@@ -142,7 +142,7 @@ function preload() {
 
     
     stroke(0, 255, 0);
-    translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
+    //(translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
     
 //    rect (0, 0, sw , sh);
 /*scale (.88);
@@ -188,7 +188,6 @@ endShape();
       trackI.pause();
       trackI.pause();//need to repeat to be sure that this happens 
       playButton.style('transform', 'rotate(0deg)');
-
       playButton.html('&#9655');
       playStateI = 0;
 
@@ -232,12 +231,12 @@ endShape();
     // create buttons
   
     playButton = createButton('&#9655');
-    playButton.position(sw*.5-(btW*.5), sh*.9-(btW*.5));
-    playButton.style('width', btW+'px');
-    playButton.style('height', btH+'px');
+    playButton.position(sw*.5, sh*.9);
+    //playButton.style('width', btW+'px');
+    //playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
-    playButton.style('color', 'green');
-    playButton.style('font-size', '1.5rem');
+    playButton.style('color', 'lawngreen');
+    playButton.style('font-size', '2.5rem');
     playButton.style('border', 'none');
     playButton.style('background', 'none');
 
@@ -282,7 +281,6 @@ endShape();
     ySlider.hide();
     zSlider.hide();
     playButton.hide();
-  
     playButton.mousePressed( playPause);
   
 
@@ -292,7 +290,7 @@ endShape();
   
     // move buttons
   
-    playButton.position(sw*.5-(btW*.5), sh*.9-(btW*.5));
+    playButton.position(sw*.5, sh*.9);
     
     // move sliders
     
@@ -303,7 +301,6 @@ endShape();
     zSlider.position(sw*.8, sh*.5);
 
   }
-
 
   function xInput(){
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
@@ -351,31 +348,31 @@ endShape();
 
     // Render the labels
 
-     t1 = createP('Distance');
+     t1 = createP('Distance:');
     t1.position(padX*offset,padY*offset);
 
-     t2 = createP('Speed');
+     t2 = createP('Speed:');
     t2.position(padX*offset,padY*offset+20);
 
-     t3 = createP('Min-Speed');
+     t3 = createP('Min-Speed:');
     t3.position(padX*offset,padY*offset+40);
 
-     t4 = createP('Max-Speed');
+     t4 = createP('Max-Speed:');
     t4.position(padX*offset,padY*offset+60);
 
     t5 = createP();
     t5.html(worldI_dist);
 
-    t5.position(padX*offset+110,padY*offset);
+    t5.position(padX*offset+90,padY*offset);
 
      t6 = createP(trackI_speed);
-    t6.position(padX*offset+90,padY*offset+20);
+    t6.position(padX*offset+70,padY*offset+20);
 
      t7 = createP(card.minSpeed);
-    t7.position(padX*offset+150,padY*offset+40);
+    t7.position(padX*offset+105,padY*offset+40);
 
      t8 = createP(card.maxSpeed);
-    t8.position(padX*offset+150,padY*offset+60);
+    t8.position(padX*offset+110,padY*offset+60);
 
 
 
@@ -475,8 +472,7 @@ function logslider(position) {
 
 
 function mousePressed(){
-  print( 'sw', sw, 'sh', sh, 'padX', padX, 'padY', padY); 
-  print( 'btW', btW, 'btH', btH, 'sliderW', sliderW, 'sliderH', sliderH); 
+
  }
 
  function doubleClicked() {
@@ -495,8 +491,8 @@ function mousePressed(){
 
   padX = sw/80.; 
   padY = sh/80.; 
-  btW = sw*.1;
-  btH = sw*.01;
+  btW = sw*.2;
+  btH = sw*.2;
   sliderW = sw*.4;
   sliderH = sliderW*.25;
 
