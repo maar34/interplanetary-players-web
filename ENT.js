@@ -236,7 +236,7 @@ endShape();
     playButton.style('width', btW+'px');
     playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
-    playButton.style('color', 'lawngreen');
+    playButton.style('color', 'green');
     playButton.style('font-size', '1.5rem');
     playButton.style('border', 'none');
     playButton.style('background', 'none');
