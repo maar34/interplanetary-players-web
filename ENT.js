@@ -16,6 +16,10 @@ var game, deck, loadDeck;
 let cam1; 
 let portrait;
 
+var analyzer;
+var numSamples = 1024;
+// Array of amplitude values (-1 to +1) over time.
+var samples = [];
 
 var card = {
   id:"",
@@ -55,9 +59,6 @@ function preload() {
   bcol = color(0, 0, 0, 10);
   col = color(255, 0, 0);
 
-
-
-
     if(params.d==0){
         card = game.skys0[params.c]; 
     };
@@ -83,9 +84,14 @@ function preload() {
 
     trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
     trackI.playMode('restart');
+
+    analyzer = new p5.FFT(0, numSamples);
+
     filterI = new p5.HighPass();
     trackI_speed = card.speed;
     
+    analyzer.setInput(filterI);
+
     // Use the selected Font 
 
     textFont(font1);
@@ -100,14 +106,32 @@ function preload() {
     lights();
     fill(255, 255, 255);
 
+    samples = analyzer.waveform();
+    var bufLen = samples.length;
+
+    beginShape();
+    for (var i = 0; i < bufLen; i++){
+      var r = sin(samples[i]) * 255;
+      var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
+      var b = 255-r-g;
+
+    }
+    endShape();
+
   if (loadP)loadGUI();
+
+
+
 
       //Planet and Background color (back from ySlider)
     push();
-    var r = (sin(frameCount * 0.001) * 0.5 + 0.5) * 255;
-    var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
-    var b = 255-r-g;
+    r = 255-abs(r); 
+    g = 255-abs(g)*2; 
+    b = 255-abs(b); 
+
+    
     ambientMaterial(r,g,b);
+    
 
     fill(r, g, b);
 
@@ -117,10 +141,10 @@ function preload() {
     rotateX(PI*.4);
     torus(120, 7, 6, 7);
 
-    var r = (sin(frameCount * 0.001) * 1.5 + 1.5) * 255;
+    /*var r = (sin(frameCount * 0.001) * 1.5 + 1.5) * 255;
     var g = r - (sin(frameCount * 0.002) * 1.5 + 1.5) * 255;
     var b = 255-r-g;
-    ambientMaterial(r,g,b);
+    ambientMaterial(r,g,b);*/
   
     translate (- 260, 0., 0.);
   
@@ -231,9 +255,9 @@ endShape();
     // create buttons
   
     playButton = createButton('&#9655');
-    playButton.position(sw*.5, sh*.9);
-    //playButton.style('width', btW+'px');
-    //playButton.style('height', btH+'px');
+    playButton.position(innerWidth*.5-(btW*.5), 11);
+    playButton.style('width', btW+'px');
+    playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
     playButton.style('color', 'lawngreen');
     playButton.style('font-size', '2.5rem');
@@ -290,7 +314,7 @@ endShape();
   
     // move buttons
   
-    playButton.position(sw*.5, sh*.9);
+    playButton.position(innerWidth*.5-(btW*.5), 11);
     
     // move sliders
     
@@ -340,7 +364,7 @@ endShape();
     
     let offset = 3.;
 
-    translate (-width*offset, -height*offset, 0.);
+    //translate (-width*offset, -height*offset, 0.);
 
     //noStroke();
     textFont(font1);
