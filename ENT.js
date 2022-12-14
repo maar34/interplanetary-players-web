@@ -219,6 +219,25 @@ endShape();
   
   }
 
+  function xB(){
+    xSlider.value(initSpeed);
+
+    xInput();
+
+  }
+
+  function yB(){
+    ySlider.value(127);
+    yInput();
+  }
+
+  function zB(){
+
+    zSlider.value(127);
+    zInput();
+    
+  }
+
   function loaded (){
 
     loadP = false; 
@@ -227,6 +246,10 @@ endShape();
     ySlider.show();
     zSlider.show();
     playButton.show();
+    xButton.show();
+    yButton.show();
+    zButton.show();
+
     guiData();
 
     trackI.disconnect();
@@ -264,7 +287,36 @@ endShape();
     playButton.style('border', 'none');
     playButton.style('background', 'none');
 
-    
+    xButton = createButton('&#x2609');
+    xButton.position(innerWidth*.5-(btW*.5), sh*.7);
+    xButton.style('width', btW+'px');
+    xButton.style('height', btH+'px');
+    xButton.style('background-color', bcol);
+    xButton.style('color', 'lawngreen');
+    xButton.style('font-size', '2.5rem');
+    xButton.style('border', 'none');
+    xButton.style('background', 'none');
+
+    yButton = createButton('&#x2609');
+    yButton.position(-25, innerHeight*.44);
+    yButton.style('width', btW+'px');
+    yButton.style('height', btH+'px');
+    yButton.style('background-color', bcol);
+    yButton.style('color', 'lawngreen');
+    yButton.style('font-size', '2.5rem');
+    yButton.style('border', 'none');
+    yButton.style('background', 'none');
+
+    zButton = createButton('&#x2609');
+    zButton.position(sw*.77, innerHeight*.44);
+    zButton.style('width', btW+'px');
+    zButton.style('height', btH+'px');
+    zButton.style('background-color', bcol);
+    zButton.style('color', 'lawngreen');
+    zButton.style('font-size', '2.5rem');
+    zButton.style('border', 'none');
+    zButton.style('background', 'none');
+
     // create sliders
   
     initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
@@ -306,7 +358,12 @@ endShape();
     zSlider.hide();
     playButton.hide();
     playButton.mousePressed( playPause);
-  
+    xButton.hide();
+    xButton.mousePressed(xB);
+    yButton.hide();
+    yButton.mousePressed(yB);
+    zButton.hide();
+    zButton.mousePressed(zB);
 
   }
 
@@ -316,13 +373,18 @@ endShape();
   
     playButton.position(innerWidth*.5-(btW*.5), 11);
     
+    xButton.position(innerWidth*.5-(btW*.5), sh*.7);
+    yButton.position(-25., innerHeight*.44);
+    zButton.position(sw*.77, innerHeight*.44);
+
+
     // move sliders
     
     xSlider.position(sw*.5-(sliderW*.5), sh*.8);
 
     ySlider.position(0 , sh*.5);
 
-    zSlider.position(sw*.8, sh*.5);
+    zSlider.position(sw*.6, sh*.5);
 
   }
 
