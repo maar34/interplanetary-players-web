@@ -16,6 +16,7 @@ var game, deck, loadDeck;
 let cam1; 
 let portrait;
 let deltaX;
+let notDOM; 
 
 var analyzer;
 var numSamples = 1024;
@@ -117,10 +118,10 @@ function preload() {
     lights();
     fill(255, 255, 255);
  
+//    print (notDOM); 
 
     samples = analyzer.waveform();
     var bufLen = samples.length;
-
 
     let world_dist= easycam.getDistance();
 
@@ -174,7 +175,6 @@ function preload() {
 
     noFill(); 
 
-    
     stroke(0, 255, 0);
 
 
@@ -340,6 +340,7 @@ endShape();
    // xSlider.style('height', sliderH+'px');
 
     xSlider.input(xInput);
+    xSlider.mousePressed(xInputP);
     xSlider.mouseReleased(xInputR);
 
 
@@ -354,6 +355,7 @@ endShape();
   //  ySlider.style('height', sliderH+'px');
 
     ySlider.input(yInput);
+    ySlider.mousePressed(yInputP);
     ySlider.mouseReleased(yInputR);
 
     zSlider = createSlider(0, 255, 127);
@@ -363,7 +365,9 @@ endShape();
     zSlider.addClass("slider");
     zSlider.style('transform', 'rotate(-90deg)');
     zSlider.input(zInput);
+    zSlider.mousePressed(zInputP);
     zSlider.mouseReleased(zInputR);
+
 
     
     xSlider.hide();
@@ -372,10 +376,12 @@ endShape();
     playButton.hide();
     playButton.mousePressed( playPause);
     playButton.mouseReleased(playPauseR);
+    playButton.addClass("crosshair");
 
     xButton.hide();
     xButton.mousePressed(xB);
     xButton.mouseReleased(xBR);
+
 
     yButton.hide();
     yButton.mousePressed(yB);
@@ -384,7 +390,6 @@ endShape();
     zButton.hide();
     zButton.mousePressed(zB);
     zButton.mouseReleased(zBR);
-
 
   }
 
@@ -410,19 +415,60 @@ endShape();
   }
 
   function xInputR(){
+    notDOM = true; 
   }
   function yInputR(){
+    notDOM = true; 
+
   }
   function zInputR(){
+    notDOM = true; 
+
   }
   
   function playPauseR(){
+    notDOM = true; 
+
   }
   function xBR(){
+    notDOM = true; 
+
   }
   function yBR(){
+    notDOM = true; 
+
   }
   function zBR(){
+    notDOM = true; 
+
+  }
+
+  function xInputP(){
+    notDOM = false; 
+  }
+  function yInputP(){
+    notDOM = false; 
+
+  }
+  function zInputP(){
+    notDOM = false; 
+
+  }
+  
+  function playPauseP(){
+
+  }
+  function xBP(){
+    notDOM = false; 
+
+  }
+  function yBP(){
+    notDOM = false; 
+
+  }
+  function zBP(){
+    notDOM = false; 
+
   }
 
   function xInput(){
@@ -445,7 +491,6 @@ endShape();
   }
 
    filterI.freq(freq);
- //  print (freq); 
 
 
   }
@@ -462,19 +507,8 @@ endShape();
   }
 
 
-  function zOutput(){
-
-
-    var levelIT = map (easycam.getDistance(), 3333., 333., 0., 1.);
-    trackI.setVolume(levelIT);
-    var zSlidValue = map (levelIT, 0., 1., 0., 255.);
-   // t5.html(nfs (worldI_dist, 1, 2));    
-    zSlider.value(zSlidValue);
-    
-  }
 
   function xOutput(){
-
 
     deltaX = map (mouseX, 0., sw, 0., 256.);
     xSlider.value(deltaX);
@@ -497,10 +531,19 @@ endShape();
     }
   
      filterI.freq(freq);
-  
-
 }
-  function guiData(){
+
+function zOutput(){
+  var levelIT = map (easycam.getDistance(), 3333., 333., 0., 1.);
+  trackI.setVolume(levelIT);
+  var zSlidValue = map (levelIT, 0., 1., 0., 255.);
+ // t5.html(nfs (worldI_dist, 1, 2));    
+  zSlider.value(zSlidValue);
+  
+}
+
+
+function guiData(){
     
     let offset = 3.;
     //translate (-width*offset, -height*offset, 0.);
@@ -600,8 +643,12 @@ function windowResized() {
 
 
 function touchMoved() {
-  xOutput();
-  yOutput();
+ 
+
+  if (notDOM){
+    xOutput();
+    yOutput();
+    }
 
 }
 
@@ -639,5 +686,6 @@ function mousePressed(){
   sliderW = sw*.4;
   sliderH = sliderW*.25;
 
-  
+  notDOM = true; 
+
  }
