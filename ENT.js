@@ -33,6 +33,16 @@ var card = {
   col2:""
 }
 
+var easycam,
+    state = {
+      distance: 1500, //final distance
+      center  : [0, 0, 0],
+      rotation: [1., 0., 0., 0.],
+    },
+    panelX=30, panelY=45;
+
+document.oncontextmenu = () => false; // no right click
+
 function preload() {
 
     params = getURLParams();
@@ -55,7 +65,6 @@ function preload() {
   playStateI= 0;
   worldI_dist =800;
 
-
   bcol = color(0, 0, 0, 10);
   col = color(255, 0, 0);
 
@@ -72,16 +81,18 @@ function preload() {
     createDom(); 
 
     // Create Canvas - Always the landscape.  
-        createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+    createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+    setAttributes('antialias', true);
 
-        setAttributes('antialias', true);
+    easycam = createEasyCam();
+    easycam.setState(state, 3000); // animate to state in 3 second
+    easycam.setDistanceMin(333);
+    easycam.setDistanceMax(3333);
+    easycam.state_reset =  state;
+    // easycam.removeMouseListeners();
+    easycam.setPanScale(.02);
 
-    cam1 = createCamera();
-    cam1.setPosition(0, 0, worldI_dist);
-    //cam1.lookAt(0, 0, 0);
-    //cam1.ortho();
-    setCamera(cam1);
-
+   // LOAD AUDIO ENGINE 
     trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
     trackI.playMode('restart');
 
@@ -101,13 +112,15 @@ function preload() {
 
   function draw(){
     background(back, 0, 0);
-
     noStroke();
     lights();
     fill(255, 255, 255);
 
     samples = analyzer.waveform();
     var bufLen = samples.length;
+
+
+    let world_dist= easycam.getDistance();
 
     beginShape();
     for (var i = 0; i < bufLen; i++){
@@ -120,19 +133,13 @@ function preload() {
 
   if (loadP)loadGUI();
 
-
-
-
-      //Planet and Background color (back from ySlider)
+      //Planet and Background color (back from Sliders)
     push();
     r = 255-abs(r); 
     g = 255-abs(g)*2; 
     b = 255-abs(b); 
 
-    
     ambientMaterial(r,g,b);
-    
-
     fill(r, g, b);
 
     rotateY((frameCount*trackI_speed*playStateI)*0.077);
@@ -141,10 +148,11 @@ function preload() {
     rotateX(PI*.4);
     torus(120, 7, 6, 7);
 
-    /*var r = (sin(frameCount * 0.001) * 1.5 + 1.5) * 255;
-    var g = r - (sin(frameCount * 0.002) * 1.5 + 1.5) * 255;
-    var b = 255-r-g;
-    ambientMaterial(r,g,b);*/
+    r = abs(r); 
+    g = abs(g)*2; 
+    b = abs(b); 
+
+    ambientMaterial(r,g,b);
   
     translate (- 260, 0., 0.);
   
@@ -166,6 +174,9 @@ function preload() {
 
     
     stroke(0, 255, 0);
+
+    zOutput();
+
     //(translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
     
 //    rect (0, 0, sw , sh);
@@ -221,7 +232,6 @@ endShape();
 
   function xB(){
     xSlider.value(initSpeed);
-
     xInput();
 
   }
@@ -232,10 +242,8 @@ endShape();
   }
 
   function zB(){
-
     zSlider.value(127);
     zInput();
-    
   }
 
   function loaded (){
@@ -416,11 +424,23 @@ endShape();
     trackI.setVolume(levelI);
     worldI_dist = map (zSlider.value(), 0., 255., 3333., 333.);
     t5.html(nfs (worldI_dist,    1, 2));
-
-    cam1.setPosition(0, 0, worldI_dist);
-    setCamera(cam1);
+    
+    easycam.setDistance(worldI_dist, 33.);
 
   }
+
+
+  function zOutput(){
+
+
+    var levelIT = map (easycam.getDistance(), 3333., 333., 0., 1.);
+    trackI.setVolume(levelIT);
+    var zSlidValue = map (levelIT, 0., 1., 0., 255.);
+   // t5.html(nfs (worldI_dist, 1, 2));    
+    zSlider.value(zSlidValue);
+
+  }
+
 
   function guiData(){
     
@@ -518,6 +538,7 @@ function windowResized() {
     initVariables(); 
     resizeCanvas(sw, sh);
     updateDom();
+    easycam.setViewport([0,0,sw, sh]);
 
 }
 
