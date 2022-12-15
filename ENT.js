@@ -15,6 +15,7 @@ let t1, t2, t3, t4, t5, t6, t7, t8, t11;
 var game, deck, loadDeck;
 let cam1; 
 let portrait;
+let deltaX;
 
 var analyzer;
 var numSamples = 1024;
@@ -115,6 +116,7 @@ function preload() {
     noStroke();
     lights();
     fill(255, 255, 255);
+ 
 
     samples = analyzer.waveform();
     var bufLen = samples.length;
@@ -142,7 +144,7 @@ function preload() {
     ambientMaterial(r,g,b);
     fill(r, g, b);
 
-    rotateY((frameCount*trackI_speed*playStateI)*0.077);
+    rotateY((frameCount* trackI_speed *playStateI)*0.077);
   
     sphere(80, 7, 7);
     rotateX(PI*.4);
@@ -175,7 +177,6 @@ function preload() {
     
     stroke(0, 255, 0);
 
-    zOutput();
 
     //(translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
     
@@ -280,7 +281,8 @@ endShape();
   
   }
   
-  
+
+
   function createDom(){
   
     // create buttons
@@ -338,7 +340,8 @@ endShape();
    // xSlider.style('height', sliderH+'px');
 
     xSlider.input(xInput);
-    
+    xSlider.mouseReleased(xInputR);
+
 
     ySlider = createSlider(0, 255, 127);
     ySlider.position(0., sh*.5);
@@ -351,6 +354,7 @@ endShape();
   //  ySlider.style('height', sliderH+'px');
 
     ySlider.input(yInput);
+    ySlider.mouseReleased(yInputR);
 
     zSlider = createSlider(0, 255, 127);
     zSlider.position(sw*.6, sh*.5);
@@ -359,6 +363,7 @@ endShape();
     zSlider.addClass("slider");
     zSlider.style('transform', 'rotate(-90deg)');
     zSlider.input(zInput);
+    zSlider.mouseReleased(zInputR);
 
     
     xSlider.hide();
@@ -366,12 +371,20 @@ endShape();
     zSlider.hide();
     playButton.hide();
     playButton.mousePressed( playPause);
+    playButton.mouseReleased(playPauseR);
+
     xButton.hide();
     xButton.mousePressed(xB);
+    xButton.mouseReleased(xBR);
+
     yButton.hide();
     yButton.mousePressed(yB);
+    yButton.mouseReleased(yBR);
+
     zButton.hide();
     zButton.mousePressed(zB);
+    zButton.mouseReleased(zBR);
+
 
   }
 
@@ -396,7 +409,24 @@ endShape();
 
   }
 
+  function xInputR(){
+  }
+  function yInputR(){
+  }
+  function zInputR(){
+  }
+  
+  function playPauseR(){
+  }
+  function xBR(){
+  }
+  function yBR(){
+  }
+  function zBR(){
+  }
+
   function xInput(){
+
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
     trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
@@ -404,6 +434,7 @@ endShape();
   }
 
   function yInput(){
+
   // ySlider mapping with 0 at the center 
   if ( ySlider.value() >= 127.){
     freq = map(ySlider.value(), 127., 255., 20., 5000.);
@@ -414,12 +445,13 @@ endShape();
   }
 
    filterI.freq(freq);
-   print (freq); 
+ //  print (freq); 
 
 
   }
 
   function zInput(){
+
     levelI = map (zSlider.value(), 0., 255., 0., 1.);
     trackI.setVolume(levelI);
     worldI_dist = map (zSlider.value(), 0., 255., 3333., 333.);
@@ -438,16 +470,40 @@ endShape();
     var zSlidValue = map (levelIT, 0., 1., 0., 255.);
    // t5.html(nfs (worldI_dist, 1, 2));    
     zSlider.value(zSlidValue);
-
+    
   }
 
+  function xOutput(){
 
+
+    deltaX = map (mouseX, 0., sw, 0., 256.);
+    xSlider.value(deltaX);
+    trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
+    trackI.rate(trackI_speed);
+    t6.html(nfs (trackI_speed,    1, 2));
+  
+
+}
+  function yOutput(){
+
+    deltaY = map (mouseY, 0., sh, 256., 0.);
+    ySlider.value(deltaY);
+    if ( ySlider.value() >= 127.){
+      freq = map(ySlider.value(), 127., 255., 20., 5000.);
+      back = map(ySlider.value(), 127., 255., 0., 255.);
+    }else{
+      freq = map(ySlider.value(), 127., 0., 20., 5000.);
+      back = map(ySlider.value(), 127., 0., 0., 255.);
+    }
+  
+     filterI.freq(freq);
+  
+
+}
   function guiData(){
     
     let offset = 3.;
-
     //translate (-width*offset, -height*offset, 0.);
-
     //noStroke();
     textFont(font1);
     textSize(21);
@@ -544,41 +600,21 @@ function windowResized() {
 
 
 function touchMoved() {
-  // do some stuff
-  var lef, rig, dow, up; 
-  var lef = sw*.2; 
-  var rig = sw*.8; 
-  var dow = sh*.2; 
-  var up = sh*.8; 
-
-  if (mouseX>lef&&mouseX<rig){
-    if (mouseY>dow&&mouseY<up){
-     // return false;
-
-  }
+  xOutput();
+  yOutput();
 
 }
 
-function logslider(position) {
-  // position will be between 0 and 100
-  var minp = 0;
-  var maxp = 100;
-
-  // The result should be between 100 an 10000000
-  var minv = Math.log(100);
-  var maxv = Math.log(10000000);
-
-  // calculate adjustment factor
-  var scale = (maxv-minv) / (maxp-minp);
-
-  return Math.exp(minv + scale*(position-minp));
-}
-
-
-}
 
 
 function mousePressed(){
+
+
+ }
+
+ function mouseWheel(){
+
+  zOutput();
 
  }
 
@@ -603,5 +639,5 @@ function mousePressed(){
   sliderW = sw*.4;
   sliderH = sliderW*.25;
 
-
+  
  }
