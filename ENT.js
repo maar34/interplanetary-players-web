@@ -109,7 +109,7 @@ function preload() {
     // Use the selected Font 
 
     textFont(font1);
-    textSize(21);
+    textSize(27);
 
   }
 
@@ -321,7 +321,7 @@ function playPause(){
     xButton.addClass("crosshair");
 
     yButton = createButton('&#x2609');
-    yButton.position(-25., innerHeight*.44);
+    yButton.position(-11., innerHeight*.44);
     yButton.style('width', btW+'px');
     yButton.style('height', btH+'px');
     yButton.style('background-color', bcol);
@@ -336,7 +336,7 @@ function playPause(){
     yButton.addClass("crosshair");
 
     zButton = createButton('&#x2609');
-    zButton.position(sw*.77, innerHeight*.44);
+    zButton.position(sw*.8, innerHeight*.44);
     zButton.style('width', btW+'px');
     zButton.style('height', btH+'px');
     zButton.style('background-color', bcol);
@@ -407,8 +407,8 @@ function playPause(){
   
     playButton.position(innerWidth*.5-(btW), 34);
     xButton.position(innerWidth*.5-(btW*.5),innerHeight*.8);
-    yButton.position(-25., innerHeight*.44);
-    zButton.position(sw*.77, innerHeight*.44);
+    yButton.position(-11., innerHeight*.44);
+    zButton.position(sw*.8, innerHeight*.44);
 
     // move sliders
     
@@ -579,11 +579,11 @@ function guiData(){
   if (loadingBar < .99){
     
     text("Receiving Sound Waves",0, sh*.5-padX*6);
-    text("please wait, unmute device...",0, sh*.5-padX*3);
+    text("please wait, unmute device...",0, sh*.5-padX*.5);
 
   }else{
       text("Decoding Sound Waves,", 0, sh*.5-padX*6);
-  text("please wait, unmute device >>>", 0, sh*.5-padX*3);
+  text("please wait, unmute device >>>", 0, sh*.5-padX*.5);
 
   }
 }
