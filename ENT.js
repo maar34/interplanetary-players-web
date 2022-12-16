@@ -15,7 +15,7 @@ let t1, t2, t3, t4, t5, t6, t7, t8, t11;
 var game, deck, loadDeck;
 let cam1; 
 let portrait;
-let deltaX;
+let deltaX, startX, startY;
 let notDOM; 
 
 var analyzer;
@@ -91,6 +91,8 @@ function preload() {
     easycam.setDistanceMin(333);
     easycam.setDistanceMax(3333);
     easycam.state_reset =  state;
+    easycam.setPanScale(0.0);
+
     // easycam.removeMouseListeners();
     easycam.setPanScale(.02);
 
@@ -102,7 +104,6 @@ function preload() {
 
     filterI = new p5.HighPass();
     trackI_speed = card.speed;
-    
     analyzer.setInput(filterI);
 
     // Use the selected Font 
@@ -118,21 +119,17 @@ function preload() {
     lights();
     fill(255, 255, 255);
  
-//    print (notDOM); 
 
     samples = analyzer.waveform();
     var bufLen = samples.length;
+    
 
-    let world_dist= easycam.getDistance();
-
-    beginShape();
     for (var i = 0; i < bufLen; i++){
       var r = sin(samples[i]) * 255;
       var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
       var b = 255-r-g;
 
     }
-    endShape();
 
   if (loadP)loadGUI();
 
@@ -169,8 +166,7 @@ function preload() {
   
     translate ( - 0, 520., 0. );
     sphere(15, 7, 7);
-  
-    
+
     pop();
 
     noFill(); 
@@ -178,35 +174,37 @@ function preload() {
     stroke(0, 255, 0);
 
 
+
     //(translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
     
 //    rect (0, 0, sw , sh);
-/*scale (.88);
+//scale (.88);
 
+  easycam.beginHUD();
 
 noFill();
 
 beginShape();
-vertex(sw, sh);
-vertex(sw, sh);
-vertex(sw, 0+padX*4);
-vertex(sw-padX*4, 0);
 vertex(0, 0);
-vertex(0, sh-sliderW);
-vertex(0+sliderW, sh);
-vertex(sw-padX*3, sh);
-curveVertex(sw, sh);
+vertex(sw*.89, 0);
+vertex(sw, sh*.11);
 vertex(sw, sh);
-
+vertex(sw*.11, sh);
+vertex(0, sh*.89);
+vertex(0, 0);
 endShape();
-*/
+
 
 //orbitControl();
+
+  easycam.endHUD();
+
 }
 
 
-  function playPause(){
+function playPause(){
 
+    notDOM = false; 
 
     if(!trackI.isPlaying()){
       userStartAudio();  // mimics the autoplay policy
@@ -232,17 +230,20 @@ endShape();
   }
 
   function xB(){
+    notDOM = false; 
     xSlider.value(initSpeed);
     xInput();
 
   }
 
   function yB(){
+    notDOM = false; 
     ySlider.value(127);
     yInput();
   }
 
   function zB(){
+    notDOM = false; 
     zSlider.value(127);
     zInput();
   }
@@ -288,7 +289,7 @@ endShape();
     // create buttons
   
     playButton = createButton('&#9655');
-    playButton.position(innerWidth*.5-(btW*.5), 11);
+    playButton.position(innerWidth*.5-(btW), 34);
     playButton.style('width', btW+'px');
     playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
@@ -296,9 +297,16 @@ endShape();
     playButton.style('font-size', '2.5rem');
     playButton.style('border', 'none');
     playButton.style('background', 'none');
+    playButton.mousePressed(playPause);
+   // playButton.touchStarted(playPause);
+    playButton.mouseReleased(releaseDOM);
+    playButton.touchEnded(releaseDOM);
+    playButton.addClass("crosshair");
 
     xButton = createButton('&#x2609');
-    xButton.position(innerWidth*.5-(btW*.5), sh*.7);
+    //xButton.position(innerWidth*.5-(btW*.5), sh*.7);
+    xButton.position(innerWidth*.5-(btW*.5),innerHeight*.8);
+
     xButton.style('width', btW+'px');
     xButton.style('height', btH+'px');
     xButton.style('background-color', bcol);
@@ -306,9 +314,14 @@ endShape();
     xButton.style('font-size', '2.5rem');
     xButton.style('border', 'none');
     xButton.style('background', 'none');
+    xButton.mousePressed(xB);
+    xButton.touchStarted(xB);
+    xButton.mouseReleased(releaseDOM);
+    xButton.touchEnded(releaseDOM);
+    xButton.addClass("crosshair");
 
     yButton = createButton('&#x2609');
-    yButton.position(-25, innerHeight*.44);
+    yButton.position(-25., innerHeight*.44);
     yButton.style('width', btW+'px');
     yButton.style('height', btH+'px');
     yButton.style('background-color', bcol);
@@ -316,6 +329,11 @@ endShape();
     yButton.style('font-size', '2.5rem');
     yButton.style('border', 'none');
     yButton.style('background', 'none');
+    yButton.mousePressed(yB);
+    yButton.touchStarted(yB);
+    yButton.mouseReleased(releaseDOM);
+    yButton.touchEnded(releaseDOM);
+    yButton.addClass("crosshair");
 
     zButton = createButton('&#x2609');
     zButton.position(sw*.77, innerHeight*.44);
@@ -326,70 +344,60 @@ endShape();
     zButton.style('font-size', '2.5rem');
     zButton.style('border', 'none');
     zButton.style('background', 'none');
-
+    zButton.mousePressed(zB);
+    zButton.touchStarted(zB);
+    zButton.mouseReleased(releaseDOM);
+    zButton.touchEnded(releaseDOM);
+    zButton.addClass("crosshair");
+    
     // create sliders
   
     initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
-  
     xSlider = createSlider(0., 255, initSpeed);
     xSlider.position(sw*.5-(sliderW*.5), sh*.8);
     xSlider.style('width', sliderW+'px');
-
     xSlider.addClass("slider");
-
    // xSlider.style('height', sliderH+'px');
-
     xSlider.input(xInput);
-    xSlider.mousePressed(xInputP);
-    xSlider.mouseReleased(xInputR);
+    xSlider.mousePressed(pressDOM);
+    xSlider.touchStarted(pressDOM);
+    xSlider.mouseReleased(releaseDOM);
+    xSlider.touchEnded(releaseDOM);
 
 
     ySlider = createSlider(0, 255, 127);
-    ySlider.position(0., sh*.5);
+    ySlider.position(0 , sh*.5);
     ySlider.style('width', sliderW+'px');
     ySlider.style('transform', 'rotate(-90deg)');
-
     ySlider.addClass("slider");
-
-
   //  ySlider.style('height', sliderH+'px');
-
     ySlider.input(yInput);
-    ySlider.mousePressed(yInputP);
-    ySlider.mouseReleased(yInputR);
+    ySlider.mousePressed(pressDOM);
+    ySlider.touchStarted(pressDOM);
+    ySlider.mouseReleased(releaseDOM);
+    ySlider.touchEnded(releaseDOM);
 
     zSlider = createSlider(0, 255, 127);
-    zSlider.position(sw*.6, sh*.5);
+    zSlider.position(sw*.55, sh*.5);
     zSlider.style('width', sliderW+'px');
     //zSlider.style('height', padY+'px');
     zSlider.addClass("slider");
     zSlider.style('transform', 'rotate(-90deg)');
     zSlider.input(zInput);
-    zSlider.mousePressed(zInputP);
-    zSlider.mouseReleased(zInputR);
-
+    zSlider.mousePressed(pressDOM);
+    zSlider.touchStarted(pressDOM);
+    zSlider.mouseReleased(releaseDOM);
+    zSlider.touchEnded(releaseDOM);
 
     
     xSlider.hide();
     ySlider.hide();
     zSlider.hide();
     playButton.hide();
-    playButton.mousePressed( playPause);
-    playButton.mouseReleased(playPauseR);
-    playButton.addClass("crosshair");
-
     xButton.hide();
-    xButton.mousePressed(xB);
-    xButton.mouseReleased(xBR);
-
-
     yButton.hide();
-    yButton.mousePressed(yB);
-    yButton.mouseReleased(yBR);
-
     zButton.hide();
-    zButton.mousePressed(zB);
-    zButton.mouseReleased(zBR);
+  
 
   }
 
@@ -397,82 +405,29 @@ endShape();
   
     // move buttons
   
-    playButton.position(innerWidth*.5-(btW*.5), 11);
-    
-    xButton.position(innerWidth*.5-(btW*.5), sh*.7);
+    playButton.position(innerWidth*.5-(btW), 34);
+    xButton.position(innerWidth*.5-(btW*.5),innerHeight*.8);
     yButton.position(-25., innerHeight*.44);
     zButton.position(sw*.77, innerHeight*.44);
-
 
     // move sliders
     
     xSlider.position(sw*.5-(sliderW*.5), sh*.8);
-
     ySlider.position(0 , sh*.5);
-
-    zSlider.position(sw*.6, sh*.5);
-
-  }
-
-  function xInputR(){
-    notDOM = true; 
-  }
-  function yInputR(){
-    notDOM = true; 
-
-  }
-  function zInputR(){
-    notDOM = true; 
-
-  }
-  
-  function playPauseR(){
-    notDOM = true; 
-
-  }
-  function xBR(){
-    notDOM = true; 
-
-  }
-  function yBR(){
-    notDOM = true; 
-
-  }
-  function zBR(){
-    notDOM = true; 
+    zSlider.position(sw*.55, sh*.5);
 
   }
 
-  function xInputP(){
+  function pressDOM(){
     notDOM = false; 
   }
-  function yInputP(){
-    notDOM = false; 
+  function releaseDOM(){
+    notDOM = true; 
 
   }
-  function zInputP(){
-    notDOM = false; 
 
-  }
-  
-  function playPauseP(){
-
-  }
-  function xBP(){
-    notDOM = false; 
-
-  }
-  function yBP(){
-    notDOM = false; 
-
-  }
-  function zBP(){
-    notDOM = false; 
-
-  }
 
   function xInput(){
-
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
     trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
@@ -489,38 +444,41 @@ endShape();
     freq = map(ySlider.value(), 127., 0., 20., 5000.);
     back = map(ySlider.value(), 127., 0., 0., 255.);
   }
-
    filterI.freq(freq);
-
-
   }
 
   function zInput(){
-
     levelI = map (zSlider.value(), 0., 255., 0., 1.);
     trackI.setVolume(levelI);
     worldI_dist = map (zSlider.value(), 0., 255., 3333., 333.);
     t5.html(nfs (worldI_dist,    1, 2));
     
     easycam.setDistance(worldI_dist, 33.);
-
   }
 
 
 
   function xOutput(){
 
-    deltaX = map (mouseX, 0., sw, 0., 256.);
+    startX = easycam.mouse.curr[0]; 
+
+    deltaX = map (startX, 0., sw, 0., 256.);
+    //print('deltaX'+ deltaX); 
+
     xSlider.value(deltaX);
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
     trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
   
-
 }
+
   function yOutput(){
 
-    deltaY = map (mouseY, 0., sh, 256., 0.);
+    startY = easycam.mouse.curr[1]; 
+    deltaY = map (startY, 0., sh, 256., 0.);
+
+   // print('deltay'+deltaY); 
+
     ySlider.value(deltaY);
     if ( ySlider.value() >= 127.){
       freq = map(ySlider.value(), 127., 255., 20., 5000.);
@@ -537,7 +495,8 @@ function zOutput(){
   var levelIT = map (easycam.getDistance(), 3333., 333., 0., 1.);
   trackI.setVolume(levelIT);
   var zSlidValue = map (levelIT, 0., 1., 0., 255.);
- // t5.html(nfs (worldI_dist, 1, 2));    
+  
+  t5.html(nfs (easycam.getDistance(), 1, 2));    
   zSlider.value(zSlidValue);
   
 }
@@ -578,9 +537,6 @@ function guiData(){
 
      t8 = createP(card.maxSpeed);
     t8.position(padX*offset+110,padY*offset+60);
-
-
-
 
         // Render the state numbers
 
@@ -641,14 +597,16 @@ function windowResized() {
 
 }
 
+function touchStarted() {
 
+}
 function touchMoved() {
- 
-
   if (notDOM){
     xOutput();
     yOutput();
     }
+
+print(notDOM); 
 
 }
 
@@ -665,27 +623,27 @@ function mousePressed(){
 
  }
 
- function doubleClicked() {
+ /*function doubleClicked() {
   xSlider.value(initSpeed);
   ySlider.value(127);
   zSlider.value(127);
   xInput();
   yInput();
   zInput();
-}
+}*/
 
  function initVariables(){
 
   sw= window.innerWidth;
   sh= window.innerHeight;
-
-  padX = sw/80.; 
-  padY = sh/80.; 
-  btW = sw*.2;
-  btH = sw*.2;
-  sliderW = sw*.4;
-  sliderH = sliderW*.25;
-
+  padX = sw/100.; 
+  padY = sh/100.; 
+  btW = sw*.1;
+  btH = sw*.1;
+  sliderW = sw*.5;
+  sliderH = sliderW*.11;
+  startX = 0; 
+  startY = 0; 
   notDOM = true; 
 
  }
