@@ -37,7 +37,7 @@ var card = {
 
 var easycam,
     state = {
-      distance: 2500, //final distance
+      distance: 1334, //final distance
       center  : [0, 0, 0],
       rotation: [1., 0., 0., 0.],
     },
@@ -91,7 +91,7 @@ function preload() {
     easycam = createEasyCam();
     easycam.setState(state, 3000); // animate to state in 3 second
     easycam.setDistanceMin(333);
-    easycam.setDistanceMax(3333);
+    easycam.setDistanceMax(1544);
     easycam.state_reset =  state;
     easycam.setPanScale(0.0);
 
@@ -422,7 +422,7 @@ function playPause(){
   function zInput(){
     levelI = map (zSlider.value(), 0., 255., 0., 1.);
     trackI.setVolume(levelI);
-    worldI_dist = map (zSlider.value(), 0., 255., 3333., 333.);
+    worldI_dist = map (zSlider.value(), 0., 255., 1544., 333.);
     t5.html(nfs (worldI_dist,    1, 2));
     
     easycam.setDistance(worldI_dist, 33.);
@@ -464,7 +464,7 @@ function playPause(){
 }
 
 function zOutput(){
-  var levelIT = map (easycam.getDistance(), 3333., 333., 0., 1.);
+  var levelIT = map (easycam.getDistance(), 1544., 333., 0., 1.);
   trackI.setVolume(levelIT);
   var zSlidValue = map (levelIT, 0., 1., 0., 255.);
   
@@ -519,7 +519,7 @@ function guiData(){
 
         // Render the labels
         fill(255, 0, 0);
-        text("Distance:",padX,padY, map (worldI_dist, 3333., 333., 333., 33.));
+        text("Distance:",padX,padY, map (worldI_dist, 1544., 333., 333., 33.));
         text("Speed:",padX,padY+20);
         text("Min-Speed:",padX,padY+40);
         text("Max-Speed:",padX,padY+60);
