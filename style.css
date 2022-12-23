@@ -6,11 +6,11 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-size: 1rem;
+  font-size: .97rem;
   font-family: "Orbitron-VariableFont_wght"; 
   color: rgb(0, 255, 0); 
   background-color: black;
-
+  position: absolute;
 
 }
 

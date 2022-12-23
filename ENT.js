@@ -37,7 +37,7 @@ var card = {
 
 var easycam,
     state = {
-      distance: 1334, //final distance
+      distance: 940, //final distance
       center  : [0, 0, 0],
       rotation: [1., 0., 0., 0.],
     },
@@ -65,7 +65,7 @@ function preload() {
  
 
   playStateI= 0;
-  worldI_dist =800;
+  worldI_dist =940;
 
 
   bcol = color(0, 0, 0, 10);
@@ -82,7 +82,6 @@ function preload() {
         card = game.skys000[params.c];
     };
    
-    createDom(); 
 
     // Create Canvas - Always the landscape.  
     createCanvas(window.innerWidth, window.innerHeight, WEBGL);
@@ -108,6 +107,8 @@ function preload() {
     trackI_speed = card.speed;
     analyzer.setInput(filterI);
 
+    createDom(); 
+
     // Use the selected Font 
 
     textFont(font1);
@@ -116,7 +117,7 @@ function preload() {
   }
 
   function draw(){
-   if(!loadP)background(0, 0, 0);
+   if(playStateI==1)background(0, 0, 0);
     noStroke();
     lights();
 
@@ -155,7 +156,7 @@ function preload() {
 
   easycam.beginHUD();
 
- if(loadP)fill(0, 0, 0, .8);
+ if(playStateI==0)fill(0, 0, 0, .8);
 
   strokeWeight(4.);
   beginShape();
@@ -259,9 +260,9 @@ function playPause(){
   function createDom(){
   
     // create buttons
-  
+
     playButton = createButton('&#9655');
-    playButton.position(innerWidth*.5-(btW), 34);
+    playButton.position(sw*.45, 34);
     playButton.style('width', btW+'px');
     playButton.style('height', btH+'px');
     playButton.style('background-color', bcol);
@@ -369,7 +370,7 @@ function playPause(){
     xButton.hide();
     yButton.hide();
     zButton.hide();
-  
+
 
   }
 
@@ -424,7 +425,6 @@ function playPause(){
     trackI.setVolume(levelI);
     worldI_dist = map (zSlider.value(), 0., 255., 1544., 333.);
     t5.html(nfs (worldI_dist,    1, 2));
-    
     easycam.setDistance(worldI_dist, 33.);
   }
 
@@ -479,8 +479,7 @@ function guiData(){
     let offset = 3.;
     //translate (-width*offset, -height*offset, 0.);
     //noStroke();
-    textFont(font1);
-    textSize(21);
+
 
     // Render the labels
 
@@ -509,32 +508,6 @@ function guiData(){
 
      t8 = createP(card.maxSpeed);
     t8.position(padX*offset+110,padY*offset+60);
-
-        // Render the state numbers
-
-/*
-  //let state = easycam.getState();
-    // Render the background box for the HUD
-    noStroke();
-
-        // Render the labels
-        fill(255, 0, 0);
-        text("Distance:",padX,padY, map (worldI_dist, 1544., 333., 333., 33.));
-        text("Speed:",padX,padY+20);
-        text("Min-Speed:",padX,padY+40);
-        text("Max-Speed:",padX,padY+60);
-
-
- 
- 
-        // Render the state numbers
-        fill(255,0,0);
-        text(nfs(1, 1, 3),padX+110,padY);
-        text(nfs (trackI_speed ,    1, 3),padX+90,padY+20);
-        text(nfs(card.minSpeed, 1, 3),padX+150,padY+40);
-        text(nfs (card.maxSpeed ,    1, 3),padX+150,padY+60);
-
-*/
 
   }
 
