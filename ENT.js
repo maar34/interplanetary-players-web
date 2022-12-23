@@ -37,7 +37,7 @@ var card = {
 
 var easycam,
     state = {
-      distance: 1500, //final distance
+      distance: 2500, //final distance
       center  : [0, 0, 0],
       rotation: [1., 0., 0., 0.],
     },
@@ -67,8 +67,10 @@ function preload() {
   playStateI= 0;
   worldI_dist =800;
 
+
   bcol = color(0, 0, 0, 10);
   col = color(255, 0, 0);
+
 
     if(params.d==0){
         card = game.skys0[params.c]; 
@@ -100,7 +102,7 @@ function preload() {
     trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
     trackI.playMode('restart');
 
-    analyzer = new p5.FFT(0, numSamples);
+		analyzer = new p5.Amplitude(.88);
 
     filterI = new p5.HighPass();
     trackI_speed = card.speed;
@@ -114,48 +116,28 @@ function preload() {
   }
 
   function draw(){
-    background(back, 0, 0);
+   if(!loadP)background(0, 0, 0);
     noStroke();
     lights();
-    fill(255, 255, 255);
- 
 
-    samples = analyzer.waveform();
-    var bufLen = samples.length;
-    
-
-    for (var i = 0; i < bufLen; i++){
-      var r = sin(samples[i]) * 255;
-      var g = r - (sin(frameCount * 0.002) * 0.5 + 0.5) * 255;
-      var b = 255-r-g;
-
-    }
+   var level = analyzer.getLevel();
+   var wsize = map (level, 0., 1., 1., 2.33);
 
   if (loadP)loadGUI();
 
+
       //Planet and Background color (back from Sliders)
     push();
-    r = 255-abs(r); 
-    g = 255-abs(g)*2; 
-    b = 255-abs(b); 
 
-    ambientMaterial(r,g,b);
-    fill(r, g, b);
+    normalMaterial();
 
     rotateY((frameCount* trackI_speed *playStateI)*0.077);
   
     sphere(80, 7, 7);
     rotateX(PI*.4);
-    torus(120, 7, 6, 7);
-
-    r = abs(r); 
-    g = abs(g)*2; 
-    b = abs(b); 
-
-    ambientMaterial(r,g,b);
+    torus(120*wsize, 7*wsize, 6, 7);
   
     translate (- 260, 0., 0.);
-  
     sphere(15, 7, 7);
   
     translate ( 520, 0., 0.);
@@ -168,34 +150,24 @@ function preload() {
     sphere(15, 7, 7);
 
     pop();
-
     noFill(); 
-
     stroke(0, 255, 0);
-
-
-
-    //(translate (-sw*.5, -sh*.5, cam1.eyeZ-sw*.77);
-    
-//    rect (0, 0, sw , sh);
-//scale (.88);
 
   easycam.beginHUD();
 
-noFill();
+ if(loadP)fill(0, 0, 0, .8);
 
-beginShape();
-vertex(0, 0);
-vertex(sw*.89, 0);
-vertex(sw, sh*.11);
-vertex(sw, sh);
-vertex(sw*.11, sh);
-vertex(0, sh*.89);
-vertex(0, 0);
-endShape();
+  strokeWeight(4.);
+  beginShape();
+  vertex(0, 0);
+  vertex(sw*.89, 0);
+  vertex(sw, sh*.11);
+  vertex(sw, sh);
+  vertex(sw*.11, sh);
+  vertex(0, sh*.89);
+  vertex(0, 0);
+  endShape();
 
-
-//orbitControl();
 
   easycam.endHUD();
 
@@ -578,12 +550,12 @@ function guiData(){
   //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
   if (loadingBar < .99){
     
-    text("Receiving Sound Waves",0, sh*.5-padX*6);
-    text("please wait, unmute device...",0, sh*.5-padX*.5);
+    text("Receiving Sound Waves",0, sh*.3-padX*6);
+    text("please wait, unmute device...",0, sh*.3-padX*.5);
 
   }else{
-      text("Decoding Sound Waves,", 0, sh*.5-padX*6);
-  text("please wait, unmute device >>>", 0, sh*.5-padX*.5);
+      text("Decoding Sound Waves,", 0, sh*.3-padX*6);
+  text("please wait, unmute device >>>", 0, sh*.3-padX*.5);
 
   }
 }
