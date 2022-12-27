@@ -11,6 +11,17 @@
          "maxSpeed":"3.",
          "col1":"333.",
          "col2":"333."
+      },
+      {
+         "id":"1",
+         "filename":"https://dl.dropbox.com/s/3x0aij70stbmz10/03%20-%20Fanky.aiff?raw=1",
+         "initTime":"111.",
+         "endTime":"333.",
+         "speed":"1",
+         "minSpeed":".-4",
+         "maxSpeed":"4.",
+         "col1":"333.",
+         "col2":"333."
       }
    ]
 }
