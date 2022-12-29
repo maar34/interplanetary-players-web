@@ -68,14 +68,16 @@
          "col2":"333."
       },
       {
-         "id":"https://dl.dropbox.com/s/d97ajaigbuwlt97/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2004%20Silbato%20Doble%20Azteca.mp3?raw=1",
+         "id":"6",
+         "filename":"https://dl.dropbox.com/s/d97ajaigbuwlt97/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2004%20Silbato%20Doble%20Azteca.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
+         "speed":"1",
+         "minSpeed":"-1.",
+         "maxSpeed":"4.",
          "col1":"333.",
          "col2":"333."
+         
       },
       {
          "id":"7",
