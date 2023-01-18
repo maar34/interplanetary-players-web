@@ -15,7 +15,7 @@ Thank you for your interest, and I hope you enjoy using Entangled Worlds!
 
 ### Run the World (code) 🕳
 
-Please note that this is just a basic example of how to run a p5.js project, and there are other ways to set it up depending on the specific requirements of your project. If you have any issues or questions, you can refer to the p5.js documentation or seek help from the p5.js community.
+Please note that this is just a basic example of how to run a p5.js project, and there are other ways to set it up depending on the specific requirements of your project for example p5.vscode extension that helps you create p5.js projects in Visual Studio Code. If you have any issues or questions, you can refer to the p5.js documentation or seek help from the p5.js community.
 
 First, make sure you have a recent version of Node.js installed on your computer. You can download it from the official website: https://nodejs.org/
 
