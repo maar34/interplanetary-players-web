@@ -1,4 +1,4 @@
-# Entangled Worlds
+# Entangled Worlds 🪐
 
 Welcome to Entangled Worlds, an initiative that explores the intersection of digital and physical worlds through the development of intelligent music players and meta-musical instruments.
 
@@ -9,9 +9,13 @@ My website, www.maar.world, offers demos and the option to subscribe to a newsle
 
 <img width="889" alt="screenshots1" src="https://user-images.githubusercontent.com/862847/212711547-3070feec-e1da-4b07-b668-a30422c1e249.png">
 
+Important, in some mobile devices you need to **turn Off Silent Mode**.
+
 Thank you for your interest, and I hope you enjoy using Entangled Worlds!
 
-### RUN THE CODE
+### Run the World (code) 🕳
+
+Please note that this is just a basic example of how to run a p5.js project, and there are other ways to set it up depending on the specific requirements of your project. If you have any issues or questions, you can refer to the p5.js documentation or seek help from the p5.js community.
 
 First, make sure you have a recent version of Node.js installed on your computer. You can download it from the official website: https://nodejs.org/
 
@@ -34,5 +38,10 @@ http-server -p 3000
 
 ```
 Finally, you can edit the code and see the changes in the browser.
-Please note that this is just a basic example of how to run a p5.js project, and there are other ways to set it up depending on the specific requirements of your project. If you have any issues or questions, you can refer to the p5.js documentation or seek help from the p5.js community.
+
+### Licence 🎶
+This project utilizes p5.js and is released under the MIT license.
+
 <3
+
+
