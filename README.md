@@ -2,7 +2,7 @@
 
 Are you curious about how music and technology are coming together to create a new era of musical creation and exploration? At Maar World, I am glad to be exploring the boundaries of what's possible in music and sound, using a combination of cutting-edge technology and curiosity.
 
-Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "ENT Music Players" and "ENT Music Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
+Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "ENT Music Players" and "ENT Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
 
 At the heart of this approach is the idea that music can be a collaborative, immersive, listening and creative experience at the same time. That's why I am developing a range of tools that allow users to create and remix music in new and unconventional ways. Using different algorithmic approaches, intelligent music players that will be able to understand and respond to the user's creative input, even if they've never had any musical training.
 
