@@ -4,19 +4,18 @@ Are you curious about how music and technology are coming together to create a n
 
 Our mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "Interplanetary Music Players," and they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
 
-
-At the heart of our approach is the idea that music should be a collaborative and immersive experience. That's why we are developing a range of tools that allow users to create and remix music in new and unconventional ways. Using different lgorithmic approaches, we've created intelligent music players that are able to understand and respond to the user's creative input, even if they've never had any musical training.
+At the heart of our approach is the idea that music should be a collaborative and immersive experience. That's why we are developing a range of tools that allow users to create and remix music in new and unconventional ways. We are designing intelligent music players that are able to understand and respond to the user's creative input, despite of they've had any musical training.
 
 Our goal is to reactivate auditory consciousness, allowing people to explore new dimensions of music and sound that they may not have even known existed. With the help of our meta-musical instruments, users can play music, soundscapes, and spoken voice that are truly unique, combining analog and digital technologies to push the boundaries of what's possible.
 
-My website, www.maar.world, offers demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as live performances, studio recordings, and interactive installations.
+Website, www.maar.world, offers first demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as playing at home with your friends, or make live performances, studio recordings, and interactive installations.
 
 
 <img width="889" alt="screenshots1" src="https://user-images.githubusercontent.com/862847/212711547-3070feec-e1da-4b07-b668-a30422c1e249.png">
 
 Important, in some mobile devices you need to **turn Off Silent Mode**.
 
-Thank you for your interest, and I hope you enjoy using ENT Music Players!
+Thank you for your interest, and I hope you enjoy using this WIP very first version ENT Music Players!
 
 ### Run the World (code) 🕳
 
