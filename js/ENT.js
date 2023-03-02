@@ -1,3 +1,6 @@
+
+
+
 let sw, sh; // window size
 let padX; // gui separation
 var btW, btH, sliderW, sliderH, initSpeed; 
@@ -17,6 +20,9 @@ let cam1;
 let portrait;
 let deltaX, startX, startY;
 let notDOM; 
+let device;
+let param1, param2, param3, audioLevel; 
+
 
 var analyzer;
 var numSamples = 1024;
@@ -52,25 +58,23 @@ function preload() {
     game = loadJSON("data/"+params.g+".json");
   
     font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
+
+    ///TEMP 
+    loadingAudio();
   
   }
 
-  function setup() {
+async function setup() {
 
-    getAudioContext().suspend();   // mimics the autoplay policy
 
-  // Initialize global variables 
-
+    
     initVariables();
  
+    playStateI= 0;
+    worldI_dist =940;
 
-  playStateI= 0;
-  worldI_dist =940;
-
-
-  bcol = color(0, 0, 0, 10);
-  col = color(255, 0, 0);
-
+    bcol = color(0, 0, 0, 10);
+    col = color(255, 0, 0);
 
     if(params.d==0){
         card = game.skys0[params.c]; 
@@ -98,14 +102,16 @@ function preload() {
     easycam.setPanScale(.02);
 
    // LOAD AUDIO ENGINE 
-    trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
-    trackI.playMode('restart');
+  //  trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
+  //  trackI.playMode('restart');
+    
+		//analyzer = new p5.Amplitude(.88);
 
-		analyzer = new p5.Amplitude(.88);
-
-    filterI = new p5.HighPass();
+   // filterI = new p5.HighPass();
     trackI_speed = card.speed;
-    analyzer.setInput(filterI);
+    //analyzer.setInput(filterI);
+
+    //arcoiris();
 
     createDom(); 
 
@@ -113,6 +119,10 @@ function preload() {
 
     textFont(font1);
     textSize(27);
+    loaded(); 
+
+    createRNBO();    
+
 
   }
 
@@ -121,11 +131,10 @@ function preload() {
     noStroke();
     lights();
 
-   var level = analyzer.getLevel();
-   var wsize = map (level, 0., 1., 1., 2.33);
+    var level = 1.; //analyzer.getLevel();
+    var wsize = 1; //map (audioLevel, 0., 1., 1., 2.33);
 
-  if (loadP)loadGUI();
-
+    if (loadP)loadGUI();
 
       //Planet and Background color (back from Sliders)
     push();
@@ -179,27 +188,29 @@ function playPause(){
 
     notDOM = false; 
 
-    if(!trackI.isPlaying()){
-      userStartAudio();  // mimics the autoplay policy
+
+    let messageEvent;
+
+
+    if(playStateI==0){
+
       playButton.html('II');
      // playButton.style('transform', 'rotate(305deg)');
+     
+     messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
 
       playStateI = 1;
-      trackI.loop();
   
     }else{
   
-      trackI.pause();
-      trackI.pause();
-      trackI.pause();
-      trackI.pause();
-      trackI.pause();//need to repeat to be sure that this happens 
+      messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
+
       playButton.style('transform', 'rotate(0deg)');
       playButton.html('&#9655');
       playStateI = 0;
 
     }
-  
+    device.scheduleEvent(messageEvent);
   }
 
   function xB(){
@@ -235,8 +246,8 @@ function playPause(){
 
     guiData();
 
-    trackI.disconnect();
-    trackI.connect(filterI);
+    //trackI.disconnect();
+    //trackI.connect(filterI);
 
   }
   
@@ -402,8 +413,13 @@ function playPause(){
 
   function xInput(){
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-    trackI.rate(trackI_speed);
-    t6.html(nfs (trackI_speed,    1, 2));
+   
+
+    param1.value = trackI_speed;
+
+      
+    //trackI.rate(trackI_speed);
+    //t6.html(nfs (trackI_speed,    1, 2));
 
   }
 
@@ -417,15 +433,20 @@ function playPause(){
     freq = map(ySlider.value(), 127., 0., 20., 5000.);
     back = map(ySlider.value(), 127., 0., 0., 255.);
   }
-   filterI.freq(freq);
+   //filterI.freq(freq);
+   param2.value = freq;
+
   }
 
   function zInput(){
     levelI = map (zSlider.value(), 0., 255., 0., 1.);
-    trackI.setVolume(levelI);
+   // trackI.setVolume(levelI);
     worldI_dist = map (zSlider.value(), 0., 255., 1544., 333.);
     t5.html(nfs (worldI_dist,    1, 2));
     easycam.setDistance(worldI_dist, 33.);
+
+    param3.value = levelI;
+
   }
 
 
@@ -439,7 +460,7 @@ function playPause(){
 
     xSlider.value(deltaX);
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-    trackI.rate(trackI_speed);
+   // trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
   
 }
@@ -460,12 +481,12 @@ function playPause(){
       back = map(ySlider.value(), 127., 0., 0., 255.);
     }
   
-     filterI.freq(freq);
+   //  filterI.freq(freq);
 }
 
 function zOutput(){
   var levelIT = map (easycam.getDistance(), 1544., 333., 0., 1.);
-  trackI.setVolume(levelIT);
+  //trackI.setVolume(levelIT);
   var zSlidValue = map (levelIT, 0., 1., 0., 255.);
   
   t5.html(nfs (easycam.getDistance(), 1, 2));    
@@ -500,7 +521,9 @@ function guiData(){
 
     t5.position(padX*offset+90,padY*offset);
 
-     t6 = createP(trackI_speed);
+    // t6 = createP(trackI_speed);
+     t6 = createP("temp");
+
     t6.position(padX*offset+70,padY*offset+20);
 
      t7 = createP(card.minSpeed);
@@ -551,7 +574,7 @@ function touchMoved() {
     yOutput();
     }
 
-print(notDOM); 
+//print(notDOM); 
 
 }
 
@@ -592,3 +615,57 @@ function mousePressed(){
   notDOM = true; 
 
  }
+
+
+ async function createRNBO(){
+
+  const patchExportURL = "export/patch.export.json";
+
+  // Create AudioContext
+  let WAContext = window.AudioContext || window.webkitAudioContext;
+  context = new WAContext();
+  
+  let rawPatcher = await fetch("export/patch.export.json");
+  let patcher = await rawPatcher.json();
+
+  document.body.onclick = () => {
+    context.resume();
+  }
+  device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
+
+  device.node.connect(context.destination);
+
+
+      // (Optional) Fetch the dependencies
+      let dependencies = [];
+      try {
+          const dependenciesResponse = await fetch("export/dependencies.json");
+          dependencies = await dependenciesResponse.json();
+  
+          // Prepend "export" to any file dependenciies
+          dependencies = dependencies.map(d => d.file ? Object.assign({}, d, { file: "export/" + d.file }) : d);
+      } catch (e) {}
+  
+
+  
+      // (Optional) Load the samples
+      if (dependencies.length)
+          await device.loadDataBufferDependencies(dependencies);
+  
+        // Connect With Parameters
+
+         param1 = device.parametersById.get("param1");
+         param2 = device.parametersById.get("param2");
+         param3 = device.parametersById.get("param3");
+
+         audioLevel = device.parametersById.get("audioLevel");
+
+         print (audioLevel);
+  // With ParameterNotificationSetting.All, the device AND the parameter emit an event when we change the value
+/*
+device.parameterChangeEvent.subscribe((v) => {
+	console.log(`ParameterChangeEvent: ${v}`);
+});
+*/
+
+};
