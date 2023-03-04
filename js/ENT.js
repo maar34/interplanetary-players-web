@@ -15,7 +15,7 @@ let xSlider, ySlider, zSlider;
 let bcol, col; 
 let freq, back; 
 let t1, t2, t3, t4, t5, t6, t7, t8, t11; 
-var game, deck, loadDeck;
+var game, deck, suit, loadDeck;
 let cam1; 
 let portrait;
 let deltaX, startX, startY;
@@ -84,13 +84,13 @@ function setup() {
     bcol = color(0, 0, 0, 10);
     col = color(255, 0, 0);
 
-    if(params.d==0){
+    if(params.s==0){
         card = game.A[params.c]; 
     };
-    if(params.d==1){
+    if(params.s==1){
         card = game.B[params.c];
     };     
-    if(params.d==2){
+    if(params.s==2){
         card = game.C[params.c];
     };
     trackI_speed = card.speed;
@@ -677,7 +677,7 @@ async function loadAudioBuffer(_context){
 
 
 	// Set the DataBuffer on the device
-	// device.setDataBuffer("world1", audioBuf);
+	await device.setDataBuffer("world1", audioBuf);
   print ("I am 3")
 
   loaded(); 
