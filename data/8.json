@@ -1,6 +1,6 @@
 {
    "description":"Configuration of first release of ENT Cards",
-   "skys0":[
+   "A":[
       {
          "id":"0",
          "filename":"data/Rabbit_Hole_Maar.mp3",
@@ -9,7 +9,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -20,7 +20,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -31,7 +31,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -42,7 +42,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -53,7 +53,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -64,7 +64,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -75,7 +75,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
          
       },
@@ -87,7 +87,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -98,7 +98,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -109,7 +109,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -120,7 +120,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -131,7 +131,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -142,7 +142,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -153,7 +153,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -164,7 +164,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -175,7 +175,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -186,7 +186,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -197,7 +197,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -208,7 +208,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -219,7 +219,7 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       }
    ]
