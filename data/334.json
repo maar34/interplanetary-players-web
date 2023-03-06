@@ -7,7 +7,7 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
@@ -19,11 +19,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1",
-         "minSpeed":".01",
-         "maxSpeed":"4.",
+         "minSpeed":"-1.",
+         "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c2.json"
+         "engine": "d00_c00_v0.1.json"
          
       },
       {
@@ -32,11 +32,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"3.4",
-         "minSpeed":"-3.",
-         "maxSpeed":"6.",
+         "minSpeed":"-1.",
+         "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c3.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"3",
@@ -44,11 +44,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":".1",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c4.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"4",
@@ -56,11 +56,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":".11",
-         "maxSpeed":"11.",
+         "minSpeed":"-1.",
+         "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c5.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"5",
@@ -68,11 +68,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c6.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"6",
@@ -80,11 +80,11 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c6.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"7",
@@ -96,7 +96,7 @@
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c7.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"8",
@@ -108,7 +108,7 @@
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d0_v0.1_c8.json"
+         "engine": "d00_c00_v0.1.json"
       },
       {
          "id":"9",
@@ -120,7 +120,8 @@
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d00_c00_v0.1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"10",
          "filename":"https://dl.dropbox.com/s/adonzu39t4rjots/10_RH.mp3?raw=1",
@@ -131,7 +132,8 @@
          "maxSpeed":"3.",
          "col1":"#ffff00",
          "col2":"333.",
-         "engine": "d00_c00_v0.1.json"      }
+         "engine": "d00_c00_v0.1.json"      
+      }
    ],
    "B":[
       {
@@ -140,7 +142,7 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
@@ -157,62 +159,68 @@
          "maxSpeed":"4.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"2",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"2.0",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"3",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":".1",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"     
+       },
       {
          "id":"4",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"     
+       },
       {
          "id":"5",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"      
+      },
       {
          "id":"6",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"      
+      },
       {
          "id":"7",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
@@ -223,7 +231,8 @@
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"      
+      },
       {
          "id":"8",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
@@ -234,7 +243,8 @@
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"      
+      },
       {
          "id":"9",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
@@ -245,7 +255,8 @@
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      },
+         "engine": "d1_v0.1_c1.json"      
+      },
       {
          "id":"10",
          "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
@@ -256,7 +267,8 @@
          "maxSpeed":"3.",
          "col1":"#0099cc",
          "col2":"333.",
-         "engine": "d1_v0.1_c1.json"      }
+         "engine": "d00_c00_v0.1.json"
+      }
    ],
    "C":[
       {
@@ -265,55 +277,60 @@
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d00_c00_v0.1"      },
+         "engine": "d00_c00_v0.1.json"
+       },
       {
          "id":"1",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1",
-         "minSpeed":".01",
-         "maxSpeed":"4.",
+         "minSpeed":"-1.",
+         "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+        },
       {
          "id":"2",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"2.0",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+       },
       {
          "id":"3",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":".1",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"4",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
          "initTime":"111.",
          "endTime":"333.",
          "speed":"1.",
-         "minSpeed":"1.",
+         "minSpeed":"-1.",
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"5",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -324,7 +341,8 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"6",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -335,7 +353,8 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+       },
       {
          "id":"7",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -346,7 +365,8 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+        },
       {
          "id":"8",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -357,7 +377,8 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+       },
       {
          "id":"9",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -368,7 +389,8 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      },
+         "engine": "d00_c00_v0.1.json"
+      },
       {
          "id":"10",
          "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
@@ -379,6 +401,7 @@
          "maxSpeed":"3.",
          "col1":"#cc0000",
          "col2":"333.",
-         "engine": "d2_v0.1_c1.json"      }
+         "engine": "d00_c00_v0.1.json"
+      }
    ]
 }
