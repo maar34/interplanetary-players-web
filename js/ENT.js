@@ -196,7 +196,10 @@ function playPause(){
 
       playButton.html('II');     
      messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
-
+     messageEvent2 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
+     messageEvent3 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
+     device.scheduleEvent(messageEvent2);
+     device.scheduleEvent(messageEvent3);
       playStateI = 1;
   
     }else{
@@ -209,6 +212,8 @@ function playPause(){
 
     }
     device.scheduleEvent(messageEvent);
+ 
+
     xInput();
 
     
@@ -216,20 +221,20 @@ function playPause(){
 
   function xB(){
     notDOM = false; 
-    xSlider.value(initSpeed);
+    xSlider.value(128.);
     xInput();
 
   }
 
   function yB(){
     notDOM = false; 
-    ySlider.value(127);
+    ySlider.value(128.);
     yInput();
   }
 
   function zB(){
     notDOM = false; 
-    zSlider.value(197);
+    zSlider.value(128.);
     zInput();
   }
 
@@ -337,7 +342,7 @@ function playPause(){
     // create sliders
   
     initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
-    xSlider = createSlider(0., 255, initSpeed);
+    xSlider = createSlider(0., 255, 128);
     xSlider.position(sw*.5-(sliderW*.5), sh*.8);
     xSlider.style('width', sliderW+'px');
     xSlider.addClass("slider");
@@ -354,7 +359,7 @@ function playPause(){
    // myClass.style(`::-webkit-slider-thumb { background: ${domColor}; }`);
 
 
-    ySlider = createSlider(0, 255, 127);
+    ySlider = createSlider(0, 255, 128);
     ySlider.position(0 , sh*.5);
     ySlider.style('width', sliderW+'px');
     ySlider.style('transform', 'rotate(-90deg)');
@@ -367,7 +372,7 @@ function playPause(){
     ySlider.touchEnded(releaseDOM);
 
 
-    zSlider = createSlider(0, 255, 197);
+    zSlider = createSlider(0, 255, 128);
     zSlider.position(sw*.55, sh*.5);
     zSlider.style('width', sliderW+'px');
    
@@ -419,10 +424,10 @@ function playPause(){
 
 
   function xInput(){
+    
+    paramX.value = xSlider.value();
+    
     trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-    paramX.value = trackI_speed;
-
-      
     //trackI.rate(trackI_speed);
     t6.html(nfs (trackI_speed,    1, 2));
 
@@ -430,16 +435,7 @@ function playPause(){
 
   function yInput(){
 
-  // ySlider mapping with 0 at the center 
-  if ( ySlider.value() >= 127.){
-    freq = map(ySlider.value(), 127., 255., 20., 5000.);
-    back = map(ySlider.value(), 127., 255., 0., 255.);
-  }else{
-    freq = map(ySlider.value(), 127., 0., 20., 5000.);
-    back = map(ySlider.value(), 127., 0., 0., 255.);
-  }
-   //filterI.freq(freq);
-   paramY.value = freq;
+   paramY.value = ySlider.value();
 
   }
 
