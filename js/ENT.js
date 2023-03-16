@@ -9,21 +9,26 @@ let font1; // font variable
 let playStateI; 
 let params; // url parameters
 let levelI, worldI_dist, cardColor; 
-let tempID;
+let tempID, xDifference, yDifference;
 let loadingBar, loadP; 
 let xSlider, ySlider, zSlider;
+let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm;
+let easyX, easyY; 
 let bcol, col; 
 let freq, back; 
 let t1, t2, t3, t4, t5, t6, t7, t8, t11; 
 var game, deck, suit, loadDeck;
 let cam1; 
 let portrait;
-let deltaX, startX, startY;
 let notDOM; 
 let device;
-let paramX, paramY, paramZ; 
+let inputX, inputY, inputZ; 
+let wMinD = 333;
+let wMaxD = 1544;
 
-let trackI_speed = 1.0; 
+
+let worldI_speed = 1.0; 
+
 var numSamples = 1024;
 // Array of amplitude values (-1 to +1) over time.
 var samples = [];
@@ -38,7 +43,10 @@ var card = {
   maxSpeed:"",
   col1:"",
   col2:"",
-  engine:""
+  engine:"",  
+  xTag: "",
+  yTag: "",
+  zTag: ""
 }
 document.oncontextmenu = () => false; // no right click
 
@@ -77,7 +85,12 @@ function preload() {
 function setup() {
     
     initVariables();
- 
+    xData = 1; 
+    yData = 0; 
+    xDataNorm = 1; 
+    yDataNorm = 0; 
+
+    
     playStateI= 0;
     worldI_dist =940;
 
@@ -93,9 +106,12 @@ function setup() {
     if(params.s==2){
         card = game.C[params.c];
     };
-    trackI_speed = card.speed;
+    worldI_speed = card.speed;
 
     //print (card.engine); 
+    xDifference = (card.xTag[2]-card.xTag[1])>10; 
+    yDifference = (card.yTag[2]-card.yTag[1])>10; 
+
 
     createDom(); 
 
@@ -105,8 +121,8 @@ function setup() {
 
     easycam = createEasyCam();
     easycam.setState(state, 3000); // animate to state in 3 second
-    easycam.setDistanceMin(333);
-    easycam.setDistanceMax(1544);
+    easycam.setDistanceMin(wMinD);
+    easycam.setDistanceMax(wMaxD);
     easycam.state_reset =  state;
     easycam.setPanScale(0.0);
     easycam.setPanScale(.02);
@@ -130,18 +146,21 @@ function setup() {
     noStroke();
     lights();
     const wsize= 1.2
-   
+    
 
     if (loadP)loadGUI();
+    
 
+    
       //Planet and Background color (back from Sliders)
     push();
    // translate (0., 0., -666.);
 
     normalMaterial();
 
-    rotateY((frameCount* trackI_speed *playStateI)*0.077);
-  
+    easycam.rotateY(playStateI*easyY);
+    easycam.rotateX(playStateI*easyX);
+
     sphere(80, 6, 6);
     rotateX(PI*.4);
     torus(120*wsize, 7*wsize, 6, 7);
@@ -215,6 +234,7 @@ function playPause(){
  
 
     xInput();
+
 
     
   }
@@ -425,75 +445,120 @@ function playPause(){
 
   function xInput(){
     
-    paramX.value = xSlider.value();
-    
-    trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-    //trackI.rate(trackI_speed);
-    t6.html(nfs (trackI_speed,    1, 2));
+    inputX.value = xSlider.value();
+    xData = map (xSlider.value(), 0., 255., float(card.xTag[1]), float(card.xTag[2]));
+   // if (card.xTag[0] == "Speed") worldI_speed = xData; 
+    t6.html(nfs (xData,    1, 2));
+    xDataNorm = map (xData, float(card.xTag[1]), float(card.xTag[2]), -1., 1.);
+
+    if (xDifference){
+      yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+      easyY =  xDataNorm * -0.077;
+    }else{
+      easyY =  xData * -0.077;
+    }
 
   }
 
   function yInput(){
 
-   paramY.value = ySlider.value();
+   inputY.value = ySlider.value();
+   yData = map (ySlider.value(), 0., 255., float(card.yTag[1]), float(card.yTag[2]));
+   t7.html(nfs (yData,    1, 2));
+  
+   // if the range in x axe is greter than 10 (xDifference) then animate planet with normalized value, else use the normal value - this exception works nice with speed and non simetrical parameters
+   if (yDifference){
+   yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+   easyX = yDataNorm * -0.077;
+  }else{
+    easyX = yData* -0.077;
+  }
+
 
   }
 
   function zInput(){
     
-    levelI = map (zSlider.value(), 0., 255., 0., 1.);
-    paramZ.value = levelI;
-    worldI_dist = map (zSlider.value(), 0., 255., 1544., 333.);
+    if ( zSlider.value() <= 127.){
+      worldI_dist = map (zSlider.value(), 0., 127., wMaxD, wMinD);
+    }else{
+      worldI_dist = map (zSlider.value(), 127., 255., wMinD, wMaxD);
+    }
+    easycam.setDistance(worldI_dist, 1.);
+    
+    inputZ.value = zSlider.value();
+
     t5.html(nfs (worldI_dist,    1, 2));
-    easycam.setDistance(worldI_dist, 11.);
+
+    zData = map (zSlider.value(), 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+    t8.html(nfs (zData,    1, 2));
+
+
   }
 
 
 
   function xOutput(){
     if (!loadP){
-    startX = easycam.mouse.curr[0]; 
-    deltaX = map (startX, 0., sw, 0., 256.);
-    //print('deltaX'+ deltaX); 
+    var startX = easycam.mouse.curr[0]; 
+    var deltaX = map (startX, 0., sw, 0., 255.);
+    inputX.value = deltaX;
 
     xSlider.value(deltaX);
-    trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-    paramX.value = trackI_speed;
-    t6.html(nfs (trackI_speed, 1, 2));
+    xData = map (xSlider.value(), 0., 255., float(card.xTag[1]), float(card.xTag[2]));
+   // if the range in x axe is greter than 10 (xDifference) then animate planet with normalized value, else use the normal value - this exception works nice with speed and non simetrical parameters
+   if (xDifference){
+    yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+    easyX =   yDataNorm * -0.077;
+   }else{
+     easyX = yData* -0.077;
+   }
+ 
+ 
+
+  //  if (card.xTag[0] == "Speed") worldI_speed = xData; 
+    t6.html(nfs (xData,    1, 2));
+
+    
+
   }
 }
 
   function yOutput(){
     if (!loadP){
 
-    startY = easycam.mouse.curr[1]; 
-    deltaY = map (startY, 0., sh, 256., 0.);
-    paramY = deltaY; 
-
-    /*
-   // print('deltay'+deltaY); 
+    var startY = easycam.mouse.curr[1]; 
+    var deltaY = map (startY, 0., sh, 255., 0.);
     ySlider.value(deltaY);
-    if ( ySlider.value() >= 127.){
-      freq = map(ySlider.value(), 127., 255., 20., 5000.);
-      back = map(ySlider.value(), 127., 255., 0., 255.);
-    }else{
-      freq = map(ySlider.value(), 127., 0., 20., 5000.);
-      back = map(ySlider.value(), 127., 0., 0., 255.);
-    }
-    */
-   //  filterI.freq(freq);
+    inputY.value = ySlider.value();
+    yData = map (ySlider.value(), 0., 255., float(card.yTag[1]), float(card.yTag[2]));
+    yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.);
+
+    t7.html(nfs (yData,    1, 2));
+
   }
 }
 
-function zOutput(){
+function zOutput(delta){
   if (!loadP){
 
-  var levelIT = map (easycam.getDistance(), 1544., 333., 0., 1.);
-  paramZ.value = levelIT;
-  var zSlidValue = map (levelIT, 0., 1., 0., 255.);
+    var zDelta = zSlider.value()+delta;  
+    inputZ.value = zDelta;
+    zSlider.value(zDelta);
+    
+    if ( zSlider.value() <= 127.){
+      worldI_dist = map (zSlider.value(), 0., 127., wMaxD, wMinD);
+    }else{
+      worldI_dist = map (zSlider.value(), 127., 255., wMinD, wMaxD);
+    }
+    t5.html(nfs (worldI_dist,    1, 2));
+    easycam.setDistance(worldI_dist, 1.);
+
+    var zData = map (zSlider.value(), 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+    t8.html(nfs (zData,    1, 2));
+
+    
   
-  t5.html(nfs (easycam.getDistance(), 1, 2));    
-  zSlider.value(zSlidValue);
   }
 }
 
@@ -509,34 +574,34 @@ function guiData(){
     t1.position(padX*offset,padY*offset);
     t1.style('color', textColor);
 
-    t2 = createP('Speed:');
+    t2 = createP(card.xTag[0]+":");
     t2.position(padX*offset,padY*offset+20);
     t2.style('color', textColor);
 
-    t3 = createP('Min-Speed:');
+    t3 = createP(card.yTag[0]+":");
     t3.position(padX*offset,padY*offset+40);
     t3.style('color', textColor);
 
-    t4 = createP('Max-Speed:');
+    t4 = createP(card.zTag[0]+":");
+    t4.position(padX*offset,padY*offset+60);    
     t4.style('color', textColor);
-    t4.position(padX*offset,padY*offset+60);
-
+    
     t5 = createP();
     t5.html(worldI_dist);
     t5.position(padX*offset+90,padY*offset);
     t5.style('color', textColor);
 
     t6 = createP();
-    t6.html(nfs (trackI_speed,    1, 2));
-    t6.position(padX*offset+70,padY*offset+20);
+    t6.html(nfs ("0",    1, 2));
+    t6.position(padX*offset+130,padY*offset+20);
     t6.style('color', textColor);
 
-    t7 = createP(card.minSpeed);
-    t7.position(padX*offset+105,padY*offset+40);
+    t7 = createP("0");
+    t7.position(padX*offset+130,padY*offset+40);
     t7.style('color', textColor);
 
-    t8 = createP(card.maxSpeed);
-    t8.position(padX*offset+110,padY*offset+60);
+    t8 = createP("0");
+    t8.position(padX*offset+130,padY*offset+60);
     t8.style('color', textColor);
 
   }
@@ -550,7 +615,6 @@ function guiData(){
       }else{
     fill(255, 0,0);
     }
-  //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
   if (loadingBar == 1){
     translate (0., 0., -666.);
 
@@ -589,23 +653,19 @@ function touchMoved() {
 
 function mousePressed(){
 
+ }
+
+ function mouseWheel(event){
+
+  zOutput(-event.delta*.1);
 
  }
 
- function mouseWheel(){
-
-  zOutput();
-
- }
-
- /*function doubleClicked() {
-  xSlider.value(initSpeed);
-  ySlider.value(127);
-  zSlider.value(127);
-  xInput();
-  yInput();
-  zInput();
-}*/
+ function doubleClicked() {
+  xB();
+  yB();
+  zB();
+}
 
  function initVariables(){
 
@@ -637,22 +697,15 @@ function mousePressed(){
   device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
 
   device.node.connect(context.destination);
-/*
-  const param = device.parametersById.get("audioLevel");
-
-  param.changeEvent.subscribe((v) => {
-    wsize = v;
-  });*/
-  print ("I am A1")
 
       loadAudioBuffer(context);
 
         // Connect With Parameters
 
-         paramX = device.parametersById.get("paramX");
-         paramY = device.parametersById.get("paramY");
-         paramZ = device.parametersById.get("paramZ");
-         print ("I am A2")
+         inputX = device.parametersById.get("inputX");
+         inputY = device.parametersById.get("inputY");
+         inputZ = device.parametersById.get("inputZ");
+     //    print ("I am A2")
 
 
 }
@@ -665,19 +718,24 @@ async function loadAudioBuffer(_context){
 	// Load our sample as an ArrayBuffer;
 	const fileResponse = await fetch(card.filename);
 	const arrayBuf = await fileResponse.arrayBuffer();
-  print ("I am 1")
+  print ("I am 1");
 
 	// Decode the received Data as an AudioBuffer
 	const audioBuf = await context.decodeAudioData(arrayBuf);
-  print ("I am 2")
+  print ("I am 2");
 
 
 	// Set the DataBuffer on the device
-	await device.setDataBuffer("world1", audioBuf);
-  print ("I am 3")
+  try {
+    await device.setDataBuffer("world1", audioBuf);
+  } catch (e) {
+    console.log(e);
+  }  
+  
+  print ("I am 3");
 
   loaded(); 
-  print ("I am 4")
+  print ("I am 4");
 
  
 }
