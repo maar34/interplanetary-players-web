@@ -8,14 +8,14 @@ At the heart of this approach is the idea that music can be a collaborative, imm
 
 Reactivate auditory consciousness, allowing people to explore new dimensions of music and sound that they may not have even known existed. With the help of meta-musical instruments, users can play music, soundscapes, and spoken voice that are truly unique, combining analog and digital technologies to push the boundaries of what's possible.
 
-Website, www.maar.world, offers first demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as playing at home with your friends, or make live performances, studio recordings, and interactive installations.
+My website, www.maar.world, offers demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as live performances, studio recordings, and interactive installations.
 
 
 <img width="889" alt="screenshots1" src="https://user-images.githubusercontent.com/862847/212711547-3070feec-e1da-4b07-b668-a30422c1e249.png">
 
 Important, in some mobile devices you need to **turn Off Silent Mode**.
 
-Thank you for your interest, and I hope you enjoy using this WIP very first version ENT Music Players!
+Thank you for your interest, and I hope you enjoy using ENT Music Players!
 
 ### Run the World (code) 🕳
 
