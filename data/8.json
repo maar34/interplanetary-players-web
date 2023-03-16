@@ -1,6 +1,6 @@
 {
    "description":"Configuration of first release of ENT Cards",
-   "skys0":[
+   "A":[
       {
          "id":"0",
          "filename":"data/Rabbit_Hole_Maar.mp3",
@@ -9,8 +9,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"1",
@@ -20,8 +24,12 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"2",
@@ -31,8 +39,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"3",
@@ -42,8 +54,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"4",
@@ -53,8 +69,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"5",
@@ -64,8 +84,12 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"6",
@@ -75,8 +99,12 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
          
       },
       {
@@ -87,8 +115,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"8",
@@ -98,8 +130,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"9",
@@ -109,8 +145,12 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"10",
@@ -120,8 +160,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"11",
@@ -131,8 +175,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"12",
@@ -142,8 +190,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"13",
@@ -153,7 +205,7 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
+         "col1":"#7CFC00",
          "col2":"333."
       },
       {
@@ -164,8 +216,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"15",
@@ -175,8 +231,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"16",
@@ -186,8 +246,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"17",
@@ -197,8 +261,12 @@
          "speed":"1",
          "minSpeed":"-1.",
          "maxSpeed":"4.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"18",
@@ -208,8 +276,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       },
       {
          "id":"19",
@@ -219,8 +291,12 @@
          "speed":"1.",
          "minSpeed":".1",
          "maxSpeed":"3.",
-         "col1":"333.",
-         "col2":"333."
+         "col1":"#7CFC00",
+         "col2":"333.",
+        "engine": "d00_c00_v0.1.json",
+         "xTag": ["Speed", "-1.", "3."],
+         "yTag": ["Tremolo", "-100.", "100."],
+         "zTag": ["Reverb", "-100.", "100."]
       }
    ]
 }

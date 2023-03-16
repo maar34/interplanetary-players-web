@@ -43,9 +43,11 @@ http-server -p 3000
 ```
 Finally, you can edit the code and see the changes in the browser.
 
-### Licence 🎶
-This project utilizes p5.js and is released under the MIT license.
+### Licence 🎶 🖼 🖋
 
-<3
+General Public License Version 3 (GPLv3)
+Details of the GPLv3 license can be found at: https://www.gnu.org/licenses/gpl-3.0.html
 
 
+
+Based on p5.js and RNBO. 🚂 🌈 🪐

@@ -8,23 +8,27 @@ let trackI, filterI; // track 1 -
 let font1; // font variable
 let playStateI; 
 let params; // url parameters
-let trackI_speed, levelI, worldI_dist; 
-let tempID;
+let levelI, worldI_dist, cardColor; 
+let tempID, xDifference, yDifference;
 let loadingBar, loadP; 
 let xSlider, ySlider, zSlider;
+let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm;
+let easyX, easyY; 
 let bcol, col; 
 let freq, back; 
 let t1, t2, t3, t4, t5, t6, t7, t8, t11; 
-var game, deck, loadDeck;
+var game, deck, suit, loadDeck;
 let cam1; 
 let portrait;
-let deltaX, startX, startY;
 let notDOM; 
 let device;
-let param1, param2, param3, audioLevel; 
+let inputX, inputY, inputZ; 
+let wMinD = 333;
+let wMaxD = 1544;
 
 
-var analyzer;
+let worldI_speed = 1.0; 
+
 var numSamples = 1024;
 // Array of amplitude values (-1 to +1) over time.
 var samples = [];
@@ -38,12 +42,17 @@ var card = {
   minSpeed:"",
   maxSpeed:"",
   col1:"",
-  col2:""
+  col2:"",
+  engine:"",  
+  xTag: "",
+  yTag: "",
+  zTag: ""
 }
+document.oncontextmenu = () => false; // no right click
 
 var easycam,
     state = {
-      distance: 940, //final distance
+      distance: 388, //final distance
       center  : [0, 0, 0],
       rotation: [1., 0., 0., 0.],
     },
@@ -59,33 +68,52 @@ function preload() {
   
     font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
-    ///TEMP 
-    loadingAudio();
+   
   
   }
 
-async function setup() {
+  document.body.onclick = () => {
+    context.resume();
+  }
+   // prevent screen movement on touchstart event
+   document.body.addEventListener('touchstart', function(e) {
+    if (e.target == document.body) {
+      e.preventDefault();
+    }
+  }, {passive: false});
 
-
+function setup() {
     
     initVariables();
- 
+    xData = 1; 
+    yData = 0; 
+    xDataNorm = 1; 
+    yDataNorm = 0; 
+
+    
     playStateI= 0;
     worldI_dist =940;
 
     bcol = color(0, 0, 0, 10);
     col = color(255, 0, 0);
 
-    if(params.d==0){
-        card = game.skys0[params.c]; 
+    if(params.s==0){
+        card = game.A[params.c]; 
     };
-    if(params.d==1){
-        card = game.skys00[params.c]; 
+    if(params.s==1){
+        card = game.B[params.c];
     };     
-    if(params.d==2){
-        card = game.skys000[params.c];
+    if(params.s==2){
+        card = game.C[params.c];
     };
-   
+    worldI_speed = card.speed;
+
+    //print (card.engine); 
+    xDifference = (card.xTag[2]-card.xTag[1])>10; 
+    yDifference = (card.yTag[2]-card.yTag[1])>10; 
+
+
+    createDom(); 
 
     // Create Canvas - Always the landscape.  
     createCanvas(window.innerWidth, window.innerHeight, WEBGL);
@@ -93,93 +121,85 @@ async function setup() {
 
     easycam = createEasyCam();
     easycam.setState(state, 3000); // animate to state in 3 second
-    easycam.setDistanceMin(333);
-    easycam.setDistanceMax(1544);
+    easycam.setDistanceMin(wMinD);
+    easycam.setDistanceMax(wMaxD);
     easycam.state_reset =  state;
     easycam.setPanScale(0.0);
-
-    // easycam.removeMouseListeners();
     easycam.setPanScale(.02);
-
-   // LOAD AUDIO ENGINE 
-  //  trackI = loadSound(card.filename, loaded, errorLoadingAudio,loadingAudio);
-  //  trackI.playMode('restart');
     
-		//analyzer = new p5.Amplitude(.88);
+    //easycam.removeMouseListeners();
 
-   // filterI = new p5.HighPass();
-    trackI_speed = card.speed;
-    //analyzer.setInput(filterI);
 
-    //arcoiris();
-
-    createDom(); 
+    cardColor = color(card.col1); 
 
     // Use the selected Font 
 
     textFont(font1);
     textSize(27);
-    loaded(); 
-
     createRNBO();    
 
-
+//    loadingAudio(0);
   }
 
   function draw(){
    if(playStateI==1)background(0, 0, 0);
     noStroke();
     lights();
-
-    var level = 1.; //analyzer.getLevel();
-    var wsize = 1; //map (audioLevel, 0., 1., 1., 2.33);
+    const wsize= 1.2
+    
 
     if (loadP)loadGUI();
+    
 
+    
       //Planet and Background color (back from Sliders)
     push();
+   // translate (0., 0., -666.);
 
     normalMaterial();
 
-    rotateY((frameCount* trackI_speed *playStateI)*0.077);
-  
-    sphere(80, 7, 7);
+    easycam.rotateY(playStateI*easyY);
+    easycam.rotateX(playStateI*easyX);
+
+    sphere(80, 6, 6);
     rotateX(PI*.4);
     torus(120*wsize, 7*wsize, 6, 7);
   
     translate (- 260, 0., 0.);
-    sphere(15, 7, 7);
+    sphere(15, 6, 6);
   
     translate ( 520, 0., 0.);
-    sphere(15, 7, 7);
+    sphere(15, 6, 6);
   
     translate ( - 260, - 260., 0.);
-    sphere(15, 7, 7);
+    sphere(15, 6, 6);
   
     translate ( - 0, 520., 0. );
-    sphere(15, 7, 7);
+    sphere(15, 6, 6);
+    //translate (0., 0., 666.);
 
     pop();
     noFill(); 
-    stroke(0, 255, 0);
+    stroke(cardColor);
 
-  easycam.beginHUD();
+    easycam.beginHUD();
 
- if(playStateI==0)fill(0, 0, 0, .8);
+    if(playStateI==0)fill(0, 0, 0, .8);
 
-  strokeWeight(4.);
-  beginShape();
-  vertex(0, 0);
-  vertex(sw*.89, 0);
-  vertex(sw, sh*.11);
-  vertex(sw, sh);
-  vertex(sw*.11, sh);
-  vertex(0, sh*.89);
-  vertex(0, 0);
-  endShape();
+    const margin = 33; 
+    strokeWeight(3.);
+    beginShape();
+    vertex(margin+0, margin+0);
+    vertex(sw*.86,margin+0);
+    vertex(sw-margin, sh*.14);
+    vertex(sw-margin, sh-margin);
+    vertex(sw*.14, sh-margin);
+    vertex(margin+0, margin+sh*.86);
+    vertex(margin+0, margin+0);
+    endShape();
 
 
-  easycam.endHUD();
+    easycam.endHUD();
 
 }
 
@@ -188,17 +208,17 @@ function playPause(){
 
     notDOM = false; 
 
-
     let messageEvent;
 
 
     if(playStateI==0){
 
-      playButton.html('II');
-     // playButton.style('transform', 'rotate(305deg)');
-     
+      playButton.html('II');     
      messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
-
+     messageEvent2 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
+     messageEvent3 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
+     device.scheduleEvent(messageEvent2);
+     device.scheduleEvent(messageEvent3);
       playStateI = 1;
   
     }else{
@@ -211,24 +231,30 @@ function playPause(){
 
     }
     device.scheduleEvent(messageEvent);
+ 
+
+    xInput();
+
+
+    
   }
 
   function xB(){
     notDOM = false; 
-    xSlider.value(initSpeed);
+    xSlider.value(128.);
     xInput();
 
   }
 
   function yB(){
     notDOM = false; 
-    ySlider.value(127);
+    ySlider.value(128.);
     yInput();
   }
 
   function zB(){
     notDOM = false; 
-    zSlider.value(127);
+    zSlider.value(128.);
     zInput();
   }
 
@@ -236,6 +262,7 @@ function playPause(){
 
     loadP = false; 
   
+
     xSlider.show();
     ySlider.show();
     zSlider.show();
@@ -267,34 +294,32 @@ function playPause(){
   }
   
 
-
   function createDom(){
   
+    let domColor = card.col1; 
     // create buttons
 
     playButton = createButton('&#9655');
     playButton.position(sw*.45, 34);
     playButton.style('width', btW+'px');
     playButton.style('height', btH+'px');
-    playButton.style('background-color', bcol);
-    playButton.style('color', 'lawngreen');
+    playButton.style('background-color', domColor);
+    playButton.style('color', domColor);
     playButton.style('font-size', '2.5rem');
     playButton.style('border', 'none');
     playButton.style('background', 'none');
     playButton.mousePressed(playPause);
-   // playButton.touchStarted(playPause);
     playButton.mouseReleased(releaseDOM);
     playButton.touchEnded(releaseDOM);
-    playButton.addClass("crosshair");
+    //playButton.addClass("crosshair");
 
     xButton = createButton('&#x2609');
-    //xButton.position(innerWidth*.5-(btW*.5), sh*.7);
     xButton.position(innerWidth*.5-(btW*.5),innerHeight*.8);
 
     xButton.style('width', btW+'px');
     xButton.style('height', btH+'px');
-    xButton.style('background-color', bcol);
-    xButton.style('color', 'lawngreen');
+    xButton.style('background-color', domColor);
+    xButton.style('color', domColor);
     xButton.style('font-size', '2.5rem');
     xButton.style('border', 'none');
     xButton.style('background', 'none');
@@ -302,14 +327,14 @@ function playPause(){
     xButton.touchStarted(xB);
     xButton.mouseReleased(releaseDOM);
     xButton.touchEnded(releaseDOM);
-    xButton.addClass("crosshair");
+    //xButton.addClass("crosshair");
 
     yButton = createButton('&#x2609');
     yButton.position(-11., innerHeight*.44);
     yButton.style('width', btW+'px');
     yButton.style('height', btH+'px');
-    yButton.style('background-color', bcol);
-    yButton.style('color', 'lawngreen');
+    yButton.style('background-color', domColor);
+    yButton.style('color', domColor);
     yButton.style('font-size', '2.5rem');
     yButton.style('border', 'none');
     yButton.style('background', 'none');
@@ -317,14 +342,14 @@ function playPause(){
     yButton.touchStarted(yB);
     yButton.mouseReleased(releaseDOM);
     yButton.touchEnded(releaseDOM);
-    yButton.addClass("crosshair");
+    //yButton.addClass("crosshair");
 
     zButton = createButton('&#x2609');
     zButton.position(sw*.8, innerHeight*.44);
     zButton.style('width', btW+'px');
     zButton.style('height', btH+'px');
-    zButton.style('background-color', bcol);
-    zButton.style('color', 'lawngreen');
+    zButton.style('background-color', domColor);
+    zButton.style('color', domColor);
     zButton.style('font-size', '2.5rem');
     zButton.style('border', 'none');
     zButton.style('background', 'none');
@@ -332,12 +357,12 @@ function playPause(){
     zButton.touchStarted(zB);
     zButton.mouseReleased(releaseDOM);
     zButton.touchEnded(releaseDOM);
-    zButton.addClass("crosshair");
+    //zButton.addClass("crosshair");
     
     // create sliders
   
     initSpeed = map (float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
-    xSlider = createSlider(0., 255, initSpeed);
+    xSlider = createSlider(0., 255, 128);
     xSlider.position(sw*.5-(sliderW*.5), sh*.8);
     xSlider.style('width', sliderW+'px');
     xSlider.addClass("slider");
@@ -348,8 +373,13 @@ function playPause(){
     xSlider.mouseReleased(releaseDOM);
     xSlider.touchEnded(releaseDOM);
 
+    //   myElement.style('background', domColor); // this change only the line color*/
+    //xSlider.style('::-webkit-slider-thumb:background', 'red');
+    //xSlider.style('background', 'rgba(0, 0, 0, 0)');
+   // myClass.style(`::-webkit-slider-thumb { background: ${domColor}; }`);
 
-    ySlider = createSlider(0, 255, 127);
+
+    ySlider = createSlider(0, 255, 128);
     ySlider.position(0 , sh*.5);
     ySlider.style('width', sliderW+'px');
     ySlider.style('transform', 'rotate(-90deg)');
@@ -361,9 +391,12 @@ function playPause(){
     ySlider.mouseReleased(releaseDOM);
     ySlider.touchEnded(releaseDOM);
 
-    zSlider = createSlider(0, 255, 127);
+
+    zSlider = createSlider(0, 255, 128);
     zSlider.position(sw*.55, sh*.5);
     zSlider.style('width', sliderW+'px');
+   
+
     //zSlider.style('height', padY+'px');
     zSlider.addClass("slider");
     zSlider.style('transform', 'rotate(-90deg)');
@@ -373,7 +406,6 @@ function playPause(){
     zSlider.mouseReleased(releaseDOM);
     zSlider.touchEnded(releaseDOM);
 
-    
     xSlider.hide();
     ySlider.hide();
     zSlider.hide();
@@ -412,125 +444,165 @@ function playPause(){
 
 
   function xInput(){
-    trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-   
+    
+    inputX.value = xSlider.value();
+    xData = map (xSlider.value(), 0., 255., float(card.xTag[1]), float(card.xTag[2]));
+   // if (card.xTag[0] == "Speed") worldI_speed = xData; 
+    t6.html(nfs (xData,    1, 2));
+    xDataNorm = map (xData, float(card.xTag[1]), float(card.xTag[2]), -1., 1.);
 
-    param1.value = trackI_speed;
-
-      
-    //trackI.rate(trackI_speed);
-    //t6.html(nfs (trackI_speed,    1, 2));
+    if (xDifference){
+      yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+      easyY =  xDataNorm * -0.077;
+    }else{
+      easyY =  xData * -0.077;
+    }
 
   }
 
   function yInput(){
 
-  // ySlider mapping with 0 at the center 
-  if ( ySlider.value() >= 127.){
-    freq = map(ySlider.value(), 127., 255., 20., 5000.);
-    back = map(ySlider.value(), 127., 255., 0., 255.);
+   inputY.value = ySlider.value();
+   yData = map (ySlider.value(), 0., 255., float(card.yTag[1]), float(card.yTag[2]));
+   t7.html(nfs (yData,    1, 2));
+  
+   // if the range in x axe is greter than 10 (xDifference) then animate planet with normalized value, else use the normal value - this exception works nice with speed and non simetrical parameters
+   if (yDifference){
+   yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+   easyX = yDataNorm * -0.077;
   }else{
-    freq = map(ySlider.value(), 127., 0., 20., 5000.);
-    back = map(ySlider.value(), 127., 0., 0., 255.);
+    easyX = yData* -0.077;
   }
-   //filterI.freq(freq);
-   param2.value = freq;
+
 
   }
 
   function zInput(){
-    levelI = map (zSlider.value(), 0., 255., 0., 1.);
-   // trackI.setVolume(levelI);
-    worldI_dist = map (zSlider.value(), 0., 255., 1544., 333.);
-    t5.html(nfs (worldI_dist,    1, 2));
-    easycam.setDistance(worldI_dist, 33.);
+    
+    if ( zSlider.value() <= 127.){
+      worldI_dist = map (zSlider.value(), 0., 127., wMaxD, wMinD);
+    }else{
+      worldI_dist = map (zSlider.value(), 127., 255., wMinD, wMaxD);
+    }
+    easycam.setDistance(worldI_dist, 1.);
+    
+    inputZ.value = zSlider.value();
 
-    param3.value = levelI;
+    t5.html(nfs (worldI_dist,    1, 2));
+
+    zData = map (zSlider.value(), 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+    t8.html(nfs (zData,    1, 2));
+
 
   }
 
 
 
   function xOutput(){
-
-    startX = easycam.mouse.curr[0]; 
-
-    deltaX = map (startX, 0., sw, 0., 256.);
-    //print('deltaX'+ deltaX); 
+    if (!loadP){
+    var startX = easycam.mouse.curr[0]; 
+    var deltaX = map (startX, 0., sw, 0., 255.);
+    inputX.value = deltaX;
 
     xSlider.value(deltaX);
-    trackI_speed = map (xSlider.value(), 0., 255., float(card.minSpeed), float(card.maxSpeed));
-   // trackI.rate(trackI_speed);
-    t6.html(nfs (trackI_speed,    1, 2));
-  
+    xData = map (xSlider.value(), 0., 255., float(card.xTag[1]), float(card.xTag[2]));
+   // if the range in x axe is greter than 10 (xDifference) then animate planet with normalized value, else use the normal value - this exception works nice with speed and non simetrical parameters
+   if (xDifference){
+    yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.); 
+    easyX =   yDataNorm * -0.077;
+   }else{
+     easyX = yData* -0.077;
+   }
+ 
+ 
+
+  //  if (card.xTag[0] == "Speed") worldI_speed = xData; 
+    t6.html(nfs (xData,    1, 2));
+
+    
+
+  }
 }
 
   function yOutput(){
+    if (!loadP){
 
-    startY = easycam.mouse.curr[1]; 
-    deltaY = map (startY, 0., sh, 256., 0.);
-
-   // print('deltay'+deltaY); 
-
+    var startY = easycam.mouse.curr[1]; 
+    var deltaY = map (startY, 0., sh, 255., 0.);
     ySlider.value(deltaY);
-    if ( ySlider.value() >= 127.){
-      freq = map(ySlider.value(), 127., 255., 20., 5000.);
-      back = map(ySlider.value(), 127., 255., 0., 255.);
-    }else{
-      freq = map(ySlider.value(), 127., 0., 20., 5000.);
-      back = map(ySlider.value(), 127., 0., 0., 255.);
-    }
-  
-   //  filterI.freq(freq);
+    inputY.value = ySlider.value();
+    yData = map (ySlider.value(), 0., 255., float(card.yTag[1]), float(card.yTag[2]));
+    yDataNorm = map (yData, float(card.yTag[1]), float(card.yTag[2]), -1., 1.);
+
+    t7.html(nfs (yData,    1, 2));
+
+  }
 }
 
-function zOutput(){
-  var levelIT = map (easycam.getDistance(), 1544., 333., 0., 1.);
-  //trackI.setVolume(levelIT);
-  var zSlidValue = map (levelIT, 0., 1., 0., 255.);
+function zOutput(delta){
+  if (!loadP){
+
+    var zDelta = zSlider.value()+delta;  
+    inputZ.value = zDelta;
+    zSlider.value(zDelta);
+    
+    if ( zSlider.value() <= 127.){
+      worldI_dist = map (zSlider.value(), 0., 127., wMaxD, wMinD);
+    }else{
+      worldI_dist = map (zSlider.value(), 127., 255., wMinD, wMaxD);
+    }
+    t5.html(nfs (worldI_dist,    1, 2));
+    easycam.setDistance(worldI_dist, 1.);
+
+    var zData = map (zSlider.value(), 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+    t8.html(nfs (zData,    1, 2));
+
+    
   
-  t5.html(nfs (easycam.getDistance(), 1, 2));    
-  zSlider.value(zSlidValue);
-  
+  }
 }
 
 
 function guiData(){
     
-    let offset = 3.;
-    //translate (-width*offset, -height*offset, 0.);
-    //noStroke();
-
+    let offset = 5.;
+    let textColor = card.col1; 
 
     // Render the labels
 
-     t1 = createP('Distance:');
+    t1 = createP('Distance:');
     t1.position(padX*offset,padY*offset);
+    t1.style('color', textColor);
 
-     t2 = createP('Speed:');
+    t2 = createP(card.xTag[0]+":");
     t2.position(padX*offset,padY*offset+20);
+    t2.style('color', textColor);
 
-     t3 = createP('Min-Speed:');
+    t3 = createP(card.yTag[0]+":");
     t3.position(padX*offset,padY*offset+40);
+    t3.style('color', textColor);
 
-     t4 = createP('Max-Speed:');
-    t4.position(padX*offset,padY*offset+60);
-
+    t4 = createP(card.zTag[0]+":");
+    t4.position(padX*offset,padY*offset+60);    
+    t4.style('color', textColor);
+    
     t5 = createP();
     t5.html(worldI_dist);
-
     t5.position(padX*offset+90,padY*offset);
+    t5.style('color', textColor);
 
-    // t6 = createP(trackI_speed);
-     t6 = createP("temp");
+    t6 = createP();
+    t6.html(nfs ("0",    1, 2));
+    t6.position(padX*offset+130,padY*offset+20);
+    t6.style('color', textColor);
 
-    t6.position(padX*offset+70,padY*offset+20);
+    t7 = createP("0");
+    t7.position(padX*offset+130,padY*offset+40);
+    t7.style('color', textColor);
 
-     t7 = createP(card.minSpeed);
-    t7.position(padX*offset+105,padY*offset+40);
-
-     t8 = createP(card.maxSpeed);
-    t8.position(padX*offset+110,padY*offset+60);
+    t8 = createP("0");
+    t8.position(padX*offset+130,padY*offset+60);
+    t8.style('color', textColor);
 
   }
 
@@ -543,16 +615,15 @@ function guiData(){
       }else{
     fill(255, 0,0);
     }
-  //       text(nfs (loadingBar*100., 1, 1), panelX+360,panelY+180);
-  if (loadingBar < .99){
-    
-    text("Receiving Sound Waves",0, sh*.3-padX*6);
-    text("please wait, unmute device...",0, sh*.3-padX*.5);
+  if (loadingBar == 1){
+    translate (0., 0., -666.);
+
+    text("Receiving Sound Waves", 0, -sh*.34-padY*4);
+    text("please wait, unmute device...",0, -sh*.34-padY*1);
+    translate (0., 0., 666.);
 
   }else{
-      text("Decoding Sound Waves,", 0, sh*.3-padX*6);
-  text("please wait, unmute device >>>", 0, sh*.3-padX*.5);
-
+  text("", 0, -padY*13);
   }
 }
 
@@ -582,29 +653,25 @@ function touchMoved() {
 
 function mousePressed(){
 
+ }
+
+ function mouseWheel(event){
+
+  zOutput(-event.delta*.1);
 
  }
 
- function mouseWheel(){
-
-  zOutput();
-
- }
-
- /*function doubleClicked() {
-  xSlider.value(initSpeed);
-  ySlider.value(127);
-  zSlider.value(127);
-  xInput();
-  yInput();
-  zInput();
-}*/
+ function doubleClicked() {
+  xB();
+  yB();
+  zB();
+}
 
  function initVariables(){
 
   sw= window.innerWidth;
   sh= window.innerHeight;
-  padX = sw/100.; 
+  padX = sw/77.; 
   padY = sh/100.; 
   btW = sw*.1;
   btH = sw*.1;
@@ -619,53 +686,58 @@ function mousePressed(){
 
  async function createRNBO(){
 
-  const patchExportURL = "export/patch.export.json";
+  const patchExportURL = "export/"+card.engine;
 
   // Create AudioContext
   let WAContext = window.AudioContext || window.webkitAudioContext;
   context = new WAContext();
   
-  let rawPatcher = await fetch("export/patch.export.json");
+  let rawPatcher = await fetch(patchExportURL);
   let patcher = await rawPatcher.json();
-
-  document.body.onclick = () => {
-    context.resume();
-  }
   device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
 
   device.node.connect(context.destination);
 
+      loadAudioBuffer(context);
 
-      // (Optional) Fetch the dependencies
-      let dependencies = [];
-      try {
-          const dependenciesResponse = await fetch("export/dependencies.json");
-          dependencies = await dependenciesResponse.json();
-  
-          // Prepend "export" to any file dependenciies
-          dependencies = dependencies.map(d => d.file ? Object.assign({}, d, { file: "export/" + d.file }) : d);
-      } catch (e) {}
-  
-
-  
-      // (Optional) Load the samples
-      if (dependencies.length)
-          await device.loadDataBufferDependencies(dependencies);
-  
         // Connect With Parameters
 
-         param1 = device.parametersById.get("param1");
-         param2 = device.parametersById.get("param2");
-         param3 = device.parametersById.get("param3");
+         inputX = device.parametersById.get("inputX");
+         inputY = device.parametersById.get("inputY");
+         inputZ = device.parametersById.get("inputZ");
+     //    print ("I am A2")
 
-         audioLevel = device.parametersById.get("audioLevel");
 
-         print (audioLevel);
-  // With ParameterNotificationSetting.All, the device AND the parameter emit an event when we change the value
-/*
-device.parameterChangeEvent.subscribe((v) => {
-	console.log(`ParameterChangeEvent: ${v}`);
-});
-*/
+}
 
-};
+
+async function loadAudioBuffer(_context){
+  loadingAudio(1);
+
+  context = _context; 
+	// Load our sample as an ArrayBuffer;
+	const fileResponse = await fetch(card.filename);
+	const arrayBuf = await fileResponse.arrayBuffer();
+  print ("I am 1");
+
+	// Decode the received Data as an AudioBuffer
+	const audioBuf = await context.decodeAudioData(arrayBuf);
+  print ("I am 2");
+
+
+	// Set the DataBuffer on the device
+  try {
+    await device.setDataBuffer("world1", audioBuf);
+  } catch (e) {
+    console.log(e);
+  }  
+  
+  print ("I am 3");
+
+  loaded(); 
+  print ("I am 4");
+
+ 
+}
+
+
