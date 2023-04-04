@@ -719,8 +719,13 @@ async function loadAudioBuffer(_context){
     loadingAudio(1);
 
     context = _context; 
+    print ("context", context);
+    print ("card.filename",card.filename);
+
     // Load our sample as an ArrayBuffer;
     const fileResponse = await fetch(card.filename);
+    print ("fileResponse", fileResponse);
+
     const arrayBuf = await fileResponse.arrayBuffer();
     print ("I am 1");
 
