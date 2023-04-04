@@ -712,6 +712,8 @@ function mousePressed(){
 
 
 async function loadAudioBuffer(_context){
+
+  let audioBuf
   try {
       
     loadingAudio(1);
@@ -723,7 +725,7 @@ async function loadAudioBuffer(_context){
     print ("I am 1");
 
     // Decode the received Data as an AudioBuffer
-    const audioBuf = await context.decodeAudioData(arrayBuf);
+    audioBuf = await context.decodeAudioData(arrayBuf);
     print ("I am 2");
   } catch (error) {
     console.log(error);
