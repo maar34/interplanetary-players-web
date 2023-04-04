@@ -686,11 +686,13 @@ function mousePressed(){
 
  async function createRNBO(){
 
+  //loadingAudio(1); // NEW 
+
   const patchExportURL = "export/"+card.engine;
 
   // Create AudioContext
-  let WAContext = window.AudioContext || window.webkitAudioContext;
-  context = new WAContext();
+  const WAContext = window.AudioContext || window.webkitAudioContext;
+  const context = new WAContext();
   
   let rawPatcher = await fetch(patchExportURL);
   let patcher = await rawPatcher.json();
@@ -698,7 +700,7 @@ function mousePressed(){
 
   device.node.connect(context.destination);
 
-      loadAudioBuffer(context);
+  //    loadAudioBuffer(context);
 
         // Connect With Parameters
 
@@ -707,6 +709,9 @@ function mousePressed(){
          inputZ = device.parametersById.get("inputZ");
      //    print ("I am A2")
 
+  loadDependencies(context);
+
+ //    loaded();  // NEW 
 
 }
 
@@ -741,3 +746,43 @@ async function loadAudioBuffer(_context){
 }
 
 
+async function loadDependencies(_context){
+  loadingAudio(1);
+  context = _context; 
+  
+
+ // (Optional) Fetch the dependencies
+ let dependencies = [];
+ try {
+     const dependenciesResponse = await fetch("export/dependencies.json");
+     dependencies = await dependenciesResponse.json();
+
+     // Prepend "export" to any file dependenciies
+     dependencies = dependencies.map(d => d.file ? Object.assign({}, d, { file: "export/" + d.file }) : d);
+ } catch (e) {}
+
+     // (Optional) Load the samples
+     if (dependencies.length)
+     await device.loadDataBufferDependencies(dependencies);
+
+     
+  loaded(); 
+
+
+       // descriptions is of type ExternalDataInfo[]
+const descriptions = device.dataBufferDescriptions;
+
+// Each description will have a unique id, as well as a "file" or "url" key, depending on whether 
+// the buffer references a local file or a remote URL
+descriptions.forEach(desc => {
+    if (!!desc.file) {
+        console.log(`Buffer with id ${desc.id} references file ${desc.file}`);
+    } else {
+        console.log(`Buffer with id ${desc.id} references remote URL ${desc.url}`);
+    }
+});
+
+
+
+ 
+}
