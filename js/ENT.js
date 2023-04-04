@@ -712,17 +712,22 @@ function mousePressed(){
 
 
 async function loadAudioBuffer(_context){
-  loadingAudio(1);
+  try {
+      
+    loadingAudio(1);
 
-  context = _context; 
-	// Load our sample as an ArrayBuffer;
-	const fileResponse = await fetch(card.filename);
-	const arrayBuf = await fileResponse.arrayBuffer();
-  print ("I am 1");
+    context = _context; 
+    // Load our sample as an ArrayBuffer;
+    const fileResponse = await fetch(card.filename);
+    const arrayBuf = await fileResponse.arrayBuffer();
+    print ("I am 1");
 
-	// Decode the received Data as an AudioBuffer
-	const audioBuf = await context.decodeAudioData(arrayBuf);
-  print ("I am 2");
+    // Decode the received Data as an AudioBuffer
+    const audioBuf = await context.decodeAudioData(arrayBuf);
+    print ("I am 2");
+  } catch (error) {
+    console.log(error);
+  }
 
 
 	// Set the DataBuffer on the device
