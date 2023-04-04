@@ -1,497 +1,900 @@
 {
-   "description":"Configuration of first release of ENT Cards",
-   "A":[
+   "description": "Configuration of first release of ENT Cards",
+   "A": [
       {
-         "id":"1",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "1",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"2",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "2",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c02_v0.1.json",
-         "xTag": ["Pitch Shift", "-12.", "12."],
-         "yTag": ["Adapt Filter", "-100.", "100."],
-         "zTag": ["Cosmic Delay", "-100.", "100."]
+         "xTag": [
+            "Pitch Shift",
+            "-12.",
+            "12."
+         ],
+         "yTag": [
+            "Adapt Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Cosmic Delay",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"3",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"3.4",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "3",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "3.4",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c03_v0.1.json",
-         "xTag": ["Spatial", "-100.", "100."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Interference", "-100.", "100."]
+         "xTag": [
+            "Spatial",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Interference",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"4",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "4",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c04_v0.1.json",
-         "xTag": ["Speed", "-2.", "4."],
-         "yTag": ["Filters", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Filters",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"5",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "5",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c05_v0.1.json",
-         "xTag": ["Speed", "-3.", "5."],
-         "yTag": ["Flanger", "-100.", "100."],
-         "zTag": ["Space Reverb", "-100.", "100."]      
+         "xTag": [
+            "Speed",
+            "-3.",
+            "5."
+         ],
+         "yTag": [
+            "Flanger",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"6",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "6",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c06_v0.1.json",
-         "xTag": ["ULFO", "-2.", "4."],
-         "yTag": ["Warm Dist", "-100.", "100."],
-         "zTag": ["Flang Vibes", "-100.", "100."]
+         "xTag": [
+            "ULFO",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Warm Dist",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Flang Vibes",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"7",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "7",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c07_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Space Shimmer", "-100.", "100."]      
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Shimmer",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"8",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "8",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c08_v0.1.json",
-         "xTag": ["Pitch S", "-100.", "100."],
-         "yTag": ["Modulator", "-100.", "100."],
-         "zTag": ["SpaceRev", "-100.", "100."]         
+         "xTag": [
+            "Pitch S",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Modulator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "SpaceRev",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"9",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "9",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c09_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Spacy", "-100.", "100."]      
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Spacy",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"10",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "10",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c10_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Filter", "-100.", "100."],
-         "zTag": ["Delay", "-100.", "100."]  
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Delay",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"11",
-         "filename":"https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"1.",
-         "maxSpeed":"3.",
-         "col1":"#ffff00",
-         "col2":"333.",
+         "id": "11",
+         "filename": "https://dl.dropbox.com/s/yybjjzqt0jrpmk6/01%20Skysounds.1.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
          "engine": "d00_c11_v0.1.json",
-         "xTag": ["Speed Pan", "-1.", "3."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]        
+         "xTag": [
+            "Speed Pan",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
       }
    ],
-   "B":[
+   "B": [
       {
-         "id":"1",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "1",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"2",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":".01",
-         "maxSpeed":"4.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "2",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": ".01",
+         "maxSpeed": "4.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c02_v0.1.json",
-         "xTag": ["Pitch Shift", "-12.", "12."],
-         "yTag": ["Adapt Filter", "-100.", "100."],
-         "zTag": ["Cosmic Delay", "-100.", "100."]
+         "xTag": [
+            "Pitch Shift",
+            "-12.",
+            "12."
+         ],
+         "yTag": [
+            "Adapt Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Cosmic Delay",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"3",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"2.0",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "3",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "2.0",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c03_v0.1.json",
-         "xTag": ["Spatial", "-100.", "100."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Interference", "-100.", "100."]
+         "xTag": [
+            "Spatial",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Interference",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"4",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "4",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c04_v0.1.json",
-         "xTag": ["Speed", "-2.", "4."],
-         "yTag": ["Filters", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]
-       },
+         "xTag": [
+            "Speed",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Filters",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"5",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "5",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c05_v0.1.json",
-         "xTag": ["Speed", "-3.", "5."],
-         "yTag": ["Flanger", "-100.", "100."],
-         "zTag": ["Space Reverb", "-100.", "100."]         },
+         "xTag": [
+            "Speed",
+            "-3.",
+            "5."
+         ],
+         "yTag": [
+            "Flanger",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Reverb",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"6",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "6",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c06_v0.1.json",
-         "xTag": ["ULFO", "-2.", "4."],
-         "yTag": ["Warm Dist", "-100.", "100."],
-         "zTag": ["Flang Vibes", "-100.", "100."]
+         "xTag": [
+            "ULFO",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Warm Dist",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Flang Vibes",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"7",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "7",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c07_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Space Shimmer", "-100.", "100."]          },
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Shimmer",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"8",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "8",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c08_v0.1.json",
-         "xTag": ["Pitch S", "-100.", "100."],
-         "yTag": ["Modulator", "-100.", "100."],
-         "zTag": ["SpaceRev", "-100.", "100."]         
+         "xTag": [
+            "Pitch S",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Modulator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "SpaceRev",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"9",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "9",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c09_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Spacy", "-100.", "100."]      
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Spacy",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"10",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "10",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c10_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Filter", "-100.", "100."],
-         "zTag": ["Delay", "-100.", "100."]  
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Delay",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"11",
-         "filename":"https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#0099cc",
-         "col2":"333.",
+         "id": "11",
+         "filename": "https://dl.dropbox.com/s/hlfigxuen2yufru/02%20Skysounds.2.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
          "engine": "d00_c11_v0.1.json",
-         "xTag": ["Speed Pan", "-1.", "3."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]        }
+         "xTag": [
+            "Speed Pan",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
+      }
    ],
-   "C":[
+   "C": [
       {
-         "id":"1",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "1",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]       },
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"2",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "2",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c02_v0.1.json",
-         "xTag": ["Pitch Shift", "-12.", "12."],
-         "yTag": ["Adapt Filter", "-100.", "100."],
-         "zTag": ["Cosmic Delay", "-100.", "100."]
-        },
+         "xTag": [
+            "Pitch Shift",
+            "-12.",
+            "12."
+         ],
+         "yTag": [
+            "Adapt Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Cosmic Delay",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"3",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"2.0",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "3",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "2.0",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c03_v0.1.json",
-         "xTag": ["Spatial", "-100.", "100."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Interference", "-100.", "100."]
-       },
+         "xTag": [
+            "Spatial",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Interference",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"4",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "4",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c04_v0.1.json",
-         "xTag": ["Speed", "-2.", "4."],
-         "yTag": ["Filters", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Filters",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"5",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "5",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c05_v0.1.json",
-         "xTag": ["Speed", "-3.", "5."],
-         "yTag": ["Flanger", "-100.", "100."],
-         "zTag": ["Space Reverb", "-100.", "100."]        },
+         "xTag": [
+            "Speed",
+            "-3.",
+            "5."
+         ],
+         "yTag": [
+            "Flanger",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Reverb",
+            "-100.",
+            "100."
+         ]
+      },
       {
-         "id":"6",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "6",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c06_v0.1.json",
-         "xTag": ["ULFO", "-2.", "4."],
-         "yTag": ["Warm Dist", "-100.", "100."],
-         "zTag": ["Flang Vibes", "-100.", "100."]
+         "xTag": [
+            "ULFO",
+            "-2.",
+            "4."
+         ],
+         "yTag": [
+            "Warm Dist",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Flang Vibes",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"7",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "7",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c07_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Space Shimmer", "-100.", "100."]           },
-      {
-         "id":"8",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
-         "engine": "d00_c08_v0.1.json",
-         "xTag": ["Pitch S", "-100.", "100."],
-         "yTag": ["Modulator", "-100.", "100."],
-         "zTag": ["SpaceRev", "-100.", "100."]         
-        },
-      {
-         "id":"9",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
-         "engine": "d00_c09_v0.1.json",
-         "xTag": ["eMods", "-100.", "100."],
-         "yTag": ["Octavver", "-100.", "100."],
-         "zTag": ["Spacy", "-100.", "100."]      
-       },
-      {
-         "id":"10",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
-         "engine": "d00_c10_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Filter", "-100.", "100."],
-         "zTag": ["Delay", "-100.", "100."]  
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Space Shimmer",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"11",
-         "filename":"https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":"-1.",
-         "maxSpeed":"3.",
-         "col1":"#cc0000",
-         "col2":"333.",
+         "id": "8",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
+         "engine": "d00_c08_v0.1.json",
+         "xTag": [
+            "Pitch S",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Modulator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "SpaceRev",
+            "-100.",
+            "100."
+         ]
+      },
+      {
+         "id": "9",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
+         "engine": "d00_c09_v0.1.json",
+         "xTag": [
+            "eMods",
+            "-100.",
+            "100."
+         ],
+         "yTag": [
+            "Octavver",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Spacy",
+            "-100.",
+            "100."
+         ]
+      },
+      {
+         "id": "10",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
+         "engine": "d00_c10_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Filter",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Delay",
+            "-100.",
+            "100."
+         ]
+      },
+      {
+         "id": "11",
+         "filename": "https:/dl.dropbox.com/s/5yg64fr1x8qcnsb/03%20Skysounds.3.mp3?raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
          "engine": "d00_c11_v0.1.json",
-         "xTag": ["Speed Pan", "-1.", "3."],
-         "yTag": ["Ring Oribitator", "-100.", "100."],
-         "zTag": ["Chorus", "-100.", "100."]        }
+         "xTag": [
+            "Speed Pan",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Ring Oribitator",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Chorus",
+            "-100.",
+            "100."
+         ]
+      }
    ]
 }
