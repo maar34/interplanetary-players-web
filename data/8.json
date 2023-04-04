@@ -1,302 +1,549 @@
 {
-   "description":"Configuration of first release of ENT Cards",
-   "A":[
+   "description": "Configuration of first release of ENT Cards",
+   "A": [
       {
-         "id":"0",
-         "filename":"data/Rabbit_Hole_Maar.mp3",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "0",
+         "wavfile": "data/Rabbit_Hole_Maar.mp3",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"1",
-         "filename":"https://dl.dropbox.com/s/3x0aij70stbmz10/03%20-%20Fanky.aiff?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "1",
+         "wavfile": "https://dl.dropbox.com/s/3x0aij70stbmz10/03%20-%20Fanky.aiff?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"2",
-         "filename":"https://dl.dropbox.com/s/tniwfmdmxahyg2f/Pardon%20Moi%20-%20Power%20To%20The%20People%20%28Damon%20Jee%20Remix%29.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "2",
+         "wavfile": "https://dl.dropbox.com/s/tniwfmdmxahyg2f/Pardon%20Moi%20-%20Power%20To%20The%20People%20%28Damon%20Jee%20Remix%29.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"3",
-         "filename":"https://dl.dropbox.com/s/dn0z8tcu6taehm5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2001%20Trompeta%20Mochica.mp3? raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "3",
+         "wavfile": "https://dl.dropbox.com/s/dn0z8tcu6taehm5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2001%20Trompeta%20Mochica.mp3? raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"4",
-         "filename":"https://dl.dropbox.com/s/inucjbuv4oeg551/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2002%20Vasija%20Silbadora%20Mochica.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "4",
+         "wavfile": "https://dl.dropbox.com/s/inucjbuv4oeg551/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2002%20Vasija%20Silbadora%20Mochica.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"5",
-         "filename":"https://dl.dropbox.com/s/ldnc623i3qc5j9z/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2003%20Tur%C3%BA.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "5",
+         "wavfile": "https://dl.dropbox.com/s/ldnc623i3qc5j9z/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2003%20Tur%C3%BA.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"6",
-         "filename":"https://dl.dropbox.com/s/d97ajaigbuwlt97/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2004%20Silbato%20Doble%20Azteca.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "6",
+         "wavfile": "https://dl.dropbox.com/s/d97ajaigbuwlt97/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2004%20Silbato%20Doble%20Azteca.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
-         
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"7",
-         "filename":"https://dl.dropbox.com/s/aizlbrziqxgtk88/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2005%20Vasija%20Silbadora%20Vicus.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "7",
+         "wavfile": "https://dl.dropbox.com/s/aizlbrziqxgtk88/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2005%20Vasija%20Silbadora%20Vicus.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"8",
-         "filename":"https://dl.dropbox.com/s/0a3nvaaqi47unrs/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2006%20Flauta%20Doble%20de%20Jalisco.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "8",
+         "wavfile": "https://dl.dropbox.com/s/0a3nvaaqi47unrs/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2006%20Flauta%20Doble%20de%20Jalisco.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"9",
-         "filename":"https://dl.dropbox.com/s/xsmooflq0bnvwv5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2007%20Sonajero%20Calabaza%20Mochica.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "9",
+         "wavfile": "https://dl.dropbox.com/s/xsmooflq0bnvwv5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2007%20Sonajero%20Calabaza%20Mochica.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"10",
-         "filename":"https://dl.dropbox.com/s/rx8j290qwp3fltx/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2008%20Zumbador%20Guaran%C3%AD.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "10",
+         "wavfile": "https://dl.dropbox.com/s/rx8j290qwp3fltx/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2008%20Zumbador%20Guaran%C3%AD.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"11",
-         "filename":"https://dl.dropbox.com/s/ragsg7pztknw5h8/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2009%20Sonajero%20San%20Pedro.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "11",
+         "wavfile": "https://dl.dropbox.com/s/ragsg7pztknw5h8/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2009%20Sonajero%20San%20Pedro.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"12",
-         "filename":"https://dl.dropbox.com/s/pls0sx6or9880dr/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2010%20Flauta%20Flor%20Azteca.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
+         "id": "12",
+         "wavfile": "https://dl.dropbox.com/s/pls0sx6or9880dr/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2010%20Flauta%20Flor%20Azteca.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
          "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"13",
-         "filename":"https://dl.dropbox.com/s/hlm6uk3w1bs663n/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2011%20Flauta%20Poliglobular%20Maya.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333."
+         "id": "13",
+         "wavfile": "https://dl.dropbox.com/s/hlm6uk3w1bs663n/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2011%20Flauta%20Poliglobular%20Maya.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333."
       },
       {
-         "id":"14",
-         "filename":"https://dl.dropbox.com/s/hlm6uk3w1bs663n/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2011%20Flauta%20Poliglobular%20Maya.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "14",
+         "wavfile": "https://dl.dropbox.com/s/hlm6uk3w1bs663n/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2011%20Flauta%20Poliglobular%20Maya.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"15",
-         "filename":"https://dl.dropbox.com/s/5l1sauaovxlbuxe/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2013%20Silbato%20de%20la%20Muerte%20Azteca.mp3?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "15",
+         "wavfile": "https://dl.dropbox.com/s/5l1sauaovxlbuxe/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2013%20Silbato%20de%20la%20Muerte%20Azteca.mp3?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"16",
-         "filename":"data/Rabbit_Hole_Maar.mp3",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "16",
+         "wavfile": "data/Rabbit_Hole_Maar.mp3",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"17",
-         "filename":"https://dl.dropbox.com/s/3x0aij70stbmz10/03%20-%20Fanky.aiff?raw=1",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1",
-         "minSpeed":"-1.",
-         "maxSpeed":"4.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "17",
+         "wavfile": "https://dl.dropbox.com/s/3x0aij70stbmz10/03%20-%20Fanky.aiff?raw=1",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1",
+         "minSpeed": "-1.",
+         "maxSpeed": "4.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"18",
-         "filename":"data/Rabbit_Hole_Maar.mp3",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "18",
+         "wavfile": "data/Rabbit_Hole_Maar.mp3",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       },
       {
-         "id":"19",
-         "filename":"data/Rabbit_Hole_Maar.mp3",
-         "initTime":"111.",
-         "endTime":"333.",
-         "speed":"1.",
-         "minSpeed":".1",
-         "maxSpeed":"3.",
-         "col1":"#7CFC00",
-         "col2":"333.",
-        "engine": "d00_c00_v0.1.json",
-         "xTag": ["Speed", "-1.", "3."],
-         "yTag": ["Tremolo", "-100.", "100."],
-         "zTag": ["Reverb", "-100.", "100."]
+         "id": "19",
+         "wavfile": "data/Rabbit_Hole_Maar.mp3",
+         "mp3file": "noname",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "#7CFC00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       }
    ]
 }
