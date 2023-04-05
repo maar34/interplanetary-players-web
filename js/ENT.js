@@ -85,6 +85,7 @@ document.body.addEventListener('touchstart', function (e) {
 
 function setup() {
 
+
   initVariables();
   xData = 1;
   yData = 0;
@@ -187,7 +188,7 @@ function draw() {
 
   if (playStateI == 0) fill(0, 0, 0, .8);
 
-  const margin = 33;
+  const margin = 3.3;
   strokeWeight(3.);
   beginShape();
   vertex(margin + 0, margin + 0);
@@ -279,9 +280,9 @@ function loaded() {
 
 }
 
-function errorLoadingAudio() {
+function errorLoadingAudio(_error) {
 
-  let p = createP('errorLoadingAudio');
+  let p = createP(_error);
   p.style('font-size', '16px');
   p.position(10, 0);
 
@@ -566,7 +567,7 @@ function zOutput(delta) {
 
 function guiData() {
 
-  let offset = 5.;
+  let offset = 3.;
   let textColor = card.col1;
 
   // Render the labels
@@ -687,63 +688,67 @@ function initVariables() {
 
 async function createRNBO() {
 
-  const patchExportURL = "export/" + card.engine;
+  try {
 
-  // Create AudioContext
-  let WAContext = window.AudioContext || window.webkitAudioContext;
-  context = new WAContext();
+    const patchExportURL = "export/" + card.engine;
 
-  let rawPatcher = await fetch(patchExportURL);
-  let patcher = await rawPatcher.json();
-  device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
+    // Create AudioContext
+    let WAContext = window.AudioContext || window.webkitAudioContext;
+    context = new WAContext();
 
-  device.node.connect(context.destination);
+    let rawPatcher = await fetch(patchExportURL);
+    let patcher = await rawPatcher.json();
+    device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
 
-  loadAudioBuffer(context);
+    device.node.connect(context.destination);
 
-  // Connect With Parameters
+    loadAudioBuffer(context);
 
-  inputX = device.parametersById.get("inputX");
-  inputY = device.parametersById.get("inputY");
-  inputZ = device.parametersById.get("inputZ");
-  //    print ("I am A2")
+    // Connect With Parameters
 
+    inputX = device.parametersById.get("inputX");
+    inputY = device.parametersById.get("inputY");
+    inputZ = device.parametersById.get("inputZ");
+    //    print ("I am A2")
+  } catch (error) {
+    console.log(error);
+    errorLoadingAudio(error);
+  }
 
 }
 
 
 async function loadAudioBuffer(_context) {
 
+  loadingAudio(1);
+  context = _context;
+
   let audioBuf
   try {
+    let audioURL;
 
-    loadingAudio(1);
+    if (navigator.connection) {
+      const speed = navigator.connection.downlink;
+      audioURL = speed > 1 ? card.mp3file : card.wavfile;
 
-    context = _context;
-
-    let audioURL = card.wavfile;
+    } else {
+      audioURL = card.mp3file;
+    }
 
     // Load our sample as an ArrayBuffer;
     const fileResponse = await fetch(audioURL);
     const arrayBuf = await fileResponse.arrayBuffer();
-
     // Decode the received Data as an AudioBuffer
     audioBuf = await context.decodeAudioData(arrayBuf);
+    // Set the DataBuffer on the device
+
+    await device.setDataBuffer("world1", audioBuf);
+    loaded();
 
   } catch (error) {
     console.log(error);
+    errorLoadingAudio(error);
   }
 
-
-  // Set the DataBuffer on the device
-  try {
-    await device.setDataBuffer("world1", audioBuf);
-  } catch (e) {
-    console.log(e);
-  }
-
-  print("I am 3");
-  loaded();
-  print("I am 4");
 
 }
