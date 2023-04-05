@@ -2,6 +2,34 @@
    "description": "Configuration of first release of ENT Cards",
    "A": [
       {
+         "id": "0",
+         "wavfile": "https://uc958d6ae5caf0ecdee00cfb4e5a.dl.dropboxusercontent.com/cd/0/inline/B5l2w0yTvVJrBoZHTKCjLL4fYPh6swNlpY5wxmFpaY1COekcOlvv8a_HIPMesrzXovih2K4731QloxQ12964CcqDYQELOh7yv0MkNLq8mdLE5P67FITkEouWTnaaWhpOvXGeljbuQJl_se4WgC2daqtykb_J0-4qLB_Lia5iq-0-Vg/file#",
+         "mp3file": "https://uc879f15fa42db2c19fa60b5e98e.dl.dropboxusercontent.com/cd/0/inline/B5nOsPyyU3TjQOQM6RMWiKO-YyqlmzVaVl5U5zPWKA7fVTV0_ouDv31XFN9ABR1i1-isABpNmjEVocDYgZBrGiWfDgFiXQUBMjJmrV4byUAWzNSEiI0wU4lnGikiXzSjibjRcovPuC4p9tNVhYhIFk3Jk-2jQ-9YzxgyEvwZlsyD5g/file#",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
+      {
          "id": "1",
          "wavfile": "https://uc34d99c36cbce48559375f35493.dl.dropboxusercontent.com/cd/0/inline/B5mD576FCKImcyWmY4CzkPR3uCbWEkgYIrq4LJ8gv9gF1DJCbk45AjlyIxoBzJI_TD-kfgbxXoQidMNfDrSUkANmG65-_F1NxXrLwPfYZBW-_q8fSqURuIDRJIzK8S0KcIiOo_9Mo6xI9CQStAUh_Q_WqlkEzjVLedjvYssOI2Eevw/file#",
          "mp3file": "https://uc65b6c073c6b33231bfda41a640.dl.dropboxusercontent.com/cd/0/inline/B5nvv9imbfaV9tw1HcCNBvQsPIqWopPhhoX4d9PItfByh7NS46qwC2OPUKPtbcqjJUg4BHBkNKD403jAoUDO6K3tAG3I4DUB7LObQK-VOCc9ohXES8CiKL7CnYuw8ehUv2Ld-By8-wXDSs-yAnvHYMSQuyh9lplotoHw_V3WMuHODg/file#",
@@ -311,6 +339,35 @@
       }
    ],
    "B": [
+      
+      {
+         "id": "0",
+         "wavfile": "https://ucf46d2377bdb1be0149a9f375d3.dl.dropboxusercontent.com/cd/0/inline/B5kAfKpCf43AvfgveQO0p4UvJjlG09zTuIRhhoBFJwfbCEO7vZ6zJiksgVuJU9MNzdjle_S4XBblKu8Rnz2LprrKF3aKh2hQumTQLxQ0keTKPP_cdEmc0BuE2YawBFz5FLROi1vZ3RHN8KufzvIguBrLFL3nwKNmz7KoGaZwMpvhiw/file#",
+         "mp3file": "https://uc5447d731cc3473bcc0829f19f4.dl.dropboxusercontent.com/cd/0/inline/B5mijMjjE_XYFIiMA4PfHqfwYdVe2uf3WF3oGwDZaDj2Gc4L3azFH5ObN5wgwXxcydq0iwdS-lO7vP3q5in5SXYEgv46uBaq1MHplAcjfK5pTHTdrt_RVyywfKc5P86kJo7AvSnSN5z6RTNQn5qEF4PJzkyfKr8pDIKfS75HCHMSyQ/file#",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
       {
          "id": "1",
          "wavfile": "https://uc49b56a078faaf79fd9ba4140d4.dl.dropboxusercontent.com/cd/0/inline/B5k0RlLnjWufdGmog7E89x-VM0tAr5Xczhz38lLZsVzNERr7SXC0DOunWxFjENYJ_17GWSk0SSmAC2Bn3xGzvod0FeSJk3Guz-0zGQwg-qWfNtoBTokaZGnAW31dv0CNmcj5q4YlHUa-KfwJRdgc7jw1qzMXWrO7zX2sHivGpjYBuA/file#",
@@ -621,6 +678,34 @@
       }
    ],
    "C": [
+      {
+         "id": "0",
+         "wavfile": "https://ucce08febda4bafd06b10362a68d.dl.dropboxusercontent.com/cd/0/inline/B5mXmjr2sNZe3An6P7ahBiAk9DMkfkW5swx2kbHB84oJWzdWm8GtaSJrSUWSjONJP35xp6YCnP1fcOahMWmluqTlSW--Ba8E2jV54vMSkMgNan1nXMeSQTOXGogBoFOoty8Ooes1NwABVgqsuCnR_0IUqyJzCjGqkgf1uOvYz9y7OA/file#",
+         "mp3file": "https://uc359f25fff786911aebc1238206.dl.dropboxusercontent.com/cd/0/inline/B5lPhawVC2xR8G95NJ5n5XSl5lUfLao9p_3hnPG8tV_teC5wPjNGIopHmeZWJoH839oQ7K4OISHpLl_mBaaS_pU2ZF1AvMo5rcDkOYYmtYtMUSQo8n-dD_XRuLH5L__fFrpCBCv6iMoFhyXX3uGFkP9imjY7Bd1MtMyph0gkAYylJw/file#",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
       {
          "id": "1",
          "wavfile": "https://uc0076d522237cf4039b03f0a229.dl.dropboxusercontent.com/cd/0/inline/B5mNv8M3EE9X2_OV2oJ5AiDnfXTC2Wk7j-2vHFNS8TnuN14fOVR2bCzTce_OgaXnNhasW6xl7myTRYxbjDdgCBtPY5A4gIu7vhECAh2HlVsuoy3AGdUZG6uIT-XfCitwTR8sB2DZRuQpd0U4UQhjWjAnWKceaWJr2kb5f8uJjP8AaQ/file#",
