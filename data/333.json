@@ -2,9 +2,37 @@
    "description": "Configuration of first release of ENT Cards",
    "A": [
       {
+         "id": "0",
+         "wavfile": "https://dl.dropboxusercontent.com/s/5er0z3q0ga8ucy5/SkySounds.1-Snippet.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/7f88mw3at01demk/SkySounds.1-Snippet.mp3?raw=10" ,
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#ffff00",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
+      {
          "id": "1",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/gcq13nn9zz312xh/Snippet-Skysounds-1-I.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/wt8nl0aba2l41yt/Snippet-Skysounds-1-I.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -31,8 +59,8 @@
       },
       {
          "id": "2",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/gv1fx2uazdytvuz/Snippet-Skysounds-1-II.wav?raw=10",
+         "mp3file": "https://dl.dropboxusercontent.com/s/i5dmads8i3w8hpo/Snippet-Skysounds-1-II.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1",
@@ -59,8 +87,8 @@
       },
       {
          "id": "3",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/9fa2cff9ce0djqw/Snippet-Skysounds-1-III.wav?raw=10",
+         "mp3file": "https://dl.dropboxusercontent.com/s/8q3208quowqju12/Snippet-Skysounds-1-III.mp3?raw=10" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "3.4",
@@ -87,8 +115,8 @@
       },
       {
          "id": "4",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/csmkz55f1d61mrm/Snippet-Skysounds-1-IV.wav?raw=10",
+         "mp3file": "	https://dl.dropboxusercontent.com/s/fop0s0aakst88or/Snippet-Skysounds-1-IV.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -115,8 +143,8 @@
       },
       {
          "id": "5",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/798yzzrklwh52zd/Snippet-Skysounds-1-V.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/fc5vrq30mu4rw7p/Snippet-Skysounds-1-V.mp3?raw=10" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -143,8 +171,8 @@
       },
       {
          "id": "6",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/dxx9xzn9iqyar9h/Snippet-Skysounds-1-VI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/zjea70fywekwpua/Snippet-Skysounds-1-VI.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -171,8 +199,8 @@
       },
       {
          "id": "7",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/bdxhou7wjfazsox/Snippet-Skysounds-1-VII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/m3scle87g3tm1hh/Snippet-Skysounds-1-VII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -199,8 +227,8 @@
       },
       {
          "id": "8",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/4coz1cabmu6a1ah/Snippet-Skysounds-1-VIII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/m3scle87g3tm1hh/Snippet-Skysounds-1-VII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -227,8 +255,8 @@
       },
       {
          "id": "9",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/5gtmbd1bfzvwwrm/Snippet-Skysounds-1-IX.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/lhj6xo8apmn6yth/Snippet-Skysounds-1-IX.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -255,8 +283,8 @@
       },
       {
          "id": "10",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/j83yb6szc2bqpt1/Snippet-Skysounds-1-X.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/qpym2lj4l52qpzf/Snippet-Skysounds-1-X.mp3?raw=1",
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -283,8 +311,8 @@
       },
       {
          "id": "11",
-         "wavfile": "https://uc61b170d513df9514ea13d0bef5.dl.dropboxusercontent.com/cd/0/inline/B5gUa2nUSiiUIhws7gzpVldLAoCph-HUrTsWcyIUVTXXjriiK5djjP4kR1SC1pjp5bTbHzp5mOwKOkaHJrDWx0teBxfZM5OhEkDMpWvLYPn2Ky2bMWWVfkGTJIGFhGHFOEgmsKzs8YCeXDZdP3HFZCvwrdilux8672AgpM7cmSgn5A/file#",
-         "mp3file": "https://uc2645036748ecd9c7326b361519.dl.dropboxusercontent.com/cd/0/inline/B5jYBQXz_KzD2a0r2Eh-AXIix78xVqpg3O7_ATHYBCOST2L8ySiw1-8gEOz8C4NrU0Z1Vx2qATDBrtQj06s8YXG1cmV8GIaGgeT4xI_CVQePsN2l6w_kfH32RyLXm4F5fRbyjZe_ZzMpaUCPuCO72PlXfkARgKUt3870JK9PGLwrDQ/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/djoig1c17gbq34u/Snippet-Skysounds-1-XI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/h6nlql0ejh9a3j6/Snippet-Skysounds-1-XI.mp3?raw=1",
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -312,9 +340,38 @@
    ],
    "B": [
       {
+         "id": "0",
+         "wavfile": "https://dl.dropboxusercontent.com/s/8yvrp7cjeuj9rau/SkySounds.2-Snippet.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/ni0jedvovgxy3od/SkySounds.2-Snippet.mp3?raw=1" ,
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#0099cc",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
+      
+      {
          "id": "1",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/85dbi313jrn6wiu/Snippet-Skysounds-2-I.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/iumbt62v8pfkt48/Snippet-Skysounds-2-I.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -341,8 +398,8 @@
       },
       {
          "id": "2",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/c8g7o1uy6yc8wvw/Snippet-Skysounds-2-II.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/ow1bxk8d0w6o4c9/Snippet-Skysounds-2-II.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1",
@@ -369,8 +426,8 @@
       },
       {
          "id": "3",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/8894ck51jf08klj/Snippet-Skysounds-2-III.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/kq4zldylgqrxdku/Snippet-Skysounds-2-III.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "2.0",
@@ -397,8 +454,8 @@
       },
       {
          "id": "4",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/smkz96m3b9s36hs/Snippet-Skysounds-2-IV.wav?raw=10",
+         "mp3file": "https://dl.dropboxusercontent.com/s/5gvtufcxs9yvzpp/Snippet-Skysounds-2-IV.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -425,8 +482,8 @@
       },
       {
          "id": "5",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/7bgxxh29daajegj/Snippet-Skysounds-2-V.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/8n7h8qb3dtcrx7r/Snippet-Skysounds-2-V.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -453,8 +510,8 @@
       },
       {
          "id": "6",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/oydht3rp4pjag4x/Snippet-Skysounds-2-VI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/vnaz7eyl80bu2pb/Snippet-Skysounds-2-VI.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -481,8 +538,8 @@
       },
       {
          "id": "7",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/8ispkcejg39sk8o/Snippet-Skysounds-2-VII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/xmusjb8zxmxtumx/Snippet-Skysounds-2-VII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -509,8 +566,8 @@
       },
       {
          "id": "8",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/rsn1av6dsht8mv8/Snippet-Skysounds-2-VIII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/3le49p0mp785hnq/Snippet-Skysounds-2-VIII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -537,8 +594,8 @@
       },
       {
          "id": "9",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/txdyf15xy2kix86/Snippet-Skysounds-2-IX.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/h54f7h90qjrt55u/Snippet-Skysounds-2-IX.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -565,8 +622,8 @@
       },
       {
          "id": "10",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/xtuo9imjs99xlu4/Snippet-Skysounds-2-X.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/rnm4y229b9yws1v/Snippet-Skysounds-2-X.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -593,8 +650,8 @@
       },
       {
          "id": "11",
-         "wavfile": "https://uc3e5411b2460cb354692493ab8a.dl.dropboxusercontent.com/cd/0/inline/B5jiZ-ZQSszcczhI5b-3z5idX68QhSXUSEPzcWhF2369eFVb6LLjN4H_wQvA-W0-YAprXFO6UQjKroU-3asWC5HoIbOFHyeERbR5jh3Gh1OmJtsZxUYscPASLV1uyCNIJC5Cbqno1KW2S2ROtjWFe2hUvjMbqGkiUHpHNPDH5S5FUA/file#",
-         "mp3file": "https://ucb202a66557eb3465499ca37a88.dl.dropboxusercontent.com/cd/0/inline/B5g5UjhQIhxzMveVVgh1MmLwh6t6decsM8bxWnRgSAR7TDmPls4GzPaWbOmA9nRLJkWyQ0aTLT5IhxEKjQ28pMmkS3U2tl7kA2tZMiPdsn4FgeTEp0TvLHTATOlcXLgXbSv-4-tFqYk3aG9h9MfVLg5FQx-nxEBrLfo2OFQdLNeavA/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/uwflzs7qqag4au8/Snippet-Skysounds-2-XI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/wfpnkjaplgu9b0o/Snippet-Skysounds-2-XI.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -622,9 +679,37 @@
    ],
    "C": [
       {
+         "id": "0",
+         "wavfile": "https://dl.dropboxusercontent.com/s/ncj27lawqjfy4es/SkySounds.3-Snippet.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/2d42z4ok49z1z45/SkySounds.3-Snippet.mp3?raw=1" ,
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": "-1.",
+         "maxSpeed": "3.",
+         "col1": "#cc0000",
+         "col2": "333.",
+         "engine": "d00_c00_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+      },
+      {
          "id": "1",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/yr10pob84blly2k/Snippet-Skysounds-3-I.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/2neths1qz37e60k/Snippet-Skysounds-3-I.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -651,8 +736,8 @@
       },
       {
          "id": "2",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/8ht5aagqzp5jilq/Snippet-Skysounds-3-II.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/oisrascw8lfhte7/Snippet-Skysounds-3-II.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1",
@@ -679,8 +764,8 @@
       },
       {
          "id": "3",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/47pjhup50c1qhb8/Snippet-Skysounds-3-III.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/cw73ecqlgm9ppij/Snippet-Skysounds-3-III.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "2.0",
@@ -707,8 +792,8 @@
       },
       {
          "id": "4",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/yyykakejxpi2xu3/Snippet-Skysounds-3-IV.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/vxj8q9sllxfkyum/Snippet-Skysounds-3-IV.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -735,8 +820,8 @@
       },
       {
          "id": "5",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/9h2f673vcbnefnn/Snippet-Skysounds-3-IX.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/n96t0j8ru3g134p/Snippet-Skysounds-3-IX.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -763,8 +848,8 @@
       },
       {
          "id": "6",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/3aek6d9ks9k1j90/Snippet-Skysounds-3-V.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/c69y1fhqh1r1us3/Snippet-Skysounds-3-V.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -791,8 +876,8 @@
       },
       {
          "id": "7",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/w4ha0e6b6grtdvo/Snippet-Skysounds-3-VI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/zfrmyx7v13ci1xm/Snippet-Skysounds-3-VI.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -819,8 +904,8 @@
       },
       {
          "id": "8",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/ufze9m4hx0jm2p2/Snippet-Skysounds-3-VII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/olaka5sl10w9qqu/Snippet-Skysounds-3-VII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -847,8 +932,8 @@
       },
       {
          "id": "9",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/cbd3o4nc9zbha01/Snippet-Skysounds-3-VIII.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/x0tgy4sagf9oubt/Snippet-Skysounds-3-VIII.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -875,8 +960,8 @@
       },
       {
          "id": "10",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/rxhpj0607pma6a3/Snippet-Skysounds-3-X.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/7juwwce3nem7lmf/Snippet-Skysounds-3-X.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -903,8 +988,8 @@
       },
       {
          "id": "11",
-         "wavfile": "https://uc83e1075be4d99f5f9a10fc4ebf.dl.dropboxusercontent.com/cd/0/inline/B5h7PTId_2-91wD098gvR9ze9grGQaiupXrev25qf91N18qeAM-_BUh8DkuK-YugmTYbP67ikaDxUP4qE-LMORM94dgzCGEvI-19CE9-acKB6gAb3nCv9kFTEtMltUQ0E01sujANOzX3MlhV2GctRomm1FxlFxq83Pzs65VjboPq9g/file#",
-         "mp3file": "https://ucf138de56b3bea5fc9a9888ce3f.dl.dropboxusercontent.com/cd/0/inline/B5inMoESq-32Gn-xAegiIiWRkdjo6obCKJaRYmdreCYkyeh5WfMgxP7Gf-nrTJzpKaiAvj2EXPBuZ2nfWK7IciooLEnZHrcjqYmv8xbFwIYmTjBxY06XLt1OZIC9n-hlziAlykBmjIImgbVPOaA3YTpdiFUHtnuwl-uGBRtd-oeXvw/file#" ,
+         "wavfile": "https://dl.dropboxusercontent.com/s/l5ztnyv6i6dhma6/Snippet-Skysounds-3-XI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/4d0m6mw5t4rz4nt/Snippet-Skysounds-3-XI.mp3?raw=1" ,
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
