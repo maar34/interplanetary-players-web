@@ -960,8 +960,8 @@
       },
       {
          "id": "10",
-         "wavfile": "",
-         "mp3file": "",
+         "wavfile": "https://dl.dropboxusercontent.com/s/6gii643d1t04ud6/Skysounds-3-X.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/ej98ch5njfcgyb1/Skysounds-3-X.mp3?raw=1",
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -988,8 +988,8 @@
       },
       {
          "id": "11",
-         "wavfile": "",
-         "mp3file": "",
+         "wavfile": "https://dl.dropboxusercontent.com/s/k6wr3ha2siqb0al/Skysounds-3-XI.wav?raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/s/mgi6asfg91073fo/Skysounds-3-XI.mp3?raw=1",
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
