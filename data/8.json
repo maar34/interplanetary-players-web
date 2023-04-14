@@ -124,7 +124,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c02_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -152,7 +152,7 @@
          "maxSpeed": "4.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c03_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -180,7 +180,7 @@
          "maxSpeed": "4.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c04_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -208,7 +208,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c05_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -236,7 +236,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c06_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -264,7 +264,7 @@
          "maxSpeed": "4.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c07_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -292,7 +292,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d08_c00_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -320,7 +320,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c09_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -348,7 +348,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c10_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -375,7 +375,24 @@
          "minSpeed": "-1.",
          "maxSpeed": "4.",
          "col1": "#7CFC00",
-         "col2": "333."
+         "col2": "333.",
+         "engine": "d00_c11_v0.1.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
+
       },
       {
          "id": "14",
@@ -388,7 +405,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c03_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -416,7 +433,7 @@
          "maxSpeed": "3.",
          "col1": "#7CFC00",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "d00_c04_v0.1.json",
          "xTag": [
             "Speed",
             "-1.",
