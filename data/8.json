@@ -10,7 +10,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -38,7 +38,7 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -66,7 +66,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -94,7 +94,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -122,21 +122,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c02_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "Pitch Shift",
+            "-12.",
+            "12."
          ],
          "yTag": [
-            "Tremolo",
+            "Adapt Filter",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Cosmic Delay",
             "-100.",
             "100."
          ]
@@ -150,21 +150,21 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c03_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "Spatial",
+            "-100.",
+            "100."
          ],
          "yTag": [
-            "Tremolo",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Interference",
             "-100.",
             "100."
          ]
@@ -178,21 +178,21 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c04_v0.1.json",
          "xTag": [
             "Speed",
-            "-1.",
-            "3."
+            "-2.",
+            "4."
          ],
          "yTag": [
-            "Tremolo",
+            "Filters",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Chorus",
             "-100.",
             "100."
          ]
@@ -206,21 +206,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c05_v0.1.json",
          "xTag": [
             "Speed",
-            "-1.",
-            "3."
+            "-3.",
+            "5."
          ],
          "yTag": [
-            "Tremolo",
+            "Flanger",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Space Reverb",
             "-100.",
             "100."
          ]
@@ -234,21 +234,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c06_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "ULFO",
+            "-2.",
+            "4."
          ],
          "yTag": [
-            "Tremolo",
+            "Warm Dist",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Flang Vibes",
             "-100.",
             "100."
          ]
@@ -262,21 +262,21 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c07_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "eMods",
+            "-100.",
+            "100."
          ],
          "yTag": [
-            "Tremolo",
+            "Octavver",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Space Shimmer",
             "-100.",
             "100."
          ]
@@ -290,21 +290,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c08_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "Pitch S",
+            "-100.",
+            "100."
          ],
          "yTag": [
-            "Tremolo",
+            "Modulator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "SpaceRev",
             "-100.",
             "100."
          ]
@@ -318,21 +318,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c09_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "eMods",
+            "-100.",
+            "100."
          ],
          "yTag": [
-            "Tremolo",
+            "Octavver",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Spacy",
             "-100.",
             "100."
          ]
@@ -346,7 +346,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c10_v0.1.json",
          "xTag": [
@@ -355,12 +355,12 @@
             "3."
          ],
          "yTag": [
-            "Tremolo",
+            "Filter",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Delay",
             "-100.",
             "100."
          ]
@@ -374,21 +374,21 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c11_v0.1.json",
          "xTag": [
-            "Speed",
+            "Speed Pan",
             "-1.",
             "3."
          ],
          "yTag": [
-            "Tremolo",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Chorus",
             "-100.",
             "100."
          ]
@@ -403,21 +403,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c03_v0.1.json",
          "xTag": [
-            "Speed",
-            "-1.",
-            "3."
+            "Spatial",
+            "-100.",
+            "100."
          ],
          "yTag": [
-            "Tremolo",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Interference",
             "-100.",
             "100."
          ]
@@ -431,21 +431,21 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c04_v0.1.json",
          "xTag": [
             "Speed",
-            "-1.",
-            "3."
+            "-2.",
+            "4."
          ],
          "yTag": [
-            "Tremolo",
+            "Filters",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Reverb",
+            "Chorus",
             "-100.",
             "100."
          ]
@@ -459,7 +459,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -487,7 +487,7 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "4.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -515,7 +515,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
@@ -543,7 +543,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "#7CFC00",
+         "col1": "#ff33cc",
          "col2": "333.",
          "engine": "d00_c00_v0.1.json",
          "xTag": [
