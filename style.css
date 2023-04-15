@@ -8,7 +8,7 @@ html, body {
   padding: 0;
   font-size: .97rem;
   font-family: "Orbitron-VariableFont_wght"; 
-  color: rgb(0, 255, 0); 
+  color: #33ffff; 
   background-color: black;
   position: absolute;
 
@@ -41,7 +41,7 @@ canvas {
   height: 1.5rem;
   cursor: pointer;
   border: 1px solid rgb(0, 0, 0, 0);
-  background: rgb(0, 255, 0);
+  background: #33ffff;
   border-radius: 100px; /* round corners */
 
 }
@@ -52,7 +52,7 @@ canvas {
   height: 1.5rem;
   cursor: pointer;
   border: 1px solid rgb(0, 0, 0, 0);
-  background: rgb(0, 255, 0);
+  background: #33ffff;
   border-radius: 100px;
   position: relative;
 
