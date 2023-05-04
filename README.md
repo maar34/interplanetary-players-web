@@ -1,7 +1,9 @@
 # Interplanetary Players - Web 🪐
 
+An initiative that explores the intersection of digital and physical worlds through the design of intelligent music players and meta-musical instruments. 
+Concibed as a global network of intelligent music tools that use algorithmic approaches to facilitate music listening and creation, allowing users to take control of their sound in new and exciting ways. These tools are designed to be accessible to anyone, regardless of musical training or technical knowledge, and aim to reactivate auditory consciousness and push the boundaries of what's possible in musical creation and exploration. 
 
-Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "Interplanetary Players" for "ENT Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
+This players are used with the ENT Cards, a new paradigm for Music Distribution. It draws inspiration from a range of sources, including, digital lutherie, history, scientific discoveries, worldbuilding, visual arts, and sound creation, to create a unique and immersive experience for users.
 
 # Reactivating Auditory Consciousness 👂🏽
 
