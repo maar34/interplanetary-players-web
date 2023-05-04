@@ -1,8 +1,9 @@
 # Interplanetary Players - Web 🪐
 
+
 Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "Interplanetary Players" for "ENT Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
 
-# Reactivating Auditory Consciousness
+# Reactivating Auditory Consciousness 👂🏽
 
 At the heart of our approach is the idea that music can be a collaborative and immersive experience. That’s why we are developing a range of tools that allow users to create and remix music in new and unconventional ways. Using different algorithmic approaches, we are creating intelligent music players that will be able to understand and respond to the user’s creative input, even if they’ve never had any musical training.
 
@@ -19,7 +20,7 @@ Important, in some mobile devices you need to **turn Off Silent Mode**.
 
 Thank you for your interest, and I hope you enjoy using Interplanetary Players!
 
-### Run the World (code) 🕳
+# Run the World (code) 🕳
 
 Please note that this is just a basic example of how to run a p5.js project, and there are other ways to set it up depending on the specific requirements of your project for example p5.vscode extension that helps you create p5.js projects in Visual Studio Code. If you have any issues or questions, you can refer to the p5.js documentation or seek help from the p5.js community.
 
@@ -45,12 +46,10 @@ http-server -p 3000
 ```
 Finally, you can edit the code and see the changes in the browser.
 
-### Licence 🎶 🖼 🖋
+# Licence 🎶 🖼 🖋
 
 General Public License Version 3 (GPLv3)
 Details of the GPLv3 license can be found at: https://www.gnu.org/licenses/gpl-3.0.html
-
-
 
 Based on p5.js and RNBO. 🚂 🌈 🪐
 
