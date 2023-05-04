@@ -1,21 +1,23 @@
-# ENT Music Players 🪐
+# Interplanetary Players - Web 🪐
 
-Are you curious about how music and technology are coming together to create a new era of musical creation and exploration? At Maar World, I am glad to be exploring the boundaries of what's possible in music and sound, using a combination of cutting-edge technology and curiosity.
+Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "Interplanetary Players" for "ENT Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
 
-Part of this mission is to create a network of playful music tools that allow users to take control of their sound in new and exciting ways. On of these tools are the "ENT Music Players" and "ENT Cards". they are designed to be accessible to anyone, whether you're a professional musician or a complete novice.
+# Reactivating Auditory Consciousness
 
-At the heart of this approach is the idea that music can be a collaborative, immersive, listening and creative experience at the same time. That's why I am developing a range of tools that allow users to create and remix music in new and unconventional ways. Using different algorithmic approaches, intelligent music players that will be able to understand and respond to the user's creative input, even if they've never had any musical training.
+At the heart of our approach is the idea that music can be a collaborative and immersive experience. That’s why we are developing a range of tools that allow users to create and remix music in new and unconventional ways. Using different algorithmic approaches, we are creating intelligent music players that will be able to understand and respond to the user’s creative input, even if they’ve never had any musical training.
 
-Reactivate auditory consciousness, allowing people to explore new dimensions of music and sound that they may not have even known existed. With the help of meta-musical instruments, users can play music, soundscapes, and spoken voice that are truly unique, combining analog and digital technologies to push the boundaries of what's possible.
+We aim to reactivate auditory consciousness, allowing people to explore new dimensions of music and sound that they may not have even known existed. With the help of meta-musical instruments, users can play music, soundscapes, and spoken voice that are truly unique, combining analog and digital technologies to push the boundaries of what’s possible.
 
-My website, www.maar.world, offers demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as live performances, studio recordings, and interactive installations.
+By connecting people around the world through the power of music and technology, we believe that we can create a new era of music that is more engaging, exciting, and inclusive than ever before. Imagine a world where people from all over the globe can connect and collaborate on new musical projects, breaking down barriers and building new communities through the power of sound.
+
+Website, www.collect.maar.world, offers demos and the option to subscribe to a newsletter. The project encourages collaboration and experimentation and can be used in various settings, such as live performances, studio recordings, and interactive installations.
 
 
 <img width="889" alt="screenshots1" src="https://user-images.githubusercontent.com/862847/212711547-3070feec-e1da-4b07-b668-a30422c1e249.png">
 
 Important, in some mobile devices you need to **turn Off Silent Mode**.
 
-Thank you for your interest, and I hope you enjoy using ENT Music Players!
+Thank you for your interest, and I hope you enjoy using Interplanetary Players!
 
 ### Run the World (code) 🕳
 
@@ -51,3 +53,7 @@ Details of the GPLv3 license can be found at: https://www.gnu.org/licenses/gpl-3
 
 
 Based on p5.js and RNBO. 🚂 🌈 🪐
+
+p5.js is a JavaScript library that provides a set of tools for creating interactive graphics, animations, and sound in web browsers. It is designed to be user-friendly and accessible, making it a popular choice for beginners and experts alike. With p5.js, developers can create complex visual and audio experiences using simple and intuitive syntax.
+
+RNBO is a library and toolchain for building and exporting software that incorporates the sound of Max, a popular visual programming language for music and multimedia. With RNBO, users can create a wide range of music-related projects, from web experiences and hardware music devices to audio plugins and new Max objects, all from the same patch. Additionally, RNBO offers an intuitive, user-friendly interface for patching and experimenting with code, making it accessible to a wide range of users. Overall, RNBO represents an exciting new tool for musicians and programmers alike, offering a powerful and versatile platform for music creation and experimentation.
