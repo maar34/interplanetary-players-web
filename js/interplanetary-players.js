@@ -250,7 +250,7 @@ function xB() {
 
 function yB() {
   notDOM = false;
-  ySlider.value(128.);
+  ySlider.value(128.);  
   yInput();
 }
 
@@ -734,15 +734,32 @@ async function loadAudioBuffer(_context) {
     } else {
       audioURL = card.mp3file;
     }
+    
+    try {
+      const fileResponse = await fetch(audioURL, {
+        cache: 'reload'
+      });
+      
+      if (!fileResponse.ok) {
+        throw new Error("Network response was not OK");
+        errorLoadingAudio("Network response was not OK");
 
-    // Load our sample as an ArrayBuffer;
-    const fileResponse = await fetch(audioURL);
-    const arrayBuf = await fileResponse.arrayBuffer();
-    // Decode the received Data as an AudioBuffer
-    audioBuf = await context.decodeAudioData(arrayBuf);
-    // Set the DataBuffer on the device
+      }
+      // Load our sample as an ArrayBuffer;
+      const arrayBuf = await fileResponse.arrayBuffer();
+      //  console.log(arrayBuf);
 
-    await device.setDataBuffer("world1", audioBuf);
+      // Decode the received Data as an AudioBuffer
+      audioBuf = await context.decodeAudioData(arrayBuf);
+      // Set the DataBuffer on the device
+      await device.setDataBuffer("world1", audioBuf);
+
+    } catch (error) {
+      console.error("There has been a problem with your fetch operation:", error);
+      errorLoadingAudio(error);
+
+    }
+
     loaded();
 
   } catch (error) {
@@ -752,3 +769,4 @@ async function loadAudioBuffer(_context) {
 
 
 }
+
