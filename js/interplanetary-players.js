@@ -233,12 +233,7 @@ function playPause() {
 
   }
   device.scheduleEvent(messageEvent);
-
-
   xInput();
-
-
-
 }
 
 function xB() {
@@ -315,14 +310,14 @@ function createDom() {
   playButton.touchEnded(releaseDOM);
   //playButton.addClass("crosshair");
 
-  xButton = createButton('&#x2609');
+  xButton = createButton('&#11042');
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
 
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
   xButton.style('color', domColor);
-  xButton.style('font-size', '2.5rem');
+  xButton.style('font-size', '3.5rem');
   xButton.style('border', 'none');
   xButton.style('background', 'none');
   xButton.mousePressed(xB);
@@ -331,13 +326,13 @@ function createDom() {
   xButton.touchEnded(releaseDOM);
   //xButton.addClass("crosshair");
 
-  yButton = createButton('&#x2609');
+  yButton = createButton('&#11042');
   yButton.position(-11., innerHeight * .44);
   yButton.style('width', btW + 'px');
   yButton.style('height', btH + 'px');
   yButton.style('background-color', domColor);
   yButton.style('color', domColor);
-  yButton.style('font-size', '2.5rem');
+  yButton.style('font-size', '3.5rem');
   yButton.style('border', 'none');
   yButton.style('background', 'none');
   yButton.mousePressed(yB);
@@ -346,13 +341,13 @@ function createDom() {
   yButton.touchEnded(releaseDOM);
   //yButton.addClass("crosshair");
 
-  zButton = createButton('&#x2609');
-  zButton.position(sw * .8, innerHeight * .44);
+  zButton = createButton('&#11042');
+  zButton.position(sw * .7, innerHeight * .44);
   zButton.style('width', btW + 'px');
   zButton.style('height', btH + 'px');
   zButton.style('background-color', domColor);
   zButton.style('color', domColor);
-  zButton.style('font-size', '2.5rem');
+  zButton.style('font-size', '3.5rem');
   zButton.style('border', 'none');
   zButton.style('background', 'none');
   zButton.mousePressed(zB);
@@ -395,7 +390,7 @@ function createDom() {
 
 
   zSlider = createSlider(0, 255, 128);
-  zSlider.position(sw * .55, sh * .5);
+  zSlider.position(sw * .45, sh * .5);
   zSlider.style('width', sliderW + 'px');
 
 
@@ -432,7 +427,7 @@ function updateDom() {
 
   xSlider.position(sw * .5 - (sliderW * .5), sh * .8);
   ySlider.position(0, sh * .5);
-  zSlider.position(sw * .55, sh * .5);
+  zSlider.position(sw * .45, sh * .5);
 
 }
 
@@ -675,8 +670,8 @@ function initVariables() {
   sh = window.innerHeight;
   padX = sw / 77.;
   padY = sh / 100.;
-  btW = sw * .1;
-  btH = sw * .1;
+  btW = sw * .15;
+  btH = sw * .15;
   sliderW = sw * .5;
   sliderH = sliderW * .11;
   startX = 0;
