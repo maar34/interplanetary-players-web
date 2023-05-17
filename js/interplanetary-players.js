@@ -302,7 +302,7 @@ function createDom() {
   playButton.style('height', btH + 'px');
   playButton.style('background-color', domColor);
   playButton.style('color', domColor);
-  playButton.style('font-size', '2.5rem');
+  playButton.style('font-size', '2rem');
   playButton.style('border', 'none');
   playButton.style('background', 'none');
   playButton.mousePressed(playPause);
@@ -311,13 +311,12 @@ function createDom() {
   //playButton.addClass("crosshair");
 
   xButton = createButton('&#11042');
-  xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
 
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
   xButton.style('color', domColor);
-  xButton.style('font-size', '3.5rem');
+  xButton.style('font-size', '3rem');
   xButton.style('border', 'none');
   xButton.style('background', 'none');
   xButton.mousePressed(xB);
@@ -327,12 +326,11 @@ function createDom() {
   //xButton.addClass("crosshair");
 
   yButton = createButton('&#11042');
-  yButton.position(-11., innerHeight * .44);
   yButton.style('width', btW + 'px');
   yButton.style('height', btH + 'px');
   yButton.style('background-color', domColor);
   yButton.style('color', domColor);
-  yButton.style('font-size', '3.5rem');
+  yButton.style('font-size', '3rem');
   yButton.style('border', 'none');
   yButton.style('background', 'none');
   yButton.mousePressed(yB);
@@ -342,12 +340,11 @@ function createDom() {
   //yButton.addClass("crosshair");
 
   zButton = createButton('&#11042');
-  zButton.position(sw * .7, innerHeight * .44);
   zButton.style('width', btW + 'px');
   zButton.style('height', btH + 'px');
   zButton.style('background-color', domColor);
   zButton.style('color', domColor);
-  zButton.style('font-size', '3.5rem');
+  zButton.style('font-size', '3rem');
   zButton.style('border', 'none');
   zButton.style('background', 'none');
   zButton.mousePressed(zB);
@@ -356,11 +353,17 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
+  xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
+  yButton.position(-11., innerHeight * .44);
+  zButton.position(innerWidth * .7, innerHeight * .44);
+
+
   // create sliders
+
+
 
   initSpeed = map(float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
   xSlider = createSlider(0., 255, 128);
-  xSlider.position(sw * .5 - (sliderW * .5), sh * .8);
   xSlider.style('width', sliderW + 'px');
   xSlider.addClass("slider");
   // xSlider.style('height', sliderH+'px');
@@ -377,7 +380,6 @@ function createDom() {
 
 
   ySlider = createSlider(0, 255, 128);
-  ySlider.position(0, sh * .5);
   ySlider.style('width', sliderW + 'px');
   ySlider.style('transform', 'rotate(-90deg)');
   ySlider.addClass("slider");
@@ -390,8 +392,11 @@ function createDom() {
 
 
   zSlider = createSlider(0, 255, 128);
-  zSlider.position(sw * .45, sh * .5);
-  zSlider.style('width', sliderW + 'px');
+
+
+  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
+  ySlider.position(0, innerHeight * .5);
+  zSlider.position(innerWidth * 0.45- (sliderW * .5), innerHeight * .5);
 
 
   //zSlider.style('height', padY+'px');
@@ -421,13 +426,13 @@ function updateDom() {
   playButton.position(innerWidth * .5 - (btW), 34);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .44);
-  zButton.position(sw * .8, innerHeight * .44);
+  zButton.position(innerWidth * .7, innerHeight * .44);
 
   // move sliders
 
-  xSlider.position(sw * .5 - (sliderW * .5), sh * .8);
-  ySlider.position(0, sh * .5);
-  zSlider.position(sw * .45, sh * .5);
+  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
+  ySlider.position(0, innerHeight * .5);
+  zSlider.position(innerWidth * 0.45- (sliderW * .5), innerHeight * .5);
 
 }
 
