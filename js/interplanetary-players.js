@@ -69,8 +69,6 @@ function preload() {
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
-
-
 }
 
 document.body.onclick = () => {
@@ -160,6 +158,7 @@ function draw() {
 
   normalMaterial();
 
+  
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
 
@@ -181,6 +180,7 @@ function draw() {
   //translate (0., 0., 666.);
 
   pop();
+
   noFill();
   stroke(cardColor);
 
@@ -216,6 +216,7 @@ function playPause() {
   if (playStateI == 0) {
 
     playButton.html('II');
+    context.resume();
     messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     messageEvent2 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     messageEvent3 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
@@ -233,7 +234,11 @@ function playPause() {
 
   }
   device.scheduleEvent(messageEvent);
-  xInput();
+ // xInput();
+
+//  xSlider.value(xSlider.value());
+//  xInput();
+
 }
 
 function xB() {
@@ -293,15 +298,17 @@ function loadingAudio(_loadingN) {
 
 function createDom() {
 
-  let domColor = card.col1;
-  // create buttons
+  let domColor = color (card.col1);
+  let domAlpha = color (card.col1); 
+  domAlpha.setAlpha(127);
 
+  // create buttons and sliderss
   playButton = createButton('&#9655');
   playButton.position(sw * .45, 34);
   playButton.style('width', btW + 'px');
   playButton.style('height', btH + 'px');
   playButton.style('background-color', domColor);
-  playButton.style('color', domColor);
+  playButton.style('color', domAlpha);
   playButton.style('font-size', '2rem');
   playButton.style('border', 'none');
   playButton.style('background', 'none');
@@ -315,7 +322,7 @@ function createDom() {
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
-  xButton.style('color', domColor);
+  xButton.style('color', domAlpha);
   xButton.style('font-size', '3rem');
   xButton.style('border', 'none');
   xButton.style('background', 'none');
@@ -329,7 +336,7 @@ function createDom() {
   yButton.style('width', btW + 'px');
   yButton.style('height', btH + 'px');
   yButton.style('background-color', domColor);
-  yButton.style('color', domColor);
+  yButton.style('color', domAlpha);
   yButton.style('font-size', '3rem');
   yButton.style('border', 'none');
   yButton.style('background', 'none');
@@ -343,7 +350,7 @@ function createDom() {
   zButton.style('width', btW + 'px');
   zButton.style('height', btH + 'px');
   zButton.style('background-color', domColor);
-  zButton.style('color', domColor);
+  zButton.style('color', domAlpha);
   zButton.style('font-size', '3rem');
   zButton.style('border', 'none');
   zButton.style('background', 'none');
@@ -354,13 +361,11 @@ function createDom() {
   //zButton.addClass("crosshair");
 
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
-  yButton.position(-11., innerHeight * .44);
-  zButton.position(innerWidth * .7, innerHeight * .44);
+  yButton.position(-11., innerHeight * .37);
+  zButton.position(innerWidth * .7, innerHeight * .37);
 
 
   // create sliders
-
-
 
   initSpeed = map(float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
   xSlider = createSlider(0., 255, 128);
@@ -374,8 +379,8 @@ function createDom() {
   xSlider.touchEnded(releaseDOM);
 
   //   myElement.style('background', domColor); // this change only the line color*/
-  //xSlider.style('::-webkit-slider-thumb:background', 'red');
-  //xSlider.style('background', 'rgba(0, 0, 0, 0)');
+  // xSlider.style('::-webkit-slider-thumb:background', 'red');
+  // xSlider.style('background', 'rgba(0, 0, 0, 0)');
   // myClass.style(`::-webkit-slider-thumb { background: ${domColor}; }`);
 
 
@@ -383,7 +388,7 @@ function createDom() {
   ySlider.style('width', sliderW + 'px');
   ySlider.style('transform', 'rotate(-90deg)');
   ySlider.addClass("slider");
-  //  ySlider.style('height', sliderH+'px');
+  ySlider.style('height', sliderH+'px');
   ySlider.input(yInput);
   ySlider.mousePressed(pressDOM);
   ySlider.touchStarted(pressDOM);
@@ -392,16 +397,10 @@ function createDom() {
 
 
   zSlider = createSlider(0, 255, 128);
-
-
-  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
-  ySlider.position(0, innerHeight * .5);
-  zSlider.position(innerWidth * 0.45- (sliderW * .5), innerHeight * .5);
-
-
-  //zSlider.style('height', padY+'px');
-  zSlider.addClass("slider");
+  zSlider.style('width', sliderW + 'px');
+  zSlider.style('height', sliderH+'px');
   zSlider.style('transform', 'rotate(-90deg)');
+  zSlider.addClass("slider");
   zSlider.input(zInput);
   zSlider.mousePressed(pressDOM);
   zSlider.touchStarted(pressDOM);
@@ -416,6 +415,9 @@ function createDom() {
   yButton.hide();
   zButton.hide();
 
+  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
+  ySlider.position(0, innerHeight * .4);
+  zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
 
 }
 
@@ -425,14 +427,14 @@ function updateDom() {
 
   playButton.position(innerWidth * .5 - (btW), 34);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
-  yButton.position(-11., innerHeight * .44);
-  zButton.position(innerWidth * .7, innerHeight * .44);
+  yButton.position(-11., innerHeight * .34);
+  zButton.position(innerWidth * .7, innerHeight * .34);
 
   // move sliders
 
   xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
-  ySlider.position(0, innerHeight * .5);
-  zSlider.position(innerWidth * 0.45- (sliderW * .5), innerHeight * .5);
+  ySlider.position(0, innerHeight * .4);
+  zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
 
 }
 
@@ -677,7 +679,7 @@ function initVariables() {
   padY = sh / 100.;
   btW = sw * .15;
   btH = sw * .15;
-  sliderW = sw * .5;
+  sliderW = sw * .6;
   sliderH = sliderW * .11;
   startX = 0;
   startY = 0;
@@ -701,7 +703,6 @@ async function createRNBO() {
     device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
 
     device.node.connect(context.destination);
-
     loadAudioBuffer(context);
 
     // Connect With Parameters
