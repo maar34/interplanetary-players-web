@@ -10,9 +10,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -38,9 +38,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -66,13 +66,13 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c02_v0.1.json",
+         "engine": "s0_c02_v1.2.json",
          "xTag": [
-            "Pitch Shift",
-            "-12.",
-            "12."
+            "Speed pShift",
+            "-1.",
+            "3."  
          ],
          "yTag": [
             "Adapt Filter",
@@ -94,13 +94,13 @@
          "speed": "3.4",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c03_v0.1.json",
+         "engine": "s0_c03_v1.2.json",
          "xTag": [
-            "Spatial",
+            "Spatial Speed",
             "-100.",
-            "100."
+            "300."
          ],
          "yTag": [
             "Ring Oribitator",
@@ -122,9 +122,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c04_v0.1.json",
+         "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
             "-2.",
@@ -150,9 +150,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c05_v0.1.json",
+         "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
             "-3.",
@@ -178,9 +178,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c06_v0.1.json",
+         "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
             "-2.",
@@ -206,9 +206,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c07_v0.1.json",
+         "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
             "-100.",
@@ -234,9 +234,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c08_v0.1.json",
+         "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
             "-100.",
@@ -262,21 +262,21 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c09_v0.1.json",
+         "engine": "s0_c09_v1.2.json",
          "xTag": [
-            "eMods",
+            "Spat Speed",
             "-100.",
-            "100."
+            "300."
          ],
          "yTag": [
-            "Octavver",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Spacy",
+            "Flang Vibes",
             "-100.",
             "100."
          ]
@@ -290,9 +290,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c10_v0.1.json",
+         "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -318,9 +318,9 @@
          "speed": "1.",
          "minSpeed": "1.",
          "maxSpeed": "3.",
-         "col1": "#ffff00",
+         "col1": "rgb(255,255,0)",
          "col2": "333.",
-         "engine": "d00_c11_v0.1.json",
+         "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
             "-1.",
@@ -349,9 +349,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c00_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -377,9 +377,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c00_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -405,9 +405,9 @@
          "speed": "1",
          "minSpeed": ".01",
          "maxSpeed": "4.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c02_v0.1.json",
+         "engine": "s0_c02_v1.2.json",
          "xTag": [
             "Pitch Shift",
             "-12.",
@@ -433,9 +433,9 @@
          "speed": "2.0",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c03_v0.1.json",
+         "engine": "s0_c03_v1.2.json",
          "xTag": [
             "Spatial",
             "-100.",
@@ -461,9 +461,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c04_v0.1.json",
+         "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
             "-2.",
@@ -489,9 +489,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c05_v0.1.json",
+         "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
             "-3.",
@@ -517,9 +517,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c06_v0.1.json",
+         "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
             "-2.",
@@ -545,9 +545,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c07_v0.1.json",
+         "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
             "-100.",
@@ -573,9 +573,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c08_v0.1.json",
+         "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
             "-100.",
@@ -601,21 +601,21 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c09_v0.1.json",
+         "engine": "s0_c09_v1.2.json",
          "xTag": [
-            "eMods",
+            "Spat Speed",
             "-100.",
-            "100."
+            "300."
          ],
          "yTag": [
-            "Octavver",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Spacy",
+            "Flang Vibes",
             "-100.",
             "100."
          ]
@@ -629,9 +629,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c10_v0.1.json",
+         "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -657,9 +657,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#0099cc",
+         "col1": "rgb(0,153,204)",
          "col2": "333.",
-         "engine": "d00_c11_v0.1.json",
+         "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
             "-1.",
@@ -687,9 +687,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c00_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -715,9 +715,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c00_v0.1.json",
+         "engine": "s0_c00_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -743,9 +743,9 @@
          "speed": "1",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c02_v0.1.json",
+         "engine": "s0_c02_v1.2.json",
          "xTag": [
             "Pitch Shift",
             "-12.",
@@ -771,9 +771,9 @@
          "speed": "2.0",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c03_v0.1.json",
+         "engine": "s0_c03_v1.2.json",
          "xTag": [
             "Spatial",
             "-100.",
@@ -799,9 +799,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c04_v0.1.json",
+         "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
             "-2.",
@@ -827,9 +827,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c05_v0.1.json",
+         "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
             "-3.",
@@ -855,9 +855,9 @@
          "speed": "1.",
          "minSpeed": "1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c06_v0.1.json",
+         "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
             "-2.",
@@ -883,9 +883,9 @@
          "speed": "1.",
          "minSpeed": "1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c07_v0.1.json",
+         "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
             "-100.",
@@ -911,9 +911,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c08_v0.1.json",
+         "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
             "-100.",
@@ -939,21 +939,21 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c09_v0.1.json",
+         "engine": "s0_c09_v1.2.json",
          "xTag": [
-            "eMods",
+            "Spat Speed",
             "-100.",
-            "100."
+            "300."
          ],
          "yTag": [
-            "Octavver",
+            "Ring Oribitator",
             "-100.",
             "100."
          ],
          "zTag": [
-            "Spacy",
+            "Flang Vibes",
             "-100.",
             "100."
          ]
@@ -967,9 +967,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c10_v0.1.json",
+         "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -995,9 +995,9 @@
          "speed": "1.",
          "minSpeed": "-1.",
          "maxSpeed": "3.",
-         "col1": "#cc0000",
+         "col1": "rgb(204,0,0)",
          "col2": "333.",
-         "engine": "d00_c11_v0.1.json",
+         "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
             "-1.",
