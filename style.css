@@ -39,12 +39,12 @@ canvas {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 3.0rem;
-  height: 1.0rem;
+  width: 4.0rem;
+  height: 0.1rem;
   cursor: move;
-  border: 1px solid rgb(0, 0, 0, 0);
-  background: #33ffff;
-  border-radius: 11px; /* round corners */
+  border: 1.0rem transparent solid;
+  background: rgba(51, 255, 255, 0.3);
+  border-radius: 1px; /* round corners */
   transform: rotate(0deg);
 
 
@@ -52,12 +52,12 @@ canvas {
 
 /* for firefox */
 .slider::-moz-range-thumb {
-  width: 3.0rem;
-  height: 1.0rem;  
+  width: 4.0rem;
+  height: 0.1rem;
   cursor: move;
-  border: 1px solid rgb(0, 0, 0, 0);
-  background: #33ffff;
-  border-radius: 11px; /* round corners */
+  border: 1.0rem solid rgb(0, 0, 0, 0);
+  background: rgba(51, 255, 255, 0.8);
+  border-radius: 1px; /* round corners */
   position: relative;
 
 }
