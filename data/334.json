@@ -409,7 +409,7 @@
          "col2": "333.",
          "engine": "s0_c02_v1.2.json",
          "xTag": [
-            "Pitch Shift",
+            "Speed pShift",
             "-12.",
             "12."
          ],
@@ -747,7 +747,7 @@
          "col2": "333.",
          "engine": "s0_c02_v1.2.json",
          "xTag": [
-            "Pitch Shift",
+            "Speed pShift",
             "-12.",
             "12."
          ],
