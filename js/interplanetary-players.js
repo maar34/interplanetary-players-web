@@ -304,7 +304,7 @@ function createDom() {
 
   // create buttons and sliderss
   playButton = createButton('&#9655');
-  playButton.position(innerWidth * .45 , innerHeight * .86);
+  playButton.position(innerWidth * .45 , innerHeight * .88);
   playButton.style('width', btW + 'px');
   playButton.style('height', btH + 'px');
   playButton.style('background-color', domColor);
@@ -320,7 +320,7 @@ function createDom() {
   xButton = createButton('&#11042');
 
   xButton.style('width', btW + 'px');
-  xButton.style('height', btH*.5 + 'px');
+  xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
   xButton.style('color', domAlpha);
   xButton.style('font-size', '3rem');
