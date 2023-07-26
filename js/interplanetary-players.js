@@ -196,7 +196,7 @@ function draw() {
   vertex(sw - margin, sh * .14);
   vertex(sw - margin, sh - margin);
   vertex(sw * .14, sh - margin);
-  vertex(margin + 0, margin + sh * .86);
+  vertex(margin + 0,  sh - margin );
   vertex(margin + 0, margin + 0);
   endShape();
 
@@ -304,10 +304,12 @@ function createDom() {
 
   // create buttons and sliderss
   playButton = createButton('&#9655');
-  playButton.position(innerWidth * .45 , innerHeight * .88);
-  playButton.style('width', btW + 'px');
-  playButton.style('height', btH + 'px');
+  playButton.position( -11 , innerHeight * .88);
+
+  playButton.style('width',  btW+ 'px');
+  playButton.style('height',  btH + 'px' );
   playButton.style('background-color', domColor);
+
   playButton.style('color', domAlpha);
   playButton.style('font-size', '2rem');
   playButton.style('border', 'none');
@@ -315,10 +317,9 @@ function createDom() {
   playButton.mousePressed(playPause);
   playButton.mouseReleased(releaseDOM);
   playButton.touchEnded(releaseDOM);
-  //playButton.addClass("crosshair");
+
 
   xButton = createButton('&#11042');
-
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
@@ -428,21 +429,18 @@ function updateDom() {
 
   sliderW = sw * .6;
   sliderH = sliderW * .11;
-  
-  // move buttons
 
-  playButton.position(innerWidth * .45 , innerHeight * .86);
+  // move buttons
+  playButton.position( -11 , innerHeight * .88);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .34);
   zButton.position(innerWidth * .7, innerHeight * .34);
 
   // move sliders
-
-
-
   xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
   ySlider.position(0, innerHeight * .4);
   zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
+
 }
 
 function pressDOM() {
