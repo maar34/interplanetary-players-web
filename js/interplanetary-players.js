@@ -320,7 +320,7 @@ function createDom() {
   xButton = createButton('&#11042');
 
   xButton.style('width', btW + 'px');
-  xButton.style('height', btH + 'px');
+  xButton.style('height', btH*.5 + 'px');
   xButton.style('background-color', domColor);
   xButton.style('color', domAlpha);
   xButton.style('font-size', '3rem');
