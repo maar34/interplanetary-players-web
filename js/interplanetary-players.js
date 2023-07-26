@@ -304,7 +304,7 @@ function createDom() {
 
   // create buttons and sliderss
   playButton = createButton('&#9655');
-  playButton.position( -11 , innerHeight * .88);
+  playButton.position( -11 , innerHeight * .84);
 
   playButton.style('width',  btW+ 'px');
   playButton.style('height',  btH + 'px' );
@@ -431,7 +431,7 @@ function updateDom() {
   sliderH = sliderW * .11;
 
   // move buttons
-  playButton.position( -11 , innerHeight * .88);
+  playButton.position( -11 , innerHeight * .84);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .34);
   zButton.position(innerWidth * .7, innerHeight * .34);
