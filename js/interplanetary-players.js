@@ -300,11 +300,11 @@ function createDom() {
 
   let domColor = color (card.col1);
   let domAlpha = color (card.col1); 
-  domAlpha.setAlpha(127);
+  domAlpha.setAlpha(190);
 
   // create buttons and sliderss
   playButton = createButton('&#9655');
-  playButton.position(sw * .45, 34);
+  playButton.position(innerWidth * .45 , innerHeight * .86);
   playButton.style('width', btW + 'px');
   playButton.style('height', btH + 'px');
   playButton.style('background-color', domColor);
@@ -423,19 +423,26 @@ function createDom() {
 
 function updateDom() {
 
+  sw = window.innerWidth;
+  sh = window.innerHeight;
+
+  sliderW = sw * .6;
+  sliderH = sliderW * .11;
+  
   // move buttons
 
-  playButton.position(innerWidth * .5 - (btW), 34);
+  playButton.position(innerWidth * .45 , innerHeight * .86);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .34);
   zButton.position(innerWidth * .7, innerHeight * .34);
 
   // move sliders
 
+
+
   xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
   ySlider.position(0, innerHeight * .4);
   zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
-
 }
 
 function pressDOM() {
