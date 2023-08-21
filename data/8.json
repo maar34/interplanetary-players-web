@@ -122,7 +122,7 @@
          "speed": "1.",
          "minSpeed": ".1",
          "maxSpeed": "3.",
-         "col1": "(255,51,204)",
+         "col1": "rgb(255,51,204)",
          "col2": "333.",
          "engine": "s0_c02_v1.2.json",
          "xTag": [
