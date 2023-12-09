@@ -561,6 +561,35 @@
             "-100.",
             "100."
          ]
+      },
+      {
+         "id": "20",
+         "wavfile": "https://dl.dropboxusercontent.com/scl/fi/5unona2g6vnusrvclwxeu/Dadada-Loop.wav?rlkey=o90g3wap5htvrx9a2e0fzgn3d&raw=1",
+         "mp3file": "https://dl.dropboxusercontent.com/scl/fi/mc751qpijwn9a300o31gq/Dadada-Loop.mp3?rlkey=utwghb5mxy8wd06h6qz2ux51q&raw=1",
+         "initTime": "111.",
+         "endTime": "333.",
+         "speed": "1.",
+         "minSpeed": ".1",
+         "maxSpeed": "3.",
+         "col1": "rgb(255,51,204)",
+         "col2": "333.",
+         "engine": "s0_c07_v1.2.json",
+         "xTag": [
+            "Speed",
+            "-1.",
+            "3."
+         ],
+         "yTag": [
+            "Tremolo",
+            "-100.",
+            "100."
+         ],
+         "zTag": [
+            "Reverb",
+            "-100.",
+            "100."
+         ]
       }
    ]
 }
+
