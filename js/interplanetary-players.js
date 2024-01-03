@@ -230,8 +230,13 @@ function draw() {
 
 
     xSlider.value(speedAmount*255.);
+    xInput();
     ySlider.value(result.interpolatedB*255.);
+    yInput();
+
     zSlider.value(result.interpolatedDuration*255);
+    zInput();
+
   }
 
 
