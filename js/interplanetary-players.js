@@ -7,6 +7,7 @@ var btW, btH, sliderW, sliderH, initSpeed;
 let trackI, filterI; // track 1 -  
 let font1; // font variable
 let playStateI;
+var regenValue; 
 let params; // url parameters
 let levelI, worldI_dist, cardColor;
 let tempID, xDifference, yDifference;
@@ -17,7 +18,7 @@ let easyX, easyY;
 let bcol, col;
 let freq, back;
 let t1, t2, t3, t4, t5, t6, t7, t8, t11;
-var game, deck, suit, loadDeck;
+var game, deck, suit, loadDeck, exoData;
 let cam1;
 let portrait;
 let notDOM;
@@ -25,6 +26,7 @@ let device;
 let inputX, inputY, inputZ;
 let wMinD = 333;
 let wMaxD = 1544;
+let index, increasing; // Inicializar el índice
 
 
 let worldI_speed = 1.0;
@@ -69,6 +71,10 @@ function preload() {
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
+  exoData = loadJSON("data/exoplanetData.json");
+ 
+  regenValue = 0.0;
+
 }
 
 document.body.onclick = () => {
@@ -90,6 +96,8 @@ function setup() {
   xDataNorm = 1;
   yDataNorm = 0;
 
+  index = 0; 
+  increasing = true; 
 
   playStateI = 0;
   worldI_dist = 940;
@@ -142,23 +150,18 @@ function setup() {
 }
 
 function draw() {
+  
   if (playStateI == 1) background(0, 0, 0);
+
   noStroke();
   lights();
   const wsize = 1.2
-
-
   if (loadP) loadGUI();
-
-
 
   //Planet and Background color (back from Sliders)
   push();
   // translate (0., 0., -666.);
-
   normalMaterial();
-
-  
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
 
@@ -203,6 +206,72 @@ function draw() {
 
   easycam.endHUD();
 
+  // REGENERATIVE UPDATES 
+
+  if ( regenValue > 0 ){
+
+    let speedAmount = regenValue / 8; // choose a normalized speed inside 8 regenButton variations 
+
+
+    if (increasing) {
+      index += speedAmount * 0.01; // Aumentar el índice
+      if (index >= 1) {
+          index = 1;
+          increasing = false; // Cambiar la dirección
+      }
+  } else {
+      index -= speedAmount * 0.01; // Disminuir el índice
+      if (index <= 0) {
+          index = 0;
+          increasing = true; // Cambiar la dirección
+      }
+  }
+    let result = normalizeAndInterpolate(exoData, index); 
+
+
+    xSlider.value(speedAmount*255.);
+    ySlider.value(result.interpolatedB*255.);
+    zSlider.value(result.interpolatedDuration*255);
+  }
+
+
+
+
+
+}
+
+function regenLogic() {
+
+  regenValue = (regenValue + 1) % 8; // This will cycle regenValue from 0 to 7
+ // result = normalizeAndInterpolate(exoData, (regenValue/10)); // 
+ // console.log(result);
+
+  switch (regenValue) {
+      case 0:
+          regenButton.html('&#9842;');
+          break;
+      case 1:
+          regenButton.html('&#9843;');
+          break;
+      case 2:
+          regenButton.html('&#9844;');
+          break;
+      case 3:
+          regenButton.html('&#9845;');
+          break;
+      case 4:
+          regenButton.html('&#9846;');
+          break;
+      case 5:
+          regenButton.html('&#9847;');
+          break;
+      case 6:
+          regenButton.html('&#9848;');
+          break;
+      case 7:
+          regenButton.html('&#9849;');
+          break;
+  }
 }
 
 
@@ -269,6 +338,7 @@ function loaded() {
   ySlider.show();
   zSlider.show();
   playButton.show();
+  regenButton.show();
   xButton.show();
   yButton.show();
   zButton.show();
@@ -318,6 +388,21 @@ function createDom() {
   playButton.mouseReleased(releaseDOM);
   playButton.touchEnded(releaseDOM);
 
+  // create buttons and sliderss
+  regenButton = createButton('&#9842');
+  regenButton.position( btW*.75 , innerHeight * .84);
+
+  regenButton.style('width',  btW+ 'px');
+  regenButton.style('height',  btH + 'px' );
+  regenButton.style('background-color', domColor);
+
+  regenButton.style('color', domAlpha);
+  regenButton.style('font-size', '2rem');
+  regenButton.style('border', 'none');
+  regenButton.style('background', 'none');
+  regenButton.mousePressed(regenLogic);
+  regenButton.mouseReleased(releaseDOM);
+  regenButton.touchEnded(releaseDOM);
 
   xButton = createButton('&#11042');
   xButton.style('width', btW + 'px');
@@ -412,6 +497,8 @@ function createDom() {
   ySlider.hide();
   zSlider.hide();
   playButton.hide();
+  regenButton.hide();
+
   xButton.hide();
   yButton.hide();
   zButton.hide();
@@ -432,6 +519,7 @@ function updateDom() {
 
   // move buttons
   playButton.position( -11 , innerHeight * .84);
+  regenButton.position( btW , innerHeight * .84);
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .34);
   zButton.position(innerWidth * .7, innerHeight * .34);
@@ -722,6 +810,58 @@ async function createRNBO() {
   }
 
 }
+
+
+function normalizeAndInterpolate(data, index) {
+  const transits = data["Kepler-47"]["Maar_World"]["transits"];
+
+  // Find minimum and maximum BJD values
+  let minBJD = Number.MAX_VALUE;
+  let maxBJD = -Number.MAX_VALUE;
+  let minDuration = Number.MAX_VALUE;
+  let maxDuration = -Number.MAX_VALUE;
+
+  transits.forEach(transit => {
+      if (transit.BJD < minBJD) minBJD = transit.BJD;
+      if (transit.BJD > maxBJD) maxBJD = transit.BJD;
+      if (transit.Duration_hrs < minDuration) minDuration = transit.Duration_hrs;
+      if (transit.Duration_hrs > maxDuration) maxDuration = transit.Duration_hrs;
+  });
+
+  // Normalize BJD
+  const normalizedBJDs = transits.map(transit => (transit.BJD - minBJD) / (maxBJD - minBJD));
+
+  // Find the two transits closest to the given index
+  let lowerTransit = null;
+  let upperTransit = null;
+  for (let i = 0; i < normalizedBJDs.length - 1; i++) {
+      if (index >= normalizedBJDs[i] && index <= normalizedBJDs[i + 1]) {
+          lowerTransit = transits[i];
+          upperTransit = transits[i + 1];
+          break;
+      }
+  }
+
+  if (!lowerTransit || !upperTransit) {
+      return null; // Index out of range
+  }
+
+  // Linearly interpolate 'b' and 'Duration_hrs' values
+  const range = upperTransit.BJD - lowerTransit.BJD;
+  const normalizedIndex = (index * (maxBJD - minBJD) + minBJD - lowerTransit.BJD) / range;
+
+  const interpolatedB = lowerTransit.b + normalizedIndex * (upperTransit.b - lowerTransit.b);
+  let interpolatedDuration = lowerTransit.Duration_hrs + normalizedIndex * (upperTransit.Duration_hrs - lowerTransit.Duration_hrs);
+
+  // Normalize interpolatedDuration
+  interpolatedDuration = (interpolatedDuration - minDuration) / (maxDuration - minDuration);
+
+  return {
+      interpolatedB: interpolatedB,
+      interpolatedDuration: interpolatedDuration
+  };
+}
+
 
 
 async function loadAudioBuffer(_context) {

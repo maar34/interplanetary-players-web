@@ -1,0 +1,58 @@
+{
+  "Kepler-47": {
+    "Maar_World": {
+      "parameters": [
+        {
+          "parameter_name": "Mass (M_sun)",
+          "value": "5.71E+10",
+          "short_parameter_name": "MASS",
+          "ID": 1,
+          "description": "Mass of the planet in solar masses."
+        },
+        {
+          "parameter_name": "x (au)",
+          "value": "2.40E+14",
+          "short_parameter_name": "X",
+          "ID": 2,
+          "description": "Position of the planet along the x-axis in astronomical units."
+        },
+        {
+          "parameter_name": "y (au)",
+          "value": "8.39E+11",
+          "short_parameter_name": "Y",
+          "ID": 3,
+          "description": "Position of the planet along the y-axis in astronomical units."
+        },
+        {
+          "parameter_name": "z (au)",
+          "value": "-6.48E+14",
+          "short_parameter_name": "Z",
+          "ID": 4,
+          "description": "Position of the planet along the z-axis in astronomical units."
+        },
+        {
+          "parameter_name": "v_x (au)",
+          "value": "2.21E+13",
+          "short_parameter_name": "VX",
+          "ID": 5,
+          "description": "Velocity of the planet along the x-axis in astronomical units."
+        },
+        {
+          "parameter_name": "v_y (au)",
+          "value": "-3.94E+11",
+          "short_parameter_name": "VY",
+          "ID": 6,
+          "description": "Velocity of the planet along the y-axis in astronomical units."
+        },
+        {
+          "parameter_name": "v_z (au)",
+          "value": "8.70E+12",
+          "short_parameter_name": "VZ",
+          "ID": 7,
+          "description": "Velocity of the planet along the z-axis in astronomical units."
+        }
+      ],
+      "reference": "Table 7 - Initial Cartesian Barycentric Conditions - Jerome A. Orosz et al 2019 AJ 157 174"
+    }
+  }
+}
