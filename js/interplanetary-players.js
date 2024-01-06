@@ -17,7 +17,8 @@ let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm;
 let easyX, easyY;
 let bcol, col;
 let freq, back;
-let t1, t2, t3, t4, t5, t6, t7, t8, t11;
+let t1, t2, t3, t4, t5, t6, t7, t8;
+let t11, t12, t13, t14, t15, t16, t17, t18;
 var game, deck, suit, loadDeck, exoData;
 let cam1;
 let portrait;
@@ -208,42 +209,84 @@ function draw() {
 
   // REGENERATIVE UPDATES 
 
-  if ( regenValue > 0 ){
-
-    let speedAmount = regenValue / 8; // choose a normalized speed inside 8 regenButton variations 
-
-
-    if (increasing) {
-      index += speedAmount * 0.01; // Aumentar el índice
-      if (index >= 1) {
-          index = 1;
-          increasing = false; // Cambiar la dirección
-      }
-  } else {
-      index -= speedAmount * 0.01; // Disminuir el índice
-      if (index <= 0) {
-          index = 0;
-          increasing = true; // Cambiar la dirección
-      }
-  }
-    let result = normalizeAndInterpolate(exoData, index); 
-
-
-    xSlider.value(speedAmount*255.);
-    xInput();
-    ySlider.value(result.interpolatedB*255.);
-    yInput();
-
-    zSlider.value(result.interpolatedDuration*255);
-    zInput();
-
-  }
-
+  regenUpdates();
 
 
 
 
 }
+
+
+
+
+
+function regenUpdates(){
+
+
+  if ( regenValue > 0 ){
+
+    let speedAmount = 1; // choose a normalized speed inside 8 regenButton variations 
+  
+  
+    if (increasing) {
+      index += speedAmount * 0.0001; // Aumentar el índice
+      if (index >= 0.99) {
+          index = 0.99;
+          increasing = false; // Cambiar la dirección
+      }
+  } else {
+      index -= speedAmount * 0.0001; // Disminuir el índice
+      if (index <= 0.00999) {
+          index = 0.00999;
+          increasing = true; // Cambiar la dirección
+      }
+  }
+  
+  }
+  
+
+  switch (regenValue) {
+    case 0:
+        break;
+    case 1:
+      
+    let result = interpolateTransitData(exoData, index); 
+
+      speedAmount = result.normalizedBJD;
+ 
+
+      xSlider.value(speedAmount*255.);
+      xInput();
+      ySlider.value(result.normalizedB*255.);
+      yInput();
+      zSlider.value(result.normalizedDuration*255);
+      zInput();
+
+      t15.html(result.transitDate);
+      t16.html(nfs(result.b, 1, 2));
+      t17.html(nfs(result.duration, 1, 2));
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+}
+
+
+}
+
+
+
+
+
 
 function regenLogic() {
 
@@ -257,6 +300,7 @@ function regenLogic() {
           break;
       case 1:
           regenButton.html('&#9843;');
+
           break;
       case 2:
           regenButton.html('&#9844;');
@@ -706,6 +750,34 @@ function guiData() {
   t8.position(padX * offset + 130, padY * offset + 60);
   t8.style('color', textColor);
 
+  t11 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+  t11.position(padX * offset, padY * offset+80);
+  t11.style('color', textColor);
+
+  t12 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1'] + ":");
+  t12.position(padX * offset, padY * offset + 100);
+  t12.style('color', textColor);
+
+  t13 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1'] + ":");
+  t13.position(padX * offset, padY * offset + 120);
+  t13.style('color', textColor);
+
+  
+  t15 = createP();
+  t15.html(worldI_dist);
+  t15.position(padX * offset + 90, padY * offset+80);
+  t15.style('color', textColor);
+
+  t16 = createP();
+  t16.html(nfs("0", 1, 2));
+  t16.position(padX * offset + 130, padY * offset + 100);
+  t16.style('color', textColor);
+
+  t17 = createP("0");
+  t17.position(padX * offset + 130, padY * offset + 120);
+  t17.style('color', textColor);
+
+
 }
 
 function loadGUI() {
@@ -816,57 +888,69 @@ async function createRNBO() {
 
 }
 
+function interpolateTransitData(transitData, index) {
+  const transits = transitData['Kepler-47']['Maar_World']['transits'];
+  const numTransits = transits.length;
 
-function normalizeAndInterpolate(data, index) {
-  const transits = data["Kepler-47"]["Maar_World"]["transits"];
+  // Calculate the positions in the array based on the index
+  const pos = index * (numTransits - 1);
+  const lowerIndex = Math.floor(pos);
+  const upperIndex = Math.ceil(pos);
+  const t = pos - lowerIndex; // Fractional part for interpolation
 
-  // Find minimum and maximum BJD values
-  let minBJD = Number.MAX_VALUE;
-  let maxBJD = -Number.MAX_VALUE;
-  let minDuration = Number.MAX_VALUE;
-  let maxDuration = -Number.MAX_VALUE;
-
-  transits.forEach(transit => {
-      if (transit.BJD < minBJD) minBJD = transit.BJD;
-      if (transit.BJD > maxBJD) maxBJD = transit.BJD;
-      if (transit.Duration_hrs < minDuration) minDuration = transit.Duration_hrs;
-      if (transit.Duration_hrs > maxDuration) maxDuration = transit.Duration_hrs;
-  });
-
-  // Normalize BJD
-  const normalizedBJDs = transits.map(transit => (transit.BJD - minBJD) / (maxBJD - minBJD));
-
-  // Find the two transits closest to the given index
-  let lowerTransit = null;
-  let upperTransit = null;
-  for (let i = 0; i < normalizedBJDs.length - 1; i++) {
-      if (index >= normalizedBJDs[i] && index <= normalizedBJDs[i + 1]) {
-          lowerTransit = transits[i];
-          upperTransit = transits[i + 1];
-          break;
-      }
+  // Handling edge cases
+  if (lowerIndex === upperIndex || upperIndex >= numTransits) {
+      return {
+          ...transits[lowerIndex],
+          exactTransitDate: julianToDate(transits[lowerIndex].BJD)
+      };
   }
 
-  if (!lowerTransit || !upperTransit) {
-      return null; // Index out of range
-  }
+  const lowerTransit = transits[lowerIndex];
+  const upperTransit = transits[upperIndex];
 
-  // Linearly interpolate 'b' and 'Duration_hrs' values
-  const range = upperTransit.BJD - lowerTransit.BJD;
-  const normalizedIndex = (index * (maxBJD - minBJD) + minBJD - lowerTransit.BJD) / range;
+  // Linear interpolation function
+  const interpolate = (start, end, t) => (1 - t) * start + t * end;
 
-  const interpolatedB = lowerTransit.b + normalizedIndex * (upperTransit.b - lowerTransit.b);
-  let interpolatedDuration = lowerTransit.Duration_hrs + normalizedIndex * (upperTransit.Duration_hrs - lowerTransit.Duration_hrs);
+  // Interpolating BJD and converting to exact date
+  const interpolatedBJD = interpolate(lowerTransit.BJD, upperTransit.BJD, t) + 2455000;
+  const exactTransitDate = julianToDate(interpolatedBJD);
 
-  // Normalize interpolatedDuration
-  interpolatedDuration = (interpolatedDuration - minDuration) / (maxDuration - minDuration);
-
+  // Interpolated values
   return {
-      interpolatedB: interpolatedB,
-      interpolatedDuration: interpolatedDuration
+      normalizedB: interpolate(lowerTransit.Normalized_b, upperTransit.Normalized_b, t),
+      normalizedDuration: interpolate(lowerTransit.Normalized_Duration_hrs, upperTransit.Normalized_Duration_hrs, t),
+      b: interpolate(lowerTransit.b, upperTransit.b, t),
+      duration: interpolate(lowerTransit.Duration_hrs, upperTransit.Duration_hrs, t),
+      transitDate: exactTransitDate,
+      normalizedBJD: interpolate(lowerTransit.Normalized_BJD, upperTransit.Normalized_BJD, t)
   };
 }
 
+
+function julianToDate(julian) {
+  // Adding 2,455,000 back to the provided BJD
+  const jd = julian + 0.5;
+
+  const Z = Math.floor(jd);
+  const F = jd - Z;
+  let A = Z;
+  if (Z >= 2299161) {
+      const alpha = Math.floor((Z - 1867216.25) / 36524.25);
+      A += 1 + alpha - Math.floor(alpha / 4);
+  }
+  const B = A + 1524;
+  const C = Math.floor((B - 122.1) / 365.25);
+  const D = Math.floor(365.25 * C);
+  const E = Math.floor((B - D) / 30.6001);
+
+  const day = B - D - Math.floor(30.6001 * E) + F;
+  const month = (E < 14) ? E - 1 : E - 13;
+  const year = (month > 2) ? C - 4716 : C - 4715;
+
+  return `${Math.floor(day)}-${month}-${year}`;
+  
+}
 
 
 async function loadAudioBuffer(_context) {

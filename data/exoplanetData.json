@@ -254,6 +254,12 @@
         "Duration_hrs": { "min": 5.02, "max": 34.28 }
       },
       "parameter_descriptions": {
+        "pX1": "Date",
+        "pY1": "Impact",
+        "pZ1": "Duration",
+        "handleX1": "e_BJD",
+        "handleY1": "e_b",
+        "handleZ1": "e_Duration_hrs",
         "General": "The sonification focuses on the prediction of future transit events, which are crucial for the study of these planets and their characteristics, based on calculations of transit times, durations, and impact parameters for Maar World (kepler47-d).",
         "BJD": "Barycentric Julian Date of the transit, minus 2,455,000.",
         "e_BJD": "Uncertainty in the Barycentric Julian Date.",
