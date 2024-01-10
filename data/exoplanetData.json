@@ -1,5 +1,26 @@
 {
   "Kepler-47": {
+      "Stars": {
+        "Binary_Orbital_Period_days": 7.5,
+        "parameter_descriptions": {
+          "Binary_Orbital_Period_days": "The orbital period of the binary star system around their common center of mass."
+        }
+      },
+      "Planets": {
+        "Kepler-47 b": {
+          "orbital_period_days": 49.5,
+          "radius_R⊕": 3
+        },
+        "Kepler-47 c": {
+          "orbital_period_days": 303.2,
+          "radius_R⊕": 4.7
+        },
+        "Kepler-47 d": {
+          "orbital_period_days": 187.4,
+          "radius_R⊕": 7
+        }
+      },
+  
     "Maar_World": {
       "transits": [
         {
@@ -257,9 +278,9 @@
         "pX1": "Date",
         "pY1": "Impact",
         "pZ1": "Duration",
-        "handleX1": "e_BJD",
-        "handleY1": "e_b",
-        "handleZ1": "e_Duration_hrs",
+        "pX2": "kepler47-d",
+        "pY2": "kepler47-b",
+        "pZ2": "kepler47-c",
         "General": "The sonification focuses on the prediction of future transit events, which are crucial for the study of these planets and their characteristics, based on calculations of transit times, durations, and impact parameters for Maar World (kepler47-d).",
         "BJD": "Barycentric Julian Date of the transit, minus 2,455,000.",
         "e_BJD": "Uncertainty in the Barycentric Julian Date.",
@@ -268,7 +289,12 @@
         "b": "Impact parameter, representing the distance of the planet's path from the star's center during transit.",
         "e_b": "Uncertainty in the impact parameter.",
         "Duration_hrs": "Duration of the transit in hours.",
-        "e_Duration_hrs": "Uncertainty in the duration of the transit."
+        "e_Duration_hrs": "Uncertainty in the duration of the transit.",
+        "orbital_period_days": "The time taken for the planet to complete one full orbit around the binary stars.",
+        "radius_R⊕": "The radius of the planet in terms of Earth radii (R⊕).",
+        "Binary_Orbital_Period_days": "The orbital period of the binary star system around their common center of mass."
+
+  
       },
       "Reference": "Table 10 - Times, durations, and impact parameters of future planet transits - Discovery of a Third Transiting Planet in the Kepler-47 Circumbinary System - BJD ~ BJD–2,455,000"
     }

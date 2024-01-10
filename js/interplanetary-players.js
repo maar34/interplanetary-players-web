@@ -225,7 +225,7 @@ function regenUpdates(){
 
   if ( regenValue > 0 ){
 
-    let speedAmount = 1; // choose a normalized speed inside 8 regenButton variations 
+    let speedAmount = 1+regenValue*.5; // choose a normalized speed inside 8 regenButton variations 
   
   
     if (increasing) {
@@ -249,7 +249,9 @@ function regenUpdates(){
     case 0:
         break;
     case 1:
-      
+    case 2:
+    case 3:
+
     let result = interpolateTransitData(exoData, index); 
 
       speedAmount = result.normalizedBJD;
@@ -266,18 +268,27 @@ function regenUpdates(){
       t16.html(nfs(result.b, 1, 2));
       t17.html(nfs(result.duration, 1, 2));
         break;
-    case 2:
-        break;
-    case 3:
-        break;
+
     case 4:
-        break;
     case 5:
-        break;
     case 6:
-        break;
     case 7:
+
+      const orbitData = generateOrbitData(exoData, index);
+
+      xSlider.value(orbitData.d.orbitPosition*255.);
+      xInput();
+      ySlider.value(orbitData.c.orbitPosition*255.);
+      yInput();
+      zSlider.value(orbitData.b.orbitPosition*255);
+      zInput();
+
+      t15.html(nfs(orbitData.d.dayInOrbit, 1, 2));
+      t16.html(nfs(orbitData.b.dayInOrbit, 1, 2));
+      t17.html(nfs(orbitData.c.dayInOrbit, 1, 2));
+
         break;
+
 }
 
 
@@ -297,28 +308,57 @@ function regenLogic() {
   switch (regenValue) {
       case 0:
           regenButton.html('&#9842;');
+          t11.html();
+          t12.html();
+          t13.html();
           break;
       case 1:
+
           regenButton.html('&#9843;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
 
           break;
       case 2:
           regenButton.html('&#9844;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           break;
       case 3:
           regenButton.html('&#9845;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           break;
       case 4:
+
           regenButton.html('&#9846;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+
           break;
       case 5:
           regenButton.html('&#9847;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           break;
       case 6:
           regenButton.html('&#9848;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+
           break;
       case 7:
           regenButton.html('&#9849;');
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+
           break;
   }
 }
@@ -734,7 +774,7 @@ function guiData() {
 
   t5 = createP();
   t5.html(worldI_dist);
-  t5.position(padX * offset + 90, padY * offset);
+  t5.position(padX * offset + 130, padY * offset);
   t5.style('color', textColor);
 
   t6 = createP();
@@ -765,7 +805,7 @@ function guiData() {
   
   t15 = createP();
   t15.html(worldI_dist);
-  t15.position(padX * offset + 90, padY * offset+80);
+  t15.position(padX * offset + 130, padY * offset+80);
   t15.style('color', textColor);
 
   t16 = createP();
@@ -952,6 +992,28 @@ function julianToDate(julian) {
   
 }
 
+function generateOrbitData(json, index) {
+  // Calculate the sine wave position and day in orbit for a planet
+  function getOrbitData(orbitalPeriod, index) {
+    // Normalize the index by the orbital period
+    const normalizedIndex = index * orbitalPeriod;
+    const phase = (normalizedIndex % orbitalPeriod) / orbitalPeriod * 2 * Math.PI;
+    const orbitPosition = (Math.sin(phase) + 1) / 2;
+    const dayInOrbit = normalizedIndex % orbitalPeriod;
+    return { dayInOrbit, orbitPosition };
+  }
+
+  // Get the orbital periods
+  const periodB = json["Kepler-47"]["Planets"]["Kepler-47 b"]["orbital_period_days"];
+  const periodC = json["Kepler-47"]["Planets"]["Kepler-47 c"]["orbital_period_days"];
+  const periodD = json["Kepler-47"]["Planets"]["Kepler-47 d"]["orbital_period_days"];
+
+  return {
+    "b": getOrbitData(periodB, index),
+    "c": getOrbitData(periodC, index * periodC / periodB), // scale index for planet C
+    "d": getOrbitData(periodD, index * periodD / periodB)  // scale index for planet D
+  };
+}
 
 async function loadAudioBuffer(_context) {
 
