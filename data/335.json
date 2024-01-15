@@ -12,6 +12,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -40,6 +41,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -68,6 +70,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c02_v1.2.json",
          "xTag": [
             "Speed pShift",
@@ -96,6 +99,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c03_v1.2.json",
          "xTag": [
             "Spatial",
@@ -124,6 +128,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
@@ -152,6 +157,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
@@ -180,6 +186,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
@@ -208,6 +215,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
@@ -236,6 +244,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
@@ -264,6 +273,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c09_v1.2.json",
          "xTag": [
             "Spat Speed",
@@ -292,6 +302,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
@@ -320,6 +331,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
+         "icon_set":"01",         
          "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
@@ -351,6 +363,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -379,6 +392,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -407,6 +421,7 @@
          "maxSpeed": "4.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c02_v1.2.json",
          "xTag": [
             "Speed pShift",
@@ -435,6 +450,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c03_v1.2.json",
          "xTag": [
             "Spatial",
@@ -463,6 +479,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
@@ -491,6 +508,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
@@ -519,6 +537,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
@@ -547,6 +566,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
@@ -575,6 +595,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
@@ -603,6 +624,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c09_v1.2.json",
          "xTag": [
             "Spat Speed",
@@ -631,6 +653,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
@@ -659,6 +682,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(0,153,204)",
          "col2": "333.",
+         "icon_set":"02",         
          "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
@@ -689,6 +713,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -717,6 +742,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c01_v1.2.json",
          "xTag": [
             "Speed",
@@ -745,6 +771,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c02_v1.2.json",
          "xTag": [
             "Speed pShift",
@@ -773,6 +800,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c03_v1.2.json",
          "xTag": [
             "Spatial",
@@ -801,6 +829,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c04_v1.2.json",
          "xTag": [
             "Speed",
@@ -829,6 +858,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c05_v1.2.json",
          "xTag": [
             "Speed",
@@ -857,6 +887,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c06_v1.2.json",
          "xTag": [
             "ULFO",
@@ -885,6 +916,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c07_v1.2.json",
          "xTag": [
             "eMods",
@@ -913,6 +945,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c08_v1.2.json",
          "xTag": [
             "Pitch S",
@@ -941,6 +974,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c09_v1.2.json",
          "xTag": [
             "Spat Speed",
@@ -969,6 +1003,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c10_v1.2.json",
          "xTag": [
             "Speed",
@@ -997,6 +1032,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(204,0,0)",
          "col2": "333.",
+         "icon_set":"03",         
          "engine": "s0_c11_v1.2.json",
          "xTag": [
             "Speed Pan",
