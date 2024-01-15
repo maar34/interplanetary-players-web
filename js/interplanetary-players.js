@@ -28,7 +28,7 @@ let inputX, inputY, inputZ;
 let wMinD = 333;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
-
+let regenIcon, playIcon, pauseIcon, centerIcon; 
 
 let worldI_speed = 1.0;
 
@@ -47,6 +47,7 @@ var card = {
   maxSpeed: "",
   col1: "",
   col2: "",
+  icon_set:"", 
   engine: "",
   xTag: "",
   yTag: "",
@@ -221,81 +222,97 @@ function draw() {
 
 
 function regenUpdates(){
-
-
-  if ( regenValue > 0 ){
-
-    let speedAmount = 1+regenValue*.5; // choose a normalized speed inside 8 regenButton variations 
-  
-  
-    if (increasing) {
-      index += speedAmount * 0.0001; // Aumentar el índice
-      if (index >= 0.99) {
-          index = 0.99;
-          increasing = false; // Cambiar la dirección
-      }
-  } else {
-      index -= speedAmount * 0.0001; // Disminuir el índice
-      if (index <= 0.00999) {
-          index = 0.00999;
-          increasing = true; // Cambiar la dirección
-      }
-  }
-  
-  }
   
 
   switch (regenValue) {
     case 0:
-        break;
+    break;
     case 1:
+      trans(2);
+    break;
     case 2:
+      trans(4);
+    break;
     case 3:
-
-    let result = interpolateTransitData(exoData, index); 
-
-      speedAmount = result.normalizedBJD;
- 
-
-      xSlider.value(speedAmount*255.);
-      xInput();
-      ySlider.value(result.normalizedB*255.);
-      yInput();
-      zSlider.value(result.normalizedDuration*255);
-      zInput();
-
-      t15.html(result.transitDate);
-      t16.html(nfs(result.b, 1, 2));
-      t17.html(nfs(result.duration, 1, 2));
-        break;
-
+      trans(8);
+    break;
     case 4:
+      trans(16);
+    break;
     case 5:
+    orb(3)
+    break;
     case 6:
+      orb(9)
+    break;
     case 7:
-
-      const orbitData = generateOrbitData(exoData, index);
-
-      xSlider.value(orbitData.d.orbitPosition*255.);
-      xInput();
-      ySlider.value(orbitData.c.orbitPosition*255.);
-      yInput();
-      zSlider.value(orbitData.b.orbitPosition*255);
-      zInput();
-
-      t15.html(nfs(orbitData.d.dayInOrbit, 1, 2));
-      t16.html(nfs(orbitData.b.dayInOrbit, 1, 2));
-      t17.html(nfs(orbitData.c.dayInOrbit, 1, 2));
-
-        break;
+      orb(27)
+    break;
 
 }
 
 
 }
 
+function trans(amp){
 
 
+//  let amp = 1+regenValue*.5; // choose a normalized amp inside 8 regenButton variations 
+  
+  
+  if (increasing) {
+    index += amp * 0.0001; // Aumentar el índice
+    if (index >= 0.99) {
+        index = 0.99;
+        increasing = false; // Cambiar la dirección
+    }
+} else {
+    index -= amp * 0.0001; // Disminuir el índice
+    if (index <= 0.00999) {
+        index = 0.00999;
+        increasing = true; // Cambiar la dirección
+    }
+}
+
+  let result = interpolateTransitData(exoData, index); 
+
+ // speedAmount = result.normalizedBJD;
+
+
+  xSlider.value(index*255.);
+  xInput();
+  ySlider.value(result.normalizedB*255.);
+  yInput();
+  zSlider.value(result.normalizedDuration*255);
+  zInput();
+
+  t15.html(result.transitDate);
+  t16.html(nfs(result.b, 1, 2));
+  t17.html(nfs(result.duration, 1, 2));
+
+}
+
+function orb(amp){
+
+
+    index += amp * 0.0001; // Aumentar el índice
+    
+    index = index%1;  
+
+    const orbitData = generateOrbitData(exoData, index);
+
+  xSlider.value(orbitData.d.orbitPosition*255.);
+  xInput();
+  ySlider.value(orbitData.c.orbitPosition*255.);
+  yInput();
+  zSlider.value(orbitData.b.orbitPosition*255);
+  zInput();
+
+  t15.html(nfs(orbitData.d.dayInOrbit, 1, 2));
+  t16.html(nfs(orbitData.b.dayInOrbit, 1, 2));
+  t17.html(nfs(orbitData.c.dayInOrbit, 1, 2));
+
+}
 
 
 
@@ -308,9 +325,12 @@ function regenLogic() {
   switch (regenValue) {
       case 0:
           regenButton.html('&#9842;');
-          t11.html();
-          t12.html();
-          t13.html();
+          t11.html("");
+          t12.html("");
+          t13.html("");
+          t15.html("");
+          t16.html("");
+          t17.html("");
           break;
       case 1:
 
@@ -318,6 +338,7 @@ function regenLogic() {
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
 
           break;
       case 2:
@@ -325,19 +346,25 @@ function regenLogic() {
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
+
           break;
       case 3:
           regenButton.html('&#9845;');
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
+
           break;
       case 4:
 
           regenButton.html('&#9846;');
-          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
-          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
-          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+          t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+          t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1']+ ":");
+          t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
+
 
           break;
       case 5:
@@ -345,12 +372,14 @@ function regenLogic() {
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           break;
       case 6:
           regenButton.html('&#9848;');
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
 
           break;
       case 7:
@@ -358,6 +387,7 @@ function regenLogic() {
           t11.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX2']+ ":");
           t12.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY2']+ ":");
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
+          t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
 
           break;
   }
@@ -373,7 +403,9 @@ function playPause() {
 
   if (playStateI == 0) {
 
-    playButton.html('II');
+   // playButton.html('II');
+    playButton.attribute('src',  pauseIcon);
+
     context.resume();
     messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     messageEvent2 = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
@@ -386,8 +418,10 @@ function playPause() {
 
     messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
 
-    playButton.style('transform', 'rotate(0deg)');
-    playButton.html('&#9655');
+    playButton.attribute('src', playIcon);
+
+    //playButton.style('transform', 'rotate(0deg)');
+    //playButton.html('&#9655');
     playStateI = 0;
 
   }
@@ -400,22 +434,105 @@ function playPause() {
 }
 
 function xB() {
-  notDOM = false;
-  xSlider.value(128.);
-  xInput();
+
+
+  switch (regenValue) {
+    case 0:
+      notDOM = false;
+      xSlider.value(128.);
+      xInput();
+      break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+
+      break;
+    case 2:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+
+      break;
+    case 3:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+
+      break;
+    case 4:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+
+      break;
+    case 5:
+    case 6:
+    case 7: 
+    
+    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
+
+      break;
+
+
+  }
+
+
 
 }
 
 function yB() {
-  notDOM = false;
-  ySlider.value(128.);  
-  yInput();
+
+
+  switch (regenValue) {
+    case 0:
+      notDOM = false;
+      ySlider.value(128.);
+      yInput();
+      break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['b']);
+
+      break;
+
+    case 5:
+    case 6:
+    case 7: 
+    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
+
+      break;
+
+  }
+
 }
 
 function zB() {
-  notDOM = false;
-  zSlider.value(128.);
-  zInput();
+
+
+  switch (regenValue) {
+    case 0:
+      notDOM = false;
+      zSlider.value(128.);
+      zInput();
+      break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_hrs']);
+
+      break;
+    case 5:
+    case 6:
+    case 7:
+
+
+    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
+
+      break;
+  }
+
+
 }
 
 function loaded() {
@@ -455,45 +572,54 @@ function loadingAudio(_loadingN) {
 }
 
 
+
 function createDom() {
 
   let domColor = color (card.col1);
   let domAlpha = color (card.col1); 
   domAlpha.setAlpha(190);
 
-  // create buttons and sliderss
-  playButton = createButton('&#9655');
-  playButton.position( -11 , innerHeight * .84);
+  playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
 
+  // create buttons and sliderss
+  playButton = createImg(playIcon, 'Play Button', '&#9655');
+  pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
+
+ // playButton = createButton('&#9655');
+  playButton.position( 0 , innerHeight * .84);
   playButton.style('width',  btW+ 'px');
   playButton.style('height',  btH + 'px' );
   playButton.style('background-color', domColor);
-
   playButton.style('color', domAlpha);
   playButton.style('font-size', '2rem');
   playButton.style('border', 'none');
   playButton.style('background', 'none');
+  playButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
   playButton.mousePressed(playPause);
   playButton.mouseReleased(releaseDOM);
   playButton.touchEnded(releaseDOM);
 
   // create buttons and sliderss
-  regenButton = createButton('&#9842');
-  regenButton.position( btW*.75 , innerHeight * .84);
 
+  regenIcon = 'icons/' + nf(card.icon_set, 2) + '_regen.svg';
+
+  regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
+  regenButton.position( btW*.75 , innerHeight * .84);
   regenButton.style('width',  btW+ 'px');
   regenButton.style('height',  btH + 'px' );
-  regenButton.style('background-color', domColor);
-
-  regenButton.style('color', domAlpha);
   regenButton.style('font-size', '2rem');
   regenButton.style('border', 'none');
   regenButton.style('background', 'none');
+  regenButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
   regenButton.mousePressed(regenLogic);
+  regenButton.touchStarted(regenLogic);
   regenButton.mouseReleased(releaseDOM);
   regenButton.touchEnded(releaseDOM);
 
-  xButton = createButton('&#11042');
+
+  centerIcon = 'icons/' + nf(card.icon_set, 2) + '_center.svg';
+
+  xButton = createImg(centerIcon, 'Play Button', '&#11042');
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
@@ -501,13 +627,14 @@ function createDom() {
   xButton.style('font-size', '3rem');
   xButton.style('border', 'none');
   xButton.style('background', 'none');
+  xButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
   xButton.mousePressed(xB);
   xButton.touchStarted(xB);
   xButton.mouseReleased(releaseDOM);
   xButton.touchEnded(releaseDOM);
   //xButton.addClass("crosshair");
 
-  yButton = createButton('&#11042');
+  yButton = createImg(centerIcon, 'Play Button', '&#11042');
   yButton.style('width', btW + 'px');
   yButton.style('height', btH + 'px');
   yButton.style('background-color', domColor);
@@ -515,13 +642,14 @@ function createDom() {
   yButton.style('font-size', '3rem');
   yButton.style('border', 'none');
   yButton.style('background', 'none');
+  yButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
   yButton.mousePressed(yB);
   yButton.touchStarted(yB);
   yButton.mouseReleased(releaseDOM);
   yButton.touchEnded(releaseDOM);
   //yButton.addClass("crosshair");
 
-  zButton = createButton('&#11042');
+  zButton = createImg(centerIcon, 'Play Button', '&#11042');
   zButton.style('width', btW + 'px');
   zButton.style('height', btH + 'px');
   zButton.style('background-color', domColor);
@@ -529,6 +657,7 @@ function createDom() {
   zButton.style('font-size', '3rem');
   zButton.style('border', 'none');
   zButton.style('background', 'none');
+  zButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
   zButton.mousePressed(zB);
   zButton.touchStarted(zB);
   zButton.mouseReleased(releaseDOM);
@@ -606,9 +735,20 @@ function updateDom() {
   sliderW = sw * .6;
   sliderH = sliderW * .11;
 
+
+  // update text position size 
+
+  t21.style('width', 4*btW + 'px');
+  t21.position(innerWidth * .5 - (btW*2), innerHeight * .3);
+
+
   // move buttons
   playButton.position( -11 , innerHeight * .84);
   regenButton.position( btW , innerHeight * .84);
+  playButton.style('width',  btW+ 'px');
+  playButton.style('height',  btH + 'px' );
+  regenButton.style('width',  btW+ 'px');
+  regenButton.style('height',  btH + 'px' );
   xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
   yButton.position(-11., innerHeight * .34);
   zButton.position(innerWidth * .7, innerHeight * .34);
@@ -625,6 +765,8 @@ function pressDOM() {
 }
 function releaseDOM() {
   notDOM = true;
+  t21.html("");
+
 
 }
 
@@ -753,6 +895,7 @@ function guiData() {
 
   let offset = 3.;
   let textColor = card.col1;
+  let black =  color(0) ;
 
   // Render the labels
 
@@ -790,33 +933,44 @@ function guiData() {
   t8.position(padX * offset + 130, padY * offset + 60);
   t8.style('color', textColor);
 
-  t11 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pX1']+ ":");
+  t11 = createP("");
   t11.position(padX * offset, padY * offset+80);
   t11.style('color', textColor);
 
-  t12 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pY1'] + ":");
+  t12 = createP("");
   t12.position(padX * offset, padY * offset + 100);
   t12.style('color', textColor);
 
-  t13 = createP(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1'] + ":");
+  t13 = createP("");
   t13.position(padX * offset, padY * offset + 120);
   t13.style('color', textColor);
 
   
   t15 = createP();
-  t15.html(worldI_dist);
+  t15.html("");
   t15.position(padX * offset + 130, padY * offset+80);
   t15.style('color', textColor);
 
   t16 = createP();
-  t16.html(nfs("0", 1, 2));
+  t16.html("");
   t16.position(padX * offset + 130, padY * offset + 100);
   t16.style('color', textColor);
 
-  t17 = createP("0");
+  t17 = createP("");
   t17.position(padX * offset + 130, padY * offset + 120);
   t17.style('color', textColor);
 
+
+  t21 = createP('');
+ // t21.position(padX * offset, 20);
+  t21.style('background-color', black);
+  t21.style('color', textColor);
+
+  t21.style('width', 4*btW + 'px');
+  t21.attribute('align', 'center');
+  t21.position(innerWidth * .5 - (btW*2), innerHeight * .3);
+
+  
 
 }
 
