@@ -2,7 +2,7 @@
 
 
 let sw, sh; // window size
-let padX; // gui separation
+let cellWidth, cellHeight; // gui separation
 var btW, btH, sliderW, sliderH, initSpeed;
 let trackI, filterI; // track 1 -  
 let font1; // font variable
@@ -29,7 +29,9 @@ let wMinD = 333;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
 let regenIcon, playIcon, pauseIcon, centerIcon; 
-
+let aspectRatio, scale, cols, rows; 
+let baseCols = 20;  
+let baseRows = 20; 
 let worldI_speed = 1.0;
 
 var numSamples = 1024;
@@ -67,6 +69,8 @@ document.oncontextmenu = () => false; // no right click
 
 function preload() {
 
+  initVariables();
+
   params = getURLParams();
 
   game = loadJSON("data/" + params.g + ".json");
@@ -76,6 +80,7 @@ function preload() {
   exoData = loadJSON("data/exoplanetData.json");
  
   regenValue = 0.0;
+
 
 }
 
@@ -91,8 +96,8 @@ document.body.addEventListener('touchstart', function (e) {
 
 function setup() {
 
-
   initVariables();
+
   xData = 1;
   yData = 0;
   xDataNorm = 1;
@@ -109,7 +114,7 @@ function setup() {
 
   if (params.s == 0) {
     card = game.A[params.c];
-  };
+  };  
   if (params.s == 1) {
     card = game.B[params.c];
   };
@@ -579,19 +584,18 @@ function createDom() {
   let domAlpha = color (card.col1); 
   domAlpha.setAlpha(190);
 
+  
   playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
 
   // create buttons and sliderss
   playButton = createImg(playIcon, 'Play Button', '&#9655');
   pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
+  playButton.position( cellWidth , sh-cellHeight*2);
 
- // playButton = createButton('&#9655');
-  playButton.position( 0 , innerHeight * .84);
   playButton.style('width',  btW+ 'px');
-  playButton.style('height',  btH + 'px' );
+  playButton.style('height', btH + 'px' );
   playButton.style('background-color', domColor);
   playButton.style('color', domAlpha);
-  playButton.style('font-size', '2rem');
   playButton.style('border', 'none');
   playButton.style('background', 'none');
   playButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
@@ -604,10 +608,10 @@ function createDom() {
   regenIcon = 'icons/' + nf(card.icon_set, 2) + '_regen.svg';
 
   regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
-  regenButton.position( btW*.75 , innerHeight * .84);
-  regenButton.style('width',  btW+ 'px');
-  regenButton.style('height',  btH + 'px' );
-  regenButton.style('font-size', '2rem');
+
+  regenButton.position( cellWidth*4 , sh-cellHeight*2);
+  regenButton.style('width', btW+'px');
+  regenButton.style('height',btH+'px');
   regenButton.style('border', 'none');
   regenButton.style('background', 'none');
   regenButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
@@ -624,7 +628,6 @@ function createDom() {
   xButton.style('height', btH + 'px');
   xButton.style('background-color', domColor);
   xButton.style('color', domAlpha);
-  xButton.style('font-size', '3rem');
   xButton.style('border', 'none');
   xButton.style('background', 'none');
   xButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
@@ -639,7 +642,6 @@ function createDom() {
   yButton.style('height', btH + 'px');
   yButton.style('background-color', domColor);
   yButton.style('color', domAlpha);
-  yButton.style('font-size', '3rem');
   yButton.style('border', 'none');
   yButton.style('background', 'none');
   yButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
@@ -654,7 +656,6 @@ function createDom() {
   zButton.style('height', btH + 'px');
   zButton.style('background-color', domColor);
   zButton.style('color', domAlpha);
-  zButton.style('font-size', '3rem');
   zButton.style('border', 'none');
   zButton.style('background', 'none');
   zButton.style('-webkit-touch-callout', 'none'); // Disable long-press callout on iOS
@@ -664,9 +665,9 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
-  xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
-  yButton.position(-11., innerHeight * .37);
-  zButton.position(innerWidth * .7, innerHeight * .37);
+  xButton.position(sw*.5 , sh-cellHeight*4);
+  yButton.position(cellWidth*4 , sh*.5);
+  zButton.position(sw-cellWidth*4 , sh*.5);
 
 
   // create sliders
@@ -721,9 +722,13 @@ function createDom() {
   yButton.hide();
   zButton.hide();
 
-  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
-  ySlider.position(0, innerHeight * .4);
-  zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
+  xSlider.position(sw*.5-sliderW*.5, sh-cellHeight*5);
+  ySlider.position(sw*.5-cellWidth*12 , sh*.5);
+  zSlider.position(sw*.5-cellWidth*2, sh*.5);
+
+  //xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
+  //ySlider.position(0, innerHeight * .4);
+  //zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
 
 }
 
@@ -732,31 +737,52 @@ function updateDom() {
   sw = window.innerWidth;
   sh = window.innerHeight;
 
-  sliderW = sw * .6;
-  sliderH = sliderW * .11;
+  aspectRatio = sw / sh;
+  scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
+  cellSize = min(width, height) / baseCols;
+  cols = floor(width / cellSize); // Adjust columns based on aspect ratio
+  rows = floor(height / cellSize); // Adjust rows based on aspect ratio
 
 
-  // update text position size 
+  cellWidth = sw / cols;
+  cellHeight = sh / rows;
 
-  t21.style('width', 4*btW + 'px');
-  t21.position(innerWidth * .5 - (btW*2), innerHeight * .3);
+  sliderW = cellWidth*10;
+  sliderH = cellHeight;
 
-
-  // move buttons
-  playButton.position( -11 , innerHeight * .84);
-  regenButton.position( btW , innerHeight * .84);
+ 
+  // move and resize buttons
+  playButton.position( cellWidth , sh-cellHeight*2);
   playButton.style('width',  btW+ 'px');
-  playButton.style('height',  btH + 'px' );
+  playButton.style('height',  btH + 'px');
+  
+  regenButton.position( cellWidth*4 , sh-cellHeight*2);
   regenButton.style('width',  btW+ 'px');
   regenButton.style('height',  btH + 'px' );
-  xButton.position(innerWidth * .5 - (btW * .5), innerHeight * .8);
-  yButton.position(-11., innerHeight * .34);
-  zButton.position(innerWidth * .7, innerHeight * .34);
+
+  xButton.position(sw*.5 , sh-cellHeight*4);
+  xButton.style('width', btW + 'px');
+  xButton.style('height', btH + 'px');
+
+  yButton.position(cellWidth*4 , sh*.5);
+  yButton.style('width', btW + 'px');
+  yButton.style('height', btH + 'px');
+
+  zButton.position(sw-cellWidth*4 , sh*.5);
+  zButton.style('width', btW + 'px');
+  zButton.style('height', btH + 'px');
 
   // move sliders
-  xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
-  ySlider.position(0, innerHeight * .4);
-  zSlider.position(innerWidth * 0.7- (sliderW * .5), innerHeight * .4);
+  xSlider.position(sw*.5-sliderW*.5, sh-cellHeight*5);
+  ySlider.position(sw*.5-cellWidth*12 , sh*.5);
+  zSlider.position(sw*.5-cellWidth*2, sh*.5);
+
+//style text:
+
+  guiDataStyle (cellWidth, cellHeight); 
+
+
+
 
 }
 
@@ -892,87 +918,70 @@ function zOutput(delta) {
 
 
 function guiData() {
-
-  let offset = 3.;
-  let textColor = card.col1;
-  let black =  color(0) ;
-
   // Render the labels
-
   t1 = createP('Distance:');
-  t1.position(padX * offset, padY * offset);
-  t1.style('color', textColor);
-
   t2 = createP(card.xTag[0] + ":");
-  t2.position(padX * offset, padY * offset + 20);
-  t2.style('color', textColor);
-
   t3 = createP(card.yTag[0] + ":");
-  t3.position(padX * offset, padY * offset + 40);
-  t3.style('color', textColor);
-
   t4 = createP(card.zTag[0] + ":");
-  t4.position(padX * offset, padY * offset + 60);
-  t4.style('color', textColor);
-
   t5 = createP();
   t5.html(worldI_dist);
-  t5.position(padX * offset + 130, padY * offset);
-  t5.style('color', textColor);
-
   t6 = createP();
   t6.html(nfs("0", 1, 2));
-  t6.position(padX * offset + 130, padY * offset + 20);
-  t6.style('color', textColor);
-
   t7 = createP("0");
-  t7.position(padX * offset + 130, padY * offset + 40);
-  t7.style('color', textColor);
-
   t8 = createP("0");
-  t8.position(padX * offset + 130, padY * offset + 60);
-  t8.style('color', textColor);
-
   t11 = createP("");
-  t11.position(padX * offset, padY * offset+80);
-  t11.style('color', textColor);
-
   t12 = createP("");
-  t12.position(padX * offset, padY * offset + 100);
-  t12.style('color', textColor);
-
   t13 = createP("");
-  t13.position(padX * offset, padY * offset + 120);
-  t13.style('color', textColor);
-
-  
   t15 = createP();
   t15.html("");
-  t15.position(padX * offset + 130, padY * offset+80);
-  t15.style('color', textColor);
-
   t16 = createP();
   t16.html("");
-  t16.position(padX * offset + 130, padY * offset + 100);
-  t16.style('color', textColor);
-
   t17 = createP("");
-  t17.position(padX * offset + 130, padY * offset + 120);
-  t17.style('color', textColor);
-
-
   t21 = createP('');
- // t21.position(padX * offset, 20);
+ // t21.position(cellWidth * offset, 20);
+  guiDataStyle (cellWidth, cellHeight); 
+}
+
+function guiDataStyle(_cellWidth, _cellHeight) {
+  
+  let offset = 1;
+  let textColor = card.col1;
+  let black = color(0);
+  
+  // Calculate guiTextSize based on a combination of windowWidth and windowHeight
+  let guiTextSize = min(windowWidth, windowHeight) * 0.02; 
+
+  // Set positions and styles for column 1 elements (t1, t2, t3, t4)
+  let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
+  col1Elements.forEach((elem, index) => {
+    let x = _cellWidth * offset;
+    let y = index * _cellHeight * .5 + guiTextSize;
+    elem.position(x, y);
+    elem.style('color', textColor);
+    elem.style('font-size', guiTextSize + 'px');
+  });
+
+  // Set positions and styles for column 2 elements (t5, t6, t7, t8)
+  let col2Elements = [t5, t6, t7, t8, t15, t16, t17];
+  col2Elements.forEach((elem, index) => {
+    let x = 5 * _cellWidth * offset; // Position for the second column
+    let y = index * _cellHeight * .5 + guiTextSize;
+    elem.position(x, y);
+    elem.style('color', textColor);
+    elem.style('font-size', guiTextSize + 'px');
+  });
+
+
   t21.style('background-color', black);
   t21.style('color', textColor);
 
-  t21.style('width', 4*btW + 'px');
+  t21.style('width', 6*btW + 'px');
   t21.attribute('align', 'center');
-  t21.position(innerWidth * .5 - (btW*2), innerHeight * .3);
-
-  
+  t21.position( sw *.5 - 3*btW , sh * .2);
+  t21.style('font-size', guiTextSize + 'px');
 
 }
+
 
 function loadGUI() {
   ///// LOADING TEXTS 
@@ -986,12 +995,12 @@ function loadGUI() {
   if (loadingBar == 1) {
     translate(0., 0., -666.);
 
-    text("Receiving Sound Waves", 0, -sh * .34 - padY * 4);
-    text("please wait, unmute device...", 0, -sh * .34 - padY * 1);
+    text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
+    text("please wait, unmute device...", 0, -sh * .34 - cellHeight * 1);
     translate(0., 0., 666.);
 
   } else {
-    text("", 0, -padY * 13);
+    text("", 0, -cellHeight * 13);
   }
 }
 
@@ -1039,12 +1048,27 @@ function initVariables() {
 
   sw = window.innerWidth;
   sh = window.innerHeight;
-  padX = sw / 77.;
-  padY = sh / 100.;
-  btW = sw * .15;
-  btH = sw * .15;
-  sliderW = sw * .6;
-  sliderH = sliderW * .11;
+
+  aspectRatio = sw / sh;
+  scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
+  cellSize = min(width, height) / baseCols;
+  cols = floor(width / cellSize); // Adjust columns based on aspect ratio
+  rows = floor(height / cellSize); // Adjust rows based on aspect ratio
+
+
+
+
+  cellWidth = sw / cols;
+  cellHeight = sh / rows;
+
+
+  sliderW = cellWidth*15;
+  sliderH = cellHeight;
+
+  btW = cellHeight;
+  btH = cellHeight;
+//  sliderW = sw * .6;
+//  sliderH = sliderW * .11;
   startX = 0;
   startY = 0;
   notDOM = true;
