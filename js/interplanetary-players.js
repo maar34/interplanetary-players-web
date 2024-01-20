@@ -33,7 +33,7 @@ var regenValue; // regen button number state
 
 let knobs = [];
 let steps = 128;  // Number of discrete steps
-let sensitivity = 10.5;  // Sensitivity for horizontal movement
+let sensitivity = 0.9;  // Sensitivity for knob movement
 let labels = ["X", "Y", "Z"]; // Labels for the knobs
 let knobSpacing; // Spacing between knobs
 
@@ -48,7 +48,7 @@ let index, increasing; // Inicializar el índice
 
 // Layout and scaling
 let aspectRatio, scale, cols, rows; // Aspect ratio, scale, column/row count
-let baseCols = 20, baseRows = 20; // Base column and row count
+let baseCols = 10, baseRows = 10     ; // Base column and row count
 let worldI_speed = 1.0; // World speed index
 
 // Audio channels and analysis
@@ -776,9 +776,9 @@ function createDom() {
   yButton.hide();
   zButton.hide();
 
-  xSlider.position(sw*.5-sliderW*.5, sh-cellHeight*5);
-  ySlider.position(sw*.5-cellWidth*12 , sh*.5);
-  zSlider.position(sw*.5-cellWidth*2, sh*.5);
+  xSlider.position(sliderW*.5, cellHeight*5);
+  ySlider.position(cellWidth*12 , sh*.5);
+  zSlider.position(cellWidth*2, sh*.5);
 
   //xSlider.position(innerWidth * .5 - (sliderW * .5), innerHeight * .8);
   //ySlider.position(0, innerHeight * .4);
@@ -795,7 +795,7 @@ function updateButtonPositions() {
   
   let canvasRect = canvas.elt.getBoundingClientRect();
 
-  let offsetY = canvasRect.height / 2 + cellHeight*2; // Adjust the Y offset
+  let offsetY = canvasRect.height / 2 + cellHeight; // Adjust the Y offset
 
   knobs.forEach((knob, index) => {
     let screenX = canvasRect.left + (canvasRect.width / 2) + knob.x - cellWidth*.5;
@@ -1108,41 +1108,38 @@ function releaseDOM() {
 
 
 function mousePressed() {
-  let webglMouseX = mouseX;
-  let webglMouseY = mouseY;
 
-  console.log("Mouse Pressed:", webglMouseX, webglMouseY);
+  console.log("Mouse Pressed:", mouseX, mouseY);
 
   knobs.forEach((knob, index) => {
-    if (dist(webglMouseX, webglMouseY, knob.x, knob.y) < knob.size / 2) {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2) {
       console.log("Knob pressed:", index);
       knob.isDragging = true;
-      updateKnobValue(knob, webglMouseX, webglMouseY);
+      updateKnobValue(knob, mouseX, mouseY);
       pressDOM();
     }
   });
 }
 
 function mouseDragged() {
-  let webglMouseX = mouseX;
-  let webglMouseY = mouseY;
 
-  knobs.forEach(knob => {
-    if (knob.isDragging) {
+  knobs.forEach((knob, index) => {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2) {
+      console.log("Knob pressed:", index);
+      knob.isDragging = true;
+      updateKnobValue(knob, mouseX, mouseY);
       pressDOM();
-      updateKnobValue(knob, webglMouseX, webglMouseY);
     }
   });
-}
 
+}
 
 // Mouse Wheel Function
 function mouseWheel(event) {
-  let webglMouseX = mouseX;
-  let webglMouseY = mouseY;
+  pressDOM();
 
   knobs.forEach(knob => {
-    if (dist(webglMouseX, webglMouseY, knob.x, knob.y) < knob.size / 2) {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2) {
       let deltaZ = event.delta * sensitivity;
       knob.valueZ = constrain(knob.valueZ - deltaZ, 0, steps - 1);
     }else{
@@ -1153,39 +1150,24 @@ function mouseWheel(event) {
 }
 
 
-function mouseReleased() {
-  knobs.forEach(knob => {
-    releaseDOM();
-    knob.isDragging = false;
-  });
-  
-}
-
 function touchStarted() {
-
+  mousePressed();  // Handle touch like a mouse press
+  return false; // Prevent default behavior and stop propagation
 
 }
 
 function touchMoved() {
+  mouseDragged();  // Handle touch move like a mouse drag
+  return false; // Prevent default behavior and stop propagation
 
-  if (notDOM) {
-    xOutput();
-    yOutput();
-  
-  if (touches.length > 0) {
-    let touchX = touches[0].x;
-    let touchY = touches[0].y;
-    handleKnobInteraction(touchX, touchY, false);
-  }
-  return false;
-
-  }
-  
 }
 
 function touchEnded() {
+  mouseReleased();
+ return false; // Prevent default behavior and stop propagation
 
 }
+
 
 function doubleClicked() {
   xB();
@@ -1231,7 +1213,7 @@ function initKnobs(){
   // Setup 3D Knobs
 
   let startX = window.innerWidth*.5-knobSpacing;
-  let startY = window.innerHeight*.8;
+  let startY = window.innerHeight*.75;
 
   // Initialize three knobs
   for (let i = 0; i < labels.length; i++) {
@@ -1367,38 +1349,36 @@ function generateOrbitData(json, index) {
 }
 
 
-
 function updateKnobValue(knob, currentX, currentY) {
-  // Normalize the delta values to a smaller range
   let deltaX = (currentX - pmouseX) * sensitivity;
   let deltaY = (currentY - pmouseY) * sensitivity;
   console.log("delta:", deltaX, deltaY);
 
-  // Apply the delta to the knob values
-  let newValueX = knob.valueX + deltaX / (width / steps);
-  let newValueY = knob.valueY + deltaY / (height / steps);
+  let newValueX = knob.valueX + deltaX ;
+  let newValueY = knob.valueY + deltaY ;
   console.log("NEW knob values:", newValueX, newValueY);
 
-  knob.valueX = constrain(round(newValueX), 0, steps - 1);
-  knob.valueY = constrain(round(newValueY), 0, steps - 1);
-
+  knob.valueY = constrain(newValueX, 0, steps - 1);  // Remove rounding for smoother movement
+  knob.valueX = constrain(newValueY, 0, steps - 1);
   console.log("Updating knob values:", knob.valueX, knob.valueY);
 
-
 }
+
+
 
 function handleKnobInteraction(x, y, isPressed) {
   knobs.forEach(knob => {
-    if (dist(x, y, knob.x, knob.y) < knob.size / 2) {
-      if (isPressed) {
-        knob.isDragging = true;
-        updateKnobValue(knob, x, y);
-      } else if (knob.isDragging) {
-        updateKnobValue(knob, x, y);
+      if (dist(x, y, knob.x, knob.y) < knob.size / 2) {
+          if (isPressed) {
+              knob.isDragging = true;
+          }
+          if (knob.isDragging) {
+              updateKnobValue(knob, x, y);
+          }
       }
-    }
   });
 }
+
 
 async function loadAudioBuffer(_context) {
 
