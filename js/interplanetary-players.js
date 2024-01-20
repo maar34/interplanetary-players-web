@@ -26,6 +26,7 @@ let cam1; // Camera
 let portrait; // Portrait element
 let notDOM; // Non-DOM element
 let device; // Device information
+let canvas; 
 
 let regenIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
 var regenValue; // regen button number state 
@@ -116,6 +117,10 @@ document.body.addEventListener('touchstart', function (e) {
 
 function setup() {
 
+      // Create Canvas - Always the landscape.  
+    canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+    setAttributes('antialias', true);
+    
   initVariables();
 
   xData = 1;
@@ -133,8 +138,8 @@ function setup() {
   col = color(255, 0, 0);
 
 
-  initKnobs(); 
 
+    
   
   // load Cards
 
@@ -153,11 +158,8 @@ function setup() {
   yDifference = (card.yTag[2] - card.yTag[1]) > 10;
 
 
-  createDom();
 
-  // Create Canvas - Always the landscape.  
-  createCanvas(window.innerWidth, window.innerHeight, WEBGL);
-  setAttributes('antialias', true);
+
 
   easycam = createEasyCam();
   easycam.setState(state, 3000); // animate to state in 3 second
@@ -166,10 +168,9 @@ function setup() {
   easycam.state_reset = state;
   easycam.setPanScale(0.0);
   easycam.setPanScale(.02);
+  easycam.removeMouseListeners();
 
-  //easycam.removeMouseListeners();
-
-
+  
   cardColor = color(card.col1);
 
   // Use the selected Font 
@@ -177,6 +178,9 @@ function setup() {
   textFont(font1);
   textSize(27);
   createRNBO();
+  
+  initKnobs(); 
+  createDom();
 
   //    loadingAudio(0);
 
@@ -218,13 +222,6 @@ function draw() {
   pop();  
   noFill();
   stroke(cardColor);
-
-
-
-
-
-
-
 
   // DRAW  GUI 
   easycam.beginHUD();
@@ -650,7 +647,6 @@ function createDom() {
   // create buttons and sliderss
   playButton = createImg(playIcon, 'Play Button', '&#9655');
   pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
-  playButton.position( cellWidth , sh-cellHeight*2);
 
   playButton.style('width',  btW+ 'px');
   playButton.style('height', btH + 'px' );
@@ -669,7 +665,6 @@ function createDom() {
 
   regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
 
-  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);
   regenButton.style('width', btW+'px');
   regenButton.style('height',btH+'px');
   regenButton.style('border', 'none');
@@ -725,14 +720,7 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
-  
-  let startX = window.innerWidth*.5-knobSpacing;
-  let startY = window.innerHeight*.9;
-  
-  
-    xButton.position(startX, startY);
-    yButton.position(startX+knobSpacing , startY);
-    zButton.position(startX+2*knobSpacing, startY);
+  updateButtonPositions();
   
 
 
@@ -798,6 +786,37 @@ function createDom() {
 
 }
 
+function updateButtonPositions() {
+  if (!canvas || !canvas.elt) {
+      console.error('Canvas is not defined');
+      return;
+  }
+
+  
+  let canvasRect = canvas.elt.getBoundingClientRect();
+
+  let offsetY = canvasRect.height / 2 + cellHeight*2; // Adjust the Y offset
+
+  knobs.forEach((knob, index) => {
+    let screenX = canvasRect.left + (canvasRect.width / 2) + knob.x - cellWidth*.5;
+    let screenY = canvasRect.top + offsetY + knob.y;
+
+    if (index === 0 && xButton) {
+      xButton.position(screenX, screenY);
+    } else if (index === 1 && yButton) {
+      yButton.position(screenX, screenY);
+    } else if (index === 2 && zButton) {
+      zButton.position(screenX, screenY);
+    }
+  });
+
+  playButton.position( cellWidth , sh-cellHeight*2);
+  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);  
+
+ 
+  }
+
+
 function updateDom() {
 
   sw = window.innerWidth;
@@ -819,25 +838,22 @@ function updateDom() {
   knobSpacing = (cellWidth+cellHeight)*1.4; 
 
   // move and resize buttons
-  playButton.position( cellWidth , sh-cellHeight*2);
   playButton.style('width',  btW+ 'px');
   playButton.style('height',  btH + 'px');
   
-  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);  
   regenButton.style('width',  btW+ 'px');
   regenButton.style('height',  btH + 'px' );
 
-  xButton.position(sw*.5 , sh-cellHeight*4);
   xButton.style('width', btW + 'px');
   xButton.style('height', btH + 'px');
 
-  yButton.position(cellWidth*4 , sh*.5);
   yButton.style('width', btW + 'px');
   yButton.style('height', btH + 'px');
 
-  zButton.position(sw-cellWidth*4 , sh*.5);
   zButton.style('width', btW + 'px');
   zButton.style('height', btH + 'px');
+
+  updateButtonPositions();
 
   // move sliders
   xSlider.position(sw*.5-sliderW*.5, sh-cellHeight*5);
@@ -853,15 +869,6 @@ function updateDom() {
 
 }
 
-function pressDOM() {
-  notDOM = false;
-}
-function releaseDOM() {
-  notDOM = true;
-  t21.html("");
-
-
-}
 
 
 function xInput() {
@@ -1077,12 +1084,27 @@ function windowResized() {
   //initKnobs();
   resizeCanvas(sw, sh);
   updateDom();
+  updateButtonPositions();
   easycam.setViewport([0, 0, sw, sh]);
 
 }
 
 
 
+function pressDOM() {
+  notDOM = false;
+
+}
+function releaseDOM() {
+
+//  easycam.attachMouseListeners();
+  notDOM = true;
+  t21.html("");
+ // attachMouseListeners();
+
+
+
+}
 
 
 function mousePressed() {
@@ -1096,6 +1118,7 @@ function mousePressed() {
       console.log("Knob pressed:", index);
       knob.isDragging = true;
       updateKnobValue(knob, webglMouseX, webglMouseY);
+      pressDOM();
     }
   });
 }
@@ -1106,6 +1129,7 @@ function mouseDragged() {
 
   knobs.forEach(knob => {
     if (knob.isDragging) {
+      pressDOM();
       updateKnobValue(knob, webglMouseX, webglMouseY);
     }
   });
@@ -1128,8 +1152,10 @@ function mouseWheel(event) {
   });
 }
 
+
 function mouseReleased() {
   knobs.forEach(knob => {
+    releaseDOM();
     knob.isDragging = false;
   });
   
