@@ -1,42 +1,62 @@
 
-
-
+// Screen and GUI dimensions
 let sw, sh; // window size
 let cellWidth, cellHeight; // gui separation
+
+// Button and slider dimensions
 var btW, btH, sliderW, sliderH, initSpeed;
-let trackI, filterI; // track 1 -  
+
+// Data and parameters
+let params; // URL parameters
+let levelI, worldI_dist, cardColor; // Level index, world distance, card color
+let tempID, xDifference, yDifference; // Temporary ID, X/Y differences
+let xSlider, ySlider, zSlider; // Sliders for X, Y, Z
+let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm; // Data arrays and their normalized versions
+let easyX, easyY; // Simplified X, Y values
+
+// GUI and Visual elements
 let font1; // font variable
-let playStateI;
-var regenValue; 
-let params; // url parameters
-let levelI, worldI_dist, cardColor;
-let tempID, xDifference, yDifference;
 let loadingBar, loadP;
-let xSlider, ySlider, zSlider;
-let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm;
-let easyX, easyY;
-let bcol, col;
+let bcol, col; // Background and general colors
 let freq, back;
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
+
+let cam1; // Camera
+let portrait; // Portrait element
+let notDOM; // Non-DOM element
+let device; // Device information
+
+let regenIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
+var regenValue; // regen button number state 
+
+let knobs = [];
+let steps = 128;  // Number of discrete steps
+let sensitivity = 10.5;  // Sensitivity for horizontal movement
+let labels = ["X", "Y", "Z"]; // Labels for the knobs
+let knobSpacing; // Spacing between knobs
+
+// Game and deck variables
 var game, deck, suit, loadDeck, exoData;
-let cam1;
-let portrait;
-let notDOM;
-let device;
+
+// Input and interaction
 let inputX, inputY, inputZ;
 let wMinD = 333;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
-let regenIcon, playIcon, pauseIcon, centerIcon; 
-let aspectRatio, scale, cols, rows; 
-let baseCols = 20;  
-let baseRows = 20; 
-let worldI_speed = 1.0;
 
+// Layout and scaling
+let aspectRatio, scale, cols, rows; // Aspect ratio, scale, column/row count
+let baseCols = 20, baseRows = 20; // Base column and row count
+let worldI_speed = 1.0; // World speed index
+
+// Audio channels and analysis
+let trackI, filterI; // track 1 -  
+let playStateI; // Play state index
 var numSamples = 1024;
 // Array of amplitude values (-1 to +1) over time.
 var samples = [];
+
 
 var card = {
   id: "",
@@ -112,6 +132,12 @@ function setup() {
   bcol = color(0, 0, 0, 10);
   col = color(255, 0, 0);
 
+
+  initKnobs(); 
+
+  
+  // load Cards
+
   if (params.s == 0) {
     card = game.A[params.c];
   };  
@@ -123,7 +149,6 @@ function setup() {
   };
   worldI_speed = card.speed;
 
-  //print (card.engine); 
   xDifference = (card.xTag[2] - card.xTag[1]) > 10;
   yDifference = (card.yTag[2] - card.yTag[1]) > 10;
 
@@ -154,7 +179,8 @@ function setup() {
   createRNBO();
 
   //    loadingAudio(0);
-}
+
+}  
 
 function draw() {
   
@@ -189,12 +215,22 @@ function draw() {
   sphere(15, 6, 6);
   //translate (0., 0., 666.);
 
-  pop();
-
+  pop();  
   noFill();
   stroke(cardColor);
 
+
+
+
+
+
+
+
+  // DRAW  GUI 
   easycam.beginHUD();
+
+
+//  stroke(cardColor);
 
   if (playStateI == 0) fill(0, 0, 0, .8);
 
@@ -210,15 +246,39 @@ function draw() {
   vertex(margin + 0, margin + 0);
   endShape();
 
+  if (playStateI == 0) fill(0, 1);
+
+  //sphere(sw*.4, sh*.8, 0);
+ // sphere(sw*.5, sh*.8, 0);
+ // sphere(sw*.6, sh*.8, 0);
+
+      // DRAW 3D GUI 
+
+    // Draw each knob as a sphere and its value
+    knobs.forEach((knob, index) => {
+      let angleX = map(knob.valueX, 0, steps - 1, 0, 360);
+   //   let angleY = map(knob.valueY, 0, steps - 1, 0, 360);
+   //   let zPos = map(knob.valueZ, 0, steps - 1, -100, 100);
+  
+      push();
+      translate(knob.x, knob.y);
+      // translate(knob.x, knob.y, zPos); // Use zPos for the Z position
+      //stroke (0,255,0);
+      rotateX(radians(angleX));
+      //rotateY(radians(angleY));
+  
+      fill (0, 50);
+      sphere(knob.size / 2, 7, 7); // Draw a sphere for the knob
+      pop();
+  
+    });
+    
 
   easycam.endHUD();
 
   // REGENERATIVE UPDATES 
 
   regenUpdates();
-
-
-
 
 }
 
@@ -609,7 +669,7 @@ function createDom() {
 
   regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
 
-  regenButton.position( cellWidth*4 , sh-cellHeight*2);
+  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);
   regenButton.style('width', btW+'px');
   regenButton.style('height',btH+'px');
   regenButton.style('border', 'none');
@@ -665,9 +725,15 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
-  xButton.position(sw*.5 , sh-cellHeight*4);
-  yButton.position(cellWidth*4 , sh*.5);
-  zButton.position(sw-cellWidth*4 , sh*.5);
+  
+  let startX = window.innerWidth*.5-knobSpacing;
+  let startY = window.innerHeight*.9;
+  
+  
+    xButton.position(startX, startY);
+    yButton.position(startX+knobSpacing , startY);
+    zButton.position(startX+2*knobSpacing, startY);
+  
 
 
   // create sliders
@@ -750,13 +816,14 @@ function updateDom() {
   sliderW = cellWidth*10;
   sliderH = cellHeight;
 
- 
+  knobSpacing = (cellWidth+cellHeight)*1.4; 
+
   // move and resize buttons
   playButton.position( cellWidth , sh-cellHeight*2);
   playButton.style('width',  btW+ 'px');
   playButton.style('height',  btH + 'px');
   
-  regenButton.position( cellWidth*4 , sh-cellHeight*2);
+  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);  
   regenButton.style('width',  btW+ 'px');
   regenButton.style('height',  btH + 'px' );
 
@@ -942,7 +1009,7 @@ function guiData() {
   guiDataStyle (cellWidth, cellHeight); 
 }
 
-function guiDataStyle(_cellWidth, _cellHeight) {
+function guiDataStyle(cellWidth, cellHeight) {
   
   let offset = 1;
   let textColor = card.col1;
@@ -954,8 +1021,8 @@ function guiDataStyle(_cellWidth, _cellHeight) {
   // Set positions and styles for column 1 elements (t1, t2, t3, t4)
   let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
   col1Elements.forEach((elem, index) => {
-    let x = _cellWidth * offset;
-    let y = index * _cellHeight * .5 + guiTextSize;
+    let x = cellWidth * offset;
+    let y = index * cellHeight * .5 + guiTextSize;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
@@ -964,8 +1031,8 @@ function guiDataStyle(_cellWidth, _cellHeight) {
   // Set positions and styles for column 2 elements (t5, t6, t7, t8)
   let col2Elements = [t5, t6, t7, t8, t15, t16, t17];
   col2Elements.forEach((elem, index) => {
-    let x = 5 * _cellWidth * offset; // Position for the second column
-    let y = index * _cellHeight * .5 + guiTextSize;
+    let x = 5 * cellWidth * offset; // Position for the second column
+    let y = index * cellHeight * .5 + guiTextSize;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
@@ -1007,34 +1074,90 @@ function loadGUI() {
 function windowResized() {
 
   initVariables();
+  //initKnobs();
   resizeCanvas(sw, sh);
   updateDom();
   easycam.setViewport([0, 0, sw, sh]);
 
 }
 
-function touchStarted() {
 
-}
-function touchMoved() {
-  if (notDOM) {
-    xOutput();
-    yOutput();
-  }
-
-  //print(notDOM); 
-
-}
 
 
 
 function mousePressed() {
+  let webglMouseX = mouseX;
+  let webglMouseY = mouseY;
+
+  console.log("Mouse Pressed:", webglMouseX, webglMouseY);
+
+  knobs.forEach((knob, index) => {
+    if (dist(webglMouseX, webglMouseY, knob.x, knob.y) < knob.size / 2) {
+      console.log("Knob pressed:", index);
+      knob.isDragging = true;
+      updateKnobValue(knob, webglMouseX, webglMouseY);
+    }
+  });
+}
+
+function mouseDragged() {
+  let webglMouseX = mouseX;
+  let webglMouseY = mouseY;
+
+  knobs.forEach(knob => {
+    if (knob.isDragging) {
+      updateKnobValue(knob, webglMouseX, webglMouseY);
+    }
+  });
+}
+
+
+// Mouse Wheel Function
+function mouseWheel(event) {
+  let webglMouseX = mouseX;
+  let webglMouseY = mouseY;
+
+  knobs.forEach(knob => {
+    if (dist(webglMouseX, webglMouseY, knob.x, knob.y) < knob.size / 2) {
+      let deltaZ = event.delta * sensitivity;
+      knob.valueZ = constrain(knob.valueZ - deltaZ, 0, steps - 1);
+    }else{
+      zOutput(-event.delta * .1);
+
+    }
+  });
+}
+
+function mouseReleased() {
+  knobs.forEach(knob => {
+    knob.isDragging = false;
+  });
+  
+}
+
+function touchStarted() {
+
 
 }
 
-function mouseWheel(event) {
+function touchMoved() {
 
-  zOutput(-event.delta * .1);
+  if (notDOM) {
+    xOutput();
+    yOutput();
+  
+  if (touches.length > 0) {
+    let touchX = touches[0].x;
+    let touchY = touches[0].y;
+    handleKnobInteraction(touchX, touchY, false);
+  }
+  return false;
+
+  }
+  
+}
+
+function touchEnded() {
 
 }
 
@@ -1061,6 +1184,7 @@ function initVariables() {
   cellWidth = sw / cols;
   cellHeight = sh / rows;
 
+  knobSpacing = (cellWidth+cellHeight)*1.4;
 
   sliderW = cellWidth*15;
   sliderH = cellHeight;
@@ -1075,6 +1199,29 @@ function initVariables() {
 
 }
 
+function initKnobs(){
+
+
+  // Setup 3D Knobs
+
+  let startX = window.innerWidth*.5-knobSpacing;
+  let startY = window.innerHeight*.8;
+
+  // Initialize three knobs
+  for (let i = 0; i < labels.length; i++) {
+    knobs.push({
+      x: startX + i * knobSpacing,
+      y: startY,
+      z: 0,  // Initial Z position
+      size: (cellWidth+cellHeight)*.8,
+      valueX: 64,
+      valueY: 64,
+      valueZ: 64  // Initial Z value
+    });
+
+
+}
+}
 
 async function createRNBO() {
 
@@ -1191,6 +1338,40 @@ function generateOrbitData(json, index) {
     "c": getOrbitData(periodC, index * periodC / periodB), // scale index for planet C
     "d": getOrbitData(periodD, index * periodD / periodB)  // scale index for planet D
   };
+}
+
+
+
+function updateKnobValue(knob, currentX, currentY) {
+  // Normalize the delta values to a smaller range
+  let deltaX = (currentX - pmouseX) * sensitivity;
+  let deltaY = (currentY - pmouseY) * sensitivity;
+  console.log("delta:", deltaX, deltaY);
+
+  // Apply the delta to the knob values
+  let newValueX = knob.valueX + deltaX / (width / steps);
+  let newValueY = knob.valueY + deltaY / (height / steps);
+  console.log("NEW knob values:", newValueX, newValueY);
+
+  knob.valueX = constrain(round(newValueX), 0, steps - 1);
+  knob.valueY = constrain(round(newValueY), 0, steps - 1);
+
+  console.log("Updating knob values:", knob.valueX, knob.valueY);
+
+
+}
+
+function handleKnobInteraction(x, y, isPressed) {
+  knobs.forEach(knob => {
+    if (dist(x, y, knob.x, knob.y) < knob.size / 2) {
+      if (isPressed) {
+        knob.isDragging = true;
+        updateKnobValue(knob, x, y);
+      } else if (knob.isDragging) {
+        updateKnobValue(knob, x, y);
+      }
+    }
+  });
 }
 
 async function loadAudioBuffer(_context) {
