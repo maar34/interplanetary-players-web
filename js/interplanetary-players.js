@@ -43,7 +43,7 @@ var game, deck, suit, loadDeck, exoData;
 
 // Input and interaction
 let inputX, inputY, inputZ;
-let wMinD = 333;
+let wMinD = 444;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
 
@@ -83,7 +83,7 @@ document.oncontextmenu = () => false; // no right click
 
 var easycam,
   state = {
-    distance: 388, //final distance
+    distance: 444, //final distance
     center: [0, 0, 0],
     rotation: [1., 0., 0., 0.],
   },
@@ -140,7 +140,6 @@ function setup() {
 
   bcol = color(0, 0, 0, 10);
   col = color(255, 0, 0);
-
 
 
     
@@ -263,6 +262,7 @@ function draw() {
       fill (0, 50);
       sphere(knob.size * .5, 7, 7); // Draw a sphere for the knob
       rotateZ(radians(90));
+      strokeWeight(3);
       line(knob.size * .5, 0,  0, 0);
       pop();
       
@@ -287,7 +287,7 @@ function draw() {
 
 
 
-
+///////// BUTTONS LOGIC //////// 
 
 function regenUpdates(){
   
@@ -657,6 +657,7 @@ function loadingAudio(_loadingN) {
 }
 
 
+/////// USER INTERACTION AND GUI FUNCTIONS ///////// 
 
 function createDom() {
 
@@ -774,80 +775,7 @@ function createDom() {
 
 }
 
-function updateButtonPositions() {
-  if (!canvas || !canvas.elt) {
-      console.error('Canvas is not defined');
-      return;
-  }
 
-  
-  let canvasRect = canvas.elt.getBoundingClientRect();
-
-  let offsetY = canvasRect.height / 2 + cellHeight; // Adjust the Y offset
-
-  knobs.forEach((knob, index) => {
-    let screenX = canvasRect.left + (canvasRect.width / 2) + knob.x - cellWidth*.5;
-    let screenY = canvasRect.top + offsetY + knob.y;
-
-    if (index === 0 && xButton) {
-      xButton.position(screenX, screenY);
-    } else if (index === 1 && yButton) {
-      yButton.position(screenX, screenY);
-    } else if (index === 2 && zButton) {
-      zButton.position(screenX, screenY);
-    }
-  });
-
-  playButton.position( cellWidth , sh-cellHeight*2);
-  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);  
-
- 
-  }
-
-
-function updateDom() {
-
-  sw = window.innerWidth;
-  sh = window.innerHeight;
-
-  aspectRatio = sw / sh;
-  scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
-  cellSize = min(width, height) / baseCols;
-  cols = floor(width / cellSize); // Adjust columns based on aspect ratio
-  rows = floor(height / cellSize); // Adjust rows based on aspect ratio
-
-
-  cellWidth = sw / cols;
-  cellHeight = sh / rows;
-  btW = cellHeight;
-  btH = cellHeight;
-
-  knobSpacing = (cellWidth+cellHeight)*1.4; 
-
-  // move and resize buttons
-  playButton.style('width',  btW+ 'px');
-  playButton.style('height',  btH + 'px');
-  
-  regenButton.style('width',  btW+ 'px');
-  regenButton.style('height',  btH + 'px' );
-
-  xButton.style('width', btW + 'px');
-  xButton.style('height', btH + 'px');
-
-  yButton.style('width', btW + 'px');
-  yButton.style('height', btH + 'px');
-
-  zButton.style('width', btW + 'px');
-  zButton.style('height', btH + 'px');
-
-  updateButtonPositions();
-
-  guiDataStyle (cellWidth, cellHeight); 
-
-
-
-
-}
 
 function xInput() {
 
@@ -892,33 +820,6 @@ function zInput() {
 
 }
 
-/*
-function xOutput() {
-  if (!loadP) {
-    var startX = easycam.mouse.curr[0];
-    knobs[0].valueX = map(startX, 0, sw, 0, steps - 1);
-    xInput(); // Update xData based on knob value
-  }
-}
-
-function yOutput() {
-  if (!loadP) {
-    var startY = easycam.mouse.curr[1];
-    knobs[1].valueY = map(startY, 0, sh, steps - 1, 0);
-    yInput(); // Update yData based on knob value
-  }
-}
-
-function zOutput(delta) {
-  if (!loadP) {
-    knobs[2].valueZ = constrain(knobs[2].valueZ + delta, 0, steps - 1);
-    zInput(); // Update worldI_dist and zData based on knob value
-  }
-}
-*/
-
-
-
 function guiData() {
   // Render the labels
   t1 = createP('Distance:');
@@ -942,7 +843,6 @@ function guiData() {
   t21 = createP('');
   t22 = createP('0');
 
- // t21.position(cellWidth * offset, 20);
   guiDataStyle (cellWidth, cellHeight); 
 }
 
@@ -953,7 +853,7 @@ function guiDataStyle(cellWidth, cellHeight) {
   let black = color(0);
   
   // Calculate guiTextSize based on a combination of windowWidth and windowHeight
-  let guiTextSize = min(windowWidth, windowHeight) * 0.02; 
+  let guiTextSize = min(windowWidth, windowHeight) * 0.03; 
 
   // Set positions and styles for column 1 elements (t1, t2, t3, t4)
   let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
@@ -968,7 +868,7 @@ function guiDataStyle(cellWidth, cellHeight) {
   // Set positions and styles for column 2 elements (t5, t6, t7, t8)
   let col2Elements = [t5, t6, t7, t8, t15, t16, t17];
   col2Elements.forEach((elem, index) => {
-    let x = 3 * cellWidth * offset; // Position for the second column
+    let x = 3.5 * cellWidth * offset; // Position for the second column
     let y = index * cellHeight * .5 + guiTextSize;
     elem.position(x, y);
     elem.style('color', textColor);
@@ -991,6 +891,7 @@ function guiDataStyle(cellWidth, cellHeight) {
   t22.attribute('align', 'center');
   t22.position( sw-(cellWidth+cellHeight) , sh-cellHeight);  
   t22.style('font-size', guiTextSize + 'px');
+  
 
 }
 
@@ -1019,14 +920,12 @@ function loadingGUI() {
 function windowResized() {
 
   initVariables();
-  //initKnobs();
   resizeCanvas(sw, sh);
-  updateDom();
-  updateButtonPositions();
+  translateKnobs();
+  guiDataStyle (cellWidth, cellHeight); 
   easycam.setViewport([0, 0, sw, sh]);
 
 }
-
 
 
 function pressDOM() {
@@ -1133,16 +1032,14 @@ function initVariables() {
   zData = 1.; 
 
 
+ // Recalculate button and cell dimensions
   cellWidth = sw / cols;
   cellHeight = sh / rows;
-
-  knobSpacing = (cellWidth+cellHeight)*1.4;
-
-
   btW = cellHeight;
   btH = cellHeight;
-//  sliderW = sw * .6;
-//  sliderH = sliderW * .11;
+
+  knobSpacing = (cellWidth+cellHeight)*1.1;
+
   startX = 0;
   startY = 0;
   notDOM = true;
@@ -1160,7 +1057,7 @@ function initKnobs(){
       x: startX + i * knobSpacing,
       y: startY,
       z: 0,  // Initial Z position
-      size: (cellWidth+cellHeight)*.8,
+      size: (cellWidth+cellHeight)*.77,
       valueX: 127,
       valueY: 127,
       valueZ: 127  // Initial Z value
@@ -1169,6 +1066,155 @@ function initKnobs(){
 
 }
 }
+
+function updateKnobValue(knob, currentX, currentY) {
+
+  let deltaX, deltaY;
+
+
+  if (touches.length > 0) { // If it's a touch event
+    deltaX = currentX - prevTouchX;
+    deltaY = currentY - prevTouchY;
+  } else { // If it's a mouse event
+    deltaX = currentX - pmouseX;
+    deltaY = currentY - pmouseY;
+  }
+
+  knob.valueX -= deltaX * sensitivity;
+  knob.valueY -= deltaY * sensitivity;
+
+  // Constrain the values within the valid range
+  knob.valueX = constrain(knob.valueX, 0, steps - 1);
+  knob.valueY = constrain(knob.valueY, 0, steps - 1);
+
+  // Update xData, yData, zData based on knob values
+  if (knob === knobs[0]) { // If it's the X knob
+    xData = knob.valueY;
+    xInput();
+  } else if (knob === knobs[1]) { // If it's the Y knob
+    yData = knob.valueY;
+    yInput();
+  } else if (knob === knobs[2]) { // If it's the Z knob
+    zData = knob.valueY;
+    zInput();
+  }
+}
+
+
+function setKnobValueY(knob, newValueY) {
+  // Update the knob's Y value
+  knob.valueY = newValueY;
+
+  // Constrain the value within the valid range
+  knob.valueY = constrain(knob.valueY, 0, steps - 1);
+
+  // If the knob's valueY is tied to certain parameters or UI elements, update them
+  if (knob === knobs[0]) { // If it's the X knob (assuming it uses valueY for some reason)
+    xData = knob.valueY;
+    xInput(); // Update any related UI or data
+  } else if (knob === knobs[1]) { // If it's the Y knob
+    yData = knob.valueY;
+    yInput(); // Update any related UI or data
+  } else if (knob === knobs[2]) { // If it's the Z knob (assuming it uses valueY for some reason)
+    zData = knob.valueY;
+    zInput(); // Update any related UI or data
+  }
+}
+
+
+function setKnobValue(knob, newXValue, newYValue, newZValue) {
+  // Update the knob values
+  knob.valueX = newXValue;
+  knob.valueY = newYValue;
+  knob.valueZ = newZValue;
+
+  // Constrain the values within the valid range
+  knob.valueX = constrain(knob.valueX, 0, steps - 1);
+  knob.valueY = constrain(knob.valueY, 0, steps - 1);
+  knob.valueZ = constrain(knob.valueZ, 0, steps - 1);
+
+  // You can call the input functions to update any related data or UI elements
+  // For example, if the knob values are tied to certain parameters or UI elements:
+  if (knob === knobs[0]) { // If it's the X knob
+    xData = knob.valueY;
+    xInput(); // Update any related UI or data
+  } else if (knob === knobs[1]) { // If it's the Y knob
+    yData = knob.valueY;
+    yInput(); // Update any related UI or data
+  } else if (knob === knobs[2]) { // If it's the Z knob
+    zData = knob.valueY;
+    zInput(); // Update any related UI or data
+  }
+}
+
+
+function updateButtonPositions() {
+  if (!canvas || !canvas.elt) {
+      console.error('Canvas is not defined');
+      return;
+  }
+
+  let offsetY =  cellHeight; // Adjust the Y offset
+
+  knobs.forEach((knob, index) => {
+    let screenX =  knob.x - cellWidth*.5;
+    let screenY =  offsetY + knob.y;
+
+    if (index === 0 ) {
+      xButton.position(screenX, screenY);
+    } else if (index === 1) {
+      yButton.position(screenX, screenY);
+    } else if (index === 2) {
+      zButton.position(screenX, screenY);
+    }
+  });
+
+  playButton.position( cellWidth , sh-cellHeight*2);
+  regenButton.position( sw-(cellWidth+cellHeight) , sh-cellHeight*2);  
+
+
+
+  playButton.style('width',  btW+ 'px');
+  playButton.style('height',  btH + 'px');
+  
+  regenButton.style('width',  btW+ 'px');
+  regenButton.style('height',  btH + 'px' );
+
+ 
+  }
+
+
+  function translateKnobs() {
+    let startX = window.innerWidth * 0.5 - knobSpacing;
+    let startY = window.innerHeight * 0.75;
+  
+    // Calculate knobSize
+    let knobSize = (cellWidth + cellHeight) * 0.77;
+  
+    // Update existing knobs
+    for (let i = 0; i < knobs.length; i++) {
+      knobs[i].x = startX + i * knobSpacing;
+      knobs[i].y = startY;
+      knobs[i].size = knobSize;
+    }
+  
+    xButton.style('width', btW + 'px');
+    xButton.style('height', btH + 'px');
+  
+    yButton.style('width', btW + 'px');
+    yButton.style('height', btH + 'px');
+  
+    zButton.style('width', btW + 'px');
+    zButton.style('height', btH + 'px');
+  
+    updateButtonPositions();
+    
+  }
+
+
+
+
+////////// AUDIO ENGINE ///////// 
 
 async function createRNBO() {
 
@@ -1201,6 +1247,59 @@ async function createRNBO() {
 
 }
 
+async function loadAudioBuffer(_context) {
+
+  loadingAudio(1);
+  context = _context;
+
+  let audioBuf
+  try {
+    let audioURL;
+
+    if (navigator.connection) {
+      const speed = navigator.connection.downlink;
+      audioURL = speed > 1 ? card.mp3file : card.wavfile;
+
+    } else {
+      audioURL = card.mp3file;
+    }
+    
+    try {
+      const fileResponse = await fetch(audioURL, {
+        cache: 'reload'
+      });
+      
+      if (!fileResponse.ok) {
+        throw new Error("Network response was not OK");
+        errorLoadingAudio("Network response was not OK");
+
+      }
+      // Load our sample as an ArrayBuffer;
+      const arrayBuf = await fileResponse.arrayBuffer();
+      //  console.log(arrayBuf);
+
+      // Decode the received Data as an AudioBuffer
+      audioBuf = await context.decodeAudioData(arrayBuf);
+      // Set the DataBuffer on the device
+      await device.setDataBuffer("world1", audioBuf);
+
+    } catch (error) {
+      console.error("There has been a problem with your fetch operation:", error);
+      errorLoadingAudio(error);
+
+    }
+
+    loaded();
+
+  } catch (error) {
+    console.log(error);
+    errorLoadingAudio(error);
+  }
+
+
+}
+
+////////// EXOPLANET DATA ///////// 
 function interpolateTransitData(transitData, index) {
   const transits = transitData['Kepler-47']['Maar_World']['transits'];
   const numTransits = transits.length;
@@ -1286,139 +1385,5 @@ function generateOrbitData(json, index) {
     "c": getOrbitData(periodC, index * periodC / periodB), // scale index for planet C
     "d": getOrbitData(periodD, index * periodD / periodB)  // scale index for planet D
   };
-}
-
-
-function updateKnobValue(knob, currentX, currentY) {
-
-  let deltaX, deltaY;
-
-
-  if (touches.length > 0) { // If it's a touch event
-    deltaX = currentX - prevTouchX;
-    deltaY = currentY - prevTouchY;
-  } else { // If it's a mouse event
-    deltaX = currentX - pmouseX;
-    deltaY = currentY - pmouseY;
-  }
-
-  knob.valueX -= deltaX * sensitivity;
-  knob.valueY -= deltaY * sensitivity;
-
-  // Constrain the values within the valid range
-  knob.valueX = constrain(knob.valueX, 0, steps - 1);
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
-
-  // Update xData, yData, zData based on knob values
-  if (knob === knobs[0]) { // If it's the X knob
-    xData = knob.valueY;
-    xInput();
-  } else if (knob === knobs[1]) { // If it's the Y knob
-    yData = knob.valueY;
-    yInput();
-  } else if (knob === knobs[2]) { // If it's the Z knob
-    zData = knob.valueY;
-    zInput();
-  }
-}
-
-
-function setKnobValueY(knob, newValueY) {
-  // Update the knob's Y value
-  knob.valueY = newValueY;
-
-  // Constrain the value within the valid range
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
-
-  // If the knob's valueY is tied to certain parameters or UI elements, update them
-  if (knob === knobs[0]) { // If it's the X knob (assuming it uses valueY for some reason)
-    xData = knob.valueY;
-    xInput(); // Update any related UI or data
-  } else if (knob === knobs[1]) { // If it's the Y knob
-    yData = knob.valueY;
-    yInput(); // Update any related UI or data
-  } else if (knob === knobs[2]) { // If it's the Z knob (assuming it uses valueY for some reason)
-    zData = knob.valueY;
-    zInput(); // Update any related UI or data
-  }
-}
-
-
-function setKnobValue(knob, newXValue, newYValue, newZValue) {
-  // Update the knob values
-  knob.valueX = newXValue;
-  knob.valueY = newYValue;
-  knob.valueZ = newZValue;
-
-  // Constrain the values within the valid range
-  knob.valueX = constrain(knob.valueX, 0, steps - 1);
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
-  knob.valueZ = constrain(knob.valueZ, 0, steps - 1);
-
-  // You can call the input functions to update any related data or UI elements
-  // For example, if the knob values are tied to certain parameters or UI elements:
-  if (knob === knobs[0]) { // If it's the X knob
-    xData = knob.valueY;
-    xInput(); // Update any related UI or data
-  } else if (knob === knobs[1]) { // If it's the Y knob
-    yData = knob.valueY;
-    yInput(); // Update any related UI or data
-  } else if (knob === knobs[2]) { // If it's the Z knob
-    zData = knob.valueY;
-    zInput(); // Update any related UI or data
-  }
-}
-
-
-async function loadAudioBuffer(_context) {
-
-  loadingAudio(1);
-  context = _context;
-
-  let audioBuf
-  try {
-    let audioURL;
-
-    if (navigator.connection) {
-      const speed = navigator.connection.downlink;
-      audioURL = speed > 1 ? card.mp3file : card.wavfile;
-
-    } else {
-      audioURL = card.mp3file;
-    }
-    
-    try {
-      const fileResponse = await fetch(audioURL, {
-        cache: 'reload'
-      });
-      
-      if (!fileResponse.ok) {
-        throw new Error("Network response was not OK");
-        errorLoadingAudio("Network response was not OK");
-
-      }
-      // Load our sample as an ArrayBuffer;
-      const arrayBuf = await fileResponse.arrayBuffer();
-      //  console.log(arrayBuf);
-
-      // Decode the received Data as an AudioBuffer
-      audioBuf = await context.decodeAudioData(arrayBuf);
-      // Set the DataBuffer on the device
-      await device.setDataBuffer("world1", audioBuf);
-
-    } catch (error) {
-      console.error("There has been a problem with your fetch operation:", error);
-      errorLoadingAudio(error);
-
-    }
-
-    loaded();
-
-  } catch (error) {
-    console.log(error);
-    errorLoadingAudio(error);
-  }
-
-
 }
 
