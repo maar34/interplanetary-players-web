@@ -37,6 +37,7 @@ let steps = 255;  // Number of discrete steps
 let sensitivity = 0.9;  // Sensitivity for knob movement
 let labels = ["X", "Y", "Z"]; // Labels for the knobs
 let knobSpacing; // Spacing between knobs
+let domAlpha, domAlpha2; 
 
 // Game and deck variables
 var game, deck, suit, loadDeck, exoData;
@@ -255,6 +256,8 @@ function draw() {
     // Draw each knob as a sphere and its value
     knobs.forEach((knob, index) => {
       let angleY = map(knob.valueY, 0, steps - 1, 0, 360, true);
+
+      stroke(regenValue > 0 ? domAlpha2 : cardColor);
 
       push();
       translate(knob.x, knob.y);
@@ -662,9 +665,10 @@ function loadingAudio(_loadingN) {
 function createDom() {
 
   let domColor = color (card.col1);
-  let domAlpha = color (card.col1); 
+  domAlpha = color (card.col1); 
+  domAlpha2 = color (card.col1);   
   domAlpha.setAlpha(190);
-
+  domAlpha2.setAlpha(99);
   
 
 
@@ -853,7 +857,7 @@ function guiDataStyle(cellWidth, cellHeight) {
   let black = color(0);
   
   // Calculate guiTextSize based on a combination of windowWidth and windowHeight
-  let guiTextSize = min(windowWidth, windowHeight) * 0.03; 
+  let guiTextSize = min(windowWidth, windowHeight) * 0.027; 
 
   // Set positions and styles for column 1 elements (t1, t2, t3, t4)
   let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
