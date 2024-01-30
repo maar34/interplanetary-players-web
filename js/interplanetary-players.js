@@ -63,6 +63,13 @@ var samples = [];
 let prevTouchX = 0;
 let prevTouchY = 0;
 
+// TIME 
+
+let lastUpdateTime = Date.now();
+let lastOrbitUpdateTime = lastUpdateTime;
+let lastTransitDate = '';
+let lastDateChangeTimestamp = Date.now();
+
 var card = {
   id: "",
   wavfile: "",
@@ -125,7 +132,8 @@ function setup() {
       // Create Canvas - Always the landscape.  
     canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
     setAttributes('antialias', true);
-    
+  
+
   initVariables();
 
   xData = 1;
@@ -143,6 +151,7 @@ function setup() {
   col = color(255, 0, 0);
 
 
+  setCurrentIndexToToday();
     
   
   // load Cards
@@ -299,25 +308,25 @@ function regenUpdates(){
     case 0:
     break;
     case 1:
-      trans(2);
+      trans(1); // 1 minute ~ 1 day
     break;
     case 2:
-      trans(4);
+      trans(60); // 1 earth second ~ 1 earth day
     break;
     case 3:
-      trans(8);
+      trans(1200); // 50 earth milisecond ~ 1 earth day
     break;
     case 4:
-      trans(16);
+      trans(6000); // 15 earth miliseconds ~ 1 earth day
     break;
     case 5:
-    orb(3)
+    orb(1)
     break;
     case 6:
-      orb(9)
+      orb(60)
     break;
     case 7:
-      orb(27)
+      orb(6000)
     break;
 
 }
@@ -325,79 +334,125 @@ function regenUpdates(){
 
 }
 
-function trans(amp){
+function trans(amp) {
+  // Get the current time in milliseconds
+  let currentTime = Date.now();
 
-  // read, interpolate and generate exoplanets transit data for sonification / vizualization 
+  // Calculate elapsed time in milliseconds since the last update
+  let elapsedTimeInMillis = currentTime - lastUpdateTime;
+  lastUpdateTime = currentTime;
 
-//  let amp = 1+regenValue*.5; // choose a normalized amp inside 8 regenButton variations 
-  
-  
+  // Convert elapsed time to a fraction of a day
+  // There are 86,400,000 milliseconds in a day
+  let incrementPerDay = elapsedTimeInMillis / 172800000;
+
+  // Scale the increment by the amp value
+  let scaledIncrement =  incrementPerDay * amp;
+
+  // Update the index based on the scaled increment
   if (increasing) {
-    index += amp * 0.0001; // Aumentar el índice
-    if (index >= 0.99) {
-        index = 0.99;
-        increasing = false; // Cambiar la dirección
-    }
-} else {
-    index -= amp * 0.0001; // Disminuir el índice
-    if (index <= 0.00999) {
-        index = 0.00999;
-        increasing = true; // Cambiar la dirección
-    }
-}
+      index += scaledIncrement;
+      if (index >= 0.99) {
+          index = 0.99;
+          increasing = false;
+      }
+  } else {
+      index -= scaledIncrement;
+      if (index <= 0.01) {
+          index = 0.01;
+          increasing = true;
+      }
+  }
+  //print (elapsedTimeInSeconds +" - "+ index);
+  let result = interpolateTransitData(exoData, index);
 
-  let result = interpolateTransitData(exoData, index); 
+  let targetX = index * 255;
+  let targetY = result.normalizedB * 255;
+  let targetZ = result.normalizedDuration * 255;
 
- // speedAmount = result.normalizedBJD;
 
+  // Function to interpolate towards a target value
+  function interpolate(currentValue, targetValue) {
+      if (Math.abs(targetValue - currentValue) > 1) {
+          return currentValue + (targetValue - currentValue) * 0.1; // Adjust the 0.1 as needed
+      } else {
+          return targetValue;
+      }
+  }
 
-  xData = index*255;
+  // Update xData, yData, and zData
+  xData = interpolate(xData, targetX);
+  yData = interpolate(yData, targetY);
+  zData = interpolate(zData, targetZ);
+
+  // Update inputs
   xInput();
-  yData = result.normalizedB*255.;
   yInput();
-  zData = result.normalizedDuration*255;
   zInput();
 
-  setKnobValue(knobs[0], 50, xData, 50); // Set the first knob's values
-  setKnobValue(knobs[1], 50, yData, 50); // Set the first knob's values
-  setKnobValue(knobs[2], 50, zData, 50); // Set the first knob's values
- 
+  setKnobValue(knobs[0], 50, xData, 50);
+  setKnobValue(knobs[1], 50, yData, 50);
+  setKnobValue(knobs[2], 50, zData, 50);
+
   t15.html(result.transitDate);
   t16.html(nfs(result.b, 1, 2));
   t17.html(nfs(result.duration, 1, 2));
-
 }
 
-function orb(amp){
 
-  // read, interpolate and generate exoplanets orbit data for sonification / vizualization 
+function orb(amp) {
+  // Get the current time in milliseconds
+  let currentTime = Date.now();
 
-    index += amp * 0.0001; // Aumentar el índice
-    
-    index = index%1;  
+  // Calculate elapsed time in milliseconds since the last update
+  let elapsedTimeInMillis = currentTime - lastOrbitUpdateTime;
+  lastOrbitUpdateTime = currentTime;
 
-    const orbitData = generateOrbitData(exoData, index);
+  // Convert elapsed time to a fraction of a day
+  // There are 86,400,000 milliseconds in a day
+  let incrementPerDay = elapsedTimeInMillis / 172800000;
 
+  // Scale the increment by the amp value
+  let scaledIncrement = incrementPerDay * amp;
 
+  // Update the index based on the scaled increment
+  index += scaledIncrement;
+  index = index % 1;  // Ensure index loops within the range [0, 1)
 
-    xData = orbitData.d.orbitPosition*255.;
-    xInput();
-    yData = orbitData.c.orbitPosition*255.;
-    yInput();
-    zData = orbitData.b.orbitPosition*255;
-    zInput();
-  
-    setKnobValue(knobs[0], 50, xData, 50); // Set the first knob's values
-    setKnobValue(knobs[1], 50, yData, 50); // Set the first knob's values
-    setKnobValue(knobs[2], 50, zData, 50); // Set the first knob's values
+  const orbitData = generateOrbitData(exoData, index);
 
+  let targetX = orbitData.d.orbitPosition * 255;
+  let targetY = orbitData.c.orbitPosition * 255;
+  let targetZ = orbitData.b.orbitPosition * 255;
+
+  // Function to interpolate towards a target value
+  function interpolate(currentValue, targetValue) {
+      if (Math.abs(targetValue - currentValue) > 1) {
+          return currentValue + (targetValue - currentValue) * 0.1; // Adjust the 0.1 as needed
+      } else {
+          return targetValue;
+      }
+  }
+
+  // Update xData, yData, and zData
+  xData = interpolate(xData, targetX);
+  yData = interpolate(yData, targetY);
+  zData = interpolate(zData, targetZ);
+
+  // Update inputs
+  xInput();
+  yInput();
+  zInput();
+
+  setKnobValue(knobs[0], 50, xData, 50); // Set the first knob's values
+  setKnobValue(knobs[1], 50, yData, 50); // Set the second knob's values
+  setKnobValue(knobs[2], 50, zData, 50); // Set the third knob's values
 
   t15.html(nfs(orbitData.d.dayInOrbit, 1, 2));
   t16.html(nfs(orbitData.b.dayInOrbit, 1, 2));
   t17.html(nfs(orbitData.c.dayInOrbit, 1, 2));
-  
-  
 }
+
 
 
 
@@ -418,8 +473,7 @@ function regenLogic() {
           t17.html("");
           t21.html("Astronaut Control");
           t22.html("0");
-
-
+          t0.html("xJam");
           break;
       case 1:
 
@@ -429,6 +483,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("1");
+          t0.html("Transit");
 
           break;
       case 2:
@@ -438,6 +493,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("2");
+          t0.html("Transit");
 
           break;
       case 3:
@@ -447,6 +503,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("3");
+          t0.html("Transit");
 
           break;
       case 4:
@@ -457,6 +514,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("4");
+          t0.html("Transit");
 
 
           break;
@@ -467,6 +525,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("5");
+          t0.html("Orbits");
 
           break;
       case 6:
@@ -476,6 +535,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("6");
+          t0.html("Orbits");
 
           break;
       case 7:
@@ -485,6 +545,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("7");
+          t0.html("Orbits");
 
           break;
   }
@@ -532,30 +593,33 @@ function xB() {
       t21.html("X Balance");
       break;
     case 1:
-    case 2:
-    case 3:
-    case 4:
 
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_s1']);
 
       break;
     case 2:
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_s2']);
 
       break;
     case 3:
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_s3']);
 
       break;
     case 4:
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_Date']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Transit_s4']);
 
       break;
     case 5:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+      break;
+
     case 6:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+      break;
+
     case 7: 
     
-    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
+    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
 
       break;
 
@@ -583,12 +647,19 @@ function yB() {
 
       break;
 
-    case 5:
-    case 6:
-    case 7: 
-    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
-
-      break;
+      case 5:
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+        break;
+  
+      case 6:
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+        break;
+  
+      case 7: 
+      
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
+  
+        break;
 
   }
 
@@ -612,14 +683,19 @@ function zB() {
       t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_hrs']);
 
       break;
-    case 5:
-    case 6:
-    case 7:
-
-
-    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_period_days']);
-
-      break;
+      case 5:
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+        break;
+  
+      case 6:
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+        break;
+  
+      case 7: 
+      
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
+  
+        break;
   }
 
 
@@ -846,24 +922,27 @@ function guiData() {
   t17 = createP("");
   t21 = createP('');
   t22 = createP('0');
-
+  t0 = createP('xJam');
   guiDataStyle (cellWidth, cellHeight); 
 }
 
 function guiDataStyle(cellWidth, cellHeight) {
   
   let offset = 1;
+  let yoffset = cellHeight;
   let textColor = card.col1;
   let black = color(0);
+
+  if (sw>sh){ yoffset = cellHeight*.5; }
   
   // Calculate guiTextSize based on a combination of windowWidth and windowHeight
   let guiTextSize = min(windowWidth, windowHeight) * 0.027; 
 
   // Set positions and styles for column 1 elements (t1, t2, t3, t4)
-  let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
+  let col1Elements = [ t1, t2, t3, t4, t11, t12, t13];
   col1Elements.forEach((elem, index) => {
     let x = cellWidth * offset;
-    let y = index * cellHeight * .5 + guiTextSize;
+    let y = index * cellHeight * .5 + guiTextSize + yoffset;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
@@ -873,12 +952,19 @@ function guiDataStyle(cellWidth, cellHeight) {
   let col2Elements = [t5, t6, t7, t8, t15, t16, t17];
   col2Elements.forEach((elem, index) => {
     let x = 3.5 * cellWidth * offset; // Position for the second column
-    let y = index * cellHeight * .5 + guiTextSize;
+    let y = index * cellHeight * .5 + guiTextSize + yoffset;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
   });
 
+
+  t0.style('color', textColor);
+  t0.style('width', 6*btW + 'px');
+  t0.attribute('align', 'center');
+  t0.position( sw *.5 - 3*btW, guiTextSize);
+  t0.style('font-size', guiTextSize+10 + 'px');
+  
 
   t21.style('background-color', black);
   t21.style('color', textColor);
@@ -1112,14 +1198,13 @@ function setKnobValueY(knob, newValueY) {
   // Constrain the value within the valid range
   knob.valueY = constrain(knob.valueY, 0, steps - 1);
 
-  // If the knob's valueY is tied to certain parameters or UI elements, update them
-  if (knob === knobs[0]) { // If it's the X knob (assuming it uses valueY for some reason)
+  if (knob === knobs[0]) { // If it's the X knob 
     xData = knob.valueY;
     xInput(); // Update any related UI or data
   } else if (knob === knobs[1]) { // If it's the Y knob
     yData = knob.valueY;
     yInput(); // Update any related UI or data
-  } else if (knob === knobs[2]) { // If it's the Z knob (assuming it uses valueY for some reason)
+  } else if (knob === knobs[2]) { // If it's the Z knob 
     zData = knob.valueY;
     zInput(); // Update any related UI or data
   }
@@ -1344,6 +1429,41 @@ function interpolateTransitData(transitData, index) {
 }
 
 
+function generateOrbitData(json, index) {
+  // Calculate the sine wave position and day in orbit for a planet
+  function getOrbitData(orbitalPeriod, index) {
+    // Normalize the index by the orbital period
+    const normalizedIndex = index * orbitalPeriod;
+    const phase = (normalizedIndex % orbitalPeriod) / orbitalPeriod * 2 * Math.PI;
+    const orbitPosition = (Math.sin(phase) + 1) / 2;
+    const dayInOrbit = normalizedIndex % orbitalPeriod;
+    return { dayInOrbit, orbitPosition };
+  }
+
+  // Get the orbital periods
+  const periodB = json["Kepler-47"]["Planets"]["Kepler-47 b"]["orbital_period_days"];
+  const periodC = json["Kepler-47"]["Planets"]["Kepler-47 c"]["orbital_period_days"];
+  const periodD = json["Kepler-47"]["Planets"]["Kepler-47 d"]["orbital_period_days"];
+
+  return {
+    "b": getOrbitData(periodB, index),
+    "c": getOrbitData(periodC, index * periodC / periodB), // scale index for planet C
+    "d": getOrbitData(periodD, index * periodD / periodB)  // scale index for planet D
+  };
+}
+
+
+function gregorianToJulian(year, month, day) {
+  if (month <= 2) {
+    year -= 1;
+    month += 12;
+  }
+  let A = Math.floor(year / 100);
+  let B = 2 - A + Math.floor(A / 4);
+
+  return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+}
+
 function julianToDate(julian) {
   // Adding 2,455,000 back to the provided BJD
   const jd = julian + 0.5;
@@ -1368,26 +1488,34 @@ function julianToDate(julian) {
   
 }
 
-function generateOrbitData(json, index) {
-  // Calculate the sine wave position and day in orbit for a planet
-  function getOrbitData(orbitalPeriod, index) {
-    // Normalize the index by the orbital period
-    const normalizedIndex = index * orbitalPeriod;
-    const phase = (normalizedIndex % orbitalPeriod) / orbitalPeriod * 2 * Math.PI;
-    const orbitPosition = (Math.sin(phase) + 1) / 2;
-    const dayInOrbit = normalizedIndex % orbitalPeriod;
-    return { dayInOrbit, orbitPosition };
-  }
+function setCurrentIndexToToday() {
+    const transits = exoData['Kepler-47']['Maar_World']['transits'];
+    const numTransits = transits.length;
 
-  // Get the orbital periods
-  const periodB = json["Kepler-47"]["Planets"]["Kepler-47 b"]["orbital_period_days"];
-  const periodC = json["Kepler-47"]["Planets"]["Kepler-47 c"]["orbital_period_days"];
-  const periodD = json["Kepler-47"]["Planets"]["Kepler-47 d"]["orbital_period_days"];
+    // Calculate today's BJD
+    const today = new Date();
+    const todayBJD = gregorianToJulian(today.getFullYear(), today.getMonth() + 1, today.getDate()) - 2455000;
 
-  return {
-    "b": getOrbitData(periodB, index),
-    "c": getOrbitData(periodC, index * periodC / periodB), // scale index for planet C
-    "d": getOrbitData(periodD, index * periodD / periodB)  // scale index for planet D
-  };
+    // Find the nearest past and future transits
+    let pastTransitIndex = 0;
+    let futureTransitIndex = numTransits - 1;
+    for (let i = 0; i < numTransits; i++) {
+        if (transits[i].BJD < todayBJD) {
+            pastTransitIndex = i;
+        } else {
+            futureTransitIndex = i;
+            break;
+        }
+    }
+
+    // Calculate the exact index for today
+    const pastBJD = transits[pastTransitIndex].BJD;
+    const futureBJD = transits[futureTransitIndex].BJD;
+    const t = (todayBJD - pastBJD) / (futureBJD - pastBJD);
+    index = (pastTransitIndex + t) / (numTransits - 1);
+
+    // Adjust the index to fit within the range
+    index = Math.max(0, Math.min(index, numTransits - 1));
+
+    return index; // This is the normalized index for today
 }
-
