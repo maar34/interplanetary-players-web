@@ -483,7 +483,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("1");
-          t0.html("Transit");
+          t0.html("Transit I");
 
           break;
       case 2:
@@ -493,7 +493,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("2");
-          t0.html("Transit");
+          t0.html("Transit II");
 
           break;
       case 3:
@@ -503,7 +503,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("3");
-          t0.html("Transit");
+          t0.html("Transit III");
 
           break;
       case 4:
@@ -514,7 +514,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ1']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("4");
-          t0.html("Transit");
+          t0.html("Transit IIII");
 
 
           break;
@@ -525,7 +525,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("5");
-          t0.html("Orbits");
+          t0.html("Orbits V");
 
           break;
       case 6:
@@ -535,7 +535,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("6");
-          t0.html("Orbits");
+          t0.html("Orbits VI");
 
           break;
       case 7:
@@ -545,7 +545,7 @@ function regenLogic() {
           t13.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['pZ2']+ ":");
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("7");
-          t0.html("Orbits");
+          t0.html("Orbits VII");
 
           break;
   }
@@ -589,7 +589,7 @@ function xB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[0], 127);      
+      setKnobValueY(knobs[0], 127, 500);      
       t21.html("X Balance");
       break;
     case 1:
@@ -610,16 +610,16 @@ function xB() {
 
       break;
     case 5:
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5x']);
       break;
 
     case 6:
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6x']);
       break;
 
     case 7: 
     
-    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
+    t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7x']);
 
       break;
 
@@ -636,7 +636,7 @@ function yB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[1], 127); 
+      setKnobValueY(knobs[1], 127, 500); 
       t21.html("Y Balance");
       break;
     case 1:
@@ -648,16 +648,16 @@ function yB() {
       break;
 
       case 5:
-        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5y']);
         break;
   
       case 6:
-        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6y']);
         break;
   
       case 7: 
       
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7y']);
   
         break;
 
@@ -671,29 +671,38 @@ function zB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[2], 127);  
+      setKnobValueY(knobs[2], 127, 500);  
       t21.html("Z Balance");
     
       break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
+      case 1:
 
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_hrs']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_s1']);
+
+      break;
+    case 2:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_s2']);
+
+      break;
+    case 3:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_s3']);
+
+      break;
+    case 4:
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['Duration_s4']);
 
       break;
       case 5:
-        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5']);
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s5z']);
         break;
   
       case 6:
-        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6']);
+        t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s6z']);
         break;
   
       case 7: 
       
-      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7']);
+      t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_s7z']);
   
         break;
   }
@@ -1043,7 +1052,7 @@ function mousePressed() {
 function mouseDragged() {
 
   knobs.forEach((knob, index) => {
-    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2) {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size *.75 ) {
       knob.isDragging = true;
       updateKnobValue(knob, mouseX, mouseY);
       pressDOM();
@@ -1191,22 +1200,47 @@ function updateKnobValue(knob, currentX, currentY) {
 }
 
 
-function setKnobValueY(knob, newValueY) {
-  // Update the knob's Y value
-  knob.valueY = newValueY;
+function setKnobValueY(knob, newValueY, interpolationTimeInMillis) {
 
-  // Constrain the value within the valid range
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
+  // Calculate the amount to change per frame
+  let totalFrames = (interpolationTimeInMillis / 1000) * frameRate();
+  let changePerFrame = (newValueY - knob.valueY) / totalFrames;
 
-  if (knob === knobs[0]) { // If it's the X knob 
+  // Create a function to incrementally update the knob's value
+  function interpolateKnobValue() {
+    // Check if the knob is close enough to the target value
+    if (Math.abs(knob.valueY - newValueY) > Math.abs(changePerFrame)) {
+      knob.valueY += changePerFrame;
+
+      // Constrain the value within the valid range
+      knob.valueY = constrain(knob.valueY, 0, steps - 1);
+
+      // Update the associated data and UI
+      updateKnobRelatedData(knob);
+
+      // Continue interpolation in the next frame
+      setTimeout(interpolateKnobValue, 1000 / frameRate);
+    } else {
+      // Set the final value and update
+      knob.valueY = newValueY;
+      updateKnobRelatedData(knob);
+    }
+  }
+
+  // Start the interpolation process
+  interpolateKnobValue();
+}
+
+function updateKnobRelatedData(knob) {
+  if (knob === knobs[0]) { 
     xData = knob.valueY;
-    xInput(); // Update any related UI or data
-  } else if (knob === knobs[1]) { // If it's the Y knob
+    xInput();
+  } else if (knob === knobs[1]) {
     yData = knob.valueY;
-    yInput(); // Update any related UI or data
-  } else if (knob === knobs[2]) { // If it's the Z knob 
+    yInput();
+  } else if (knob === knobs[2]) {
     zData = knob.valueY;
-    zInput(); // Update any related UI or data
+    zInput();
   }
 }
 
