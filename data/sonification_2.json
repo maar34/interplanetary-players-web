@@ -1,0 +1,65 @@
+{
+  "Kepler-47": {
+    "Maar_World": {
+      "parameters": [
+        {
+          "parameter_name": "a (au)",
+          "value": "6.99E+14",
+          "short_parameter_name": "A",
+          "ID": 1,
+          "description": "Semimajor axis of the orbit in astronomical units."
+        },
+        {
+          "parameter_name": "e",
+          "value": "2.42E+13",
+          "short_parameter_name": "E",
+          "ID": 2,
+          "description": "Eccentricity of the orbit."
+        },
+        {
+          "parameter_name": "i (deg)",
+          "value": "9.04E+16",
+          "short_parameter_name": "I",
+          "ID": 4,
+          "description": "Inclination of the orbital plane in degrees."
+        },
+        {
+          "parameter_name": "omega (deg)",
+          "value": "3.52E+17",
+          "short_parameter_name": "OMEG",
+          "ID": 4,
+          "description": "Argument of periastron in degrees."
+        },
+        {
+          "parameter_name": "Omega (deg)",
+          "value": "-8.66E+14",
+          "short_parameter_name": "OMGA",
+          "ID": 5,
+          "description": "Nodal angle in degrees."
+        },
+        {
+          "parameter_name": "f (deg)",
+          "value": "2.99E+17",
+          "short_parameter_name": "F",
+          "ID": 6,
+          "description": "True anomaly in degrees."
+        },
+        {
+          "parameter_name": "M (deg)",
+          "value": "3.01E+17",
+          "short_parameter_name": "M",
+          "ID": 7,
+          "description": "Mean anomaly in degrees."
+        },
+        {
+          "parameter_name": "lambda (deg)",
+          "value": "2.89E+17",
+          "short_parameter_name": "LAMB",
+          "ID": 8,
+          "description": "Mean longitude in degrees."
+        }
+      ],
+      "reference": "Table 8 - Initial Orbital Elements - Jerome A. Orosz et al 2019 AJ 157 174"
+    }
+  }
+}

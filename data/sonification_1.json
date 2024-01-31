@@ -1,0 +1,82 @@
+{
+    "Kepler-47": {
+      "maar_world": {
+        "parameters": [
+
+          {
+            "parameter_name": "Period (days)",
+            "short_parameter_name": "PERI",
+            "ID": 1,
+            "values": {
+              "Lower": 187.15,
+              "Upper": 187.6
+            },
+            "description": "The time it takes for the planet to complete one orbit around its star."
+          },
+          {
+            "parameter_name": "T conj (BJD 2,455,000+)",
+            "short_parameter_name": "TCON",
+            "ID": 2,
+            "values": {
+              "Lower": 45.1,
+              "Upper": 45.75
+            },
+            "description": "The time of the first transit in Barycentric Julian Date minus 2,455,000."
+          },
+          {
+            "parameter_name": "Eccentricity cosine",
+            "short_parameter_name": "ECOS",
+            "ID": 3,
+            "values": {
+              "Lower": -0.39,
+              "Upper": 0.35
+            },
+            "description": " ."
+          },
+          {
+            "parameter_name": "Eccentricity sine",
+            "short_parameter_name": "ESIN",
+            "ID": 4,
+            "values": {
+              "Lower": -0.1,
+              "Upper": 0.2
+            },
+            "description": "The eccentricity of the planet's orbit times the sine of the argument of periapsis."
+          },
+          {
+            "parameter_name": "Inclination (deg)",
+            "short_parameter_name": "INCL",
+            "ID": 5,
+            "values": {
+              "Lower": 90.18,
+              "Upper": 90.62
+            },
+            "description": "The tilt of the planet's orbit in degrees relative to the line of sight."
+          },
+          {
+            "parameter_name": "Nodal angle (deg)",
+            "short_parameter_name": "NODA",
+            "ID": 6,
+            "values": {
+              "Lower": -2.8,
+              "Upper": 0.5
+            },
+            "description": "The angle in the orbital plane from the reference direction to the ascending node."
+          },
+          {
+            "parameter_name": "M 3 (M_⊕)",
+            "short_parameter_name": "EMAS",
+            "ID": 7,
+            "values": {
+              "Lower": 0.01,
+              "Upper": 100.0
+            },
+            "description": "The mass of the planet in Earth masses."
+          }
+          
+        ],
+        "reference": "Orosz, J. A., et al. (2019). Priors for Fitting Parameters. In The Astronomical Journal, 157(174), Table 4."
+      }
+    }
+  }
+  

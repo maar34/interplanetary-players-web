@@ -1,0 +1,318 @@
+{
+  "Kepler-47": {
+      "Stars": {
+        "Binary_Orbital_Period_days": 7.5,
+        "parameter_descriptions": {
+          "Binary_Orbital_Period_days": "The orbital period of the binary star system around their common center of mass."
+        }
+      },
+      "Planets": {
+        "Kepler-47 b": {
+          "orbital_period_days": 49.5,
+          "radius_R⊕": 3
+        },
+        "Kepler-47 c": {
+          "orbital_period_days": 303.2,
+          "radius_R⊕": 4.7
+        },
+        "Kepler-47 d": {
+          "orbital_period_days": 187.4,
+          "radius_R⊕": 7
+        }
+      },
+  
+    "Maar_World": {
+      "transits": [
+        {
+          "ID": 1,
+          "BJD": 3590.46599,
+          "e_BJD": 0.01449,
+          "Transit_Date": "2019 Apr 16",
+          "Transit_Time": "23:11:01.3",
+          "b": 0.381,
+          "e_b": 0.031,
+          "Duration_hrs": 5.02,
+          "e_Duration_hrs": 0.05,
+          "Normalized_BJD": 0.0,
+          "Normalized_b": 0.97241,
+          "Normalized_Duration_hrs": 0.0
+        },
+        {
+         
+          
+            "ID": 2,
+            "BJD": 3776.89067,
+            "e_BJD": 0.01533,
+            "Transit_Date": "2019 Oct 20",
+            "Transit_Time": "09:22:33.7",
+            "b": 0.362,
+            "e_b": 0.032,
+            "Duration_hrs": 5.05,
+            "e_Duration_hrs": 0.04,
+            "Normalized_BJD": 0.04953,
+            "Normalized_b": 0.92407,
+            "Normalized_Duration_hrs": 0.00236
+          },
+          
+          
+            {
+              "ID": 3,
+              "BJD": 3963.31897,
+              "e_BJD": 0.01657,
+              "Transit_Date": "2020 Apr 23",
+              "Transit_Time": "19:39:19.0",
+              "b": 0.343,
+              "e_b": 0.033,
+              "Duration_hrs": 5.15,
+              "e_Duration_hrs": 0.04,
+              "Normalized_BJD": 0.09906,
+              "Normalized_b": 0.87284,
+              "Normalized_Duration_hrs": 0.01024
+            },
+            
+            {
+              "ID": 4,
+              "BJD": 4149.75504,
+              "e_BJD": 0.01850,
+              "Transit_Date": "2020 Oct 27",
+              "Transit_Time": "06:07:15.6",
+              "b": 0.326,
+              "e_b": 0.034,
+              "Duration_hrs": 5.32,
+              "e_Duration_hrs": 0.04,
+              "Normalized_BJD": 0.14862,
+              "Normalized_b": 0.82847,
+              "Normalized_Duration_hrs": 0.02354
+            },
+
+
+            
+
+              {
+                "ID": 5,
+                "BJD": 4336.19874,
+                "e_BJD": 0.02071,
+                "Transit_Date": "2021 May 1",
+                "Transit_Time": "16:46:11.3",
+                "b": 0.309,
+                "e_b": 0.034,
+                "Duration_hrs": 5.60,
+                "e_Duration_hrs": 0.04,
+                "Normalized_BJD": 0.19821,
+                "Normalized_b": 0.78333,
+                "Normalized_Duration_hrs": 0.04573
+              },
+   
+              {
+                "ID": 6,
+                "BJD": 4522.65635,
+                "e_BJD": 0.02359,
+                "Transit_Date": "2021 Nov 4",
+                "Transit_Time": "03:45:08.9",
+                "b": 0.292,
+                "e_b": 0.035,
+                "Duration_hrs": 6.04,
+                "e_Duration_hrs": 0.05,
+                "Normalized_BJD": 0.24801,
+                "Normalized_b": 0.73740,
+                "Normalized_Duration_hrs": 0.08027
+              },
+     
+              {
+                "ID": 7,
+                "BJD": 4709.13842,
+                "e_BJD": 0.02774,
+                "Transit_Date": "2022 May 9",
+                "Transit_Time": "15:19:19.7",
+                "b": 0.275,
+                "e_b": 0.037,
+                "Duration_hrs": 6.72,
+                "e_Duration_hrs": 0.09,
+                "Normalized_BJD": 0.29790,
+                "Normalized_b": 0.69237,
+                "Normalized_Duration_hrs": 0.13359
+              },
+         
+              {
+                "ID": 8,
+                "BJD": 4895.65032,
+                "e_BJD": 0.03401,
+                "Transit_Date": "2022 Nov 12",
+                "Transit_Time": "03:36:27.5",
+                "b": 0.256,
+                "e_b": 0.038,
+                "Duration_hrs": 7.84,
+                "e_Duration_hrs": 0.16,
+                "Normalized_BJD": 0.34789,
+                "Normalized_b": 0.64211,
+                "Normalized_Duration_hrs": 0.22137
+              },
+      
+              {
+                "ID": 9,
+                "BJD": 5082.21936,
+                "e_BJD": 0.04505,
+                "Transit_Date": "2023 May 17",
+                "Transit_Time": "17:15:52.9",
+                "b": 0.232,
+                "e_b": 0.039,
+                "Duration_hrs": 9.97,
+                "e_Duration_hrs": 0.35,
+                "Normalized_BJD": 0.39799,
+                "Normalized_b": 0.57895,
+                "Normalized_Duration_hrs": 0.38956
+              },
+   
+              {
+                "ID": 10,
+                "BJD": 5268.92328,
+                "e_BJD": 0.07347,
+                "Transit_Date": "2023 Nov 20",
+                "Transit_Time": "10:09:31.0",
+                "b": 0.199,
+                "e_b": 0.041,
+                "Duration_hrs": 15.74,
+                "e_Duration_hrs": 1.35,
+                "Normalized_BJD": 0.44822,
+                "Normalized_b": 0.49123,
+                "Normalized_Duration_hrs": 0.84211
+              },
+       
+              {
+                "ID": 11,
+                "BJD": 5456.14904,
+                "e_BJD": 0.20665,
+                "Transit_Date": "2024 May 25",
+                "Transit_Time": "15:34:37.5",
+                "b": 0.119,
+                "e_b": 0.045,
+                "Duration_hrs": 34.28,
+                "e_Duration_hrs": 0.83,
+                "Normalized_BJD": 0.49856,
+                "Normalized_b": 0.27895,
+                "Normalized_Duration_hrs": 2.29474
+              },
+          
+              {
+                "ID": 12,
+                "BJD": 5643.63396,
+                "e_BJD": 0.08954,
+                "Transit_Date": "2024 Nov 29",
+                "Transit_Time": "03:12:54.0",
+                "b": 0.014,
+                "e_b": 0.041,
+                "Duration_hrs": 18.61,
+                "e_Duration_hrs": 1.73,
+                "Normalized_BJD": 0.54902,
+                "Normalized_b": 0.0,
+                "Normalized_Duration_hrs": 1.06842
+              },
+           
+              {
+                "ID": 13,
+                "BJD": 5830.39948,
+                "e_BJD": 0.05933,
+                "Transit_Date": "2025 Jun 3",
+                "Transit_Time": "21:35:14.8",
+                "b": 0.079,
+                "e_b": 0.044,
+                "Duration_hrs": 11.14,
+                "e_Duration_hrs": 0.49,
+                "Normalized_BJD": 0.59960,
+                "Normalized_b": 0.17237,
+                "Normalized_Duration_hrs": 0.48026
+              },
+             
+              {
+                "ID": 14,
+                "BJD": 6016.99917,
+                "e_BJD": 0.04807,
+                "Transit_Date": "2025 Dec 7",
+                "Transit_Time": "11:58:48.0",
+                "b": 0.127,
+                "e_b": 0.046,
+                "Duration_hrs": 8.58,
+                "e_Duration_hrs": 0.24,
+                "Normalized_BJD": 0.65031,
+                "Normalized_b": 0.29868,
+                "Normalized_Duration_hrs": 0.27947
+              },
+              
+            {
+              "ID": 15,
+              "BJD": 6203.52776,
+              "e_BJD": 0.04248,
+              "Transit_Date": "2026 Jun 12",
+              "Transit_Time": "00:39:58.4",
+              "b": 0.165,
+              "e_b": 0.047,
+              "Duration_hrs": 7.26,
+              "e_Duration_hrs": 0.15,
+              "Normalized_BJD": 0.70114,
+              "Normalized_b": 0.40000,
+              "Normalized_Duration_hrs": 0.17632
+            },
+        
+                    {
+            "ID": 16,
+            "BJD": 6390.01925,
+            "e_BJD": 0.03950,
+            "Transit_Date": "2026 Dec 15",
+            "Transit_Time": "12:27:43.1",
+            "b": 0.197,
+            "e_b": 0.048,
+            "Duration_hrs": 6.46,
+            "e_Duration_hrs": 0.11,
+            "Normalized_BJD": 0.75211,
+            "Normalized_b": 0.48553,
+            "Normalized_Duration_hrs": 0.11263
+          }
+        
+      ],
+      "Normalization_Ranges": {
+        "BJD": { "min": 3590.46599, "max": 6390.01925 },
+        "b": { "min": 0.014, "max": 0.381 },
+        "Duration_hrs": { "min": 5.02, "max": 34.28 }
+      },
+      "parameter_descriptions": {
+        "pX1": "Date",
+        "pY1": "Impact",
+        "pZ1": "Duration",
+        "pX2": "kepler47-d",
+        "pY2": "kepler47-b",
+        "pZ2": "kepler47-c",
+        "General": "Maar World (Kepler-47 d) orbit: it's a way to audibly experience the dance of a distant exoplanet through past present and future time, offering a sonic perspective its celestial movements and characteristics.!",
+        "BJD": "Barycentric Julian Date of the transit, minus 2,455,000.",
+        "e_BJD": "Uncertainty in the Barycentric Julian Date.",
+        "Transit_Date": "Date of the transit (Day Month Year).",
+        "Transit_s1": "Date of the transit (Day Month Year)<br>scale = 1 minute ~ 1 day ",
+        "Transit_s2": "Date of the transit (Day Month Year)<br>scale = 1 second ~ 1 earth day",
+        "Transit_s3": "Date of the transit (Day Month Year)<br>scale = 50 milisecond ~ 1 earth day.",
+        "Transit_s4": "Date of the transit (Day Month Year)<br>scale = 15 miliseconds ~ 1 earth day.",
+        "Transit_Time": "Time of the transit (UT).",
+        "b": "Impact parameter, representing the distance of the exoplanet's path from the star's center during transit.",
+        "e_b": "Uncertainty in the impact parameter.",
+        "Duration_hrs": "Duration of the transit in hours.",
+        "Duration_s1": "Duration of the transit in hours<br>scale = 1 minute ~ 1 day ",
+        "Duration_s2": "Duration of the transit in hours<br>scale = 1 second ~ 1 earth day",
+        "Duration_s3": "Duration of the transit in hours<br>scale = 50 milisecond ~ 1 earth day.",
+        "Duration_s4": "Duration of the transit in hours<br>scale = 15 miliseconds ~ 1 earth day.",
+        "e_Duration_hrs": "Uncertainty in the duration of the transit.",
+        "orbital_period_days": "The time taken for the exoplanet to complete one full orbit around the binary stars.",
+        "orbital_s5x": "The time taken to kepler47-d to complete one full orbit around the binary stars.<br>scale = 1 minute ~ 1 day",
+        "orbital_s5y": "The time taken to kepler47-b to complete one full orbit around the binary stars.<br>scale = 1 minute ~ 1 day",
+        "orbital_s5z": "The time taken to kepler47-c to complete one full orbit around the binary stars.<br>scale = 1 minute ~ 1 day",
+        "orbital_s6x": "The time taken to kepler47-d to complete one full orbit around the binary stars.<br>scale = 1 second ~ 1 earth day",
+        "orbital_s6y": "The time taken to kepler47-b to complete one full orbit around the binary stars.<br>scale = 1 second ~ 1 earth day",
+        "orbital_s6z": "The time taken to kepler47-c to complete one full orbit around the binary stars.<br>scale = 1 second ~ 1 earth day",
+        "orbital_s7x": "The time taken to kepler47-d to complete one full orbit around the binary stars.<br>scale = 15 miliseconds ~ 1 earth day",
+        "orbital_s7y": "The time taken to kepler47-b to complete one full orbit around the binary stars.<br>scale = 15 miliseconds ~ 1 earth day",
+        "orbital_s7z": "The time taken to kepler47-c to complete one full orbit around the binary stars.<br>scale = 15 miliseconds ~ 1 earth day",
+        "radius_R⊕": "The radius of the exoplanet in terms of Earth radii (R⊕).",
+        "Binary_Orbital_Period_days": "The orbital period of the binary star system around their common center of mass.",
+        "orbital_description": "In the Kepler-47 system, each exoplanet's dance around its twin stars takes a specific amount of days, known as its orbital period. Connecting this movements with music, It's a way to perceive the dynamics of this exoplanets situated approximately 3343 light-years away in the direction of the Cygnus constellation, using the multi-versal language of music. "
+      },
+      "Reference": "Table 10 - Times, durations, and impact parameters of future exoplanet transits - Discovery of a Third Transiting Planet in the Kepler-47 Circumbinary System - BJD ~ BJD–2,455,000"
+    }
+  }
+}
