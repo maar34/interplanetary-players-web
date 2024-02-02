@@ -37,7 +37,7 @@ let steps = 255;  // Number of discrete steps
 let sensitivity = 0.9;  // Sensitivity for knob movement
 let labels = ["X", "Y", "Z"]; // Labels for the knobs
 let knobSpacing; // Spacing between knobs
-let domAlpha, domAlpha2; 
+let domAlpha, domColor2; 
 
 // Game and deck variables
 var game, deck, suit, loadDeck, exoData;
@@ -181,7 +181,7 @@ function setup() {
   easycam.state_reset = state;
   easycam.setPanScale(0.0);
   easycam.setPanScale(.02);
-  easycam.removeMouseListeners();
+  easycam.attachMouseListeners();
 
   
   cardColor = color(card.col1);
@@ -266,7 +266,7 @@ function draw() {
     knobs.forEach((knob, index) => {
       let angleY = map(knob.valueY, 0, steps - 1, 0, 360, true);
 
-      stroke(regenValue > 0 ? domAlpha2 : cardColor);
+      stroke(regenValue > 0 ? domColor2 : cardColor);
 
       push();
       translate(knob.x, knob.y);
@@ -471,9 +471,13 @@ function regenLogic() {
           t15.html("");
           t16.html("");
           t17.html("");
-          t21.html("Astronaut Control");
+          t21.html("A playground for improvisation and deep listening");
           t22.html("0");
           t0.html("xJam");
+          t22.style('color', domAlpha); // Section Number
+
+         // t22.style('color', textColor);
+
           break;
       case 1:
 
@@ -484,6 +488,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("1");
           t0.html("Transit I");
+          t22.style('color', domColor2); // Section Number
 
           break;
       case 2:
@@ -494,6 +499,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("2");
           t0.html("Transit II");
+          t22.style('color', domColor2); // Section Number
 
           break;
       case 3:
@@ -504,6 +510,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("3");
           t0.html("Transit III");
+          t22.style('color', domColor2); // Section Number
 
           break;
       case 4:
@@ -515,6 +522,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['General']);
           t22.html("4");
           t0.html("Transit IIII");
+          t22.style('color', domColor2); // Section Number
 
 
           break;
@@ -526,6 +534,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("5");
           t0.html("Orbits V");
+          t22.style('color', domColor2); // Section Number
 
           break;
       case 6:
@@ -536,6 +545,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("6");
           t0.html("Orbits VI");
+          t22.style('color', domColor2); // Section Number
 
           break;
       case 7:
@@ -546,6 +556,7 @@ function regenLogic() {
           t21.html(exoData['Kepler-47']['Maar_World']['parameter_descriptions']['orbital_description']);
           t22.html("7");
           t0.html("Orbits VII");
+          t22.style('color', domColor2); // Section Number
 
           break;
   }
@@ -561,6 +572,7 @@ function playPause() {
     context.resume().then(() => {
       console.log('Playback resumed successfully');
     });
+
   }
 
   // Toggle play state
@@ -570,7 +582,8 @@ function playPause() {
     // Schedule play events
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     device.scheduleEvent(messageEvent);
-    
+    easycam.removeMouseListeners();
+
     playStateI = 1;
   } else {
     playButton.attribute('src', playIcon);
@@ -578,7 +591,7 @@ function playPause() {
     // Schedule stop events
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
     device.scheduleEvent(messageEvent);
-
+    easycam.attachMouseListeners();
     playStateI = 0;
   }
 }
@@ -751,11 +764,9 @@ function createDom() {
 
   let domColor = color (card.col1);
   domAlpha = color (card.col1); 
-  domAlpha2 = color (card.col1);   
   domAlpha.setAlpha(190);
-  domAlpha2.setAlpha(99);
-  
 
+  domColor2 = color(0, 255, 128);
 
 
   centerIcon = 'icons/' + nf(card.icon_set, 2) + '_center.svg';
@@ -929,9 +940,9 @@ function guiData() {
   t16 = createP();
   t16.html("");
   t17 = createP("");
-  t21 = createP('');
+  t21 = createP(''); // Hint
   t22 = createP('0');
-  t0 = createP('xJam');
+  t0 = createP('xJam'); // Section Title
   guiDataStyle (cellWidth, cellHeight); 
 }
 
@@ -968,7 +979,7 @@ function guiDataStyle(cellWidth, cellHeight) {
   });
 
 
-  t0.style('color', textColor);
+  t0.style('color', domColor2);
   t0.style('width', 6*btW + 'px');
   t0.attribute('align', 'center');
   t0.position( sw *.5 - 3*btW, guiTextSize);
@@ -976,15 +987,15 @@ function guiDataStyle(cellWidth, cellHeight) {
   
 
   t21.style('background-color', black);
-  t21.style('color', textColor);
+  t21.style('color', domColor2);
 
   t21.style('width', 6*btW + 'px');
   t21.attribute('align', 'center');
   t21.position( sw *.5 - 3*btW , sh * .2);
-  t21.style('font-size', guiTextSize + 'px');
+  t21.style('font-size', guiTextSize + 'px'); // Hint
 
   t22.style('background-color', black);
-  t22.style('color', textColor);
+  t22.style('color', textColor); // Section Number
 
   t22.style('width', btW + 'px');
   t22.attribute('align', 'center');
