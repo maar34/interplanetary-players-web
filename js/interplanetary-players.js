@@ -4,27 +4,22 @@ let sw, sh; // window size
 let cellWidth, cellHeight; // gui separation
 
 // Button and slider dimensions
-var btW, btH, sliderW, sliderH, initSpeed;
+var btW, btH;
 
 // Data and parameters
 let params; // URL parameters
-let levelI, worldI_dist, cardColor; // Level index, world distance, card color
-let tempID, xDifference, yDifference; // Temporary ID, X/Y differences
+let worldI_dist, cardColor; // Level index, world distance, card color
 
 let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm; // Data arrays and their normalized versions
-let easyX, easyY; // Simplified X, Y values
+let easyX, easyY; // Simplified X, Y values for visualization 
 
 // GUI and Visual elements
 let font1; // font variable
 let loadingBar;
 let loadP =false; 
-let bcol, col; // Background and general colors
-let freq, back;
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
 
-let cam1; // Camera
-let portrait; // Portrait element
 let notDOM; // Non-DOM element
 let device; // Device information
 let canvas; 
@@ -47,28 +42,15 @@ let inputX, inputY, inputZ;
 let wMinD = 444;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
-
-// Layout and scaling
-let aspectRatio, scale, cols, rows; // Aspect ratio, scale, column/row count
-let baseCols = 10, baseRows = 10     ; // Base column and row count
-let worldI_speed = 1.0; // World speed index
+let prevTouchX = 0, prevTouchY = 0;
 
 // Audio channels and analysis
-let trackI, filterI; // track 1 -  
 let playStateI; // Play state index
-var numSamples = 1024;
-// Array of amplitude values (-1 to +1) over time.
-var samples = [];
 
-let prevTouchX = 0;
-let prevTouchY = 0;
-
-// TIME 
+// TIME, related to Dates and Transits 
 
 let lastUpdateTime = Date.now();
 let lastOrbitUpdateTime = lastUpdateTime;
-let lastTransitDate = '';
-let lastDateChangeTimestamp = Date.now();
 
 var card = {
   id: "",
@@ -101,9 +83,6 @@ document.oncontextmenu = () => false; // no right click
 
 function preload() {
 
-
-  initVariables();
-
   params = getURLParams();
 
   game = loadJSON("data/" + params.g + ".json");
@@ -129,10 +108,10 @@ document.body.addEventListener('touchstart', function (e) {
 
 function setup() {
 
-      // Create Canvas - Always the landscape.  
-    canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
-    setAttributes('antialias', true);
-    frameRate(30); 
+    // Create Canvas - Always the landscape.  
+  canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+  setAttributes('antialias', true);
+  frameRate(30); 
 
   initVariables();
 
@@ -146,10 +125,6 @@ function setup() {
 
   playStateI = 0;
   worldI_dist = 940;
-
-  bcol = color(0, 0, 0, 10);
-  col = color(255, 0, 0);
-
 
   setCurrentIndexToToday();
     
@@ -165,14 +140,6 @@ function setup() {
   if (params.s == 2) {
     card = game.C[params.c];
   };
-  worldI_speed = card.speed;
-
-  xDifference = (card.xTag[2] - card.xTag[1]) > 10;
-  yDifference = (card.yTag[2] - card.yTag[1]) > 10;
-
-
-
-
 
   easycam = createEasyCam();
   easycam.setState(state, 3000); // animate to state in 3 second
@@ -737,9 +704,6 @@ function loaded() {
 
   guiData();
 
-  //trackI.disconnect();
-  //trackI.connect(filterI);
-
 }
 
 function errorLoadingAudio(_error) {
@@ -848,22 +812,6 @@ function createDom() {
   regenButton.touchEnded(releaseDOM);
 
   updateButtonPositions();
-  
-
-
-  // create sliders
-
-  initSpeed = map(float((card.speed)), float(card.minSpeed), float(card.maxSpeed), 0., 255.);
-  //xSlider = createSlider(0., 255, 128);
-
-
-  //   myElement.style('background', domColor); // this change only the line color*/
-  // xSlider.style('::-webkit-slider-thumb:background', 'red');
-  // xSlider.style('background', 'rgba(0, 0, 0, 0)');
-  // myClass.style(`::-webkit-slider-thumb { background: ${domColor}; }`);
-
-
-  //ySlider = createSlider(0, 255, 128);
 
   playButton.hide();
   regenButton.hide();
@@ -871,7 +819,6 @@ function createDom() {
   xButton.hide();
   yButton.hide();
   zButton.hide();
-
 
 }
 
@@ -897,7 +844,6 @@ function yInput() {
 
   easyX = yDataM * -0.00077;
 
-  // if the range in x axe is greter than 10 (xDifference) then animate planet with normalized value, else use the normal value - this exception works nice with speed and non simetrical parameters
 
 }
 
@@ -1131,11 +1077,12 @@ function initVariables() {
   sw = window.innerWidth;
   sh = window.innerHeight;
 
-  aspectRatio = sw / sh;
-  scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
-  cellSize = min(width, height) / baseCols;
-  cols = floor(width / cellSize); // Adjust columns based on aspect ratio
-  rows = floor(height / cellSize); // Adjust rows based on aspect ratio
+  let baseCols = 10; 
+  //let aspectRatio = sw / sh;
+  //scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
+  let cellSize = min(width, height) / baseCols;
+  let cols = floor(width / cellSize); // Adjust columns based on aspect ratio
+  let rows = floor(height / cellSize); // Adjust rows based on aspect ratio
 
   xData = 1.;
   yData = 1.;
@@ -1368,8 +1315,6 @@ async function createRNBO() {
     loadAudioBuffer(context);
 
     // Connect With Parameters
-
-    
     inputX = device.parametersById.get("inputX");
     inputY = device.parametersById.get("inputY");
     inputZ = device.parametersById.get("inputZ");
