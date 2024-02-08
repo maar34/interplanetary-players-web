@@ -132,7 +132,7 @@ function setup() {
       // Create Canvas - Always the landscape.  
     canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
     setAttributes('antialias', true);
-  
+    frameRate(30); 
 
   initVariables();
 
