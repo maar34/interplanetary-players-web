@@ -440,7 +440,7 @@ function regenLogic() {
           t17.html("");
           t21.html("A playground for improvisation and deep listening");
           t22.html("0");
-          t0.html("xJam");
+          t0.html("Space Jam");
           t22.style('color', domAlpha); // Section Number
 
          // t22.style('color', textColor);
@@ -888,7 +888,7 @@ function guiData() {
   t17 = createP("");
   t21 = createP(''); // Hint
   t22 = createP('0');
-  t0 = createP('xJam'); // Section Title
+  t0 = createP('Space Jam'); // Section Title
   guiDataStyle (cellWidth, cellHeight); 
 }
 
