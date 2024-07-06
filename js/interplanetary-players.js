@@ -566,6 +566,8 @@ function playPause() {
     // If suspended (not yet running), resume it
     context.resume().then(() => {
       console.log('Playback resumed successfully');
+      inputGain.value = 0.77;
+
     });
 
   }
@@ -896,8 +898,7 @@ function zInput() {
 
 function gainInput() {
 
-  inputGain.value = zData;
-
+  inputGain.value = inputGain; 
 }
 
 
@@ -1070,6 +1071,8 @@ function mouseDragged() {
     if (sliders.isDragging) {
     // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
       sliders.sliderValue = constrain(mouseY - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+      inputGain.value = map (sliders.sliderValue, 220., -220, 0., 1.);   
+
     }
 });
 }
@@ -1194,7 +1197,7 @@ function initSliders(){
       y: startY,
       z: 0,  // Initial Z position
       sliderHeight: (cellHeight)*4,
-      sliderValue: 98,
+      sliderValue: -127,
       sliderMin: 0,
       sliderMax: 127,
       isDragging: false,
@@ -1202,6 +1205,8 @@ function initSliders(){
       handleRadius: btW*.5
     });
 }
+
+
 
 }
 
@@ -1381,7 +1386,7 @@ function updateButtonPositions() {
           sliders[i].y = sstartY;
           sliders[i].z = 0;  // Initial Z position
           sliders[i].sliderHeight = (cellHeight)*4;
-          sliders[i].sliderValue = 98;
+          sliders[i].sliderValue = -124;
           sliders[i].sliderMin = 0;
           sliders[i].sliderMax = 127;
           sliders[i].isDragging = false;
@@ -1440,11 +1445,25 @@ async function createRNBO() {
     device.node.connect(context.destination);
     loadAudioBuffer(context);
 
-    // Connect With Parameters
-    inputX = device.parametersById.get("inputX");
-    inputY = device.parametersById.get("inputY");
-    inputZ = device.parametersById.get("inputZ");
-    inputGain = device.parametersById.get("inputGain");
+  // Connect With Parameters
+  inputX = device.parametersById.get("inputX");
+  inputY = device.parametersById.get("inputY");
+  inputZ = device.parametersById.get("inputZ");
+  inputGain = device.parametersById.get("inputGain");
+
+  // Set the initial values of the input parameters to the center position of the knobs and slider
+  const centerValue = (ksteps - 1) / 2;
+  inputX.value = map(centerValue, 0, ksteps - 1, float(card.xTag[1]), float(card.xTag[2]));
+  inputY.value = map(centerValue, 0, ksteps - 1, float(card.yTag[1]), float(card.yTag[2]));
+  inputZ.value = map(centerValue, 0, ksteps - 1, float(card.zTag[1]), float(card.zTag[2]));
+  inputGain.value = map(0, -220, 220, 0, 1); // Set slider to center value (0)
+
+  // Initialize knobs to center position
+  knobs[0].valueY = centerValue;
+  knobs[1].valueY = centerValue;
+  knobs[2].valueY = centerValue;
+  sliders[0].sliderValue = 0; // Set slider to center value (0)
+
 
   } catch (error) {
     console.log(error);

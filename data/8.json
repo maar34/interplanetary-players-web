@@ -3,8 +3,8 @@
    "A": [
       {
          "id": "0",
-         "wavfile": "data/Rabbit_Hole_Maar.mp3",
-         "mp3file": "data/Rabbit_Hole_Maar.mp3",
+         "wavfile": "https://dl.dropbox.com/s/dn0z8tcu6taehm5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2001%20Trompeta%20Mochica.mp3?raw=1",
+         "mp3file": "https://dl.dropbox.com/s/dn0z8tcu6taehm5/Shika%20Shika%20-%20Sample%20Pack-%20Sonido%20de%20las%20Am%C3%A9ricas%20-%2001%20Trompeta%20Mochica.mp3?raw=1",
          "initTime": "111.",
          "endTime": "333.",
          "speed": "1.",
@@ -13,7 +13,7 @@
          "col1": "rgb(255,51,204)",
          "col2": "333.",
          "icon_set":"101",
-         "engine": "d00_c01_v0.3-noLimit.json",
+         "engine": "d00_c01_v0.3.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -71,7 +71,7 @@
          "col1": "rgb(255,51,204)",
          "col2": "333.",
          "icon_set":"101",
-         "engine": "s0_c01_v1.2.json",
+         "engine": "d00_c01_v0.3.json",
          "xTag": [
             "Speed",
             "-1.",
@@ -100,7 +100,7 @@
          "col1": "rgb(255,51,204)",
          "col2": "333.",
          "icon_set":"101",
-         "engine": "s0_c01_v1.2.json",
+         "engine": "d00_c01_v0.3.json",
          "xTag": [
             "Speed",
             "-1.",
