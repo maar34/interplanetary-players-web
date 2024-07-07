@@ -112,6 +112,7 @@ document.body.onclick = () => {
 document.body.addEventListener('touchstart', function (e) {
   if (e.target == document.body) {
     e.preventDefault();
+
   }
 }, { passive: false });
 
@@ -164,6 +165,7 @@ function setup() {
 
   // Use the selected Font 
 
+  
   textFont(font1);
   textSize(27);
   createRNBO();
@@ -562,18 +564,18 @@ function regenLogic() {
 function playPause() {
   notDOM = false;
   // Check if the AudioContext is already running
+  
   if (context.state === 'suspended') {
     // If suspended (not yet running), resume it
     context.resume().then(() => {
       console.log('Playback resumed successfully');
-      inputGain.value = 0.77;
 
     });
 
   }
 
   // Toggle play state
-  if (playStateI == 0) {
+  if (playStateI == 0 && context.state === 'running') {
     playButton.attribute('src', pauseIcon);
 
     // Schedule play events
@@ -1035,6 +1037,8 @@ function releaseDOM() {
 
 
 function mousePressed() {
+
+
   knobs.forEach(knob => {
       knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
   });
@@ -1071,7 +1075,7 @@ function mouseDragged() {
     if (sliders.isDragging) {
     // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
       sliders.sliderValue = constrain(mouseY - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
-      inputGain.value = map (sliders.sliderValue, 220., -220, 0., 1.);   
+      inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -220, 0., 1.);   
 
     }
 });
@@ -1127,8 +1131,10 @@ function touchMoved() {
   sliders.forEach(sliders => {
     if (sliders.isDragging) {
     // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
-      sliders.sliderValue = constrain(touches[0].y - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
-    }
+    sliders.sliderValue = constrain(touches[0].y - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+    inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -sliders.sliderHeight / 2, 0., 1.);   
+
+  }
 });
 
   prevTouchX = touches[0].x;
