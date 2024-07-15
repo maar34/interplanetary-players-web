@@ -16,7 +16,7 @@ let easyX, easyY; // Simplified X, Y values for visualization
 // GUI and Visual elements
 let font1; // font variable
 let loadingBar;
-let loadP =false; 
+let loadP =true; 
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
 
@@ -24,7 +24,7 @@ let notDOM; // Non-DOM element
 let device; // Device information
 let canvas; 
 
-let regenIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
+let regenIcon, initialPlayIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
 var regenValue; // regen button number state 
 
 let knobs = [];
@@ -105,9 +105,6 @@ function preload() {
 
 }
 
-document.body.onclick = () => {
-  context.resume();
-}
 // prevent screen movement on touchstart event
 document.body.addEventListener('touchstart', function (e) {
   if (e.target == document.body) {
@@ -471,7 +468,7 @@ function regenLogic() {
           t17.html("");
           t21.html("A playground for improvisation and deep listening");
           t22.html("0");
-          t0.html("Space Jam");
+          t0.html("Jam");
           t22.style('color', domAlpha); // Section Number
 
          // t22.style('color', textColor);
@@ -561,20 +558,30 @@ function regenLogic() {
 }
 
 
-function playPause() {
+async function playPause() {
   notDOM = false;
-  // Check if the AudioContext is already running
-  
-  if (context.state === 'suspended') {
-    // If suspended (not yet running), resume it
-    context.resume().then(() => {
-      console.log('Playback resumed successfully');
 
-    });
-
+  // Check if the context is already initialized
+  if (typeof context === 'undefined') {
+    loadP = true; 
+    await createRNBO();
   }
 
-  // Toggle play state
+  // Check if the AudioContext is suspended and resume it
+  if (context.state === 'suspended') {
+    await context.resume().then(() => {
+      console.log('Playback resumed successfully');
+      playButton.attribute('src', playIcon); // Change to play icon after context is resumed
+     // togglePlayState();
+    }).catch(err => {
+      console.log('Failed to resume AudioContext:', err);
+    });
+  } else {
+    togglePlayState();
+  }
+}
+
+function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
     playButton.attribute('src', pauseIcon);
 
@@ -594,6 +601,7 @@ function playPause() {
     playStateI = 0;
   }
 }
+
 
 function xB() {
 
@@ -809,10 +817,11 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
+  initialPlayIcon = 'icons/' + nf(card.icon_set, 2) + '_on-off.svg';
   playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
 
   // create buttons and sliderss
-  playButton = createImg(playIcon, 'Play Button', '&#9655');
+  playButton = createImg(initialPlayIcon, 'Play Button', '&#9655');
   pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
 
   playButton.style('width',  btW+ 'px');
@@ -927,7 +936,7 @@ function guiData() {
   t17 = createP("");
   t21 = createP(''); // Hint
   t22 = createP('0');
-  t0 = createP('Space Jam'); // Section Title
+  t0 = createP('Jam'); // Section Title
   guiDataStyle (cellWidth, cellHeight); 
 }
 
@@ -1004,7 +1013,7 @@ function loadingGUI() {
     translate(0., 0., -666.);
 
     text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
-    text("please wait, unmute device...", 0, -sh * .34 - cellHeight * 1);
+    text("turn on & unmute device...", 0, -sh * .34 - cellHeight * 1);
     translate(0., 0., 666.);
 
   } else {
@@ -1435,48 +1444,40 @@ function updateButtonPositions() {
 ////////// AUDIO ENGINE ///////// 
 
 async function createRNBO() {
-
   try {
-
     const patchExportURL = "export/" + card.engine;
-
-    // Create AudioContext
     let WAContext = window.AudioContext || window.webkitAudioContext;
     context = new WAContext();
 
     let rawPatcher = await fetch(patchExportURL);
     let patcher = await rawPatcher.json();
-    device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
+    device = await RNBO.createDevice({ context, patcher });
 
     device.node.connect(context.destination);
     loadAudioBuffer(context);
 
-  // Connect With Parameters
-  inputX = device.parametersById.get("inputX");
-  inputY = device.parametersById.get("inputY");
-  inputZ = device.parametersById.get("inputZ");
-  inputGain = device.parametersById.get("inputGain");
+    inputX = device.parametersById.get("inputX");
+    inputY = device.parametersById.get("inputY");
+    inputZ = device.parametersById.get("inputZ");
+    inputGain = device.parametersById.get("inputGain");
 
-  // Set the initial values of the input parameters to the center position of the knobs and slider
-  const centerValue = (ksteps - 1) / 2;
-  inputX.value = map(centerValue, 0, ksteps - 1, float(card.xTag[1]), float(card.xTag[2]));
-  inputY.value = map(centerValue, 0, ksteps - 1, float(card.yTag[1]), float(card.yTag[2]));
-  inputZ.value = map(centerValue, 0, ksteps - 1, float(card.zTag[1]), float(card.zTag[2]));
-  inputGain.value = map(0, -220, 220, 0, 1); // Set slider to center value (0)
+    const centerValue = (ksteps - 1) / 2;
+    inputX.value = map(centerValue, 0, ksteps - 1, parseFloat(card.xTag[1]), parseFloat(card.xTag[2]));
+    inputY.value = map(centerValue, 0, ksteps - 1, parseFloat(card.yTag[1]), parseFloat(card.yTag[2]));
+    inputZ.value = map(centerValue, 0, ksteps - 1, parseFloat(card.zTag[1]), parseFloat(card.zTag[2]));
+    inputGain.value = map(0, -220, 220, 0, 1);
 
-  // Initialize knobs to center position
-  knobs[0].valueY = centerValue;
-  knobs[1].valueY = centerValue;
-  knobs[2].valueY = centerValue;
-  sliders[0].sliderValue = 0; // Set slider to center value (0)
-
+    knobs[0].valueY = centerValue;
+    knobs[1].valueY = centerValue;
+    knobs[2].valueY = centerValue;
+    sliders[0].sliderValue = 0;
 
   } catch (error) {
     console.log(error);
     errorLoadingAudio(error);
   }
-
 }
+
 
 async function loadAudioBuffer(_context) {
 
