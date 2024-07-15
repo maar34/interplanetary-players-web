@@ -55,6 +55,7 @@ let prevTouchX = 0, prevTouchY = 0;
 
 // Audio channels and analysis
 let playStateI; // Play state index
+let isFirstPlay = true; // Flag to track the first play button press
 
 // TIME, related to Dates and Transits 
 
@@ -122,10 +123,10 @@ function setup() {
 
   initVariables();
 
-  xData = 1;
-  yData = 0;
-  xDataNorm = 1;
-  yDataNorm = 0;
+//  xData = 1;
+//  yData = 0;
+  xDataNorm = 1.;
+  yDataNorm = 0.;
 
   index = 0; 
   increasing = true; 
@@ -385,7 +386,7 @@ function trans(amp) {
   yInput();
   zInput();
 
-setKnobValue(knobs[0], 50, xData, 50);
+  setKnobValue(knobs[0], 50, xData, 50);
   setKnobValue(knobs[1], 50, yData, 50);
   setKnobValue(knobs[2], 50, zData, 50);
 
@@ -572,15 +573,26 @@ async function playPause() {
     await context.resume().then(() => {
       console.log('Playback resumed successfully');
       playButton.attribute('src', playIcon); // Change to play icon after context is resumed
+      handleFirstPlay(); // Handle first play actions
+
      // togglePlayState();
     }).catch(err => {
       console.log('Failed to resume AudioContext:', err);
     });
   } else {
+    handleFirstPlay(); // Handle first play actions
     togglePlayState();
   }
 }
-
+function handleFirstPlay() {
+  if (isFirstPlay) {
+    // Update inputs
+    setKnobValueY(knobs[0], 127, 500);      
+    setKnobValueY(knobs[1], 127, 500);      
+    setKnobValueY(knobs[2], 127, 500);       
+    isFirstPlay = false; // Set the flag to false after the first play
+  }
+}
 function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
     playButton.attribute('src', pauseIcon);
@@ -589,6 +601,7 @@ function togglePlayState() {
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     device.scheduleEvent(messageEvent);
     easycam.removeMouseListeners();
+  
 
     playStateI = 1;
   } else {
@@ -656,7 +669,7 @@ function yB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[1], 127, 500); 
+      setKnobValueY(knobs[1], 127., 500); 
       t21.html("Y Balance");
       break;
     case 1:
@@ -691,7 +704,7 @@ function zB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[2], 127, 500);  
+      setKnobValueY(knobs[2], 127., 500);  
       t21.html("Z Balance");
     
       break;
@@ -923,7 +936,7 @@ function guiData() {
   t5 = createP();
   t5.html(worldI_dist);
   t6 = createP();
-  t6.html(nfs("0", 1, 2));
+  t6.html(nfs("0.00", 1, 2));
   t7 = createP("0");
   t8 = createP("0");
   t11 = createP("");
@@ -1182,9 +1195,9 @@ function initVariables() {
   let cols = floor(width / cellSize); // Adjust columns based on aspect ratio
   let rows = floor(height / cellSize); // Adjust rows based on aspect ratio
 
-  xData = 1.;
-  yData = 1.;
-  zData = 1.; 
+  xData = 127.;
+  yData = 127.;
+  zData = 127.; 
 
 
  // Recalculate button and cell dimensions
@@ -1472,10 +1485,14 @@ async function createRNBO() {
     knobs[2].valueY = centerValue;
     sliders[0].sliderValue = 0;
 
+    
+
   } catch (error) {
     console.log(error);
     errorLoadingAudio(error);
   }
+
+
 }
 
 
