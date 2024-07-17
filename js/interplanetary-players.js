@@ -928,7 +928,7 @@ function gainInput() {
 
 
 function guiData() {
-  // Render the klabels
+  // Render the labels
   t1 = createP('Distance:');
   t2 = createP(card.xTag[0] + ":");
   t3 = createP(card.yTag[0] + ":");
@@ -936,7 +936,11 @@ function guiData() {
   t5 = createP();
   t5.html(worldI_dist);
   t6 = createP();
-  t6.html(nfs("0.00", 1, 2));
+
+  // Ensure the value passed to nfs is a number
+  let formattedNumber = nfs(parseFloat("0.00"), 1, 2);
+  t6.html(formattedNumber);
+
   t7 = createP("0");
   t8 = createP("0");
   t11 = createP("");
@@ -950,26 +954,27 @@ function guiData() {
   t21 = createP(''); // Hint
   t22 = createP('0');
   t0 = createP('Jam'); // Section Title
-  guiDataStyle (cellWidth, cellHeight); 
+  guiDataStyle(cellWidth, cellHeight); 
 }
 
 function guiDataStyle(cellWidth, cellHeight) {
-  
   let offset = 1;
   let yoffset = cellHeight;
   let textColor = card.col1;
   let black = color(0);
 
-  if (sw>sh){ yoffset = cellHeight*.5; }
-  
+  if (sw > sh) {
+    yoffset = cellHeight * 0.5;
+  }
+
   // Calculate guiTextSize based on a combination of windowWidth and windowHeight
   let guiTextSize = min(windowWidth, windowHeight) * 0.027; 
 
   // Set positions and styles for column 1 elements (t1, t2, t3, t4)
-  let col1Elements = [ t1, t2, t3, t4, t11, t12, t13];
+  let col1Elements = [t1, t2, t3, t4, t11, t12, t13];
   col1Elements.forEach((elem, index) => {
     let x = cellWidth * offset;
-    let y = index * cellHeight * .5 + guiTextSize + yoffset;
+    let y = index * cellHeight * 0.5 + guiTextSize + yoffset;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
@@ -979,26 +984,24 @@ function guiDataStyle(cellWidth, cellHeight) {
   let col2Elements = [t5, t6, t7, t8, t15, t16, t17];
   col2Elements.forEach((elem, index) => {
     let x = 3.5 * cellWidth * offset; // Position for the second column
-    let y = index * cellHeight * .5 + guiTextSize + yoffset;
+    let y = index * cellHeight * 0.5 + guiTextSize + yoffset;
     elem.position(x, y);
     elem.style('color', textColor);
     elem.style('font-size', guiTextSize + 'px');
   });
 
-
   t0.style('color', domColor2);
-  t0.style('width', 6*btW + 'px');
+  t0.style('width', 6 * btW + 'px');
   t0.attribute('align', 'center');
-  t0.position( sw *.5 - 3*btW, guiTextSize);
-  t0.style('font-size', guiTextSize+10 + 'px');
-  
+  t0.position(sw * 0.5 - 3 * btW, guiTextSize);
+  t0.style('font-size', guiTextSize + 10 + 'px');
 
   t21.style('background-color', black);
   t21.style('color', domColor2);
 
-  t21.style('width', 6*btW + 'px');
+  t21.style('width', 6 * btW + 'px');
   t21.attribute('align', 'center');
-  t21.position( sw *.5 - 3*btW , sh * .2);
+  t21.position(sw * 0.5 - 3 * btW, sh * 0.2);
   t21.style('font-size', guiTextSize + 'px'); // Hint
 
   t22.style('background-color', black);
@@ -1006,10 +1009,8 @@ function guiDataStyle(cellWidth, cellHeight) {
 
   t22.style('width', btW + 'px');
   t22.attribute('align', 'center');
-  t22.position( sw-(cellWidth+cellHeight) , sh-cellHeight);  
+  t22.position(sw - (cellWidth + cellHeight), sh - cellHeight);  
   t22.style('font-size', guiTextSize + 'px');
-  
-
 }
 
 
@@ -1497,55 +1498,55 @@ async function createRNBO() {
 
 
 async function loadAudioBuffer(_context) {
-
   loadingAudio(1);
   context = _context;
 
-  let audioBuf
+  let audioBuf;
   try {
     let audioURL;
 
     if (navigator.connection) {
       const speed = navigator.connection.downlink;
+      console.log("Connection speed:", speed); // Log the connection speed
       audioURL = speed > 1 ? card.mp3file : card.wavfile;
-
     } else {
       audioURL = card.mp3file;
     }
-    
+
+    console.log("Audio URL:", audioURL); // Log the audio URL
+
     try {
       const fileResponse = await fetch(audioURL, {
         cache: 'reload'
       });
-      
+
       if (!fileResponse.ok) {
         throw new Error("Network response was not OK");
-        errorLoadingAudio("Network response was not OK");
-
       }
-      // Load our sample as an ArrayBuffer;
+
       const arrayBuf = await fileResponse.arrayBuffer();
-      //  console.log(arrayBuf);
+      if (!(arrayBuf instanceof ArrayBuffer)) {
+        throw new Error("Fetched data is not a valid ArrayBuffer");
+      }
 
-      // Decode the received Data as an AudioBuffer
-      audioBuf = await context.decodeAudioData(arrayBuf);
-      // Set the DataBuffer on the device
-      await device.setDataBuffer("world1", audioBuf);
-
-    } catch (error) {
-      console.error("There has been a problem with your fetch operation:", error);
-      errorLoadingAudio(error);
-
+      try {
+        audioBuf = await context.decodeAudioData(arrayBuf);
+        await device.setDataBuffer("world1", audioBuf);
+      } catch (decodeError) {
+        console.error("Error decoding audio data or setting data buffer:", decodeError);
+        throw decodeError;
+      }
+    } catch (fetchError) {
+      console.error("There has been a problem with your fetch operation:", fetchError);
+      throw fetchError;
     }
 
     loaded();
-
   } catch (error) {
-    console.log(error);
+    console.log("Error type:", typeof error);
+    console.log("Error details:", error);
     errorLoadingAudio(error);
   }
-
-
 }
 
 ////////// EXOPLANET DATA ///////// 
