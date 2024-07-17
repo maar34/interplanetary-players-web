@@ -178,17 +178,16 @@ function setup() {
 
 function draw() {
   
-  if (playStateI == 1) background(0, 0, 0);
+  background(0, 0, 0);
 
   noStroke();
-  lights();
-  const wsize = 1.2
+  //lights();
+  const wsize = 1.2 // ring size multiplier
   if (loadP) loadingGUI();
 
-  //Planet and Background color (back from Sliders)
   push();
-  // translate (0., 0., -666.);
   normalMaterial();
+
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
 
@@ -207,17 +206,14 @@ function draw() {
 
   translate(- 0, 520., 0.);
   sphere(15, 6, 6);
-  //translate (0., 0., 666.);
 
   pop();  
-  noFill();
-  stroke(cardColor);
 
   // DRAW  GUI 
   easycam.beginHUD();
-//  stroke(cardColor);
 
-  if (playStateI == 0) fill(0, 0, 0, .8);
+  noFill();
+  stroke(cardColor);
 
   const margin = 3.3;
   strokeWeight(1.5);
@@ -231,16 +227,11 @@ function draw() {
   vertex(margin + 0, margin + 0);
   endShape();
 
-  if (playStateI == 0) fill(0, 1);
-
-
-      // DRAW 3D GUI 
+  // DRAW 3D GUI 
   if (!loadP) {
-
     // Draw each knob as a sphere and its value
     knobs.forEach((knob, index) => {
       let angleY = map(knob.valueY, 0, ksteps - 1, 0, 360, true);
-
       stroke(regenValue > 0 ? domColor2 : cardColor);
 
       push();
@@ -274,12 +265,10 @@ sliders.forEach((sliders, index) => {
 
     pop();
 
-
-
   });
 
 }else{
-  fill(0, 0, 0, 33); // RGBA: Black with 50% transparency (127 is half of 255)
+  fill(0, 0, 0, 1); // RGBA: Black with 50% transparency (127 is half of 255)
   noStroke();
   rect(0, 0, sw, sh); // Cover the entire canvas
 }
@@ -290,7 +279,7 @@ sliders.forEach((sliders, index) => {
 
   // REGENERATIVE UPDATES 
 
-  regenUpdates();
+  if (regenValue != 0)  regenUpdates();
 
 }
 
@@ -568,14 +557,21 @@ async function playPause() {
     await createRNBO();
   }
 
+  // Get the muted audio element
+  const audioTag = document.getElementById("mutedaudio");
+  
+  // Play the muted audio if it is paused
+  if (audioTag?.paused) {
+    await audioTag.play();
+  }
+
   // Check if the AudioContext is suspended and resume it
   if (context.state === 'suspended') {
     await context.resume().then(() => {
       console.log('Playback resumed successfully');
       playButton.attribute('src', playIcon); // Change to play icon after context is resumed
       handleFirstPlay(); // Handle first play actions
-
-     // togglePlayState();
+      // togglePlayState();
     }).catch(err => {
       console.log('Failed to resume AudioContext:', err);
     });
@@ -584,6 +580,7 @@ async function playPause() {
     togglePlayState();
   }
 }
+
 function handleFirstPlay() {
   if (isFirstPlay) {
     // Update inputs
@@ -1027,7 +1024,7 @@ function loadingGUI() {
     translate(0., 0., -666.);
 
     text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
-    text("turn on & unmute device...", 0, -sh * .34 - cellHeight * 1);
+    text("Turn on IP & press play...", 0, -sh * .34 - cellHeight * 1);
     translate(0., 0., 666.);
 
   } else {
@@ -1507,13 +1504,10 @@ async function loadAudioBuffer(_context) {
 
     if (navigator.connection) {
       const speed = navigator.connection.downlink;
-      console.log("Connection speed:", speed); // Log the connection speed
       audioURL = speed > 1 ? card.mp3file : card.wavfile;
     } else {
       audioURL = card.mp3file;
     }
-
-    console.log("Audio URL:", audioURL); // Log the audio URL
 
     try {
       const fileResponse = await fetch(audioURL, {
