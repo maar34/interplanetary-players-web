@@ -16,7 +16,7 @@ let easyX, easyY; // Simplified X, Y values for visualization
 // GUI and Visual elements
 let font1; // font variable
 let loadingBar;
-let loadP =false; 
+let loadP =true; 
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
 
@@ -24,21 +24,30 @@ let notDOM; // Non-DOM element
 let device; // Device information
 let canvas; 
 
-let regenIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
+let regenIcon, initialPlayIcon, playIcon, pauseIcon, centerIcon; // Icons for control elements
 var regenValue; // regen button number state 
 
 let knobs = [];
-let steps = 255;  // Number of discrete steps
-let sensitivity = 0.9;  // Sensitivity for knob movement
-let labels = ["X", "Y", "Z"]; // Labels for the knobs
+let ksteps = 255;  // Number of discrete ksteps
+let ksensitivity = 0.9;  // kSensitivity for knob movement
+let klabels = ["X", "Y", "Z"]; // kLabels for the knobs
 let knobSpacing; // Spacing between knobs
 let domAlpha, domColor2; 
+
+
+let sliders = [];
+let ssteps = 255;  // Number of discrete ssteps
+let ssensitivity = 0.9;  // sSensitivity for snob movement
+let slabels = ["Gain"]; // sLabels for the snobs
+let sliderSpacing= 0; // Spacing between knobs
+
+
 
 // Game and deck variables
 var game, deck, suit, loadDeck, exoData;
 
 // Input and interaction
-let inputX, inputY, inputZ;
+let inputX, inputY, inputZ, inputGain;
 let wMinD = 444;
 let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
@@ -46,6 +55,7 @@ let prevTouchX = 0, prevTouchY = 0;
 
 // Audio channels and analysis
 let playStateI; // Play state index
+let isFirstPlay = true; // Flag to track the first play button press
 
 // TIME, related to Dates and Transits 
 
@@ -96,13 +106,11 @@ function preload() {
 
 }
 
-document.body.onclick = () => {
-  context.resume();
-}
 // prevent screen movement on touchstart event
 document.body.addEventListener('touchstart', function (e) {
   if (e.target == document.body) {
     e.preventDefault();
+
   }
 }, { passive: false });
 
@@ -115,10 +123,10 @@ function setup() {
 
   initVariables();
 
-  xData = 1;
-  yData = 0;
-  xDataNorm = 1;
-  yDataNorm = 0;
+//  xData = 1;
+//  yData = 0;
+  xDataNorm = 1.;
+  yDataNorm = 0.;
 
   index = 0; 
   increasing = true; 
@@ -155,11 +163,13 @@ function setup() {
 
   // Use the selected Font 
 
+  
   textFont(font1);
   textSize(27);
   createRNBO();
-  
+  initSliders(); 
   initKnobs(); 
+
   createDom();
 
   //    loadingAudio(0);
@@ -205,8 +215,6 @@ function draw() {
 
   // DRAW  GUI 
   easycam.beginHUD();
-
-
 //  stroke(cardColor);
 
   if (playStateI == 0) fill(0, 0, 0, .8);
@@ -231,7 +239,7 @@ function draw() {
 
     // Draw each knob as a sphere and its value
     knobs.forEach((knob, index) => {
-      let angleY = map(knob.valueY, 0, steps - 1, 0, 360, true);
+      let angleY = map(knob.valueY, 0, ksteps - 1, 0, 360, true);
 
       stroke(regenValue > 0 ? domColor2 : cardColor);
 
@@ -246,15 +254,37 @@ function draw() {
       pop();
       
     });
-  }else{
-
-
-    fill(0, 0, 0, 33); // RGBA: Black with 50% transparency (127 is half of 255)
-    noStroke();
-    rect(0, 0, sw, sh); // Cover the entire canvas
   
 
-  }
+// Draw each slider as a cone and its value
+sliders.forEach((sliders, index) => {
+
+    push();
+    stroke(cardColor);
+    translate(sliders.x, sliders.y, sliders.z);
+
+    if (sliders.isDragging) {
+    cone(10, sliders.sliderHeight, 10); // Draw a thin, flat box as the slider track
+    }
+    translate(0, sliders.sliderValue, 0);
+    fill (0, 50);
+    rotateX(PI);
+    rotateY(sliders.sliderValue*0.005);
+    cone(sliders.handleRadius, sliders.handleHeight, 7); // Draw a cone as the handle
+
+    pop();
+
+
+
+  });
+
+}else{
+  fill(0, 0, 0, 33); // RGBA: Black with 50% transparency (127 is half of 255)
+  noStroke();
+  rect(0, 0, sw, sh); // Cover the entire canvas
+}
+
+
 
   easycam.endHUD();
 
@@ -330,7 +360,6 @@ function trans(amp) {
           increasing = true;
       }
   }
-  //print (elapsedTimeInSeconds +" - "+ index);
   let result = interpolateTransitData(exoData, index);
 
   let targetX = index * 255;
@@ -440,7 +469,7 @@ function regenLogic() {
           t17.html("");
           t21.html("A playground for improvisation and deep listening");
           t22.html("0");
-          t0.html("Space Jam");
+          t0.html("Jam");
           t22.style('color', domAlpha); // Section Number
 
          // t22.style('color', textColor);
@@ -530,26 +559,49 @@ function regenLogic() {
 }
 
 
-function playPause() {
+async function playPause() {
   notDOM = false;
 
-  // Check if the AudioContext is already running
-  if (context.state === 'suspended') {
-    // If suspended (not yet running), resume it
-    context.resume().then(() => {
-      console.log('Playback resumed successfully');
-    });
-
+  // Check if the context is already initialized
+  if (typeof context === 'undefined') {
+    loadP = true; 
+    await createRNBO();
   }
 
-  // Toggle play state
-  if (playStateI == 0) {
+  // Check if the AudioContext is suspended and resume it
+  if (context.state === 'suspended') {
+    await context.resume().then(() => {
+      console.log('Playback resumed successfully');
+      playButton.attribute('src', playIcon); // Change to play icon after context is resumed
+      handleFirstPlay(); // Handle first play actions
+
+     // togglePlayState();
+    }).catch(err => {
+      console.log('Failed to resume AudioContext:', err);
+    });
+  } else {
+    handleFirstPlay(); // Handle first play actions
+    togglePlayState();
+  }
+}
+function handleFirstPlay() {
+  if (isFirstPlay) {
+    // Update inputs
+    setKnobValueY(knobs[0], 127, 500);      
+    setKnobValueY(knobs[1], 127, 500);      
+    setKnobValueY(knobs[2], 127, 500);       
+    isFirstPlay = false; // Set the flag to false after the first play
+  }
+}
+function togglePlayState() {
+  if (playStateI == 0 && context.state === 'running') {
     playButton.attribute('src', pauseIcon);
 
     // Schedule play events
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
     device.scheduleEvent(messageEvent);
     easycam.removeMouseListeners();
+  
 
     playStateI = 1;
   } else {
@@ -562,6 +614,7 @@ function playPause() {
     playStateI = 0;
   }
 }
+
 
 function xB() {
 
@@ -616,7 +669,7 @@ function yB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[1], 127, 500); 
+      setKnobValueY(knobs[1], 127., 500); 
       t21.html("Y Balance");
       break;
     case 1:
@@ -651,7 +704,7 @@ function zB() {
   switch (regenValue) {
     case 0:
       notDOM = false;
-      setKnobValueY(knobs[2], 127, 500);  
+      setKnobValueY(knobs[2], 127., 500);  
       t21.html("Z Balance");
     
       break;
@@ -777,10 +830,11 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
+  initialPlayIcon = 'icons/' + nf(card.icon_set, 2) + '_on-off.svg';
   playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
 
   // create buttons and sliderss
-  playButton = createImg(playIcon, 'Play Button', '&#9655');
+  playButton = createImg(initialPlayIcon, 'Play Button', '&#9655');
   pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
 
   playButton.style('width',  btW+ 'px');
@@ -828,7 +882,7 @@ function xInput() {
 
   inputX.value = xData;
 
-  let xDataM = map(xData, 0, steps - 1, float(card.xTag[1]), float(card.xTag[2]));
+  let xDataM = map(xData, 0, ksteps - 1, float(card.xTag[1]), float(card.xTag[2]));
   t6.html(nfs(xDataM, 1, 2));
   
   easyY = xDataM * -0.0077;
@@ -839,7 +893,7 @@ function yInput() {
 
   inputY.value = yData;
 
-  let yDataM = map(yData, 0, steps - 1, float(card.yTag[1]), float(card.yTag[2]));
+  let yDataM = map(yData, 0, ksteps - 1, float(card.yTag[1]), float(card.yTag[2]));
   t7.html(nfs(yDataM, 1, 2));
 
   easyX = yDataM * -0.00077;
@@ -850,10 +904,10 @@ function yInput() {
 function zInput() {
 
 
-  if (zData <= (steps - 1)/2) {
-    worldI_dist = map(zData, 0., (steps - 1)/2, wMaxD, wMinD, true);
+  if (zData <= (ksteps - 1)/2) {
+    worldI_dist = map(zData, 0., (ksteps - 1)/2, wMaxD, wMinD, true);
   } else {
-    worldI_dist = map(zData, (steps - 1)/2, (steps - 1), wMinD, wMaxD, true);
+    worldI_dist = map(zData, (ksteps - 1)/2, (ksteps - 1), wMinD, wMaxD, true);
   }
   easycam.setDistance(worldI_dist, 1.);
 
@@ -866,8 +920,15 @@ function zInput() {
 
 }
 
+function gainInput() {
+
+  inputGain.value = inputGain; 
+}
+
+
+
 function guiData() {
-  // Render the labels
+  // Render the klabels
   t1 = createP('Distance:');
   t2 = createP(card.xTag[0] + ":");
   t3 = createP(card.yTag[0] + ":");
@@ -875,7 +936,7 @@ function guiData() {
   t5 = createP();
   t5.html(worldI_dist);
   t6 = createP();
-  t6.html(nfs("0", 1, 2));
+  t6.html(nfs("0.00", 1, 2));
   t7 = createP("0");
   t8 = createP("0");
   t11 = createP("");
@@ -888,7 +949,7 @@ function guiData() {
   t17 = createP("");
   t21 = createP(''); // Hint
   t22 = createP('0');
-  t0 = createP('Space Jam'); // Section Title
+  t0 = createP('Jam'); // Section Title
   guiDataStyle (cellWidth, cellHeight); 
 }
 
@@ -965,7 +1026,7 @@ function loadingGUI() {
     translate(0., 0., -666.);
 
     text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
-    text("please wait, unmute device...", 0, -sh * .34 - cellHeight * 1);
+    text("turn on & unmute device...", 0, -sh * .34 - cellHeight * 1);
     translate(0., 0., 666.);
 
   } else {
@@ -974,13 +1035,12 @@ function loadingGUI() {
 }
 
 function windowResized() {
-
   initVariables();
   resizeCanvas(sw, sh);
-  translateKnobs();
   guiDataStyle (cellWidth, cellHeight); 
   easycam.setViewport([0, 0, sw, sh]);
-
+  translateKnobs();
+  translateSliders();
 }
 
 
@@ -999,10 +1059,28 @@ function releaseDOM() {
 
 
 function mousePressed() {
+
+
   knobs.forEach(knob => {
       knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
   });
+  
+    // Check if the mouse is over the handle
+
+  sliders.forEach(sliders => {
+  let d = dist(mouseX, mouseY, sliders.x, sliders.y + sliders.sliderValue);
+
+    if (d < sliders.handleRadius) {
+      sliders.isDragging = true; 
+      pressDOM();
+
+    }
+
+});
+
+
   return false; // Prevent default behavior and stop propagation
+
 }
 
 
@@ -1015,7 +1093,14 @@ function mouseDragged() {
       pressDOM();
     }
   });
+  sliders.forEach(sliders => {
+    if (sliders.isDragging) {
+    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
+      sliders.sliderValue = constrain(mouseY - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+      inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -220, 0., 1.);   
 
+    }
+});
 }
 
 // Mouse Wheel Function
@@ -1024,15 +1109,17 @@ function mouseWheel(event) {
 
   knobs.forEach(knob => {
     if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2) {
-      let deltaZ = event.delta * sensitivity;
-      knob.valueZ = constrain(knob.valueZ - deltaZ, 0, steps - 1);
-      worldI_dist = map(knob.valueZ, 0, steps - 1, wMinD, wMaxD); // Update worldI_dist for Z knob
+      let deltaZ = event.delta * ksensitivity;
+      knob.valueZ = constrain(knob.valueZ - deltaZ, 0, ksteps - 1);
+      worldI_dist = map(knob.valueZ, 0, ksteps - 1, wMinD, wMaxD); // Update worldI_dist for Z knob
     }
   });
 }
 
 function mouseReleased() {
   knobs.forEach(knob => knob.isDragging = false);
+  sliders.forEach(sliders => sliders.isDragging = false);
+
 }
 
 function touchStarted() {
@@ -1042,7 +1129,17 @@ function touchStarted() {
   knobs.forEach(knob => {
       knob.isDragging = dist(touches[0].x, touches[0].y, knob.x, knob.y) < knob.size / 2;
   });
-  return false; // Prevent default behavior and stop propagation
+
+  sliders.forEach(sliders => {
+    let d = dist(touches[0].x, touches[0].y, sliders.x, sliders.y + sliders.sliderValue);
+  
+      if (d < sliders.handleRadius) {
+        sliders.isDragging = true; 
+        pressDOM();
+      }
+    });
+    return false; // Prevent default behavior and stop propagation
+
 }
 
 function touchMoved() {
@@ -1052,13 +1149,27 @@ function touchMoved() {
       updateKnobValue(knob, touches[0].x, touches[0].y);
     }
   });
+
+  sliders.forEach(sliders => {
+    if (sliders.isDragging) {
+    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
+    sliders.sliderValue = constrain(touches[0].y - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+    inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -sliders.sliderHeight / 2, 0., 1.);   
+
+  }
+});
+
   prevTouchX = touches[0].x;
   prevTouchY = touches[0].y;
+
+  
   return false; // Prevent default behavior
 }
 
 function touchEnded() {
   knobs.forEach(knob => knob.isDragging = false);
+  sliders.forEach(sliders => sliders.isDragging = false);
+
   return false; // Prevent default behavior and stop propagation
 
 }
@@ -1084,9 +1195,9 @@ function initVariables() {
   let cols = floor(width / cellSize); // Adjust columns based on aspect ratio
   let rows = floor(height / cellSize); // Adjust rows based on aspect ratio
 
-  xData = 1.;
-  yData = 1.;
-  zData = 1.; 
+  xData = 127.;
+  yData = 127.;
+  zData = 127.; 
 
 
  // Recalculate button and cell dimensions
@@ -1097,11 +1208,36 @@ function initVariables() {
 
   knobSpacing = (cellWidth+cellHeight)*1.1;
 
-  startX = 0;
-  startY = 0;
+ // startX = 0;
+ // startY = 0;
   notDOM = true;
 
 }
+function initSliders(){
+
+  let startX = window.innerWidth*.9;
+  let startY = window.innerHeight*.5;
+
+  // Initialize three sliders
+  for (let i = 0; i < 1; i++) {
+    sliders.push({
+      x: startX + i * sliderSpacing,
+      y: startY,
+      z: 0,  // Initial Z position
+      sliderHeight: (cellHeight)*4,
+      sliderValue: -127,
+      sliderMin: 0,
+      sliderMax: 127,
+      isDragging: false,
+      handleHeight: btH,
+      handleRadius: btW*.5
+    });
+}
+
+
+
+}
+
 
 function initKnobs(){
 
@@ -1109,7 +1245,7 @@ function initKnobs(){
   let startY = window.innerHeight*.75;
 
   // Initialize three knobs
-  for (let i = 0; i < labels.length; i++) {
+  for (let i = 0; i < klabels.length; i++) {
     knobs.push({
       x: startX + i * knobSpacing,
       y: startY,
@@ -1137,12 +1273,12 @@ function updateKnobValue(knob, currentX, currentY) {
     deltaY = currentY - pmouseY;
   }
 
-  knob.valueX -= deltaX * sensitivity;
-  knob.valueY -= deltaY * sensitivity;
+  knob.valueX -= deltaX * ksensitivity;
+  knob.valueY -= deltaY * ksensitivity;
 
   // Constrain the values within the valid range
-  knob.valueX = constrain(knob.valueX, 0, steps - 1);
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
+  knob.valueX = constrain(knob.valueX, 0, ksteps - 1);
+  knob.valueY = constrain(knob.valueY, 0, ksteps - 1);
 
   // Update xData, yData, zData based on knob values
   if (knob === knobs[0]) { // If it's the X knob
@@ -1171,7 +1307,7 @@ function setKnobValueY(knob, newValueY, interpolationTimeInMillis) {
       knob.valueY += changePerFrame;
 
       // Constrain the value within the valid range
-      knob.valueY = constrain(knob.valueY, 0, steps - 1);
+      knob.valueY = constrain(knob.valueY, 0, ksteps - 1);
 
       // Update the associated data and UI
       updateKnobRelatedData(knob);
@@ -1210,9 +1346,9 @@ function setKnobValue(knob, newXValue, newYValue, newZValue) {
   knob.valueZ = newZValue;
 
   // Constrain the values within the valid range
-  knob.valueX = constrain(knob.valueX, 0, steps - 1);
-  knob.valueY = constrain(knob.valueY, 0, steps - 1);
-  knob.valueZ = constrain(knob.valueZ, 0, steps - 1);
+  knob.valueX = constrain(knob.valueX, 0, ksteps - 1);
+  knob.valueY = constrain(knob.valueY, 0, ksteps - 1);
+  knob.valueZ = constrain(knob.valueZ, 0, ksteps - 1);
 
   // You can call the input functions to update any related data or UI elements
   // For example, if the knob values are tied to certain parameters or UI elements:
@@ -1265,17 +1401,40 @@ function updateButtonPositions() {
   }
 
 
+    function translateSliders() {
+
+      let sstartX = window.innerWidth*.9;
+      let sstartY = window.innerHeight*.5;
+
+
+
+      // Update sliders position
+      for (let i = 0; i < 1; i++) {
+          sliders[i].x = sstartX + i;
+          sliders[i].y = sstartY;
+          sliders[i].z = 0;  // Initial Z position
+          sliders[i].sliderHeight = (cellHeight)*4;
+          sliders[i].sliderValue = -124;
+          sliders[i].sliderMin = 0;
+          sliders[i].sliderMax = 127;
+          sliders[i].isDragging = false;
+          sliders[i].handleHeight = btH;
+          sliders[i].handleRadius = btW*.5;
+
+    }  
+  }
+
   function translateKnobs() {
-    let startX = window.innerWidth * 0.5 - knobSpacing;
-    let startY = window.innerHeight * 0.75;
+    let kstartX = window.innerWidth * 0.5 - knobSpacing;
+    let kstartY = window.innerHeight * 0.75;
   
     // Calculate knobSize
     let knobSize = (cellWidth + cellHeight) * 0.77;
   
     // Update existing knobs
     for (let i = 0; i < knobs.length; i++) {
-      knobs[i].x = startX + i * knobSpacing;
-      knobs[i].y = startY;
+      knobs[i].x = kstartX + i * knobSpacing;
+      knobs[i].y = kstartY;
       knobs[i].size = knobSize;
     }
   
@@ -1298,33 +1457,44 @@ function updateButtonPositions() {
 ////////// AUDIO ENGINE ///////// 
 
 async function createRNBO() {
-
   try {
-
     const patchExportURL = "export/" + card.engine;
-
-    // Create AudioContext
     let WAContext = window.AudioContext || window.webkitAudioContext;
     context = new WAContext();
 
     let rawPatcher = await fetch(patchExportURL);
     let patcher = await rawPatcher.json();
-    device = await RNBO.createDevice({ context, patcher }); // seems we need to access the default exports via .default
+    device = await RNBO.createDevice({ context, patcher });
 
     device.node.connect(context.destination);
     loadAudioBuffer(context);
 
-    // Connect With Parameters
     inputX = device.parametersById.get("inputX");
     inputY = device.parametersById.get("inputY");
     inputZ = device.parametersById.get("inputZ");
-    //    print ("I am A2")
+    inputGain = device.parametersById.get("inputGain");
+
+    const centerValue = (ksteps - 1) / 2;
+    inputX.value = map(centerValue, 0, ksteps - 1, parseFloat(card.xTag[1]), parseFloat(card.xTag[2]));
+    inputY.value = map(centerValue, 0, ksteps - 1, parseFloat(card.yTag[1]), parseFloat(card.yTag[2]));
+    inputZ.value = map(centerValue, 0, ksteps - 1, parseFloat(card.zTag[1]), parseFloat(card.zTag[2]));
+    inputGain.value = map(0, -220, 220, 0, 1);
+
+    knobs[0].valueY = centerValue;
+    knobs[1].valueY = centerValue;
+    knobs[2].valueY = centerValue;
+    sliders[0].sliderValue = 0;
+
+    
+
   } catch (error) {
     console.log(error);
     errorLoadingAudio(error);
   }
 
+
 }
+
 
 async function loadAudioBuffer(_context) {
 
