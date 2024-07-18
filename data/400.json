@@ -1,35 +1,34 @@
 {
-   "description": "IP Collabs",
-   "A": [
-      {
-         "id": "0",
-         "wavfile": "https://dl.dropboxusercontent.com/scl/fi/alp4e8enp7ku5j3030uuk/Stoney_Way_Mix-10-09-22.wav?rlkey=7qr7x5pfuz0ou6sb30bkm7pgj&raw=1",
-         "mp3file": " https://dl.dropboxusercontent.com/scl/fi/xp7ew10ihkpg6xd6amumg/Stoney_Way_Mix-10-09-22.mp3?rlkey=b8s5c3mg2n89stv5xzou4tpln&raw=1",
-         "initTime": "111.",
-         "endTime": "333.",
-         "speed": "1.",
-         "minSpeed": ".1",
-         "maxSpeed": "3.",
-         "col1": "rgb(255,51,204)",
-         "col2": "333.",
-         "icon_set":"101",
-         "engine": "d00_c01_v1.3.json",
-         "xTag": [
-            "Speed",
-            "-1.",
-            "3."
-         ],
-         "yTag": [
-            "Tremolo",
-            "-100.",
-            "100."
-         ],
-         "zTag": [
-            "Reverb",
-            "-100.",
-            "100."
-         ]
-      }
-   ]
-}
-
+    "description": "IP Collabs",
+    "A": [
+       {
+          "id": "0",
+          "wavfile": "https://dl.dropboxusercontent.com/scl/fi/alp4e8enp7ku5j3030uuk/Stoney_Way_Mix-10-09-22.wav?rlkey=7qr7x5pfuz0ou6sb30bkm7pgj&raw=1",
+          "mp3file": " https://dl.dropboxusercontent.com/scl/fi/xp7ew10ihkpg6xd6amumg/Stoney_Way_Mix-10-09-22.mp3?rlkey=b8s5c3mg2n89stv5xzou4tpln&raw=1",
+          "initTime": "111.",
+          "endTime": "333.",
+          "speed": "1.",
+          "minSpeed": ".1",
+          "maxSpeed": "3.",
+          "col1": "rgb(255,51,204)",
+          "col2": "333.",
+          "icon_set":"101",
+          "engine": "d00_c01_v1.3.json",
+          "xTag": [
+             "Speed",
+             "-1.",
+             "3."
+          ],
+          "yTag": [
+             "Tremolo",
+             "-100.",
+             "100."
+          ],
+          "zTag": [
+             "Reverb",
+             "-100.",
+             "100."
+          ]
+       }
+    ]
+ }

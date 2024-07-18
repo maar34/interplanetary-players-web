@@ -96,11 +96,11 @@ function preload() {
 
   params = getURLParams();
 
-  game = loadJSON("data/" + params.g + ".json");
+  game = loadJSON("data/" + params.g + ".min.json");
 
   font1 = loadFont('fonts/Orbitron-VariableFont_wght.ttf');
 
-  exoData = loadJSON("data/exoplanetData.json");
+  exoData = loadJSON("data/exoplanetData.min.json");
  
   regenValue = 0.0;
 
