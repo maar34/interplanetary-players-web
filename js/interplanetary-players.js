@@ -15,11 +15,10 @@ let easyX, easyY; // Simplified X, Y values for visualization
 
 // GUI and Visual elements
 let font1; // font variable
-let loadingBar;
 let loadP =true; 
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
-let showText = "Turn on IP engine"; 
+let showText = "Receiving Sound Waves \n Unmute device \n & \n Turn on IP engine"; 
 
 let notDOM; // Non-DOM element
 let device; // Device information
@@ -84,7 +83,7 @@ document.oncontextmenu = () => false; // no right click
 
 var easycam,
   state = {
-    distance: 444, //final distance
+    distance: 666, //final distance
     center: [0, 0, 0],
     rotation: [1., 0., 0., 0.],
   },
@@ -133,7 +132,7 @@ function setup() {
   increasing = true; 
 
   playStateI = 0;
-  worldI_dist = 940;
+ // worldI_dist = 940;
 
   setCurrentIndexToToday();
     
@@ -167,13 +166,11 @@ function setup() {
   
   textFont(font1);
   textSize(27);
-  createRNBO();
   initSliders(); 
   initKnobs(); 
 
   createDom();
 
-  //    loadingAudio(0);
 
 }  
 
@@ -547,73 +544,97 @@ function regenLogic() {
 
           break;
   }
-}
-async function playPause() {
+}async function playPause() {
   notDOM = false;
 
-    // Check if the AudioContext is suspended and resume it
-    if (context.state === 'suspended') {
-      const audioTag = document.getElementById("mutedaudio");
-      // Play the muted audio if it is paused
-      if (audioTag?.paused) {
-        await audioTag.play();
-      }
-      showText = "Main engine \n start sequence initiated \n press again";
-      await context.resume().then(() => {
+  if (isFirstPlay) {
+    createRNBO();
+  }
 
-       // handleFirstPlay(); // Handle first play actions
-        // togglePlayState();
-      }).catch(err => {
-        console.log('Failed to resume AudioContext:', err);
-      });
-      if (context.state === 'suspended') {
-        setTimeout(tryResumeContext, 100); // Retry after a short delay
-      } else {
-        playButton.attribute('src', playIcon);
-        showText = "All engines are running \n press play to start";
-      }
+  if (context.state === 'suspended') {
+    if (isFirstPlay) handleFirstPlay();
+
+    await context.resume().then(() => {
+      playButton.attribute('src', playIcon);
+      showText = "All engines are running \n press play to start";
+
+    }).catch(err => {
+      console.log('Failed to resume AudioContext:', err);
+    });
+
+    if (context.state === 'suspended') {
+      setTimeout(tryResumeContext, 100);
     } else {
-      handleFirstPlay(); // Handle first play actions
-      togglePlayState();  
+      // Context resumed successfully
     }
+  } else {
+    if (isFirstPlay) handleFirstPlay();
+    togglePlayState();
+  }
 }
 
-function handleFirstPlay() {
-  if (isFirstPlay) {
-    // Update inputs
-    guiData();
-    regenButton.show();
-    xButton.show();
-    yButton.show();
-    zButton.show();
-    loadP = false;
-    setKnobValueY(knobs[0], 127, 500);      
-    setKnobValueY(knobs[1], 127, 500);      
-    setKnobValueY(knobs[2], 127, 500);       
-    isFirstPlay = false; // Set the flag to false after the first play
-  }
+async function handleFirstPlay() {
+
+  playButton.attribute('src', initialPlayIcon);
+  isFirstPlay = false;
+  loadP = true;
 }
 
 function togglePlayState() {
+  if (!device || !RNBO) {
+   //console.log('Error: device or RNBO is not defined.');
+   showText = "All engines are running \n press play to start";
+   playButton.attribute('src', initialPlayIcon);
+    return;
+  }
+
   if (playStateI == 0 && context.state === 'running') {
-    playButton.attribute('src', pauseIcon);
 
-    // Schedule play events
-    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
-    device.scheduleEvent(messageEvent);
-    easycam.removeMouseListeners();
-  
-    playStateI = 1;
+    if (loadP){
+
+      guiData();
+      regenButton.show();
+      xButton.show();
+      yButton.show();
+      zButton.show();
+      setKnobValueY(knobs[0], 127, 500);
+      setKnobValueY(knobs[1], 127, 500);
+      setKnobValueY(knobs[2], 127, 500);
+      loadP = false;
+
+    }
+
+
+    try {
+      let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
+      device.scheduleEvent(messageEvent);
+      easycam.removeMouseListeners();
+      playStateI = 1;
+      
+      playButton.attribute('src', pauseIcon);
+
+    } catch (err) {
+      console.log('Failed to schedule play event:', err);
+    }
+
   } else {
-    playButton.attribute('src', playIcon);
+    try {
+      let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
+      device.scheduleEvent(messageEvent);
+      easycam.attachMouseListeners();
+      playButton.attribute('src', initialPlayIcon);
 
-    // Schedule stop events
-    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
-    device.scheduleEvent(messageEvent);
-    easycam.attachMouseListeners();
-    playStateI = 0;
+      context.suspend().catch(err => {
+        console.log('Failed to suspend AudioContext:', err);
+      });
+
+      playStateI = 0;
+    } catch (err) {
+      console.log('Failed to schedule stop event:', err);
+    }
   }
 }
+
 
 
 function xB() {
@@ -752,12 +773,6 @@ function errorLoadingAudio(_error) {
 
 }
 
-function loadingAudio(_loadingN) {
-
-  loadingBar = _loadingN;
-  loadP = true;
-
-}
 
 
 /////// USER INTERACTION AND GUI FUNCTIONS ///////// 
@@ -852,7 +867,6 @@ function createDom() {
 
   updateButtonPositions();
 
-  playButton.hide();
   regenButton.hide();
 
   xButton.hide();
@@ -1001,6 +1015,7 @@ function guiDataStyle(cellWidth, cellHeight) {
 
 function loadingGUI(showText) {
   ///// LOADING TEXTS 
+
   textAlign(CENTER);
   let tempF = frameRate() % 30.;
   if (tempF > 15.) {
@@ -1008,16 +1023,13 @@ function loadingGUI(showText) {
   } else {
     fill(255, 0, 0);
   }
-  if (loadingBar == 1) {
+ 
     translate(0., 0., -666.);
 
-    text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
-    text(showText, 0, -sh * .34 - cellHeight * 1);
+    text(showText, 0, -sh * .34 - cellHeight * 2);
     translate(0., 0., 666.);
 
-  } else {
-    text("", 0, -cellHeight * 13);
-  }
+
 }
 
 function windowResized() {
@@ -1038,7 +1050,7 @@ function releaseDOM() {
 
 //  easycam.attachMouseListeners();
   notDOM = true;
-  t21.html("");
+ //t21.html("");
  // attachMouseListeners();
 
 }
@@ -1471,7 +1483,8 @@ async function createRNBO() {
     knobs[2].valueY = centerValue;
     sliders[0].sliderValue = 0;
 
-    
+
+    showText = "Main engine \n start sequence initiated \n press again";
 
   } catch (error) {
     console.log(error);
@@ -1483,7 +1496,7 @@ async function createRNBO() {
 
 
 async function loadAudioBuffer(_context) {
-  loadingAudio(1);
+
   context = _context;
 
   let audioBuf;
@@ -1523,7 +1536,6 @@ async function loadAudioBuffer(_context) {
       throw fetchError;
     }
 
-    playButton.show();
 
   } catch (error) {
     console.log("Error type:", typeof error);
