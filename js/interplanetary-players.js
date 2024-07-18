@@ -19,6 +19,7 @@ let loadingBar;
 let loadP =true; 
 let t1, t2, t3, t4, t5, t6, t7, t8;
 let t11, t12, t13, t14, t15, t16, t17, t18;
+let showText = "Turn on IP engine"; 
 
 let notDOM; // Non-DOM element
 let device; // Device information
@@ -183,7 +184,7 @@ function draw() {
   noStroke();
   //lights();
   const wsize = 1.2 // ring size multiplier
-  if (loadP) loadingGUI();
+  if (loadP) loadingGUI(showText);
 
   push();
   normalMaterial();
@@ -235,6 +236,7 @@ function draw() {
       stroke(regenValue > 0 ? domColor2 : cardColor);
 
       push();
+      strokeWeight(.5);
       translate(knob.x, knob.y);
       rotateZ(radians(angleY));  
       fill (0, 50);
@@ -546,50 +548,52 @@ function regenLogic() {
           break;
   }
 }
-
-
 async function playPause() {
   notDOM = false;
 
-  // Check if the context is already initialized
-  if (typeof context === 'undefined') {
-    loadP = true; 
-    await createRNBO();
-  }
+    // Check if the AudioContext is suspended and resume it
+    if (context.state === 'suspended') {
+      const audioTag = document.getElementById("mutedaudio");
+      // Play the muted audio if it is paused
+      if (audioTag?.paused) {
+        await audioTag.play();
+      }
+      showText = "Main engine \n start sequence initiated \n press again";
+      await context.resume().then(() => {
 
-  // Get the muted audio element
-  const audioTag = document.getElementById("mutedaudio");
-  
-  // Play the muted audio if it is paused
-  if (audioTag?.paused) {
-    await audioTag.play();
-  }
-
-  // Check if the AudioContext is suspended and resume it
-  if (context.state === 'suspended') {
-    await context.resume().then(() => {
-      console.log('Playback resumed successfully');
-      playButton.attribute('src', playIcon); // Change to play icon after context is resumed
+       // handleFirstPlay(); // Handle first play actions
+        // togglePlayState();
+      }).catch(err => {
+        console.log('Failed to resume AudioContext:', err);
+      });
+      if (context.state === 'suspended') {
+        setTimeout(tryResumeContext, 100); // Retry after a short delay
+      } else {
+        playButton.attribute('src', playIcon);
+        showText = "All engines are running \n press play to start";
+      }
+    } else {
       handleFirstPlay(); // Handle first play actions
-      // togglePlayState();
-    }).catch(err => {
-      console.log('Failed to resume AudioContext:', err);
-    });
-  } else {
-    handleFirstPlay(); // Handle first play actions
-    togglePlayState();
-  }
+      togglePlayState();  
+    }
 }
 
 function handleFirstPlay() {
   if (isFirstPlay) {
     // Update inputs
+    guiData();
+    regenButton.show();
+    xButton.show();
+    yButton.show();
+    zButton.show();
+    loadP = false;
     setKnobValueY(knobs[0], 127, 500);      
     setKnobValueY(knobs[1], 127, 500);      
     setKnobValueY(knobs[2], 127, 500);       
     isFirstPlay = false; // Set the flag to false after the first play
   }
 }
+
 function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
     playButton.attribute('src', pauseIcon);
@@ -599,7 +603,6 @@ function togglePlayState() {
     device.scheduleEvent(messageEvent);
     easycam.removeMouseListeners();
   
-
     playStateI = 1;
   } else {
     playButton.attribute('src', playIcon);
@@ -740,21 +743,6 @@ function zB() {
 
 }
 
-function loaded() {
-
-  loadP = false;
-
-
-
-  playButton.show();
-  regenButton.show();
-  xButton.show();
-  yButton.show();
-  zButton.show();
-
-  guiData();
-
-}
 
 function errorLoadingAudio(_error) {
 
@@ -1011,7 +999,7 @@ function guiDataStyle(cellWidth, cellHeight) {
 }
 
 
-function loadingGUI() {
+function loadingGUI(showText) {
   ///// LOADING TEXTS 
   textAlign(CENTER);
   let tempF = frameRate() % 30.;
@@ -1024,7 +1012,7 @@ function loadingGUI() {
     translate(0., 0., -666.);
 
     text("Receiving Sound Waves", 0, -sh * .34 - cellHeight * 4);
-    text("Turn on IP & press play...", 0, -sh * .34 - cellHeight * 1);
+    text(showText, 0, -sh * .34 - cellHeight * 1);
     translate(0., 0., 666.);
 
   } else {
@@ -1174,10 +1162,10 @@ function touchEnded() {
 
 
 function doubleClicked() {
-  xB();
-  yB();
-  zB();
-  t21.html("");
+ // xB();
+ // yB();
+ // zB();
+ // t21.html("");
 
 }
 
@@ -1535,7 +1523,8 @@ async function loadAudioBuffer(_context) {
       throw fetchError;
     }
 
-    loaded();
+    playButton.show();
+
   } catch (error) {
     console.log("Error type:", typeof error);
     console.log("Error details:", error);
