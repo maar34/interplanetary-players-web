@@ -33,7 +33,7 @@ let ksensitivity = 0.9;  // kSensitivity for knob movement
 let klabels = ["X", "Y", "Z"]; // kLabels for the knobs
 let knobSpacing; // Spacing between knobs
 let domAlpha, domColor2; 
-
+let starPos=[]; // Starts code original idea "Make a planet in p5js" video by Kazuki Umeda 
 
 let sliders = [];
 let ssteps = 255;  // Number of discrete ssteps
@@ -41,7 +41,7 @@ let ssensitivity = 0.9;  // sSensitivity for snob movement
 let slabels = ["Gain"]; // sLabels for the snobs
 let sliderSpacing= 0; // Spacing between knobs
 
-
+let bodySize; 
 
 // Game and deck variables
 var game, deck, suit, loadDeck, exoData;
@@ -83,7 +83,7 @@ document.oncontextmenu = () => false; // no right click
 
 var easycam,
   state = {
-    distance: 666, //final distance
+    distance: 444, //final distance
     center: [0, 0, 0],
     rotation: [1., 0., 0., 0.],
   },
@@ -123,8 +123,6 @@ function setup() {
 
   initVariables();
 
-//  xData = 1;
-//  yData = 0;
   xDataNorm = 1.;
   yDataNorm = 0.;
 
@@ -156,7 +154,7 @@ function setup() {
   easycam.state_reset = state;
   easycam.setPanScale(0.0);
   easycam.setPanScale(.02);
-  easycam.attachMouseListeners();
+  easycam.removeMouseListeners();
 
   
   cardColor = color(card.col1);
@@ -165,121 +163,158 @@ function setup() {
 
   
   textFont(font1);
-  textSize(27);
+  textSize(8);
   initSliders(); 
   initKnobs(); 
 
   createDom();
 
-
-}  
-
-function draw() {
+  for (let i = 0; i < 150; i++) {
+    let theta = random(PI); // Random angle between 0 and PI
+    let phi = random(TWO_PI); // Random angle between 0 and TWO_PI
+    let pos = createVector(
+      2000 * sin(theta) * cos(phi),
+      2000 * cos(theta),
+      2000 * sin(theta) * sin(phi)
+    );
+    let brightness = random(100, 127);
+    starPos.push([pos, brightness]);
+  }
   
+}  
+function draw() {
   background(0, 0, 0);
-
   noStroke();
-  //lights();
-  const wsize = 1.2 // ring size multiplier
+
   if (loadP) loadingGUI(showText);
 
+  renderBody(bodySize);
+  stars();  
+  drawHUD();
+
+
+  if (regenValue != 0) regenUpdates();
+}
+
+function renderBody(bodySize) {
   push();
   normalMaterial();
 
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
 
-  sphere(80, 6, 6);
-  rotateX(PI * .4);
-  torus(120 * wsize, 7 * wsize, 6, 7);
+  sphere(80 * bodySize, 24, 24);
+  rotateX(PI * 0.4);
+  torus(120 * bodySize, 7 * bodySize, 24, 24);
 
-  translate(- 260, 0., 0.);
-  sphere(15, 6, 6);
+  translate(-260 * bodySize, 0, 0);
+  sphere(15 * bodySize, 24, 24);
 
-  translate(520, 0., 0.);
-  sphere(15, 6, 6);
+  translate(520 * bodySize, 0, 0);
+  sphere(15 * bodySize, 24, 24);
 
-  translate(- 260, - 260., 0.);
-  sphere(15, 6, 6);
+  translate(-260 * bodySize, -260 * bodySize, 0);
+  sphere(15 * bodySize, 24, 24);
 
-  translate(- 0, 520., 0.);
-  sphere(15, 6, 6);
+  translate(0, 520 * bodySize, 0);
+  sphere(15 * bodySize, 24, 24);
 
-  pop();  
+  pop();
+}
 
-  // DRAW  GUI 
+function stars() {
+  push();
+  strokeWeight(3);
+  beginShape(POINTS);
+  for (let i = 0; i < starPos.length; i++) {
+    stroke(starPos[i][1]);
+    vertex(
+      starPos[i][0].x,
+      starPos[i][0].y,
+      starPos[i][0].z
+    );
+  }
+  endShape();
+  pop();
+}
+
+
+
+
+function drawHUD() {
   easycam.beginHUD();
-
   noFill();
   stroke(cardColor);
 
   const margin = 3.3;
   strokeWeight(1.5);
   beginShape();
-  vertex(margin + 0, margin + 0);
-  vertex(sw * .86, margin + 0);
-  vertex(sw - margin, sh * .14);
+  vertex(margin, margin);
+  vertex(sw * 0.86, margin);
+  vertex(sw - margin, sh * 0.14);
   vertex(sw - margin, sh - margin);
-  vertex(sw * .14, sh - margin);
-  vertex(margin + 0,  sh - margin );
-  vertex(margin + 0, margin + 0);
+  vertex(sw * 0.14, sh - margin);
+  vertex(margin, sh - margin);
+  vertex(margin, margin);
   endShape();
 
-  // DRAW 3D GUI 
   if (!loadP) {
-    // Draw each knob as a sphere and its value
-    knobs.forEach((knob, index) => {
-      let angleY = map(knob.valueY, 0, ksteps - 1, 0, 360, true);
-      stroke(regenValue > 0 ? domColor2 : cardColor);
-
-      push();
-      strokeWeight(.5);
-      translate(knob.x, knob.y);
-      rotateZ(radians(angleY));  
-      fill (0, 50);
-      sphere(knob.size * .5, 7, 7); // Draw a sphere for the knob
-      rotateZ(radians(90));
-      strokeWeight(3);
-      line(knob.size * .5, 0,  0, 0);
-      pop();
-      
-    });
+    draw3DGUI();
+  } else {
+    drawOverlay();
+  }
   
+  easycam.endHUD();
+}
 
-// Draw each slider as a cone and its value
-sliders.forEach((sliders, index) => {
-
-    push();
-    stroke(cardColor);
-    translate(sliders.x, sliders.y, sliders.z);
-
-    if (sliders.isDragging) {
-    cone(10, sliders.sliderHeight, 10); // Draw a thin, flat box as the slider track
-    }
-    translate(0, sliders.sliderValue, 0);
-    fill (0, 50);
-    rotateX(PI);
-    rotateY(sliders.sliderValue*0.005);
-    cone(sliders.handleRadius, sliders.handleHeight, 7); // Draw a cone as the handle
-
-    pop();
-
+function draw3DGUI() {
+  knobs.forEach((knob) => {
+    drawKnob(knob);
   });
 
-}else{
+  sliders.forEach((slider) => {
+    drawSlider(slider);
+  });
+}
+
+function drawKnob(knob) {
+  let angleY = map(knob.valueY, 0, ksteps - 1, 0, 360, true);
+  stroke(regenValue > 0 ? domColor2 : cardColor);
+
+  push();
+  strokeWeight(0.5);
+  translate(knob.x, knob.y);
+  rotateZ(radians(angleY));
+  fill(0, 50);
+  sphere(knob.size * 0.5, 7, 7); // Draw a sphere for the knob
+  rotateZ(radians(90));
+  strokeWeight(3);
+  line(knob.size * 0.5, 0, 0, 0);
+  pop();
+}
+
+function drawSlider(slider) {
+  push();
+  stroke(cardColor);
+  translate(slider.x, slider.y, slider.z);
+
+  if (slider.isDragging) {
+    cone(10, slider.sliderHeight, 10); // Draw a thin, flat box as the slider track
+  }
+  
+  translate(0, slider.sliderValue, 0);
+  fill(0, 50);
+  rotateX(PI);
+  rotateY(slider.sliderValue * 0.005);
+  cone(slider.handleRadius, slider.handleHeight, 7); // Draw a cone as the handle
+
+  pop();
+}
+
+function drawOverlay() {
   fill(0, 0, 0, 1); // RGBA: Black with 50% transparency (127 is half of 255)
   noStroke();
   rect(0, 0, sw, sh); // Cover the entire canvas
-}
-
-
-
-  easycam.endHUD();
-
-  // REGENERATIVE UPDATES 
-
-  if (regenValue != 0)  regenUpdates();
-
 }
 
 
@@ -591,7 +626,6 @@ function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
 
     if (loadP){
-
       guiData();
       regenButton.show();
       xButton.show();
@@ -608,7 +642,6 @@ function togglePlayState() {
     try {
       let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
       device.scheduleEvent(messageEvent);
-      easycam.removeMouseListeners();
       playStateI = 1;
       
       playButton.attribute('src', pauseIcon);
@@ -621,7 +654,7 @@ function togglePlayState() {
     try {
       let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [0]);
       device.scheduleEvent(messageEvent);
-      easycam.attachMouseListeners();
+      //easycam.attachMouseListeners();
       playButton.attribute('src', initialPlayIcon);
 
       context.suspend().catch(err => {
@@ -1017,18 +1050,11 @@ function loadingGUI(showText) {
   ///// LOADING TEXTS 
 
   textAlign(CENTER);
-  let tempF = frameRate() % 30.;
-  if (tempF > 15.) {
-    fill(0, 0, 255);
-  } else {
-    fill(255, 0, 0);
-  }
- 
-    translate(0., 0., -666.);
+  fill(cardColor); 
+    translate(0., -30., 125.);
 
-    text(showText, 0, -sh * .34 - cellHeight * 2);
-    translate(0., 0., 666.);
-
+    text(showText, 0, 0);
+    translate(0., 30., -125.);
 
 }
 
@@ -1050,7 +1076,7 @@ function releaseDOM() {
 
 //  easycam.attachMouseListeners();
   notDOM = true;
- //t21.html("");
+  if (!loadP) t21.html("");
  // attachMouseListeners();
 
 }
@@ -1206,8 +1232,9 @@ function initVariables() {
 
   knobSpacing = (cellWidth+cellHeight)*1.1;
 
- // startX = 0;
- // startY = 0;
+
+  bodySize = (cellWidth + cellHeight) * 0.0067; // planet rings and moon size multiplier
+
   notDOM = true;
 
 }
