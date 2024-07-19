@@ -14,6 +14,8 @@ let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm; // Data arrays and the
 let easyX, easyY; // Simplified X, Y values for visualization 
 
 // GUI and Visual elements
+let bodyRenderer; // Declare the bodyRenderer variable
+
 let font1; // font variable
 let loadP =true; 
 let t1, t2, t3, t4, t5, t6, t7, t8;
@@ -33,7 +35,6 @@ let ksensitivity = 0.9;  // kSensitivity for knob movement
 let klabels = ["X", "Y", "Z"]; // kLabels for the knobs
 let knobSpacing; // Spacing between knobs
 let domAlpha, domColor2; 
-let starPos=[]; // Starts code original idea "Make a planet in p5js" video by Kazuki Umeda 
 
 let sliders = [];
 let ssteps = 255;  // Number of discrete ssteps
@@ -120,6 +121,7 @@ function setup() {
   canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   setAttributes('antialias', true);
   frameRate(30); 
+  bodyRenderer = new BodyRenderer(bodySize);
 
   initVariables();
 
@@ -168,18 +170,6 @@ function setup() {
   initKnobs(); 
 
   createDom();
-
-  for (let i = 0; i < 150; i++) {
-    let theta = random(PI); // Random angle between 0 and PI
-    let phi = random(TWO_PI); // Random angle between 0 and TWO_PI
-    let pos = createVector(
-      2000 * sin(theta) * cos(phi),
-      2000 * cos(theta),
-      2000 * sin(theta) * sin(phi)
-    );
-    let brightness = random(100, 127);
-    starPos.push([pos, brightness]);
-  }
   
 }  
 function draw() {
@@ -188,57 +178,15 @@ function draw() {
 
   if (loadP) loadingGUI(showText);
 
-  renderBody(bodySize);
-  stars();  
-  drawHUD();
-
-
-  if (regenValue != 0) regenUpdates();
-}
-
-function renderBody(bodySize) {
-  push();
-  normalMaterial();
 
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
+  bodyRenderer.renderBody();
+  bodyRenderer.stars();
+  drawHUD();
 
-  sphere(80 * bodySize, 24, 24);
-  rotateX(PI * 0.4);
-  torus(120 * bodySize, 7 * bodySize, 24, 24);
-
-  translate(-260 * bodySize, 0, 0);
-  sphere(15 * bodySize, 24, 24);
-
-  translate(520 * bodySize, 0, 0);
-  sphere(15 * bodySize, 24, 24);
-
-  translate(-260 * bodySize, -260 * bodySize, 0);
-  sphere(15 * bodySize, 24, 24);
-
-  translate(0, 520 * bodySize, 0);
-  sphere(15 * bodySize, 24, 24);
-
-  pop();
+  if (regenValue != 0) regenUpdates();
 }
-
-function stars() {
-  push();
-  strokeWeight(3);
-  beginShape(POINTS);
-  for (let i = 0; i < starPos.length; i++) {
-    stroke(starPos[i][1]);
-    vertex(
-      starPos[i][0].x,
-      starPos[i][0].y,
-      starPos[i][0].z
-    );
-  }
-  endShape();
-  pop();
-}
-
-
 
 
 function drawHUD() {
@@ -643,7 +591,7 @@ function togglePlayState() {
       let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "play", [1]);
       device.scheduleEvent(messageEvent);
       playStateI = 1;
-      
+
       playButton.attribute('src', pauseIcon);
 
     } catch (err) {
@@ -1050,11 +998,13 @@ function loadingGUI(showText) {
   ///// LOADING TEXTS 
 
   textAlign(CENTER);
+
+  
   fill(cardColor); 
-    translate(0., -30., 125.);
+    translate(0., -30., 150.*bodySize);
 
     text(showText, 0, 0);
-    translate(0., 30., -125.);
+    translate(0., 30., -150.*bodySize);
 
 }
 
@@ -1234,6 +1184,7 @@ function initVariables() {
 
 
   bodySize = (cellWidth + cellHeight) * 0.0067; // planet rings and moon size multiplier
+  bodyRenderer.setBodySize(bodySize);
 
   notDOM = true;
 
@@ -1475,6 +1426,9 @@ function updateButtonPositions() {
     updateButtonPositions();
     
   }
+
+///DATA///////
+
 
 
 
