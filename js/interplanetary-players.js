@@ -15,6 +15,9 @@ let easyX, easyY; // Simplified X, Y values for visualization
 
 // GUI and Visual elements
 let bodyRenderer; // Declare the bodyRenderer variable
+let model00, model01; 
+let body00, body01; 
+let bodyColor; 
 
 let font1; // font variable
 let loadP =true; 
@@ -57,6 +60,12 @@ let prevTouchX = 0, prevTouchY = 0;
 // Audio channels and analysis
 let playStateI; // Play state index
 let isFirstPlay = true; // Flag to track the first play button press
+
+let lo = 0;
+let mid = 0;
+let hi = 0;
+let xx = 0;
+let yy = 0;
 
 // TIME, related to Dates and Transits 
 
@@ -104,6 +113,11 @@ function preload() {
  
   regenValue = 0.0;
 
+  model00 = loadModel('media/d6fbd28b1af1_a_spherical_exoplan.obj', true); // Load your 3D model in preload
+  body00 = loadImage('media/d6fbd28b1af1_a_spherical_exoplan_texture_kd.jpg'); // Load your texture image
+  model01 = loadModel('media/9508c22b65db__A_3D_scene_depicti.obj', true); // Load your 3D model in preload
+  body01 = loadImage('media/9508c22b65db__A_3D_scene_depicti_texture_kd.jpg'); // Load your texture image
+
 
 }
 
@@ -121,13 +135,14 @@ function setup() {
   canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   setAttributes('antialias', true);
   frameRate(30); 
+
+  angleMode(DEGREES); 
+
+  
   bodyRenderer = new BodyRenderer(bodySize);
-
   initVariables();
-
   xDataNorm = 1.;
   yDataNorm = 0.;
-
   index = 0; 
   increasing = true; 
 
@@ -173,16 +188,28 @@ function setup() {
   
 }  
 function draw() {
+
+  // fovy= 2 * atan(sh / 2 / easycam.state.distance;
+
+  let aspect = sw / sh; 
+
+
   background(0, 0, 0);
   noStroke();
 
   if (loadP) loadingGUI(showText);
 
+  perspective(45, aspect);
 
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
+
+  colorMode(HSB, 360, 100, 100); 
   bodyRenderer.renderBody();
   bodyRenderer.stars();
+  colorMode(RGB); 
+
+
   drawHUD();
 
   if (regenValue != 0) regenUpdates();
@@ -232,10 +259,10 @@ function drawKnob(knob) {
   push();
   strokeWeight(0.5);
   translate(knob.x, knob.y);
-  rotateZ(radians(angleY));
+  rotateZ(angleY);
   fill(0, 50);
   sphere(knob.size * 0.5, 7, 7); // Draw a sphere for the knob
-  rotateZ(radians(90));
+  rotateZ(90);
   strokeWeight(3);
   line(knob.size * 0.5, 0, 0, 0);
   pop();
@@ -252,8 +279,8 @@ function drawSlider(slider) {
   
   translate(0, slider.sliderValue, 0);
   fill(0, 50);
-  rotateX(PI);
-  rotateY(slider.sliderValue * 0.005);
+  rotateX(180);
+  rotateY(slider.sliderValue * .5);
   cone(slider.handleRadius, slider.handleHeight, 7); // Draw a cone as the handle
 
   pop();
@@ -999,12 +1026,11 @@ function loadingGUI(showText) {
 
   textAlign(CENTER);
 
-  
-  fill(cardColor); 
-    translate(0., -30., 150.*bodySize);
 
-    text(showText, 0, 0);
-    translate(0., 30., -150.*bodySize);
+  fill(cardColor); 
+  translate(0., -30., 150.*bodySize);
+  text(showText, 0, 0);
+  translate(0., 30., -150.*bodySize); 
 
 }
 
@@ -1163,8 +1189,6 @@ function initVariables() {
   sh = window.innerHeight;
 
   let baseCols = 10; 
-  //let aspectRatio = sw / sh;
-  //scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
   let cellSize = min(width, height) / baseCols;
   let cols = floor(width / cellSize); // Adjust columns based on aspect ratio
   let rows = floor(height / cellSize); // Adjust rows based on aspect ratio
@@ -1466,6 +1490,19 @@ async function createRNBO() {
 
 
     showText = "Main engine \n start sequence initiated \n press again";
+
+    // ev is of type MessageEvent, which has a tag and a payload
+    // Assume `device` is already defined and connected
+    device.messageEvent.subscribe((ev) => {
+      if (ev.tag === "listout") {
+        // Check if ev.payload is an array
+        if (Array.isArray(ev.payload)) {
+          [lo, mid, hi] = ev.payload;
+        } else {
+          console.error('Unexpected payload format:', ev.payload);
+        }
+      }
+});
 
   } catch (error) {
     console.log(error);
