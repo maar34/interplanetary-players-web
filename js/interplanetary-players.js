@@ -52,8 +52,8 @@ var game, deck, suit, loadDeck, exoData;
 
 // Input and interaction
 let inputX, inputY, inputZ, inputGain;
-let wMinD = 444;
-let wMaxD = 1544;
+let wMinD = 600;
+let wMaxD = 1700;
 let index, increasing; // Inicializar el índice
 let prevTouchX = 0, prevTouchY = 0;
 
@@ -61,9 +61,7 @@ let prevTouchX = 0, prevTouchY = 0;
 let playStateI; // Play state index
 let isFirstPlay = true; // Flag to track the first play button press
 
-let lo = 0;
-let mid = 0;
-let hi = 0;
+let amplitud = 0;
 let xx = 0;
 let yy = 0;
 
@@ -93,7 +91,7 @@ document.oncontextmenu = () => false; // no right click
 
 var easycam,
   state = {
-    distance: 444, //final distance
+    distance: 1000, //final distance
     center: [0, 0, 0],
     rotation: [1., 0., 0., 0.],
   },
@@ -189,9 +187,7 @@ function setup() {
 }  
 function draw() {
 
-  // fovy= 2 * atan(sh / 2 / easycam.state.distance;
 
-  let aspect = sw / sh; 
 
 
   background(0, 0, 0);
@@ -199,13 +195,13 @@ function draw() {
 
   if (loadP) loadingGUI(showText);
 
-  perspective(45, aspect);
 
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
 
   colorMode(HSB, 360, 100, 100); 
   bodyRenderer.renderBody();
+  bodyRenderer.renderMoons();
   bodyRenderer.stars();
   colorMode(RGB); 
 
@@ -554,7 +550,9 @@ function regenLogic() {
 
           break;
   }
-}async function playPause() {
+}
+
+async function playPause() {
   notDOM = false;
 
   if (isFirstPlay) {
@@ -562,7 +560,10 @@ function regenLogic() {
   }
 
   if (context.state === 'suspended') {
-    if (isFirstPlay) handleFirstPlay();
+    if (isFirstPlay) {
+      console.log('Handling first play');
+      handleFirstPlay();
+    }
 
     await context.resume().then(() => {
       playButton.attribute('src', playIcon);
@@ -575,10 +576,12 @@ function regenLogic() {
     if (context.state === 'suspended') {
       setTimeout(tryResumeContext, 100);
     } else {
-      // Context resumed successfully
+      console.log('Context resumed successfully');
     }
   } else {
-    if (isFirstPlay) handleFirstPlay();
+    if (isFirstPlay) {
+      handleFirstPlay();
+    }
     togglePlayState();
   }
 }
@@ -588,6 +591,12 @@ async function handleFirstPlay() {
   playButton.attribute('src', initialPlayIcon);
   isFirstPlay = false;
   loadP = true;
+  
+  guiData();
+  guiDataStyle(cellWidth, cellHeight); 
+  setKnobValueY(knobs[0], 127, 500);
+  setKnobValueY(knobs[1], 127, 500);
+  setKnobValueY(knobs[2], 127, 500);
 }
 
 function togglePlayState() {
@@ -601,7 +610,6 @@ function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
 
     if (loadP){
-      guiData();
       regenButton.show();
       xButton.show();
       yButton.show();
@@ -916,7 +924,8 @@ function zInput() {
   } else {
     worldI_dist = map(zData, (ksteps - 1)/2, (ksteps - 1), wMinD, wMaxD, true);
   }
-  easycam.setDistance(worldI_dist, 1.);
+   easycam.setDistance(worldI_dist, 200);
+
 
   inputZ.value = zData;
 
@@ -961,7 +970,7 @@ function guiData() {
   t21 = createP(''); // Hint
   t22 = createP('0');
   t0 = createP('Jam'); // Section Title
-  guiDataStyle(cellWidth, cellHeight); 
+  
 }
 
 function guiDataStyle(cellWidth, cellHeight) {
@@ -1059,49 +1068,58 @@ function releaseDOM() {
 
 
 function mousePressed() {
-
-
   knobs.forEach(knob => {
-      knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
+    knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
   });
-  
-    // Check if the mouse is over the handle
 
-  sliders.forEach(sliders => {
-  let d = dist(mouseX, mouseY, sliders.x, sliders.y + sliders.sliderValue);
-
-    if (d < sliders.handleRadius) {
-      sliders.isDragging = true; 
+  sliders.forEach(slider => {
+    let d = dist(mouseX, mouseY, slider.x, slider.y + slider.sliderValue);
+    if (d < slider.handleRadius) {
+      slider.isDragging = true;
       pressDOM();
-
     }
-
-});
-
+  });
 
   return false; // Prevent default behavior and stop propagation
+}
 
+function touchStarted() {
+  prevTouchX = touches[0].x;
+  prevTouchY = touches[0].y;
+
+  knobs.forEach(knob => {
+    knob.isDragging = dist(touches[0].x, touches[0].y, knob.x, knob.y) < knob.size / 2;
+  });
+
+  sliders.forEach(slider => {
+    let d = dist(touches[0].x, touches[0].y, slider.x, slider.y + slider.sliderValue);
+    if (d < slider.handleRadius) {
+      slider.isDragging = true;
+      pressDOM();
+    }
+  });
+
+  return false; // Prevent default behavior and stop propagation
 }
 
 
-function mouseDragged() {
 
+function mouseDragged() {
   knobs.forEach((knob, index) => {
-    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size *.75 ) {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size * 0.75) {
       knob.isDragging = true;
       updateKnobValue(knob, mouseX, mouseY);
       pressDOM();
     }
   });
-  sliders.forEach(sliders => {
-    if (sliders.isDragging) {
-    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
-      sliders.sliderValue = constrain(mouseY - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
-      inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -220, 0., 1.);   
-
+  sliders.forEach(slider => {
+    if (slider.isDragging) {
+      slider.sliderValue = constrain(mouseY - slider.y, -slider.sliderHeight / 2, slider.sliderHeight / 2);
+      inputGain.value = map(slider.sliderValue, slider.sliderHeight / 2, -220, 0., 1.);
     }
-});
+  });
 }
+
 
 // Mouse Wheel Function
 function mouseWheel(event) {
@@ -1118,29 +1136,18 @@ function mouseWheel(event) {
 
 function mouseReleased() {
   knobs.forEach(knob => knob.isDragging = false);
-  sliders.forEach(sliders => sliders.isDragging = false);
-
+  sliders.forEach(slider => slider.isDragging = false);
 }
 
-function touchStarted() {
-  prevTouchX = touches[0].x;
-  prevTouchY = touches[0].y;
+function touchEnded() {
+  knobs.forEach(knob => knob.isDragging = false);
+  sliders.forEach(slider => slider.isDragging = false);
 
-  knobs.forEach(knob => {
-      knob.isDragging = dist(touches[0].x, touches[0].y, knob.x, knob.y) < knob.size / 2;
-  });
-
-  sliders.forEach(sliders => {
-    let d = dist(touches[0].x, touches[0].y, sliders.x, sliders.y + sliders.sliderValue);
-  
-      if (d < sliders.handleRadius) {
-        sliders.isDragging = true; 
-        pressDOM();
-      }
-    });
-    return false; // Prevent default behavior and stop propagation
-
+  return false; // Prevent default behavior and stop propagation
 }
+
+
+
 
 function touchMoved() {
   // Update knobs based on touch movement
@@ -1150,29 +1157,21 @@ function touchMoved() {
     }
   });
 
-  sliders.forEach(sliders => {
-    if (sliders.isDragging) {
-    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
-    sliders.sliderValue = constrain(touches[0].y - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
-    inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -sliders.sliderHeight / 2, 0., 1.);   
-
-  }
-});
+  sliders.forEach(slider => {
+    if (slider.isDragging) {
+      slider.sliderValue = constrain(touches[0].y - slider.y, -slider.sliderHeight / 2, slider.sliderHeight / 2);
+      inputGain.value = map(slider.sliderValue, slider.sliderHeight / 2, -slider.sliderHeight / 2, 0., 1.);
+    }
+  });
 
   prevTouchX = touches[0].x;
   prevTouchY = touches[0].y;
 
-  
   return false; // Prevent default behavior
 }
 
-function touchEnded() {
-  knobs.forEach(knob => knob.isDragging = false);
-  sliders.forEach(sliders => sliders.isDragging = false);
 
-  return false; // Prevent default behavior and stop propagation
 
-}
 
 
 function doubleClicked() {
@@ -1211,6 +1210,23 @@ function initVariables() {
   bodyRenderer.setBodySize(bodySize);
 
   notDOM = true;
+
+    const  aspect = sw / sh; 
+
+    if (sh>sw) {
+
+      wMinD = 600*aspect;
+      wMaxD = 1700*aspect;
+      fovy= 2 * atan(sh / 2 / wMaxD);
+      perspective(fovy, aspect);
+
+    }else{
+      perspective(45, aspect);
+      wMinD = 1000/aspect;
+      wMaxD = 2000/aspect;
+      fovy= 2 * atan(sh / 2 / wMaxD);
+      perspective(fovy, aspect);
+    }
 
 }
 function initSliders(){
@@ -1461,16 +1477,20 @@ function updateButtonPositions() {
 
 async function createRNBO() {
   try {
+    
     const patchExportURL = "export/" + card.engine;
     let WAContext = window.AudioContext || window.webkitAudioContext;
     context = new WAContext();
 
     let rawPatcher = await fetch(patchExportURL);
+    
     let patcher = await rawPatcher.json();
     device = await RNBO.createDevice({ context, patcher });
+    
 
     device.node.connect(context.destination);
-    loadAudioBuffer(context);
+    
+    await loadAudioBuffer(context);
 
     inputX = device.parametersById.get("inputX");
     inputY = device.parametersById.get("inputY");
@@ -1488,36 +1508,30 @@ async function createRNBO() {
     knobs[2].valueY = centerValue;
     sliders[0].sliderValue = 0;
 
-
     showText = "Main engine \n start sequence initiated \n press again";
 
     // ev is of type MessageEvent, which has a tag and a payload
-    // Assume `device` is already defined and connected
     device.messageEvent.subscribe((ev) => {
-      if (ev.tag === "listout") {
-        // Check if ev.payload is an array
-        if (Array.isArray(ev.payload)) {
-          [lo, mid, hi] = ev.payload;
-        } else {
-          console.error('Unexpected payload format:', ev.payload);
-        }
+      if (ev.tag === "amp") {
+          // Check if ev.payload is a float
+          if (typeof ev.payload === 'number') {
+              amplitud = ev.payload;
+          } else {
+              console.error('Unexpected payload format:', ev.payload);
+          }
       }
-});
+    });
 
   } catch (error) {
-    console.log(error);
+    console.log('Error creating RNBO:', error);
     errorLoadingAudio(error);
   }
-
-
 }
 
-
 async function loadAudioBuffer(_context) {
-
   context = _context;
-
   let audioBuf;
+
   try {
     let audioURL;
 
@@ -1528,36 +1542,22 @@ async function loadAudioBuffer(_context) {
       audioURL = card.mp3file;
     }
 
-    try {
-      const fileResponse = await fetch(audioURL, {
-        cache: 'reload'
-      });
+    const fileResponse = await fetch(audioURL, { cache: 'reload' });
 
-      if (!fileResponse.ok) {
-        throw new Error("Network response was not OK");
-      }
-
-      const arrayBuf = await fileResponse.arrayBuffer();
-      if (!(arrayBuf instanceof ArrayBuffer)) {
-        throw new Error("Fetched data is not a valid ArrayBuffer");
-      }
-
-      try {
-        audioBuf = await context.decodeAudioData(arrayBuf);
-        await device.setDataBuffer("world1", audioBuf);
-      } catch (decodeError) {
-        console.error("Error decoding audio data or setting data buffer:", decodeError);
-        throw decodeError;
-      }
-    } catch (fetchError) {
-      console.error("There has been a problem with your fetch operation:", fetchError);
-      throw fetchError;
+    if (!fileResponse.ok) {
+      throw new Error("Network response was not OK");
     }
 
+    const arrayBuf = await fileResponse.arrayBuffer();
 
+    if (!(arrayBuf instanceof ArrayBuffer)) {
+      throw new Error("Fetched data is not a valid ArrayBuffer");
+    }
+
+    audioBuf = await context.decodeAudioData(arrayBuf);
+    await device.setDataBuffer("world1", audioBuf);
   } catch (error) {
-    console.log("Error type:", typeof error);
-    console.log("Error details:", error);
+    console.log('Error loading audio buffer:', error);
     errorLoadingAudio(error);
   }
 }

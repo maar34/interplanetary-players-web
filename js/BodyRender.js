@@ -1,24 +1,35 @@
+// Audio responsive Planetary Ring
+// Inspired by Daniel Shiffman's Coding Train video 17.10: Sound Visualization: Radial Graph - p5.js Sound Tutorial
+// Link to Daniel Shiffman's video: https://www.youtube.com/watch?v=h_aTgOl9J5I
+
+// Stars
+// Based on the Make a Planet in p5.js video by Kazuki Umeda
+// Link to Kazuki Umeda's video: https://www.youtube.com/watch?v=CuD_HHrmDiA
+
 class BodyRenderer {
   constructor(bodySize) {
-    this.bodySize = bodySize;
+    this.setBodySize(bodySize); // Ensure body size is set before initializing positions
     this.starPos = [];
+    this.amp_history = [];
+    this.lastPositions = [
+      {x: 0, z: 0},
+      {x: 0, z: 0},
+      {x: 0, z: 0},
+      {x: 0, z: 0}
+    ];
     this.initStarPositions();
-    this.ringDiameter; 
-    this.ringWidth; 
-    this.moonSize; 
-    this.planetSize; 
-    this.lo_history = [];
-    this.mid_history = [];
-    this.hi_history = [];
+    this.t = 1; 
+    this.t2 = 45; 
+    this.planetRotation = 0;
 
   }
 
   setBodySize(bodySize) {
-    this.bodySize = bodySize; // body size is a factor tied to the screen width and height size.
-    this.ringDiameter = 70 * this.bodySize; 
-    this.ringWidth = 3 * this.bodySize; 
-    this.moonSize = .07* this.bodySize; 
-    this.planetSize = .66* this.bodySize; 
+    this.bodySize = bodySize; // body size is a factor tied to the screen width and height size
+    this.ringDiameter = 70 * this.bodySize;
+    this.ringWidth = 3 * this.bodySize;
+    this.moonSize = 0.07 * this.bodySize;
+    this.planetSize = 0.66 * this.bodySize;
   }
 
   initStarPositions() {
@@ -31,16 +42,13 @@ class BodyRenderer {
         2000 * sin(theta) * sin(phi)
       );
       let brightness = random(50, 100);
-      let size = random(1., 3.); // Random star size
+      let size = random(1, 3); // Random star size
       this.starPos.push([pos, brightness, size]);
     }
   }
 
   renderBody() {
-    this.lo_history.push(lo);
-    this.mid_history.push(mid);
-    this.hi_history.push(hi);
-
+    this.amp_history.push(amplitud);
     push();
 
     // Improved material settings
@@ -59,104 +67,80 @@ class BodyRenderer {
     push();
     scale(this.planetSize);
     rotateX(90);
-    rotateZ(-frameCount * 0.6); // Slow rotation for dynamic effect
+
+    // Update the rotation angle based on playStateI
+    if (playStateI === 1) {
+        this.planetRotation -= 0.02; // Update the rotation angle
+    }
+    rotateZ(this.planetRotation); // Apply the rotation
+
     noStroke();
     model(model00); // Render the 3D model
     pop();
 
     // Render the ring around the planet
     push();
-    strokeWeight(2); // Thickness of the ring
+    strokeWeight(1.5); // Thickness of the ring
     noFill();
 
     // Precompute angle increment
-    const angleIncrement = 360 / this.lo_history.length;
+    const angleIncrement = 360 / this.amp_history.length;
     const diameter = this.ringDiameter;
-/*
+
     beginShape();
-    for (let i = 0; i < this.lo_history.length; i++) {
-      let angle = i * angleIncrement;
-      let cosAngle = cos(angle);
-      let sinAngle = sin(angle);
-    
-      // Primer anillo
-      let r1 = diameter + map(this.lo_history[i], -1, 1, 0, diameter);
-      let x1 = r1 * cosAngle;
-      let y1 = r1 * sinAngle;
-    
-      let hue1 = map(this.lo_history[i], -1, 1, 150, 0);
-    
-      stroke(hue1, 80, 80); // Color del primer anillo
-      vertex(x1, 0, y1);
+    rotateX(-14);
+
+    for (let i = 0; i < this.amp_history.length; i++) {
+        let angle = i * angleIncrement;
+        let cosAngle = cos(angle);
+        let sinAngle = sin(angle);
+
+        // Second ring, with a larger radius
+        let r2 = diameter + map(this.amp_history[i], -.4, .4, diameter, 1); // Add extra radius
+        let x2 = r2 * cosAngle;
+        let y2 = r2 * sinAngle;
+
+        let hue2 = map(this.amp_history[i], -1, 1, 150, 0);
+
+        stroke(hue2, 80, 80); // Color of the second ring
+        vertex(x2, 0, y2);
     }
     endShape(CLOSE);
-    
-    beginShape();
-    for (let i = 0; i < this.mid_history.length; i++) {
-      let angle = i * angleIncrement;
-      let cosAngle = cos(angle);
-      let sinAngle = sin(angle);
-    
-      // Segundo anillo, con un radio más grande
-      let r2 = diameter + map(this.mid_history[i], -1, 1, 0, diameter) + 30; // Añadir extraRadius
-      let x2 = r2 * cosAngle;
-      let y2 = r2 * sinAngle;
-    
-      let hue2 = map(this.mid_history[i], -1, 1, 150, 0);
-    
-      stroke(hue2, 80, 80); // Color del segundo anillo
-      vertex(x2, 0, y2);
-    }
-    endShape(CLOSE);
-    
-    beginShape();
-  for (let i = 0; i < this.hi_history.length; i++) {
-    let angle = i * angleIncrement;
-    let cosAngle = cos(angle);
-    let sinAngle = sin(angle);
-
-    // Tercer anillo, con un radio aún más grande
-    let r3 = diameter + map(this.hi_history[i], -1, 1, 0, diameter) + 60; // Añadir extraRadius para el tercer anillo
-    let x3 = r3 * cosAngle;
-    let y3 = r3 * sinAngle;
-
-    let hue3 = map(this.hi_history[i], -1, 1, 150, 0);
-
-    stroke(hue3, 80, 80); // Color del tercer anillo
-    vertex(x3, 0, y3);
-  }
-endShape(CLOSE);
-*/
-
-    
-
 
     // Limit history array lengths
-    if (this.lo_history.length > 360) {
-      this.lo_history.shift();
-      this.mid_history.shift();
-      this.hi_history.shift();
+    if (this.amp_history.length > 360) {
+        this.amp_history.shift();
     }
 
     pop();
-
-    // Render smaller moons or spheres around the planet
-    this.renderMoons();
     pop();
 }
 
-
-
-
-
   renderMoons() {
     // Calculate orbit positions for the moons
-    let t = 45 + (millis() / 100000 * 360 / TWO_PI); // Time in degrees
+
+      this.t = millis();  
+      if (playStateI) this.t2 = 45 + (this.t / 150000 * 360 / TWO_PI); // Time in degrees 
+
+
+      this.lastPositions[0].x = 260 * this.bodySize * cos(this.t2);
+      this.lastPositions[0].z = 260 * this.bodySize * sin(this.t2);
+
+      this.lastPositions[1].x = 260 * this.bodySize * cos(this.t2 + 180);
+      this.lastPositions[1].z = 260 * this.bodySize * sin(this.t2 + 180);
+
+      this.lastPositions[2].x = 260 * this.bodySize * cos(this.t2 + 90);
+      this.lastPositions[2].z = 260 * this.bodySize * sin(this.t2 + 90);
+
+      this.lastPositions[3].x = 260 * this.bodySize * cos(this.t2 + 270);
+      this.lastPositions[3].z = 260 * this.bodySize * sin(this.t2 + 270);
+
+
+    rotateX(-14);
+    
     // First moon
     push();
-    let x1 = 260 * this.bodySize * cos(t);
-    let z1 = 260 * this.bodySize * sin(t);
-    translate(x1, 0, z1);
+    translate(this.lastPositions[0].x, 0, this.lastPositions[0].z);
     scale(this.moonSize);
     texture(body01); // Apply the texture image
     model(model01); // Render the 3D model
@@ -164,11 +148,7 @@ endShape(CLOSE);
 
     // Second moon
     push();
-
-
-    let x2 = 260 * this.bodySize * cos(t + 180);
-    let z2 = 260 * this.bodySize * sin(t + 180);
-    translate(x2, 0, z2);
+    translate(this.lastPositions[1].x, 0, this.lastPositions[1].z);
     scale(this.moonSize);
     texture(body01); // Apply the texture image
     model(model01); // Render the 3D model
@@ -176,9 +156,7 @@ endShape(CLOSE);
 
     // Third moon
     push();
-    let x3 = 260 * this.bodySize * cos(t + 90);
-    let z3 = 260 * this.bodySize * sin(t + 90);
-    translate(x3, 0, z3);
+    translate(this.lastPositions[2].x, 0, this.lastPositions[2].z);
     scale(this.moonSize);
     texture(body01); // Apply the texture image
     model(model01); // Render the 3D model
@@ -186,9 +164,7 @@ endShape(CLOSE);
 
     // Fourth moon
     push();
-    let x4 = 260 * this.bodySize * cos(t + 270);
-    let z4 = 260 * this.bodySize * sin(t + 270);
-    translate(x4, 0, z4);
+    translate(this.lastPositions[3].x, 0, this.lastPositions[3].z);
     scale(this.moonSize);
     texture(body01); // Apply the texture image
     model(model01); // Render the 3D model
@@ -206,12 +182,11 @@ endShape(CLOSE);
       let twinkle = brightness + sin(millis() * 0.001 + i);
       push();
       translate(pos.x, pos.y, pos.z);
-      strokeWeight (size); 
-      stroke (twinkle);
+      strokeWeight(size); 
+      stroke(twinkle);
       point(0, 0, 0);
       pop();
     }
     pop();
   }
-
 }
