@@ -894,46 +894,40 @@ function createDom() {
 
 
 function xInput() {
-
+  if (!inputX) {
+    return;
+  }
   inputX.value = xData;
-
   let xDataM = map(xData, 0, ksteps - 1, float(card.xTag[1]), float(card.xTag[2]));
   t6.html(nfs(xDataM, 1, 2));
-  
   easyY = xDataM * -0.0077;
-
 }
 
 function yInput() {
-
+  if (!inputY) {
+    return;
+  }
   inputY.value = yData;
-
   let yDataM = map(yData, 0, ksteps - 1, float(card.yTag[1]), float(card.yTag[2]));
   t7.html(nfs(yDataM, 1, 2));
-
   easyX = yDataM * -0.00077;
-
-
 }
 
 function zInput() {
-
-
+  if (!inputZ) {
+    return;
+  }
   if (zData <= (ksteps - 1)/2) {
     worldI_dist = map(zData, 0., (ksteps - 1)/2, wMaxD, wMinD, true);
   } else {
     worldI_dist = map(zData, (ksteps - 1)/2, (ksteps - 1), wMinD, wMaxD, true);
   }
-   easycam.setDistance(worldI_dist, 200);
-
+  easycam.setDistance(worldI_dist, 200);
 
   inputZ.value = zData;
-
   t5.html(nfs(worldI_dist, 1, 2));
-
-  zDataV = map(zData, 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+  let zDataV = map(zData, 0., 255., float(card.zTag[1]), float(card.zTag[2]));
   t8.html(nfs(zDataV, 1, 2));
-
 }
 
 function gainInput() {
