@@ -81,7 +81,7 @@ var card = {
   maxSpeed: "",
   col1: "",
   col2: "",
-  icon_set:"", 
+  iconSet:"", 
   engine: "",
   xTag: "",
   yTag: "",
@@ -802,7 +802,7 @@ function createDom() {
   domColor2 = color(0, 255, 128);
 
 
-  centerIcon = 'icons/' + nf(card.icon_set, 2) + '_center.svg';
+  centerIcon = 'icons/' + nf(card.iconSet, 2) + '_center.svg';
 
   xButton = createImg(centerIcon, 'Play Button', '&#11042');
   xButton.style('width', btW + 'px');
@@ -846,12 +846,12 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
-  initialPlayIcon = 'icons/' + nf(card.icon_set, 2) + '_on-off.svg';
-  playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
+  initialPlayIcon = 'icons/' + nf(card.iconSet, 2) + '_on-off.svg';
+  playIcon = 'icons/' + nf(card.iconSet, 2) + '_play.svg';
 
   // create buttons and sliderss
   playButton = createImg(initialPlayIcon, 'Play Button', '&#9655');
-  pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
+  pauseIcon = 'icons/' + nf(card.iconSet, 2) + '_pause.svg';
 
   playButton.style('width',  btW+ 'px');
   playButton.style('height', btH + 'px' );
@@ -867,7 +867,7 @@ function createDom() {
 
   // create buttons and sliderss
 
-  regenIcon = 'icons/' + nf(card.icon_set, 2) + '_regen.svg';
+  regenIcon = 'icons/' + nf(card.iconSet, 2) + '_regen.svg';
 
   regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
 

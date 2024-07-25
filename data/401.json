@@ -12,7 +12,7 @@
          "maxSpeed": "3.",
          "col1": "rgb(255,51,204)",
          "col2": "333.",
-         "icon_set":"101",
+         "iconSet":"101",
          "engine": "d00_c01_v1.3.json",
          "xTag": [
             "Speed",
