@@ -14,7 +14,8 @@ let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm; // Data arrays and the
 let easyX, easyY; // Simplified X, Y values for visualization 
 
 // GUI and Visual elements
-let bodyRenderer; // Declare the bodyRenderer variable
+let bodyRenderer, proxyServerUrl, playbackDataManager; // Declare the bodyRenderer variable
+
 let model00, model01; 
 let body00, body01; 
 let bodyColor; 
@@ -138,6 +139,9 @@ function setup() {
 
   
   bodyRenderer = new BodyRenderer(bodySize);
+  proxyServerUrl = 'http://161.35.206.36:3000'; // Use the IP or domain of your backend server
+  playbackDataManager = new PlaybackDataManager(proxyServerUrl);
+
   initVariables();
   xDataNorm = 1.;
   yDataNorm = 0.;
@@ -184,6 +188,11 @@ function setup() {
 
   createDom();
   
+  // Example usage
+  onSongPlay("user123", "player456", "Song Name", "Artist Name");
+  print ("displayPlaybackData"+" "+displayPlaybackData("player456"));
+
+
 }  
 function draw() {
 
@@ -1686,4 +1695,15 @@ function setCurrentIndexToToday() {
     index = Math.max(0, Math.min(index, numTransits - 1));
 
     return index; // This is the normalized index for today
+}
+
+function onSongPlay(userId, playerId, songName, artistName) {
+  playbackDataManager.savePlaybackData(userId, playerId, songName, artistName, 1, 120, "14h 29m 42s", "-62° 40′ 46″");
+}
+
+function displayPlaybackData(playerId) {
+  playbackDataManager.getPlaybackData(playerId).then(data => {
+    // Code to display data on your frontend
+    console.log(data);
+  });
 }
