@@ -1,3 +1,4 @@
+
 // Screen and GUI dimensions
 let sw, sh; // window size
 let cellWidth, cellHeight; // gui separation
@@ -13,11 +14,7 @@ let xData, yData, zData, xDataNorm, yDataNorm, zDataNorm; // Data arrays and the
 let easyX, easyY; // Simplified X, Y values for visualization 
 
 // GUI and Visual elements
-let bodyRenderer, proxyServerUrl, playbackDataManager, playbackData; // Declare the bodyRenderer variable
-
-let model00, model01; 
-let body00, body01; 
-let bodyColor; 
+let bodyRenderer; // Declare the bodyRenderer variable
 
 let font1; // font variable
 let loadP =true; 
@@ -52,18 +49,14 @@ var game, deck, suit, loadDeck, exoData;
 
 // Input and interaction
 let inputX, inputY, inputZ, inputGain;
-let wMinD = 600;
-let wMaxD = 1700;
+let wMinD = 444;
+let wMaxD = 1544;
 let index, increasing; // Inicializar el índice
 let prevTouchX = 0, prevTouchY = 0;
 
 // Audio channels and analysis
 let playStateI; // Play state index
 let isFirstPlay = true; // Flag to track the first play button press
-
-let amplitud = 0;
-let xx = 0;
-let yy = 0;
 
 // TIME, related to Dates and Transits 
 
@@ -81,7 +74,7 @@ var card = {
   maxSpeed: "",
   col1: "",
   col2: "",
-  iconSet:"", 
+  icon_set:"", 
   engine: "",
   xTag: "",
   yTag: "",
@@ -91,7 +84,7 @@ document.oncontextmenu = () => false; // no right click
 
 var easycam,
   state = {
-    distance: 1000, //final distance
+    distance: 444, //final distance
     center: [0, 0, 0],
     rotation: [1., 0., 0., 0.],
   },
@@ -111,11 +104,6 @@ function preload() {
  
   regenValue = 0.0;
 
-  model00 = loadModel('media/077899da693f__Design_a_3D_model_.obj', true); // Load your 3D model in preload
-  body00 = loadImage('media/077899da693f__Design_a_3D_model__texture_kd.jpg'); // Load your texture image
-  model01 = loadModel('media/9508c22b65db__A_3D_scene_depicti.obj', true); // Load your 3D model in preload
-  body01 = loadImage('media/9508c22b65db__A_3D_scene_depicti_texture_kd.jpg'); // Load your texture image
-
 
 }
 
@@ -133,21 +121,13 @@ function setup() {
   canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
   setAttributes('antialias', true);
   frameRate(30); 
-
-  angleMode(DEGREES); 
-
-  
   bodyRenderer = new BodyRenderer(bodySize);
-  proxyServerUrl = 'http://161.35.206.36:3000'; // Use the IP or domain of your backend server
-
-  playbackDataManager = new PlaybackDataManager();
-  playerId = 232341; // Example playerId
-
-
 
   initVariables();
+
   xDataNorm = 1.;
   yDataNorm = 0.;
+
   index = 0; 
   increasing = true; 
 
@@ -191,16 +171,8 @@ function setup() {
 
   createDom();
   
-  // Example usage
-
-
-
 }  
 function draw() {
-
-
-
-
   background(0, 0, 0);
   noStroke();
 
@@ -209,14 +181,8 @@ function draw() {
 
   easycam.rotateY(playStateI * easyY);
   easycam.rotateX(playStateI * easyX);
-
-  colorMode(HSB, 360, 100, 100); 
   bodyRenderer.renderBody();
-  bodyRenderer.renderMoons();
   bodyRenderer.stars();
-  colorMode(RGB); 
-
-
   drawHUD();
 
   if (regenValue != 0) regenUpdates();
@@ -266,10 +232,10 @@ function drawKnob(knob) {
   push();
   strokeWeight(0.5);
   translate(knob.x, knob.y);
-  rotateZ(angleY);
+  rotateZ(radians(angleY));
   fill(0, 50);
   sphere(knob.size * 0.5, 7, 7); // Draw a sphere for the knob
-  rotateZ(90);
+  rotateZ(radians(90));
   strokeWeight(3);
   line(knob.size * 0.5, 0, 0, 0);
   pop();
@@ -286,8 +252,8 @@ function drawSlider(slider) {
   
   translate(0, slider.sliderValue, 0);
   fill(0, 50);
-  rotateX(180);
-  rotateY(slider.sliderValue * .5);
+  rotateX(PI);
+  rotateY(slider.sliderValue * 0.005);
   cone(slider.handleRadius, slider.handleHeight, 7); // Draw a cone as the handle
 
   pop();
@@ -561,9 +527,7 @@ function regenLogic() {
 
           break;
   }
-}
-
-async function playPause() {
+}async function playPause() {
   notDOM = false;
 
   if (isFirstPlay) {
@@ -571,10 +535,7 @@ async function playPause() {
   }
 
   if (context.state === 'suspended') {
-    if (isFirstPlay) {
-      console.log('Handling first play');
-      handleFirstPlay();
-    }
+    if (isFirstPlay) handleFirstPlay();
 
     await context.resume().then(() => {
       playButton.attribute('src', playIcon);
@@ -587,12 +548,10 @@ async function playPause() {
     if (context.state === 'suspended') {
       setTimeout(tryResumeContext, 100);
     } else {
-      console.log('Context resumed successfully');
+      // Context resumed successfully
     }
   } else {
-    if (isFirstPlay) {
-      handleFirstPlay();
-    }
+    if (isFirstPlay) handleFirstPlay();
     togglePlayState();
   }
 }
@@ -602,12 +561,6 @@ async function handleFirstPlay() {
   playButton.attribute('src', initialPlayIcon);
   isFirstPlay = false;
   loadP = true;
-  
-  guiData();
-  guiDataStyle(cellWidth, cellHeight); 
-  setKnobValueY(knobs[0], 127, 500);
-  setKnobValueY(knobs[1], 127, 500);
-  setKnobValueY(knobs[2], 127, 500);
 }
 
 function togglePlayState() {
@@ -621,6 +574,7 @@ function togglePlayState() {
   if (playStateI == 0 && context.state === 'running') {
 
     if (loadP){
+      guiData();
       regenButton.show();
       xButton.show();
       yButton.show();
@@ -813,7 +767,7 @@ function createDom() {
   domColor2 = color(0, 255, 128);
 
 
-  centerIcon = 'icons/' + nf(card.iconSet, 2) + '_center.svg';
+  centerIcon = 'icons/' + nf(card.icon_set, 2) + '_center.svg';
 
   xButton = createImg(centerIcon, 'Play Button', '&#11042');
   xButton.style('width', btW + 'px');
@@ -857,12 +811,12 @@ function createDom() {
   zButton.touchEnded(releaseDOM);
   //zButton.addClass("crosshair");
 
-  initialPlayIcon = 'icons/' + nf(card.iconSet, 2) + '_on-off.svg';
-  playIcon = 'icons/' + nf(card.iconSet, 2) + '_play.svg';
+  initialPlayIcon = 'icons/' + nf(card.icon_set, 2) + '_on-off.svg';
+  playIcon = 'icons/' + nf(card.icon_set, 2) + '_play.svg';
 
   // create buttons and sliderss
   playButton = createImg(initialPlayIcon, 'Play Button', '&#9655');
-  pauseIcon = 'icons/' + nf(card.iconSet, 2) + '_pause.svg';
+  pauseIcon = 'icons/' + nf(card.icon_set, 2) + '_pause.svg';
 
   playButton.style('width',  btW+ 'px');
   playButton.style('height', btH + 'px' );
@@ -878,7 +832,7 @@ function createDom() {
 
   // create buttons and sliderss
 
-  regenIcon = 'icons/' + nf(card.iconSet, 2) + '_regen.svg';
+  regenIcon = 'icons/' + nf(card.icon_set, 2) + '_regen.svg';
 
   regenButton = createImg(regenIcon, 'Regen Button', '&#9842');
 
@@ -905,40 +859,45 @@ function createDom() {
 
 
 function xInput() {
-  if (!inputX) {
-    return;
-  }
+
   inputX.value = xData;
+
   let xDataM = map(xData, 0, ksteps - 1, float(card.xTag[1]), float(card.xTag[2]));
   t6.html(nfs(xDataM, 1, 2));
+  
   easyY = xDataM * -0.0077;
+
 }
 
 function yInput() {
-  if (!inputY) {
-    return;
-  }
+
   inputY.value = yData;
+
   let yDataM = map(yData, 0, ksteps - 1, float(card.yTag[1]), float(card.yTag[2]));
   t7.html(nfs(yDataM, 1, 2));
+
   easyX = yDataM * -0.00077;
+
+
 }
 
 function zInput() {
-  if (!inputZ) {
-    return;
-  }
+
+
   if (zData <= (ksteps - 1)/2) {
     worldI_dist = map(zData, 0., (ksteps - 1)/2, wMaxD, wMinD, true);
   } else {
     worldI_dist = map(zData, (ksteps - 1)/2, (ksteps - 1), wMinD, wMaxD, true);
   }
-  easycam.setDistance(worldI_dist, 200);
+  easycam.setDistance(worldI_dist, 1.);
 
   inputZ.value = zData;
+
   t5.html(nfs(worldI_dist, 1, 2));
-  let zDataV = map(zData, 0., 255., float(card.zTag[1]), float(card.zTag[2]));
+
+  zDataV = map(zData, 0., 255., float(card.zTag[1]), float(card.zTag[2]));
   t8.html(nfs(zDataV, 1, 2));
+
 }
 
 function gainInput() {
@@ -975,7 +934,7 @@ function guiData() {
   t21 = createP(''); // Hint
   t22 = createP('0');
   t0 = createP('Jam'); // Section Title
-  
+  guiDataStyle(cellWidth, cellHeight); 
 }
 
 function guiDataStyle(cellWidth, cellHeight) {
@@ -1040,11 +999,12 @@ function loadingGUI(showText) {
 
   textAlign(CENTER);
 
-
+  
   fill(cardColor); 
-  translate(0., -30., 150.*bodySize);
-  text(showText, 0, 0);
-  translate(0., 30., -150.*bodySize); 
+    translate(0., -30., 150.*bodySize);
+
+    text(showText, 0, 0);
+    translate(0., 30., -150.*bodySize);
 
 }
 
@@ -1074,76 +1034,48 @@ function releaseDOM() {
 
 function mousePressed() {
 
-  const songName = 'Song A'; // Get actual song name
-  const artistName = 'Artist A'; // Get actual artist name
-  const playCount = 1; // Example count
-  const playDuration = 25;
-  const system_rightascension = 123.45; // Example value
-  const system_declination = 67.89; // Example value
-  const userId = 'user1'; // Example userId
-  const playerId = 232341; 
-
-  playbackDataManager.savePlaybackData(userId, playerId, songName, artistName, playCount, playDuration, system_rightascension, system_declination);
-
-  playbackData = playbackDataManager.getPlaybackData(playerId);
-  if (playbackData.length > 0) {
-    // Initialize player with retrieved data
-    console.log('Initialize player with:', playbackData);
-  }
-
-  print (playbackData);
-  knobs.forEach(knob => {
-    knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
-  });
-
-  sliders.forEach(slider => {
-    let d = dist(mouseX, mouseY, slider.x, slider.y + slider.sliderValue);
-    if (d < slider.handleRadius) {
-      slider.isDragging = true;
-      pressDOM();
-    }
-  });
-
-  return false; // Prevent default behavior and stop propagation
-}
-
-function touchStarted() {
-  prevTouchX = touches[0].x;
-  prevTouchY = touches[0].y;
 
   knobs.forEach(knob => {
-    knob.isDragging = dist(touches[0].x, touches[0].y, knob.x, knob.y) < knob.size / 2;
+      knob.isDragging = dist(mouseX, mouseY, knob.x, knob.y) < knob.size / 2;
   });
+  
+    // Check if the mouse is over the handle
 
-  sliders.forEach(slider => {
-    let d = dist(touches[0].x, touches[0].y, slider.x, slider.y + slider.sliderValue);
-    if (d < slider.handleRadius) {
-      slider.isDragging = true;
+  sliders.forEach(sliders => {
+  let d = dist(mouseX, mouseY, sliders.x, sliders.y + sliders.sliderValue);
+
+    if (d < sliders.handleRadius) {
+      sliders.isDragging = true; 
       pressDOM();
+
     }
-  });
+
+});
+
 
   return false; // Prevent default behavior and stop propagation
-}
 
+}
 
 
 function mouseDragged() {
+
   knobs.forEach((knob, index) => {
-    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size * 0.75) {
+    if (dist(mouseX, mouseY, knob.x, knob.y) < knob.size *.75 ) {
       knob.isDragging = true;
       updateKnobValue(knob, mouseX, mouseY);
       pressDOM();
     }
   });
-  sliders.forEach(slider => {
-    if (slider.isDragging) {
-      slider.sliderValue = constrain(mouseY - slider.y, -slider.sliderHeight / 2, slider.sliderHeight / 2);
-      inputGain.value = map(slider.sliderValue, slider.sliderHeight / 2, -220, 0., 1.);
-    }
-  });
-}
+  sliders.forEach(sliders => {
+    if (sliders.isDragging) {
+    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
+      sliders.sliderValue = constrain(mouseY - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+      inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -220, 0., 1.);   
 
+    }
+});
+}
 
 // Mouse Wheel Function
 function mouseWheel(event) {
@@ -1160,18 +1092,29 @@ function mouseWheel(event) {
 
 function mouseReleased() {
   knobs.forEach(knob => knob.isDragging = false);
-  sliders.forEach(slider => slider.isDragging = false);
+  sliders.forEach(sliders => sliders.isDragging = false);
+
 }
 
-function touchEnded() {
-  knobs.forEach(knob => knob.isDragging = false);
-  sliders.forEach(slider => slider.isDragging = false);
+function touchStarted() {
+  prevTouchX = touches[0].x;
+  prevTouchY = touches[0].y;
 
-  return false; // Prevent default behavior and stop propagation
+  knobs.forEach(knob => {
+      knob.isDragging = dist(touches[0].x, touches[0].y, knob.x, knob.y) < knob.size / 2;
+  });
+
+  sliders.forEach(sliders => {
+    let d = dist(touches[0].x, touches[0].y, sliders.x, sliders.y + sliders.sliderValue);
+  
+      if (d < sliders.handleRadius) {
+        sliders.isDragging = true; 
+        pressDOM();
+      }
+    });
+    return false; // Prevent default behavior and stop propagation
+
 }
-
-
-
 
 function touchMoved() {
   // Update knobs based on touch movement
@@ -1181,21 +1124,29 @@ function touchMoved() {
     }
   });
 
-  sliders.forEach(slider => {
-    if (slider.isDragging) {
-      slider.sliderValue = constrain(touches[0].y - slider.y, -slider.sliderHeight / 2, slider.sliderHeight / 2);
-      inputGain.value = map(slider.sliderValue, slider.sliderHeight / 2, -slider.sliderHeight / 2, 0., 1.);
-    }
-  });
+  sliders.forEach(sliders => {
+    if (sliders.isDragging) {
+    // let mouseYIn3D = map(mouseY, 0, height, -height / 2, height / 2);
+    sliders.sliderValue = constrain(touches[0].y - sliders.y, -sliders.sliderHeight / 2, sliders.sliderHeight / 2);
+    inputGain.value = map (sliders.sliderValue, sliders.sliderHeight / 2, -sliders.sliderHeight / 2, 0., 1.);   
+
+  }
+});
 
   prevTouchX = touches[0].x;
   prevTouchY = touches[0].y;
 
+  
   return false; // Prevent default behavior
 }
 
+function touchEnded() {
+  knobs.forEach(knob => knob.isDragging = false);
+  sliders.forEach(sliders => sliders.isDragging = false);
 
+  return false; // Prevent default behavior and stop propagation
 
+}
 
 
 function doubleClicked() {
@@ -1212,6 +1163,8 @@ function initVariables() {
   sh = window.innerHeight;
 
   let baseCols = 10; 
+  //let aspectRatio = sw / sh;
+  //scale = sqrt(aspectRatio); // Scale factor based on square root of aspect ratio
   let cellSize = min(width, height) / baseCols;
   let cols = floor(width / cellSize); // Adjust columns based on aspect ratio
   let rows = floor(height / cellSize); // Adjust rows based on aspect ratio
@@ -1234,23 +1187,6 @@ function initVariables() {
   bodyRenderer.setBodySize(bodySize);
 
   notDOM = true;
-
-    const  aspect = sw / sh; 
-
-    if (sh>sw) {
-
-      wMinD = 600*aspect;
-      wMaxD = 1700*aspect;
-      fovy= 2 * atan(sh / 2 / wMaxD);
-      perspective(fovy, aspect);
-
-    }else{
-      perspective(45, aspect);
-      wMinD = 1000/aspect;
-      wMaxD = 2000/aspect;
-      fovy= 2 * atan(sh / 2 / wMaxD);
-      perspective(fovy, aspect);
-    }
 
 }
 function initSliders(){
@@ -1501,20 +1437,16 @@ function updateButtonPositions() {
 
 async function createRNBO() {
   try {
-    
     const patchExportURL = "export/" + card.engine;
     let WAContext = window.AudioContext || window.webkitAudioContext;
     context = new WAContext();
 
     let rawPatcher = await fetch(patchExportURL);
-    
     let patcher = await rawPatcher.json();
     device = await RNBO.createDevice({ context, patcher });
-    
 
     device.node.connect(context.destination);
-    
-    await loadAudioBuffer(context);
+    loadAudioBuffer(context);
 
     inputX = device.parametersById.get("inputX");
     inputY = device.parametersById.get("inputY");
@@ -1532,30 +1464,23 @@ async function createRNBO() {
     knobs[2].valueY = centerValue;
     sliders[0].sliderValue = 0;
 
+
     showText = "Main engine \n start sequence initiated \n press again";
 
-    // ev is of type MessageEvent, which has a tag and a payload
-    device.messageEvent.subscribe((ev) => {
-      if (ev.tag === "amp") {
-          // Check if ev.payload is a float
-          if (typeof ev.payload === 'number') {
-              amplitud = ev.payload;
-          } else {
-              console.error('Unexpected payload format:', ev.payload);
-          }
-      }
-    });
-
   } catch (error) {
-    console.log('Error creating RNBO:', error);
+    console.log(error);
     errorLoadingAudio(error);
   }
+
+
 }
 
-async function loadAudioBuffer(_context) {
-  context = _context;
-  let audioBuf;
 
+async function loadAudioBuffer(_context) {
+
+  context = _context;
+
+  let audioBuf;
   try {
     let audioURL;
 
@@ -1566,22 +1491,36 @@ async function loadAudioBuffer(_context) {
       audioURL = card.mp3file;
     }
 
-    const fileResponse = await fetch(audioURL, { cache: 'reload' });
+    try {
+      const fileResponse = await fetch(audioURL, {
+        cache: 'reload'
+      });
 
-    if (!fileResponse.ok) {
-      throw new Error("Network response was not OK");
+      if (!fileResponse.ok) {
+        throw new Error("Network response was not OK");
+      }
+
+      const arrayBuf = await fileResponse.arrayBuffer();
+      if (!(arrayBuf instanceof ArrayBuffer)) {
+        throw new Error("Fetched data is not a valid ArrayBuffer");
+      }
+
+      try {
+        audioBuf = await context.decodeAudioData(arrayBuf);
+        await device.setDataBuffer("world1", audioBuf);
+      } catch (decodeError) {
+        console.error("Error decoding audio data or setting data buffer:", decodeError);
+        throw decodeError;
+      }
+    } catch (fetchError) {
+      console.error("There has been a problem with your fetch operation:", fetchError);
+      throw fetchError;
     }
 
-    const arrayBuf = await fileResponse.arrayBuffer();
 
-    if (!(arrayBuf instanceof ArrayBuffer)) {
-      throw new Error("Fetched data is not a valid ArrayBuffer");
-    }
-
-    audioBuf = await context.decodeAudioData(arrayBuf);
-    await device.setDataBuffer("world1", audioBuf);
   } catch (error) {
-    console.log('Error loading audio buffer:', error);
+    console.log("Error type:", typeof error);
+    console.log("Error details:", error);
     errorLoadingAudio(error);
   }
 }
@@ -1717,4 +1656,3 @@ function setCurrentIndexToToday() {
 
     return index; // This is the normalized index for today
 }
-
